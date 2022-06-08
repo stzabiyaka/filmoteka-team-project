@@ -1,0 +1,61 @@
+// breakpoints
+$mobile: 320px;
+$tablet: 768px;
+$desktop: 1280px;
+
+// site colors palette
+$colors: (
+  'text-primary': #000000,
+  'text-secondary': #ffffff,
+  'accent': #FF6B08,
+  'warning': #FF001B,
+  'background-primary': #ffffff,
+  'background-secondary': #F7F7F7,
+);
+
+// site fonts
+$fontPrimary: 'Roboto', sans-serif;
+
+// transitions duration and timing
+$transitionDuration: 300ms;
+$transitionTiming: cubic-bezier(0.4, 0, 0.2, 1);
+
+// breakpoints map for respondTo() mixin
+$breakpoints: (
+  'mobile': (
+    min-width: #{$mobile},
+  ),
+  'tablet': (
+    min-width: #{$tablet},
+  ),
+  'desktop': (
+    min-width: #{$desktop},
+  ),
+  '-mobile': (
+    max-width: #{$mobile - 1},
+  ),
+  '-tablet': (
+    max-width: #{$tablet - 1},
+  ),
+  '-desktop': (
+    max-width: #{$desktop - 1},
+  ),
+  'mobile-tablet': (
+    min-width: #{$mobile},
+  )
+  #{and} (
+    max-width: #{$tablet - 1},
+  ),
+  'mobile-desktop': (
+    min-width: #{$mobile},
+  )
+  #{and} (
+    max-width: #{$desktop - 1},
+  ),
+  'tablet-desktop': (
+    min-width: #{$tablet},
+  )
+  #{and} (
+    max-width: #{$desktop - 1},
+  ),
+) !default;

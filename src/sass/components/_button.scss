@@ -1,0 +1,36 @@
+.button {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    height: 44px;
+    width: 124px;
+
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: getColor('text-primary');
+    vertical-align: middle;
+
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px solid getColor('text-primary');
+
+    &--accent {
+        color: getColor('text-secondary');
+        background-color: getColor('accent');
+        border-color: transparent;
+        
+    }
+
+    &--shadow {
+        box-shadow: 0 8px 43px rgba(255, 107, 1, 0.6);
+    }
+
+
+
+    &--inverse {
+        color: getColor('text-secondary');
+        border-color: getColor('text-secondary');
+    }
+}

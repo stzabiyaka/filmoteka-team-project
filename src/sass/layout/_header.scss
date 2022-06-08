@@ -1,0 +1,11 @@
+.site-header {
+    height: 230px;
+
+    @include respondTo(tablet) {
+        height: 219px;
+    }
+
+    @include respondTo(desktop) {
+        height: 216px;
+    }
+}
