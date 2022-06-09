@@ -3,7 +3,7 @@ import localStorageService from "./js/classes/local-storage-service";
 
 const moviesApiService = new MoviesApiService();
 const localStorageWatched = new localStorageService('moviesWatched');
-const localStorageQue = new localStorageService('moviesQue');
+const localStorageQueue = new localStorageService('moviesQueue');
 
 // moviesApiService.page = 5;
 // moviesApiService.getTrending().then(data => {
