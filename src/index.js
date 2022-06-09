@@ -1,9 +1,9 @@
 import MoviesApiService from "./js/classes/movies-api-service";
-import localStorageService from "./js/classes/local-storage-service";
+import LocalStorageService from "./js/classes/local-storage-service";
 
 const moviesApiService = new MoviesApiService();
-const localStorageWatched = new localStorageService('moviesWatched');
-const localStorageQueue = new localStorageService('moviesQueue');
+const localStorageWatched = new LocalStorageService('moviesWatched');
+const localStorageQueue = new LocalStorageService('moviesQueue');
 
 // moviesApiService.page = 5;
 // moviesApiService.getTrending().then(data => {

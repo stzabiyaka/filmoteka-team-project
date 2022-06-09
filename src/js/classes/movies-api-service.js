@@ -8,7 +8,7 @@ export default class MoviesApiService {
         this.URL_PARAMETERS = {
             trending: 'trending/movie/day',
             search: 'search/movie',
-            details: 'movie',
+            movieDetails: 'movie',
         }
         this.LANGUAGES = {
                 default: 'en-US',
@@ -20,7 +20,7 @@ export default class MoviesApiService {
     async #getData (url) {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error('Error occured', response.status);
+            throw new Error(response.status);
         }
         const data = await response.json();
         return data;
@@ -32,14 +32,14 @@ export default class MoviesApiService {
     }
 
     async searchMovies (query, language) {
-        const currentLanguage = language !== 'optional' ? this.LANGUAGES.default : this.LANGUAGES.optional;
+        const currentLanguage = this.#setCurrentLanguage(language);
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.search}?api_key=${this.#API_KEY}&language=${currentLanguage}&query=${query}&page=${this.page}&include_adult=false`;
         return await this.#getData(url);
     }
 
     async getMovie (movieId, language) {
-        const currentLanguage = language !== 'optional' ? this.LANGUAGES.default : this.LANGUAGES.optional;
-        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.details}/${movieId}?api_key=${this.#API_KEY}&language=${currentLanguage}`;
+        const currentLanguage = this.#setCurrentLanguage(language);
+        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.movieDetails}/${movieId}?api_key=${this.#API_KEY}&language=${currentLanguage}`;
         return await this.#getData(url);
     }
 
@@ -65,5 +65,9 @@ export default class MoviesApiService {
 
     decrementPage() {
         this.page -= 1;
+    }
+
+    #setCurrentLanguage(language) {
+        return language !== 'optional' ? this.LANGUAGES.default : this.LANGUAGES.optional;
     }
 }
