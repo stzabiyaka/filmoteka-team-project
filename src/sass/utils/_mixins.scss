@@ -2,7 +2,7 @@
 //Миксин вычисляет flex-basis для flex-элемента
 //Принимает два параметра: (1- количество элементов в строке, 2- ширина промежутка между элементами в пикселях)
 @mixin flexBasis($column: 2, $gap: 32px) {
-  flex-basis: calc((100% - (#{$gap} * (#{$column} - 1))) / #{$column});
+  flex-basis: calc((100% - #{$gap} * (#{$column})) / #{$column});
 }
 
 //transition properties, duration, timing function
@@ -34,6 +34,6 @@
   }
   //if the key doesn't exsist in the map
   @else {
-    @warn "Unfortunately, no value could be retrieved from #{$breakpoint}" + "Available breakpoints are: #{map-keys($breakpoints)}.";
+    @warn "Unfortunately, no value could be retrieved from #{$breakpoint}" + " Available breakpoints are: #{map-keys($breakpoints)}.";
   }
 }
