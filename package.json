@@ -2,7 +2,7 @@
   "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://61083nataliG0rdienk0.github.io/filmoteka-team-project",
+  "homepage": "https://stzabiyaka.github.io/filmoteka-team-project",
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /filmoteka-team-project/"
