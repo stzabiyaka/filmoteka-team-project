@@ -26,7 +26,7 @@ const refs = {
     modalAddToQueueBtn: document.querySelector('#queue-add'),
     modalCloseBtn: document.querySelector('#modal-close'),
 
-    teamLink: documen.querySelector('#team'),
+    teamLink: document.querySelector('#team'),
 }
 
 
