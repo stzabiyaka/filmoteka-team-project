@@ -1,9 +1,12 @@
 import MoviesApiService from "./js/classes/movies-api-service";
 import LocalStorageService from "./js/classes/local-storage-service";
+import ImagesPathConstructor from "./js/classes/images-path-constructor";
+import { CAPTIONS } from "./js/templates/captions";
 
 const moviesApiService = new MoviesApiService();
 const localStorageWatched = new LocalStorageService('moviesWatched');
 const localStorageQueue = new LocalStorageService('moviesQueue');
+const imgConstruct = new ImagesPathConstructor();
 
 const refs = {
     body: document.body,
@@ -44,11 +47,6 @@ const refs = {
 
 
 
-
-
-
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
-    
-    
