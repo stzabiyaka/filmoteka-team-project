@@ -9,6 +9,7 @@ export default class MoviesApiService {
             trending: 'trending/movie/day',
             search: 'search/movie',
             movieDetails: 'movie',
+            genres: 'genre/movie/list',
         }
         this.LANGUAGES = {
                 default: 'en-US',
@@ -42,6 +43,14 @@ export default class MoviesApiService {
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.movieDetails}/${movieId}?api_key=${this.#API_KEY}&language=${currentLanguage}`;
         return await this.#getData(url);
     }
+
+    async getGenres (language) {
+        const currentLanguage = this.#setCurrentLanguage(language);
+        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.genres}?api_key=${this.#API_KEY}&language=${currentLanguage}`;
+        return await this.#getData(url);
+    }
+
+    
 
     resetPage() {
         this.page = 1;
