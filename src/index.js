@@ -1,20 +1,52 @@
 import MoviesApiService from "./js/classes/movies-api-service";
 import LocalStorageService from "./js/classes/local-storage-service";
+import ImagesPathConstructor from "./js/classes/images-path-constructor";
+import { CAPTIONS } from "./js/templates/captions";
 
 const moviesApiService = new MoviesApiService();
 const localStorageWatched = new LocalStorageService('moviesWatched');
 const localStorageQueue = new LocalStorageService('moviesQueue');
+const imgConstruct = new ImagesPathConstructor();
 
-// moviesApiService.page = 5;
-// moviesApiService.getTrending().then(data => {
-//     console.log(data);
-// }).catch(error => error);
+const refs = {
+    body: document.body,
 
-// moviesApiService.resetPage();
-// moviesApiService.searchMovies('месники', 'optional').then(data => {
-//     console.log(data);
-// }).catch(error => error);
+    headerLogo: document.querySelector('#logo'),
+    headerHomeBtn: document.querySelector('#home'),
+    headerMyLibBtn: document.querySelector('#my-library'),
 
-// moviesApiService.getMovie(299534).then(data => {
-//     console.log(data);
-// }).catch(error => error);
+    headerBtnsContainer: document.querySelector('#collections-nav'),
+    headerWatchedBtn: document.querySelector('#watched'),
+    headerQueueBtn: document.querySelector('#queue'),
+
+    searchForm: document.querySelector('#search-form'),
+
+    libraryContainer: document.querySelector('#library'),
+
+    backdrop: document.querySelector('#backdrop'),
+    modalContainer: document.querySelector('#modal'),
+    modalAddToWatchedBtn: document.querySelector('#watched-add'),
+    modalAddToQueueBtn: document.querySelector('#queue-add'),
+    modalCloseBtn: document.querySelector('#modal-close'),
+
+    teamLink: document.querySelector('#team'),
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
+    не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
+    файлах классів чи модулів */

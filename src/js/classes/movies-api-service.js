@@ -9,12 +9,16 @@ export default class MoviesApiService {
             trending: 'trending/movie/day',
             search: 'search/movie',
             movieDetails: 'movie',
+            genres: 'genre/movie/list',
         }
         this.LANGUAGES = {
                 default: 'en-US',
                 optional: 'uk-UA'
         }
         this.page = 1;
+        this.genres = null;
+
+        this.#getGenres();
     }
 
     async #getData (url) {
@@ -27,14 +31,18 @@ export default class MoviesApiService {
     }
 
     async getTrending () {
-        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.trending}?api_key=${this.#API_KEY}&page=${this.page}`
-        return await this.#getData(url);
+        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.trending}?api_key=${this.#API_KEY}&page=${this.page}`;
+        const movies = await this.#getData(url);
+        this.#replaceGenresById(movies.results);
+        return movies;
     }
 
     async searchMovies (query, language) {
         const currentLanguage = this.#setCurrentLanguage(language);
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.search}?api_key=${this.#API_KEY}&language=${currentLanguage}&query=${query}&page=${this.page}&include_adult=false`;
-        return await this.#getData(url);
+        const movies = await this.#getData(url);
+        this.#replaceGenresById(movies.results);
+        return movies;
     }
 
     async getMovie (movieId, language) {
@@ -42,6 +50,24 @@ export default class MoviesApiService {
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.movieDetails}/${movieId}?api_key=${this.#API_KEY}&language=${currentLanguage}`;
         return await this.#getData(url);
     }
+
+    async #getGenres (language) {
+        const currentLanguage = this.#setCurrentLanguage(language);
+        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.genres}?api_key=${this.#API_KEY}&language=${currentLanguage}`;
+        const genres = await this.#getData(url);
+        this.genres = genres.genres;
+    }
+    
+    #replaceGenresById(movies) {
+        movies.forEach(movie => {
+            movie.genre_ids = movie.genre_ids.map(genre => {
+                const genreObj = this.genres.find(element => element.id === genre);
+                return genreObj.name;
+            });
+        });        
+    }
+
+    
 
     resetPage() {
         this.page = 1;

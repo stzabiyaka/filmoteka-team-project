@@ -1,0 +1,22 @@
+.library__section {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    
+    @include respondTo(tablet) {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+}
+
+.library__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    
+
+    @include respondTo(tablet) {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
