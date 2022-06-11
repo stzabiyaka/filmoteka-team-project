@@ -68,7 +68,8 @@
 }
 
 .modal-card__close-btn-icon {
-    fill: getColor('text-primary');
+    stroke: getColor('text-primary');
+    stroke-width: 1px;
 }
 
 .modal-card__img {

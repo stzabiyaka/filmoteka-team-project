@@ -12,7 +12,12 @@ export const testRefs = {
 
 
 
-function modalCardMarkUp({about, imgSrc, imgAlt, originalTitle, vote, votes, popularity}) { 
+function modalCardMarkUp({ about, imgSrc, imgAlt, originalTitle, vote, votes, popularity, genre }) { 
+    
+    //це для прикладу
+    const srcsetMobile = "./images/modal-test/growing-mobile.jpg 1x, ./images/modal-test/growing-mobile@2x.jpg 2x";
+    const srcsetTablet = "./images/modal-test/growing-tablet.jpg 1x, ./images/modal-test/growing-tablet@2x.jpg 2x";
+    const srcsetDesktop = "./images/modal-test/growing-desctop.jpg 1x, ./images/modal-test/growing-desctop@2x.jpg 2x";
 
     return  `
     <div class="modal-card container" id="modal">
@@ -21,8 +26,12 @@ function modalCardMarkUp({about, imgSrc, imgAlt, originalTitle, vote, votes, pop
                 <use href="./images/icons.svg#icon-close"></use>
             </svg>
         </button>
-        <img class="modal-card__img" src="${imgSrc}"
-            alt="${imgAlt}" loading="lazy">
+        <picture class="modal-card__img">
+            <source media='(min-width:1280px)' srcset="${srcsetDesktop}">
+            <source media='(min-width:768px)' srcset="${srcsetTablet}">
+            <source media='(min-width:320px)' srcset="${srcsetMobile}">
+            <img src="${imgSrc}" alt="${imgAlt}" loading="lazy"/>
+        </picture>       
         <div class="modal-card-thumb__content">
             <div class="modal-card-info">
                 <h2 class="modal-card-info__title">${originalTitle}</h2>
@@ -36,9 +45,13 @@ function modalCardMarkUp({about, imgSrc, imgAlt, originalTitle, vote, votes, pop
                     <b>Popularity</b>
                     <span>${popularity}</span>
                 </p>
-                <p class="modal-card-info__item modal-card-info__item--last-item">
+                <p class="modal-card-info__item">
                     <b>Original Title</b>
                     <span>${originalTitle}</span>
+                </p>
+                <p class="modal-card-info__item modal-card-info__item--last-item">
+                    <b>Genre</b>
+                    <span>${genre}</span>
                 </p>
                 <h3 class="modal-card-info-about__title">About</h3>
                 <p class="modal-card-info-about__description">${about}</p>
