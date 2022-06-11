@@ -37,7 +37,7 @@ const refs = {
 }
 
 
-
+    testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
 
 
 
