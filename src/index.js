@@ -12,6 +12,14 @@ const watchedService = new CollectionService('moviesWatched');
 const queueService = new CollectionService('moviesQueue');
 const imgConstruct = new ImagesPathConstructor();
 
+const APPLICATION_PAGES = {
+    home: 'home',
+    myLibrary: 'my library'
+}
+const LANGUAGES = {
+    default: 'en-US',
+    optional: 'uk-UA'
+}
 const refs = {
     body: document.body,
 
@@ -35,18 +43,12 @@ const refs = {
 
     teamLink: document.querySelector('#team'),
 }
-
-
+    let currentPage = APPLICATION_PAGES.home;
+    let currentLanguage = LANGUAGES.optional;
     testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
-
-
-
-
-
-
-
-
 
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
+
+    

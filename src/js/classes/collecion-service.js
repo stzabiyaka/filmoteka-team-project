@@ -4,9 +4,10 @@ export default class CollectionService extends LocalStorageService {
     page;
     perPage;
     #collection;
+    #totalPages;
     constructor(key) {
         super (key);
-        this.totalPages = 1;
+        this.#totalPages = 1;
         this.perPage = 9;
         this.page = 1;
 
@@ -18,20 +19,20 @@ export default class CollectionService extends LocalStorageService {
         if (this.#collection === undefined) {
             this.#collection = [];
         }
-        this.totalPages = Math.ceil(this.#collection.length / this.perPage);
+        this.#totalPages = Math.ceil(this.#collection.length / this.perPage);
 
     }
 
-    async loadCollection (apiService) {
-        if(this.#collection === undefined || this.page > this.totalPages) {
+    async loadCollection (loadMethod) {
+        if(this.#collection === undefined || this.#collection === [] || this.page > this.#totalPages) {
             return;
         }
-        const start = (this.page - 1) * this.perPage;
-        const query = this.#collection.slice(start, (start + this.perPage));
-        const requests = query.forEach(request => {
-            apiService.getMovie(request);
-        });
-        return await Promise.all(requests);
+        let query;
+        const startPosition = (this.page - 1) * this.perPage;
+        query = this.#totalPages === 1 ? this.#collection : this.#collection.slice(startPosition, (startPosition + this.perPage));
+        const requests = query.map(id => loadMethod({movieId: id}));
+        const result = await Promise.all(requests);
+        return result;
     }
 
     #saveCollection () {
@@ -73,5 +74,9 @@ export default class CollectionService extends LocalStorageService {
 
     get perPage () {
         return this.perPage;
+    }
+
+    resetPage () {
+        this.page = 1;
     }
 }
