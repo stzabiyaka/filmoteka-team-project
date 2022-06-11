@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+img{
+    max-width: 100%;
+    display: block;
+}
+.card-film {
+    cursor: pointer;
+    margin-bottom: 20px;
+    &:nth-last-child(-n + 1) {
+        margin-bottom: 0;
+      }
+
+    @include respondTo(tablet){
+        margin-bottom: 30px;
+        &:nth-last-child(-n + 1) {
+          margin-bottom: 0;
+        }
+    }
+
+    @include respondTo (desktop){
+        margin-bottom: 30px;
+        margin-right: 30px;
+        &:nth-last-child(-n + 3) {
+         margin-bottom: 0;
+        }
+    }
+         &:nth-child(3n) {
+         margin-right: 0;
+    }
+         &:last-child {
+          margin-right: 0;
+    }
+ }
+
+.card-img{
+    border-radius: 5px;
+
+    @include respondTo(-tablet){
+        width: 280px;
+        height: 398px;
+    }
+    @include respondTo (tablet) {
+        width: 336px;
+        height: 455px;
+    }
+    @include respondTo (desktop){
+        width: 309px;
+        height: 449px;
+    }
+}
+.card-title {
+    text-transform: uppercase;
+    font-family: $fontPrimary;
+    color: getColor('text-primary');
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    margin-top: 10px;
+    margin-bottom: 5px;
+   
+}
+
+.card-info{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 4px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: getolor('accent');
+}
+.genre-id {
+    cursor: pointer;
+    margin-right: 6px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: getColor('accent');
+}
+//gerne hover&focus
+.card-symbol {
+    margin-right: 4px ;
+}
