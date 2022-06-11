@@ -1,11 +1,15 @@
 import MoviesApiService from "./js/classes/movies-api-service";
 import LocalStorageService from "./js/classes/local-storage-service";
+import CollectionService from "./js/classes/collecion-service";
 import ImagesPathConstructor from "./js/classes/images-path-constructor";
 import { CAPTIONS } from "./js/templates/captions";
 
+import { testRefs } from "./js/templates/modal-tmpl";
+import { renderModalCard } from "./js/templates/modal-tmpl";
+
 const moviesApiService = new MoviesApiService();
-const localStorageWatched = new LocalStorageService('moviesWatched');
-const localStorageQueue = new LocalStorageService('moviesQueue');
+const watchedService = new CollectionService('moviesWatched');
+const queueService = new CollectionService('moviesQueue');
 const imgConstruct = new ImagesPathConstructor();
 
 const refs = {
@@ -43,11 +47,6 @@ const refs = {
 
 
 
-
-
-
-
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
-    

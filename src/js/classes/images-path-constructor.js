@@ -11,7 +11,7 @@ export default class ImagesPathConstructor {
 
     }
 
-    getImagePath(path, width = "default") {
+    getImagePath({path, width = "default"}) {
         const size = this.#width[width];
         return `${this.#BASE_URL}${size}${path}`;
     }

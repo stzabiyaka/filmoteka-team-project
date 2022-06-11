@@ -15,7 +15,7 @@ export default class LocalStorageService {
 
     load() {
         try {
-            const localStorageState = localStorage.getItem(this.#LOCALSTORAGE_KEY);
+            let localStorageState = localStorage.getItem(this.#LOCALSTORAGE_KEY);
             return localStorageState = localStorageState === null ? undefined : JSON.parse(localStorageState);
         }
         catch(error) {
