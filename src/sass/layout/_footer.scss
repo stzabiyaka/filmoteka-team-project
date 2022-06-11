@@ -1,0 +1,97 @@
+ // ============блок footer=============
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    background-color: getColor('background-secondary');
+
+    @include respondTo(tablet) {
+        height: 79px;
+    }
+
+    @include respondTo(desktop) {
+        height: 77px;
+    }
+}
+
+// ==========текст==========
+
+.footer__text {
+    width: 236px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5em;
+    color: #545454;
+
+    @include respondTo(tablet) {
+        width: 100%;
+        font-size: 16px;
+        line-height: 1.2em;
+    }
+}
+
+// =========декоративні вертикальні лінії============
+
+.text__line {
+    &:before {
+        content: '';
+        border-right: 2px solid #545454;
+        margin-right: 9px;
+        margin-left: 5px;
+    }
+
+    &:after {
+        content: '';
+        border-right: 2px solid #545454;
+        margin-left: 9px;
+        margin-right: 5px;
+    }
+}
+
+// ========перехід тексту при mobile-first=========
+
+.text__sub {
+    display: inline-block;
+    margin-top: 10px;
+
+    @include respondTo(tablet) {
+        margin-top: 0;
+    }
+
+}
+
+// ==============SVG-анімація=================
+
+.icon-heart {
+    fill: getColor('accent');
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.icon-heart {
+    animation-name: 'heart';
+    animation-duration: 300ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in;
+}
+
+@keyframes heart {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.1);
+    }
+}
+
+// =========посилання=============
+
+.footer__link {
+    color: #545454;
+}
