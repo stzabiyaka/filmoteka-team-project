@@ -10,7 +10,6 @@ import { renderModalCard } from "./js/templates/modal-tmpl";
 const moviesApiService = new MoviesApiService();
 const watchedService = new CollectionService('moviesWatched');
 const queueService = new CollectionService('moviesQueue');
-const imgConstruct = new ImagesPathConstructor();
 
 const APPLICATION_PAGES = {
     home: 'home',
@@ -47,8 +46,7 @@ const refs = {
     let currentLanguage = LANGUAGES.optional;
     testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
 
+
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
-
-    
