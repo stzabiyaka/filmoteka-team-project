@@ -50,3 +50,16 @@ const refs = {
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
+
+    
+    
+    // moviesApiService.setCurrentLanguage({ language: currentLanguage });
+
+    // moviesApiService.getTrending().then(console.log).catch(console.log);
+    
+    // moviesApiService.searchMovies({query: 'месники', language: currentLanguage}).then(console.log).catch(console.log);
+
+
+    // watchedService.resetPage();
+    // watchedService.loadCollection({ loader: moviesApiService.getMovie.bind(moviesApiService) }).then(console.log).catch(console.log);
+    // // console.log(ImagesPathConstructor.getImagePath({ path: '/fVf4YHHkRfo1uuljpWBViEGmaUQ.jpg' }));
