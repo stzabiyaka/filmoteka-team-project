@@ -9,8 +9,14 @@
         }
 }
 
+// =======приховування блоку========
+.pagination__container.is-hidden{
+    display: none;
+}
+
 // ===========стиль кнопок===========
 .btn__pagination{
+    font-size: 12px;
     width: 40px;
     height: 40px;
     border-radius: 5px;
@@ -19,6 +25,27 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    margin: 0px 2px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    background-color: getColor('text-secondary');
+    color: getColor('text-primary');
+        @include respondTo(tablet) {
+            margin: 0px 1px;
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: getColor('accent');
+            color: getColor('text-secondary');
+        }
+}
+
+.btn__number--active{
+    background-color: getColor('accent');
+    color: getColor('text-secondary');
 }
 
 .btn__arrow {
@@ -29,14 +56,10 @@
         background-color: #c6c6c6;
     }
 }
-.btn__number {
-    background-color: getColor('accent');
-    color: getColor('text-secondary');
-    margin: 0px 70px;
 
-    @include respondTo(tablet) {
-            margin: 0px 127px;
-        }
+// =======приховування кнопки========
+.btn__dots.is-hidden {
+    display: none;
 }
 
 // ==========стиль svg-іконки==========
