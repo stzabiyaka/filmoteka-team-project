@@ -3,6 +3,7 @@ import LocalStorageService from "./js/classes/local-storage-service";
 import CollectionService from "./js/classes/collecion-service";
 import ImagesPathConstructor from "./js/classes/images-path-constructor";
 import { CAPTIONS } from "./js/templates/captions";
+import cardParser from "./js/modules/card-parser";
 
 import { testRefs } from "./js/templates/modal-tmpl";
 import { renderModalCard } from "./js/templates/modal-tmpl";
@@ -41,7 +42,6 @@ const refs = {
     let currentPage = APPLICATION_PAGES.home;
     let currentLanguage = LANGUAGES.ukrainian;
     testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
-
 
 
 
