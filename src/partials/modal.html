@@ -1,3 +1,12 @@
 <button type="button" id="try-to-open-modal-card">try-to-open-modal-card</button>
 <!-- поки створила кнопку, пізніше слухач повісимо на картку фільма -->
-<div class="backdrop is-hidden" id="backdrop-modal-card"></div>
+<div class="backdrop is-hidden" id="backdrop-modal-card">
+    <div class="modal-card container" id="modal">
+        <button type="button" class="modal-card__close-btn" id="modal-close" title="close window" data-modal-close>
+            <svg class="modal-card__close-btn-icon" width="30" height="30">
+                <use href="./images/icons.svg#icon-close"></use>
+            </svg>
+        </button>    
+
+    </div> 
+</div>

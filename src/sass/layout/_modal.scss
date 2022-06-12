@@ -38,7 +38,7 @@
     padding-right: 20px;
     padding-bottom: 40px;
     padding-top: 48px;
-    margin-bottom: 38px;
+    
     overflow-y: scroll;
     transform: translate(-50%, -50%);
 
@@ -60,19 +60,23 @@
 }
 
 .modal-card__close-btn {
-    border: 1px solid black;
-    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 8px;
     right: 8px;
+    background-color: transparent;
+    border: transparent;
+    padding: 0;    
 }
 
 .modal-card__close-btn-icon {
     stroke: getColor('text-primary');
-    stroke-width: 1px;
+    color: inherit;
 }
 
-.modal-card__img {
+.modal-card-thumb__img {
     display: block;
     width: 240px;
     height: 357px;
@@ -86,6 +90,15 @@
         width: 375px;
         height: 478px;
     }
+}
+
+.modal-card__img{
+    display: block;
+    object-fit: cover;
+    width: inherit;
+    height: inherit;
+    background-color: aqua;
+    
 }
 
 .modal-card-thumb__content {
@@ -115,10 +128,30 @@ margin-top: 20px;
     margin-bottom: 8px;
 
     &--last-item{
-        margin-bottom: 0;
+        margin-bottom: 20px;
     }    
 }
 
 .modal-card-info__title {
     margin-bottom: 20px;
+}
+
+.modal-card-info-about__title{
+    margin-bottom: 8px;
+}
+
+.modal-card-info{
+    margin-bottom: 20px;
+}
+
+.modal-card-btn__watched{
+    @extend .button;
+
+    width: 110px;
+}
+
+.modal-card-btn__queue{
+    @extend .modal-card-btn__watched;
+
+    margin-left: 20px;
 }
