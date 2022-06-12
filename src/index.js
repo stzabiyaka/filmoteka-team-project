@@ -13,38 +13,38 @@ const queueService = new CollectionService('moviesQueue');
 
 const APPLICATION_PAGES = {
     home: 'home',
-    myLibrary: 'my library'
+    search: 'search results',
+    watched : 'watched',
+    queue: 'queue',
 }
 const LANGUAGES = {
     default: 'en-US',
-    optional: 'uk-UA'
+    ukrainian: 'uk-UA'
 }
 const refs = {
     body: document.body,
-
     headerLogo: document.querySelector('#logo'),
     headerHomeBtn: document.querySelector('#home'),
     headerMyLibBtn: document.querySelector('#my-library'),
-
     headerBtnsContainer: document.querySelector('#collections-nav'),
     headerWatchedBtn: document.querySelector('#watched'),
     headerQueueBtn: document.querySelector('#queue'),
-
     searchForm: document.querySelector('#search-form'),
-
     libraryContainer: document.querySelector('#library'),
-
     backdrop: document.querySelector('#backdrop'),
     modalContainer: document.querySelector('#modal'),
     modalAddToWatchedBtn: document.querySelector('#watched-add'),
     modalAddToQueueBtn: document.querySelector('#queue-add'),
     modalCloseBtn: document.querySelector('#modal-close'),
-
     teamLink: document.querySelector('#team'),
 }
     let currentPage = APPLICATION_PAGES.home;
-    let currentLanguage = LANGUAGES.optional;
+    let currentLanguage = LANGUAGES.ukrainian;
     testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
+
+
+
+
 
 
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки

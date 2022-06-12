@@ -23,16 +23,16 @@ export default class CollectionService extends LocalStorageService {
 
     }
 
-    async loadCollection (loadMethod) {
+    async loadCollection ({loader}) {
         if(this.#collection === undefined || this.#collection === [] || this.page > this.#totalPages) {
             return;
         }
         let query;
         const startPosition = (this.page - 1) * this.perPage;
         query = this.#totalPages === 1 ? this.#collection : this.#collection.slice(startPosition, (startPosition + this.perPage));
-        const requests = query.map(id => loadMethod({movieId: id}));
+        const requests = query.map(id => loader({movieId: id}));
         const result = await Promise.all(requests);
-        return result;
+        return { results: result, total_pages: this.#totalPages, page: this.page};
     }
 
     #saveCollection () {
