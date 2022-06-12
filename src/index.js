@@ -4,7 +4,6 @@ import CollectionService from "./js/classes/collecion-service";
 import ImagesPathConstructor from "./js/classes/images-path-constructor";
 import { CAPTIONS } from "./js/templates/captions";
 import cardParser from "./js/modules/card-parser";
-
 import { testRefs } from "./js/templates/modal-tmpl";
 import { renderModalCard } from "./js/partials/modal";
 
@@ -38,15 +37,16 @@ const refs = {
     modalAddToQueueBtn: document.querySelector('#queue-add'),
     modalCloseBtn: document.querySelector('#modal-close'),
     teamLink: document.querySelector('#team'),
+    paginator: document.querySelector('#paginator'),
 }
     let currentPage = APPLICATION_PAGES.home;
     let currentLanguage = LANGUAGES.ukrainian;
     testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
 
+    
 
 
-
-
+    
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
