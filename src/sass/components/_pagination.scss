@@ -1,0 +1,45 @@
+// ==========стиль блоку пагінація=======
+.pagination__container{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 40px;
+
+    @include respondTo(tablet) {
+            padding-bottom: 60px;
+        }
+}
+
+// ===========стиль кнопок===========
+.btn__pagination{
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn__arrow {
+    background-color: getColor('background-secondary');
+
+    &:hover,
+    &:focus{
+        background-color: #c6c6c6;
+    }
+}
+.btn__number {
+    background-color: getColor('accent');
+    color: getColor('text-secondary');
+    margin: 0px 70px;
+
+    @include respondTo(tablet) {
+            margin: 0px 127px;
+        }
+}
+
+// ==========стиль svg-іконки==========
+.icon-arrow-right{
+    transform: rotate(180deg);
+}
