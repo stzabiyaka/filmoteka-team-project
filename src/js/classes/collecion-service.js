@@ -39,15 +39,15 @@ export default class CollectionService extends LocalStorageService {
         this.save(this.#collection);
     }
 
-    addToCollection (id) {
-        if(this.isInCollection(id)){
+    addToCollection ({id = null}) {
+        if(!id || this.isInCollection({id: id})){
             return;
         }
         this.#collection.push(id);
         this.#saveCollection();
     }
 
-    removeFromCollection (id) {
+    removeFromCollection ({id = null}) {
         if(!this.isInCollection(id)) {
             return;
         }
@@ -56,7 +56,10 @@ export default class CollectionService extends LocalStorageService {
         this.#saveCollection();
     }
 
-    isInCollection(id) {
+    isInCollection({id = null}) {
+        if (!id){
+            return;
+        }
         return this.#collection.includes(id);
     }
 

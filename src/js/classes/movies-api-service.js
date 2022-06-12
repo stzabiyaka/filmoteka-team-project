@@ -44,8 +44,7 @@ export default class MoviesApiService {
         return movies;
     }
 
-    async searchMovies ({query, language}) {
-        this.setCurrentLanguage({language: language});
+    async searchMovies ({query}) {
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.search}?api_key=${this.#API_KEY}&language=${this.currentLanguage}&query=${query}&page=${this.page}&include_adult=false`;
         const movies = await this.#getData(url);
         this.#normalizeGenres(movies.results);
