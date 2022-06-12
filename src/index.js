@@ -6,7 +6,7 @@ import { CAPTIONS } from "./js/templates/captions";
 import cardParser from "./js/modules/card-parser";
 
 import { testRefs } from "./js/templates/modal-tmpl";
-import { renderModalCard } from "./js/templates/modal-tmpl";
+import { renderModalCard } from "./js/partials/modal";
 
 const moviesApiService = new MoviesApiService();
 const watchedService = new CollectionService('moviesWatched');
