@@ -3,7 +3,7 @@ import LocalStorageService from './js/classes/local-storage-service';
 import CollectionService from './js/classes/collecion-service';
 import ImagesPathConstructor from './js/classes/images-path-constructor';
 import { CAPTIONS } from './js/templates/captions';
-
+import markupRenderer from './js/modules/markup-renderer';
 import { testRefs } from './js/templates/modal-tmpl';
 import { renderModalCard } from './js/partials/modal';
 import markupRenderer from './js/modules/markup-renderer';
