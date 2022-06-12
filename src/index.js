@@ -1,26 +1,27 @@
-import MoviesApiService from "./js/classes/movies-api-service";
-import LocalStorageService from "./js/classes/local-storage-service";
-import CollectionService from "./js/classes/collecion-service";
-import ImagesPathConstructor from "./js/classes/images-path-constructor";
-import { CAPTIONS } from "./js/templates/captions";
-import cardParser from "./js/modules/card-parser";
-import { testRefs } from "./js/templates/modal-tmpl";
-import { renderModalCard } from "./js/partials/modal";
+import MoviesApiService from './js/classes/movies-api-service';
+import LocalStorageService from './js/classes/local-storage-service';
+import CollectionService from './js/classes/collecion-service';
+import ImagesPathConstructor from './js/classes/images-path-constructor';
+import { CAPTIONS } from './js/templates/captions';
+
+import { testRefs } from './js/templates/modal-tmpl';
+import { renderModalCard } from './js/partials/modal';
+import markupRenderer from './js/modules/markup-renderer';
 
 const moviesApiService = new MoviesApiService();
 const watchedService = new CollectionService('moviesWatched');
 const queueService = new CollectionService('moviesQueue');
 
 const APPLICATION_PAGES = {
-    home: 'home',
-    search: 'search results',
-    watched : 'watched',
-    queue: 'queue',
-}
+  home: 'home',
+  search: 'search results',
+  watched: 'watched',
+  queue: 'queue',
+};
 const LANGUAGES = {
-    default: 'en-US',
-    ukrainian: 'uk-UA'
-}
+  default: 'en-US',
+  ukrainian: 'uk-UA',
+};
 const refs = {
     body: document.body,
     headerLogo: document.querySelector('#logo'),
@@ -45,8 +46,8 @@ const refs = {
 
     
 
-
     
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
+
