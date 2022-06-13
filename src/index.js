@@ -50,10 +50,3 @@ const refs = {
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
-
-    // console.log(watchedService.isCollectionExist());
-    // const bundle = watchedService.getCollectionPage({page: 1});
-    // console.log(bundle);
-    // markupRenderer({ loader: moviesApiService.getMoviesBundle.bind(moviesApiService), target: refs.libraryContainer, content: bundle});
-
-    // console.log(currentLanguage);
