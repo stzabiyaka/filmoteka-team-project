@@ -11,7 +11,7 @@ export const CAPTIONS = {
             removeFromQueue: 'remove from Queue',
         },
         
-        searchPlaceholder: 'search movies',
+        searchPlaceholder: 'Search movies',
         notification: 'Search result not successful. Enter the correct movie name and try again',
         movieDetails: {
             vote: 'Vote',
@@ -19,7 +19,8 @@ export const CAPTIONS = {
             popularity: 'Popularity',
             title: 'Original Title',
             genre: 'Genre',
-            about: 'About'
+            about: 'About',
+            other: 'Other'
         },
         copyright: 'All Rights Reserved',
         developedWidth: 'Developed with',
@@ -36,7 +37,7 @@ export const CAPTIONS = {
             removeFromQueue: 'видалити з черги',
         },
        
-        searchPlaceholder: 'пошук фильмів',
+        searchPlaceholder: 'Пошук фильмів',
         notification: 'Пошук не мав успіху. Введить правильну назву фільму та спробуйте ще раз',
         movieDetails: {
             vote: 'Голос',
@@ -44,7 +45,8 @@ export const CAPTIONS = {
             popularity: 'Популярнісь',
             title: 'Оригінальна назва',
             genre: 'Жанр',
-            about: 'Опис'
+            about: 'Опис',
+            other: 'Інші'
         },
         copyright: 'Всі права захищено',
         developedWidth: 'Розроблено із',

@@ -7,7 +7,7 @@ export default class CollectionService extends LocalStorageService {
     #totalPages;
     constructor(key) {
         super (key);
-        this.#totalPages = 1;
+        this.#totalPages = 0;
         this.perPage = 9;
         this.currentPage = 1;
 
@@ -16,7 +16,7 @@ export default class CollectionService extends LocalStorageService {
 
     #restoreCollection () {
         this.#collection = this.load();
-        if (this.#collection === undefined) {
+        if (!this.#collection) {
             this.#collection = [];
         }
         this.#totalPages = Math.ceil(this.#collection.length / this.perPage);
@@ -24,6 +24,12 @@ export default class CollectionService extends LocalStorageService {
     }
 
     getCollectionPage ({ page = 1}) {
+        if(!this.isCollectionExist()) {
+            //remove this after end of development
+            console.log('Collection is empty');
+            //remove this after end of development ^^^
+            return;
+        }
         this.currentPage = page;
         if(this.#collection === undefined || this.#collection === [] || this.currentPage > this.#totalPages) {
             return;
@@ -59,6 +65,10 @@ export default class CollectionService extends LocalStorageService {
             return;
         }
         return this.#collection.includes(id);
+    }
+
+    isCollectionExist() {
+        return this.#totalPages ? true : false;
     }
 
     set currentPage (newPage) {

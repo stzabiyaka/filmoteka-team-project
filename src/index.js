@@ -1,5 +1,5 @@
 import MoviesApiService from './js/classes/movies-api-service';
-import LocalStorageService from './js/classes/local-storage-service';
+import UserPreferencesService from './js/classes/user-preferences';
 import CollectionService from './js/classes/collecion-service';
 import ImagesPathConstructor from './js/classes/images-path-constructor';
 import { CAPTIONS } from './js/templates/captions';
@@ -7,20 +7,20 @@ import markupRenderer from './js/modules/markup-renderer';
 import { testRefs } from './js/templates/modal-tmpl';
 import { renderModalCard } from './js/partials/modal';
 import markupRenderer from './js/modules/markup-renderer';
-
-const moviesApiService = new MoviesApiService();
+const LANGUAGES = {
+  default: 'english',
+  ukrainian: 'ukrainian',
+};
+const userPreferences = new UserPreferencesService('userPreferences');
+let currentLanguage = userPreferences.getPreferences().language;
+const moviesApiService = new MoviesApiService({ language: currentLanguage});
 const watchedService = new CollectionService('moviesWatched');
 const queueService = new CollectionService('moviesQueue');
-
 const APPLICATION_PAGES = {
   home: 'home',
   search: 'search results',
   watched: 'watched',
   queue: 'queue',
-};
-const LANGUAGES = {
-  default: 'en-US',
-  ukrainian: 'uk-UA',
 };
 const refs = {
     body: document.body,
@@ -43,13 +43,17 @@ const refs = {
     paginator: document.querySelector('#paginator'),
 }
     let currentPage = APPLICATION_PAGES.home;
-    let currentLanguage = LANGUAGES.ukrainian;
     testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
 
     markupRenderer({ loader: moviesApiService.getTrendingMovies.bind(moviesApiService), target: refs.libraryContainer});
+
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
 
+    // console.log(watchedService.isCollectionExist());
+    // const bundle = watchedService.getCollectionPage({page: 1});
+    // console.log(bundle);
+    // markupRenderer({ loader: moviesApiService.getMoviesBundle.bind(moviesApiService), target: refs.libraryContainer, content: bundle});
 
-    
+    // console.log(currentLanguage);
