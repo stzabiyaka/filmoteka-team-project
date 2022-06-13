@@ -47,7 +47,7 @@
         padding-left: 36px;
         padding-right: 72px;
         padding-top: 40px;
-        flex-direction: row;
+        flex-direction: row;        
     }
 
     @include respondTo(desktop) {
@@ -85,13 +85,18 @@
     display: flex;
     max-width: 240px;
     flex-direction: column;
-    background-color: hotpink;
 
     @include respondTo(tablet){
         flex-direction: row;
         max-width: 596px;
         height: 472px;
         margin-top: 2px;
+    }
+
+    @include respondTo(desktop){
+        max-width: 782px;
+        height: 478px;
+        margin: 0;
     }
 }
 
@@ -117,6 +122,7 @@
     height: inherit; 
     max-width: 240px;
     max-height: 357px;
+    border-radius: 5px;
 
     @include respondTo(tablet) {
             max-width: 264px;
@@ -131,6 +137,8 @@
 
 .modal-card-thumb__content {
 margin-top: 20px;
+display: flex;
+flex-direction: column;
 
     @include respondTo(tablet) {
         height: 100%;
@@ -140,6 +148,8 @@ margin-top: 20px;
 
     @include respondTo(desktop) {
         margin-left: 16px;
+        width: 391px;
+        height: 478px;
     }
 }
 
@@ -151,11 +161,16 @@ margin-top: 20px;
 
 
     @include respondTo(tablet) {
-        height: 233px;  //не по макету, але так не вилазять кнопки
+        max-height: 233px;  //не по макету, але так не вилазять кнопки
         width: 264px;   
         overflow-y: scroll; //все одно скрол, бо весь текст не завжди влазить      
     }
 
+    @include respondTo(desktop){
+        width: 391px;
+        max-height: 253px;
+        overflow-y: scroll;
+    }
 }
 
 .modal-card-info__characteristics--name{
@@ -219,10 +234,6 @@ margin-top: 20px;
 .modal-card-info__data--item,
 .modal-card-info__data--votes{
     color: getColor('text-primary');
-
-    @include respondTo(tablet){
-        // line-height: 1.333em;
-    }
 }
 
 .modal-card-info__title {
@@ -233,10 +244,6 @@ margin-top: 20px;
     vertical-align: top;
     text-transform: uppercase;
 
-    @include respondTo(tablet){
-        // line-height: 1.15em;
-    }
-
     @include respondTo(desktop){
         font-size: 30px;
         line-height: 1.167;
@@ -244,11 +251,11 @@ margin-top: 20px;
 }
 
 .modal-card-info-about__title{
-    display: inline-block;
+    display: block;
     font-size: 12px;
     font-weight: 500;
     text-align: left;
-    vertical-align: middle;
+    align-self:center;
     margin-bottom: 8px;
     text-transform: uppercase;
 }
@@ -277,13 +284,26 @@ margin-top: 20px;
     @include respondTo(tablet){
         width: 125px;
     }
+
+    @include respondTo(desktop){
+        width: 136px;
+        margin-left: 8px;
+    }
 }
 
 .modal-card-btn__queue{
-    @extend .modal-card-btn__watched;   
+    @extend .modal-card-btn__watched;
+
+    @include respondTo(tablet){
+        margin-left: 15px;
+    }    
 }
 
 .modal-card-thumb__btn{
     display: flex;
     justify-content: space-between;
+
+    @include respondTo(tablet){
+        justify-content: start;
+    }
 }
