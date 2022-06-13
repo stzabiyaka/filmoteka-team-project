@@ -1,0 +1,157 @@
+//загальне для всіх модалок
+
+.backdrop {
+    width: 100vw;
+    height: 100vh;
+    background-color: getColor('backdrop');
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    z-index: 100;
+    visibility: visible;
+    pointer-events: auto;
+
+    &.is-hidden {
+        visibility: hidden;
+        pointer-events: none;
+        opacity: 0;
+    }
+}
+
+//______________________________________________________
+//модалка фільму
+
+.modal-card {
+    opacity: 1;
+    background-color: getColor('background-primary');
+    z-index: 101;
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 40px;
+    padding-top: 48px;
+    
+    overflow-y: scroll;
+    transform: translate(-50%, -50%);
+
+    @include respondTo(tablet) {
+        height: 552px;
+        padding-left: 36px;
+        padding-right: 72px;
+        padding-top: 40px;
+        flex-direction: row;
+    }
+
+    @include respondTo(desktop) {
+        width: 814px;
+        height: 558px;
+        padding-left: 16px;
+        padding-right: 16px;
+
+    }
+}
+
+.modal-card__close-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: transparent;
+    border: transparent;
+    padding: 0;    
+}
+
+.modal-card__close-btn-icon {
+    stroke: getColor('text-primary');
+    color: inherit;
+}
+
+.modal-card-thumb__img {
+    display: block;
+    width: 240px;
+    height: 357px;
+
+    @include respondTo(tablet) {
+        width: 264px;
+        height: 374px;
+    }
+
+    @include respondTo(desktop) {
+        width: 375px;
+        height: 478px;
+    }
+}
+
+.modal-card__img{
+    display: block;
+    object-fit: cover;
+    width: inherit;
+    height: inherit;
+    background-color: aqua;
+    
+}
+
+.modal-card-thumb__content {
+margin-top: 20px;
+
+    @include respondTo(tablet) {
+        height: 100%;
+        margin-top: 0;
+        margin-left: 68px;
+    }
+
+    @include respondTo(desktop) {
+        margin-left: 16px;
+    }
+}
+
+.modal-card-info-about__description {
+    overflow-y: scroll;
+
+    @include respondTo(tablet) {
+        max-height: 260px;
+    }
+
+}
+
+.modal-card-info__item{
+    margin-bottom: 8px;
+
+    &--last-item{
+        margin-bottom: 20px;
+    }    
+}
+
+.modal-card-info__title {
+    margin-bottom: 20px;
+}
+
+.modal-card-info-about__title{
+    margin-bottom: 8px;
+}
+
+.modal-card-info{
+    margin-bottom: 20px;
+}
+
+.modal-card-btn__watched{
+    @extend .button;
+
+    width: 110px;
+}
+
+.modal-card-btn__queue{
+    @extend .modal-card-btn__watched;
+
+    margin-left: 20px;
+}

@@ -1,52 +1,52 @@
-import MoviesApiService from "./js/classes/movies-api-service";
-import LocalStorageService from "./js/classes/local-storage-service";
-import ImagesPathConstructor from "./js/classes/images-path-constructor";
-import { CAPTIONS } from "./js/templates/captions";
+import MoviesApiService from './js/classes/movies-api-service';
+import LocalStorageService from './js/classes/local-storage-service';
+import CollectionService from './js/classes/collecion-service';
+import ImagesPathConstructor from './js/classes/images-path-constructor';
+import { CAPTIONS } from './js/templates/captions';
+import markupRenderer from './js/modules/markup-renderer';
+import { testRefs } from './js/templates/modal-tmpl';
+import { renderModalCard } from './js/partials/modal';
+import markupRenderer from './js/modules/markup-renderer';
 
 const moviesApiService = new MoviesApiService();
-const localStorageWatched = new LocalStorageService('moviesWatched');
-const localStorageQueue = new LocalStorageService('moviesQueue');
-const imgConstruct = new ImagesPathConstructor();
+const watchedService = new CollectionService('moviesWatched');
+const queueService = new CollectionService('moviesQueue');
 
+const APPLICATION_PAGES = {
+  home: 'home',
+  search: 'search results',
+  watched: 'watched',
+  queue: 'queue',
+};
+const LANGUAGES = {
+  default: 'en-US',
+  ukrainian: 'uk-UA',
+};
 const refs = {
     body: document.body,
-
     headerLogo: document.querySelector('#logo'),
     headerHomeBtn: document.querySelector('#home'),
     headerMyLibBtn: document.querySelector('#my-library'),
-
     headerBtnsContainer: document.querySelector('#collections-nav'),
     headerWatchedBtn: document.querySelector('#watched'),
     headerQueueBtn: document.querySelector('#queue'),
-
     searchForm: document.querySelector('#search-form'),
-
     libraryContainer: document.querySelector('#library'),
-
     backdrop: document.querySelector('#backdrop'),
     modalContainer: document.querySelector('#modal'),
     modalAddToWatchedBtn: document.querySelector('#watched-add'),
     modalAddToQueueBtn: document.querySelector('#queue-add'),
     modalCloseBtn: document.querySelector('#modal-close'),
-
     teamLink: document.querySelector('#team'),
+    paginator: document.querySelector('#paginator'),
 }
+    let currentPage = APPLICATION_PAGES.home;
+    let currentLanguage = LANGUAGES.ukrainian;
+    testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    markupRenderer({ loader: moviesApiService.getTrending.bind(moviesApiService), target: refs.libraryContainer});
+    
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */

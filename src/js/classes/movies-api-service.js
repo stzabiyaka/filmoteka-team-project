@@ -2,6 +2,7 @@ export default class MoviesApiService {
     #API_KEY;
     #BASE_URL;
     page;
+    currentLanguage;
     constructor () {
         this.#API_KEY = '704d5b04a49684ea4810e36d12ae79df';
         this.#BASE_URL = 'https://api.themoviedb.org/3';
@@ -13,12 +14,12 @@ export default class MoviesApiService {
         }
         this.LANGUAGES = {
                 default: 'en-US',
-                optional: 'uk-UA'
+                ukrainian: 'uk-UA'
         }
         this.page = 1;
         this.genres = null;
 
-        this.#getGenres();
+        this.setCurrentLanguage({ language: this.LANGUAGES.default });
     }
 
     async #getData (url) {
@@ -30,53 +31,52 @@ export default class MoviesApiService {
         return data;
     }
 
-    async getTrending () {
-        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.trending}?api_key=${this.#API_KEY}&page=${this.page}`;
-        const movies = await this.#getData(url);
-        this.#replaceGenresById(movies.results);
-        return movies;
-    }
-
-    async searchMovies (query, language) {
-        const currentLanguage = this.#setCurrentLanguage(language);
-        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.search}?api_key=${this.#API_KEY}&language=${currentLanguage}&query=${query}&page=${this.page}&include_adult=false`;
-        const movies = await this.#getData(url);
-        this.#replaceGenresById(movies.results);
-        return movies;
-    }
-
-    async getMovie (movieId, language) {
-        const currentLanguage = this.#setCurrentLanguage(language);
-        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.movieDetails}/${movieId}?api_key=${this.#API_KEY}&language=${currentLanguage}`;
-        return await this.#getData(url);
-    }
-
-    async #getGenres (language) {
-        const currentLanguage = this.#setCurrentLanguage(language);
-        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.genres}?api_key=${this.#API_KEY}&language=${currentLanguage}`;
+    async getGenres () {
+        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.genres}?api_key=${this.#API_KEY}&language=${this.currentLanguage}`;
         const genres = await this.#getData(url);
         this.genres = genres.genres;
     }
+
+    async getTrending () {
+        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.trending}?api_key=${this.#API_KEY}&page=${this.page}&language=${this.currentLanguage}`;
+        const movies = await this.#getData(url);
+        this.#normalizeGenres(movies.results);
+        return movies;
+    }
+
+    async searchMovies ({query}) {
+        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.search}?api_key=${this.#API_KEY}&language=${this.currentLanguage}&query=${query}&page=${this.page}&include_adult=false`;
+        const movies = await this.#getData(url);
+        this.#normalizeGenres(movies.results);
+        return movies;
+    }
+
+    async getMovie ({movieId}) {
+        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.movieDetails}/${movieId}?api_key=${this.#API_KEY}&language=${this.currentLanguage}`;
+        const movie = await this.#getData(url);
+        this.#flatGenres(movie);
+        return movie;
+    }
     
-    #replaceGenresById(movies) {
+    #normalizeGenres(movies) {
         movies.forEach(movie => {
             movie.genre_ids = movie.genre_ids.map(genre => {
                 const genreObj = this.genres.find(element => element.id === genre);
                 return genreObj.name;
             });
+            movie['genres'] = movie['genre_ids'];
+            delete movie['genre_ids'];
         });        
     }
 
-    
+    #flatGenres(movie) {
+        movie.genres = movie.genres.map(genre => genre.name);
+    }
 
     resetPage() {
         this.page = 1;
     }
-
     
-    /**
-     * @param {number} newPage
-     */
     set page(newPage) {
         this.page = newPage;
     }
@@ -93,7 +93,11 @@ export default class MoviesApiService {
         this.page -= 1;
     }
 
-    #setCurrentLanguage(language) {
-        return language !== 'optional' ? this.LANGUAGES.default : this.LANGUAGES.optional;
+    setCurrentLanguage({language}) {
+        if(this.currentLanguage === language) {
+            return;
+        }
+        this.currentLanguage = Object.values(this.LANGUAGES).includes(language) ? language : this.LANGUAGES.default;
+        this.getGenres();
     }
 }
