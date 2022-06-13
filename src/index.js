@@ -45,8 +45,11 @@ const refs = {
     testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
 
     
-    markupRenderer({ loader: moviesApiService.getTrending.bind(moviesApiService), target: refs.libraryContainer});
+    markupRenderer({ loader: moviesApiService.getTrendingMovies.bind(moviesApiService), target: refs.libraryContainer});
     
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
+
+
+    

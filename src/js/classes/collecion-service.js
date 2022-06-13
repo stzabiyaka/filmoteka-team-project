@@ -1,7 +1,7 @@
 import LocalStorageService from "./local-storage-service";
 
 export default class CollectionService extends LocalStorageService {
-    page;
+    currentPage;
     perPage;
     #collection;
     #totalPages;
@@ -9,7 +9,7 @@ export default class CollectionService extends LocalStorageService {
         super (key);
         this.#totalPages = 1;
         this.perPage = 9;
-        this.page = 1;
+        this.currentPage = 1;
 
         this.#restoreCollection();
     }
@@ -23,16 +23,14 @@ export default class CollectionService extends LocalStorageService {
 
     }
 
-    async loadCollection ({loader}) {
-        if(this.#collection === undefined || this.#collection === [] || this.page > this.#totalPages) {
+    getCollectionPage ({ page = 1}) {
+        this.currentPage = page;
+        if(this.#collection === undefined || this.#collection === [] || this.currentPage > this.#totalPages) {
             return;
         }
-        let query;
-        const startPosition = (this.page - 1) * this.perPage;
-        query = this.#totalPages === 1 ? this.#collection : this.#collection.slice(startPosition, (startPosition + this.perPage));
-        const requests = query.map(id => loader({movieId: id}));
-        const result = await Promise.all(requests);
-        return { results: result, total_pages: this.#totalPages, page: this.page};
+        const startPosition = (this.currentPage - 1) * this.perPage;
+        const bundle = this.#totalPages === 1 ? this.#collection : this.#collection.slice(startPosition, (startPosition + this.perPage));
+        return { bundle: bundle, totalPages: this.#totalPages, page: this.currentPage};
     }
 
     #saveCollection () {
@@ -63,12 +61,12 @@ export default class CollectionService extends LocalStorageService {
         return this.#collection.includes(id);
     }
 
-    set page (newPage) {
-        this.page = newPage;
+    set currentPage (newPage) {
+        this.currentPage = newPage;
     }
 
-    get page () {
-        return this.page;
+    get currentPage () {
+        return this.currentPage;
     }
 
     set perPage (newPerPage) {
@@ -79,7 +77,7 @@ export default class CollectionService extends LocalStorageService {
         return this.perPage;
     }
 
-    resetPage () {
-        this.page = 1;
+    resetCurrentPage () {
+        this.currentPage = 1;
     }
 }

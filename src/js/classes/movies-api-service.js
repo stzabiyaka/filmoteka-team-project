@@ -37,25 +37,31 @@ export default class MoviesApiService {
         this.genres = genres.genres;
     }
 
-    async getTrending () {
+    async getTrendingMovies () {
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.trending}?api_key=${this.#API_KEY}&page=${this.page}&language=${this.currentLanguage}`;
         const movies = await this.#getData(url);
         this.#normalizeGenres(movies.results);
         return movies;
     }
 
-    async searchMovies ({query}) {
+    async searchMovies ({ query }) {
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.search}?api_key=${this.#API_KEY}&language=${this.currentLanguage}&query=${query}&page=${this.page}&include_adult=false`;
         const movies = await this.#getData(url);
         this.#normalizeGenres(movies.results);
         return movies;
     }
 
-    async getMovie ({movieId}) {
+    async getMovie ({ movieId }) {
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.movieDetails}/${movieId}?api_key=${this.#API_KEY}&language=${this.currentLanguage}`;
         const movie = await this.#getData(url);
         this.#flatGenres(movie);
         return movie;
+    }
+
+    async getMoviesBundle ({ bundle, page = 1, total_pages = 1 }) {
+        const requests = bundle.map(id => this.getMovie({movieId: id}));
+        const results = await Promise.all(requests);
+        return { results: results, page: page, total_pages: total_pages };
     }
     
     #normalizeGenres(movies) {

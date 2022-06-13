@@ -1,7 +1,7 @@
 import cardParser from './card-parser';
 
-export default function markupRenderer({ loader, target }) {
-  loader()
+export default function markupRenderer({ loader, target, content }) {
+  loader(content)
     .then(data => {
       const markup = data.results
         .map(result => {
