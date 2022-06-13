@@ -1,23 +1,48 @@
 .site-header {
-    height: 320px;
+    height: 230px;
+    max-width: 320px;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
             url(../images/backgrounds/header-background-320.jpg);
+    @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+                url(../images/backgrounds/header-background-320@2x.jpg);
+        }
 
     @include respondTo(tablet) {
         height: 216px;
+        max-width: 768px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+            url(../images/backgrounds/header-background-768.jpg);
+    @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
         background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-                url(../images/backgrounds/header-background-768.jpg);
+                url(../images/backgrounds/header-background-768@2x.jpg);
+        }
     }
 
     @include respondTo(desktop) {
+        max-width: 1024px;
         background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-                url(../images/backgrounds/header-background-1024.jpg);
-        height: 216px;
+            url(../images/backgrounds/header-background-768.jpg);
+
+    @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+                url(../images/backgrounds/header-background-1024@2x.jpg);
+        }
+        
     }
- &__nav {
+ &__container {
      display: flex;
     flex-wrap: nowrap;
     padding-top: 44px;
@@ -25,19 +50,20 @@
     margin-left: 20px;
     align-items: center;
     justify-content: center;
+    margin-bottom: 60px;
     @include respondTo(tablet) {
      padding-top: 49px;
     margin-right: 32px;
     }
  }
- &__link {
+ &__logo {
 justify-content: center;
 align-items: center;
 @include respondTo(tablet) {
 display: flex;
 }
  }
-&__svg{
+&__logo-image{
 stroke: #818181;
 fill: none;
 @include respondTo(tablet) {
@@ -45,7 +71,7 @@ fill: none;
 }
 
 }
- &__logo {
+ &__logo-name {
     @include respondTo(-tablet) {
         display: none;
     }
@@ -61,7 +87,7 @@ fill: none;
         color: getColor('background-primary');
     }
 }
-&__list{
+&__nav-buttons{
 display: flex;
 margin-left: auto;
 }
@@ -82,7 +108,17 @@ font-family: 'Roboto';
     text-transform: uppercase;
     color: getColor('background-primary');
 }
-
+&__container-input {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+&__input{
+    background: rgba(0, 0, 0, 0.56);
+    border: none;
+    border-bottom: 0.5px solid #FFFFFF;
+    width: 280px;
+}
 }
 .list{
     list-style: none;
