@@ -97,28 +97,36 @@
 
 .modal-card-thumb__img {
     display: block;
-    width: 240px;
+    border-radius: 5px;    
     height: 357px;
-    border-radius: 5px;
-
-    @include respondTo(tablet) {
+    @include respondTo(tablet){
         width: 264px;
         height: 374px;
     }
-
-    @include respondTo(desktop) {
+    @include respondTo(desktop){
         width: 375px;
         height: 478px;
     }
+
 }
 
 .modal-card__img{
     display: block;
     object-fit: cover;
     width: inherit;
-    height: inherit;
-    background-color: aqua;
-    
+    height: inherit; 
+    max-width: 240px;
+    max-height: 357px;
+
+    @include respondTo(tablet) {
+            max-width: 264px;
+            max-height: 374px;
+        }
+
+    @include respondTo(desktop) {
+        max-width: 375px;
+        max-height: 478px;
+    }
 }
 
 .modal-card-thumb__content {
@@ -136,15 +144,16 @@ margin-top: 20px;
 }
 
 .modal-card-info-about__description {
-    display: inline-block;
-    overflow-y: scroll;
+    display: inline-block;    
     line-height: 1.667em;
     text-align: left;
     vertical-align: middle;
 
 
     @include respondTo(tablet) {
-        max-height: 260px;
+        height: 233px;  //не по макету, але так не вилазять кнопки
+        width: 264px;   
+        overflow-y: scroll; //все одно скрол, бо весь текст не завжди влазить      
     }
 
 }
@@ -212,7 +221,7 @@ margin-top: 20px;
     color: getColor('text-primary');
 
     @include respondTo(tablet){
-        line-height: 1.333em;
+        // line-height: 1.333em;
     }
 }
 
@@ -225,7 +234,7 @@ margin-top: 20px;
     text-transform: uppercase;
 
     @include respondTo(tablet){
-        line-height: 1.15em;
+        // line-height: 1.15em;
     }
 
     @include respondTo(desktop){
@@ -263,6 +272,10 @@ margin-top: 20px;
             background-color: getColor('accent');
             border-color: transparent;
             box-shadow: 0 8px 43px rgba(255, 107, 1, 0.6);
+    }
+
+    @include respondTo(tablet){
+        width: 125px;
     }
 }
 
