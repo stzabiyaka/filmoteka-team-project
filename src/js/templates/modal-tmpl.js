@@ -8,10 +8,6 @@ export const testRefs = {
     backdrop: document.querySelector('#backdrop-modal-card'),
     testOpenModalCard: document.querySelector('#try-to-open-modal-card'),
     modalContainer: document.querySelector('#modal'),
-    sourseInModalCardDesktop: document.querySelector('#sourse-in-modal-card-desktop'),
-    sourseInModalCardTablet: document.querySelector('#sourse-in-modal-card-tablet'),
-    sourseInModalCardMobile: document.querySelector('#sourse-in-modal-card-mobile'),
-    imgInModalCardPicture: document.querySelector('#img-in-modal-card-picture'),
     // цей refs тимчасовий, бо у нас ще не всі елементи є на сторінці
 }
 
@@ -19,21 +15,10 @@ export const testRefs = {
 
 export function modalCardMarkUp({ about, imgSrc, imgAlt, originalTitle, vote, votes, popularity, genre }) { 
 
-    //посилання для прикладу
-    const srcsetMobile = `../images/modal-test/rectangle-18-mobile.jpg 240w, ../images/modal-test/rectangle-18-mobile@2x.jpg 480w`;
-    const srcsetTablet = `../images/modal-test/rectangle-18-tablet.jpg 264w, ../images/modal-test/rectangle-18-tablet@2x.jpg 528w`;
-    const srcsetDesktop = `../images/modal-test/rectangle-18-desktop.jpg 375w, ../images/modal-test/rectangle-18-desktop@2x.jpg 750w`;
-    
-
     return  `
 
         <div class="modal-card-thumb__img" >
-        <picture class="modal-card__img">
-            <source media='(min-width:1280px)' srcset="${srcsetDesktop}" sizes="375px" type="image/jpeg" id="sourse-in-modal-card-desktop">
-            <source media='(min-width:768px)' srcset="${srcsetTablet}" sizes="264px" type="image/jpeg" id="sourse-in-modal-card-tablet">
-            <source media='(min-width:320px)' srcset="${srcsetMobile}" sizes="240px" type="image/jpeg" id="sourse-in-modal-card-mobile">
-            <img src="${imgSrc}" alt="${imgAlt}" loading="lazy" type="image/jpeg" id="img-in-modal-card-picture"/>
-        </picture>
+            <img src="${imgSrc}" alt="${imgAlt}" loading="lazy" class="modal-card__img" type="image/jpeg" id="img-in-modal-card-picture"/>
         </div>   
             
         <div class="modal-card-thumb__content">
