@@ -25,7 +25,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 1.5em;
-    color: #545454;
+    color: getColor('text-footer');
 
     @include respondTo(tablet) {
         width: 100%;
@@ -39,14 +39,14 @@
 .text__line {
     &:before {
         content: '';
-        border-right: 2px solid #545454;
+        border-right: 2px solid getColor('text-footer');
         margin-right: 9px;
         margin-left: 5px;
     }
 
     &:after {
         content: '';
-        border-right: 2px solid #545454;
+        border-right: 2px solid getColor('text-footer');
         margin-left: 9px;
         margin-right: 5px;
     }
@@ -74,7 +74,7 @@
 
 .icon-heart {
     animation-name: 'heart';
-    animation-duration: 300ms;
+    animation-duration: 600ms;
     animation-iteration-count: infinite;
     animation-direction: alternate;
     animation-timing-function: ease-in;
@@ -93,5 +93,5 @@
 // =========посилання=============
 
 .footer__link {
-    color: #545454;
+    color: getColor('text-footer');
 }
