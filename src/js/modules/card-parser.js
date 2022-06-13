@@ -11,7 +11,7 @@ export default function cardParser ({ genres, poster_path, release_date, title, 
         genres.push ( `<span class="movie-card_genres">Other</span>`);
     }
    
-    return result = `<article class="movie-card">
+    return `<article class="movie-card">
     <picture>
         <source srcset="${ImagesPathConstructor.getImagePath({ path:poster_path })}, 1x, ${ImagesPathConstructor.getImagePath({ path:poster_path, width: 'retina' })}, 2x" type="image/jpeg">
         <img class="movie-card_img" src= "${ImagesPathConstructor.getImagePath({ path:poster_path })} " alt=${title}>
