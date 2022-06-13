@@ -69,11 +69,16 @@
     background-color: transparent;
     border: transparent;
     padding: 0;    
+    cursor: pointer;    
+}
+
+.modal-card__close-btn:hover .modal-card__close-btn-icon,
+.modal-card__close-btn:focus .modal-card__close-btn-icon{
+    stroke: getColor('accent');
 }
 
 .modal-card__close-btn-icon {
     stroke: getColor('text-primary');
-    color: inherit;
 }
 
 .modal-card__data{
@@ -157,7 +162,15 @@ margin-top: 20px;
 .modal-card-btn__watched{
     @extend .button;
 
+    cursor: pointer;
     width: 110px;
+
+    &:hover,
+    &:focus{
+        color: getColor('text-secondary');
+            background-color: getColor('accent');
+            border-color: transparent;
+    }
 }
 
 .modal-card-btn__queue{
