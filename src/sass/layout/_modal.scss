@@ -76,6 +76,16 @@
     color: inherit;
 }
 
+.modal-card__data{
+    display: flex;
+    flex-direction: column;
+    background-color: hotpink;
+
+    @include respondTo(tablet){
+        flex-direction: row;
+    }
+}
+
 .modal-card-thumb__img {
     display: block;
     width: 240px;
