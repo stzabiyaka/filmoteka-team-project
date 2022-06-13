@@ -27,9 +27,10 @@ const refs = {
     headerLogo: document.querySelector('#logo'),
     headerHomeBtn: document.querySelector('#home'),
     headerMyLibBtn: document.querySelector('#my-library'),
-    headerBtnsContainer: document.querySelector('#collections-nav'),
-    headerWatchedBtn: document.querySelector('#watched'),
-    headerQueueBtn: document.querySelector('#queue'),
+    collectionsBtnsContainer: document.querySelector('#collections-nav'),
+    collectionWatchedBtn: document.querySelector('#watched'),
+    collectionQueueBtn: document.querySelector('#queue'),
+    searchFormContainer: document.querySelector('#search-rorm-container'),
     searchForm: document.querySelector('#search-form'),
     libraryContainer: document.querySelector('#library'),
     backdrop: document.querySelector('#backdrop'),
@@ -44,7 +45,6 @@ const refs = {
     let currentLanguage = LANGUAGES.ukrainian;
     testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
 
-    
     markupRenderer({ loader: moviesApiService.getTrendingMovies.bind(moviesApiService), target: refs.libraryContainer});
     
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки

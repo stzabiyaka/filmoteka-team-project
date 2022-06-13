@@ -1,19 +1,23 @@
 <header class="site-header">
        <div class="site-header__container">
-            <a id="logo" class="site-header__logo" href="#">
-                <svg class="site-header__logo-image" width="20" height="20">
+            <a id="logo" class="site-logo" href="#">
+                <svg class="site-logo__image">
                     <use href="./images/icons.svg#icon-film"></use>
                 </svg>
-                <span class="site-header__logo-name">Filmoteka</span>
+                <span class="site-logo__name">Filmoteka</span>
             </a>
-            <nav class="site-header__nav"></nav>
-            <ul class="site-header__nav-buttons">
-                <li id="home" class="site-header__item"><a href="#" class="site-header__list-link list active">HOME</a></li>
-                <li id="my-library" class="site-header__item"><a href="#" class="site-header__list-link list">MY LIBRARY</a></li>
+            <nav class="site-header-nav"></nav>
+            <ul class="site-header-nav__buttons">
+                <li class="site-header-nav__buttons-item"><button id="home" class="site-header-nav__button current" type="button">HOME</button></li>
+                <li id="my-library" class="site-header-nav__buttons-item"><button class="site-header-nav__button" type="button">MY LIBRARY</button></li>
             </ul>
         </nav>
         </div>
-        <div class="site-header__container-input">
-            <input id="search-form" class="site-header__input" type="search" name="search"  placeholder="Поиск фильмов" />
+        <div id="search-rorm-container" class="search-form__container">
+            <input id="search-form" class="search-form__input" type="search" name="search"  placeholder="Search movies" />
+        </div>
+        <div id="collections-nav" class="collections-nav">
+            <button id="watched" class="collection-nav__button collection-nav__button--accent" type="button">WATCHED</button>
+            <button id="queue" class="collection-nav__button" type="button">QUEUE</button>
         </div>
 </header>
