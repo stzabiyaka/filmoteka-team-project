@@ -1,19 +1,19 @@
 <header class="site-header">
        <div class="site-header__container">
-            <a class="site-header__logo list" href="./index.html">
+            <a id="logo" class="site-header__logo" href="#">
                 <svg class="site-header__logo-image" width="20" height="20">
                     <use href="./images/icons.svg#icon-film"></use>
                 </svg>
                 <span class="site-header__logo-name">Filmoteka</span>
             </a>
             <nav class="site-header__nav"></nav>
-            <ul class="site-header__nav-buttons list">
-                <li class="site-header__item"><a href="./index.html" class="site-header__list-link list active">HOME</a></li>
-                <li class="site-header__item"><a href="#" class="site-header__list-link list">MY LIBRARY</a></li>
+            <ul class="site-header__nav-buttons">
+                <li id="home" class="site-header__item"><a href="#" class="site-header__list-link list active">HOME</a></li>
+                <li id="my-library" class="site-header__item"><a href="#" class="site-header__list-link list">MY LIBRARY</a></li>
             </ul>
         </nav>
         </div>
         <div class="site-header__container-input">
-            <input class="site-header__input" type="search" name="search" placeholder="Поиск фильмов" />
+            <input id="search-form" class="site-header__input" type="search" name="search"  placeholder="Поиск фильмов" />
         </div>
 </header>
