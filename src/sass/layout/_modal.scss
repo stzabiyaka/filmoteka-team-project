@@ -12,7 +12,7 @@
     visibility: visible;
     pointer-events: auto;
 
-    &.is-hidden {
+    &.js-hidden {
         visibility: hidden;
         pointer-events: none;
         opacity: 0;
@@ -47,7 +47,7 @@
         padding-left: 36px;
         padding-right: 72px;
         padding-top: 40px;
-        flex-direction: row;
+        flex-direction: row;        
     }
 
     @include respondTo(desktop) {
@@ -69,40 +69,76 @@
     background-color: transparent;
     border: transparent;
     padding: 0;    
+    cursor: pointer;    
+}
+
+.modal-card__close-btn:hover .modal-card__close-btn-icon,
+.modal-card__close-btn:focus .modal-card__close-btn-icon{
+    stroke: getColor('accent');
 }
 
 .modal-card__close-btn-icon {
     stroke: getColor('text-primary');
-    color: inherit;
+}
+
+.modal-card__data{
+    display: flex;
+    max-width: 240px;
+    flex-direction: column;
+
+    @include respondTo(tablet){
+        flex-direction: row;
+        max-width: 596px;
+        height: 472px;
+        margin-top: 2px;
+    }
+
+    @include respondTo(desktop){
+        max-width: 782px;
+        height: 478px;
+        margin: 0;
+    }
 }
 
 .modal-card-thumb__img {
     display: block;
-    width: 240px;
+    border-radius: 5px;    
     height: 357px;
-
-    @include respondTo(tablet) {
+    @include respondTo(tablet){
         width: 264px;
         height: 374px;
     }
-
-    @include respondTo(desktop) {
+    @include respondTo(desktop){
         width: 375px;
         height: 478px;
     }
+
 }
 
 .modal-card__img{
     display: block;
     object-fit: cover;
     width: inherit;
-    height: inherit;
-    background-color: aqua;
-    
+    height: inherit; 
+    max-width: 240px;
+    max-height: 357px;
+    border-radius: 5px;
+
+    @include respondTo(tablet) {
+            max-width: 264px;
+            max-height: 374px;
+        }
+
+    @include respondTo(desktop) {
+        max-width: 375px;
+        max-height: 478px;
+    }
 }
 
 .modal-card-thumb__content {
 margin-top: 20px;
+display: flex;
+flex-direction: column;
 
     @include respondTo(tablet) {
         height: 100%;
@@ -112,32 +148,116 @@ margin-top: 20px;
 
     @include respondTo(desktop) {
         margin-left: 16px;
+        width: 391px;
+        height: 478px;
     }
 }
 
 .modal-card-info-about__description {
-    overflow-y: scroll;
+    display: inline-block;    
+    line-height: 1.667em;
+    text-align: left;
+    vertical-align: middle;
+
 
     @include respondTo(tablet) {
-        max-height: 260px;
+        max-height: 233px;  //не по макету, але так не вилазять кнопки
+        width: 264px;   
+        overflow-y: scroll; //все одно скрол, бо весь текст не завжди влазить      
     }
 
+    @include respondTo(desktop){
+        width: 391px;
+        max-height: 253px;
+        overflow-y: scroll;
+    }
 }
 
-.modal-card-info__item{
-    margin-bottom: 8px;
+.modal-card-info__characteristics--name{
+    color: getColor('modal-text-secondary');   
+}
 
-    &--last-item{
-        margin-bottom: 20px;
-    }    
+.modal-card__thumb--characteristics{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.modal-card-info__characteristics--item:not(:last-child),
+.modal-card-info__data--item:not(:last-child){
+    margin-bottom: 8px;
+}
+
+.modal-card-info__characteristics,
+.modal-card-info__data{
+    display: flex;
+    flex-direction: column;   
+}
+
+.modal-card-info__characteristics{
+    width: 108px;
+}
+
+.modal-card-info__data--item{
+    line-height: 1.333em;
+}
+
+.modal-card-info__data--popularity{
+    line-height: 1.167em;
+}
+
+.modal-card-info__data--vote,
+.modal-card-info__data--votes{    
+    line-height: 1.167em;
+    text-align: center;
+    vertical-align:middle;
+    display: inline-block;
+    width: 36px;
+    height: 16px;
+    border-radius: 5px;
+}
+
+.modal-card-info__data--slesh{
+    color: getColor('modal-text-secondary');
+    margin-right: 3px;
+}
+
+.modal-card-info__data--vote{
+    color: getColor('text-secondary');
+    background-color: getColor('accent');    
+    margin-right: 3px;
+}
+
+.modal-card-info__data--votes{
+    background-color: getColor('background-secondary');    
+}
+
+.modal-card-info__data--item,
+.modal-card-info__data--votes{
+    color: getColor('text-primary');
 }
 
 .modal-card-info__title {
     margin-bottom: 20px;
+    font-size: 20px;
+    line-height: 1.172em;
+    text-align: left;
+    vertical-align: top;
+    text-transform: uppercase;
+
+    @include respondTo(desktop){
+        font-size: 30px;
+        line-height: 1.167;
+    }
 }
 
 .modal-card-info-about__title{
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    align-self:center;
     margin-bottom: 8px;
+    text-transform: uppercase;
 }
 
 .modal-card-info{
@@ -146,12 +266,44 @@ margin-top: 20px;
 
 .modal-card-btn__watched{
     @extend .button;
-
+    font-family: $fontPrimary;
+    font-size: 12px;
+    line-height: 1.333;
+    font-weight: 500;
+    cursor: pointer;
     width: 110px;
+
+    &:hover,
+    &:focus{
+        color: getColor('text-secondary');
+            background-color: getColor('accent');
+            border-color: transparent;
+            box-shadow: 0 8px 43px rgba(255, 107, 1, 0.6);
+    }
+
+    @include respondTo(tablet){
+        width: 125px;
+    }
+
+    @include respondTo(desktop){
+        width: 136px;
+        margin-left: 8px;
+    }
 }
 
 .modal-card-btn__queue{
     @extend .modal-card-btn__watched;
 
-    margin-left: 20px;
+    @include respondTo(tablet){
+        margin-left: 15px;
+    }    
+}
+
+.modal-card-thumb__btn{
+    display: flex;
+    justify-content: space-between;
+
+    @include respondTo(tablet){
+        justify-content: start;
+    }
 }
