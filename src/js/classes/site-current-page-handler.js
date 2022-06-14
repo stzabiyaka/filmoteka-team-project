@@ -22,7 +22,7 @@ export default class SiteCurrentPageHandler {
         REFS.collectionsBtnsContainer.classList.add(this.hiderClass);
         this.#navBtnsToggle();
         // REFS.paginator.classList.add(this.hiderClass);
-        markupRenderer({ loader: this.#apiService.getTrendingMovies.bind(this.apiService), target: REFS.libraryContainer });
+        markupRenderer({ loader: this.#apiService.getTrendingMovies.bind(this.#apiService), target: REFS.libraryContainer });
         console.log(event);
         console.log('HOME PAGE LOADED');
 
