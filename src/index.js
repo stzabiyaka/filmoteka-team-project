@@ -8,11 +8,12 @@ import { testRefs } from './js/templates/modal-tmpl';
 import { renderModalCard } from './js/templates/modal';
 import SiteCurrentPageHandler from './js/classes/site-current-page-handler';
 import markupRenderer from './js/modules/markup-renderer';
+import SwitchSiteCaptions from './js/classes/switch-site-captons';
 
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
-// currentLanguage = LANGUAGES.ukrainian;
-
+currentLanguage = LANGUAGES.ukrainian;
+const switchCaptions = new SwitchSiteCaptions({ language: currentLanguage });
 const moviesApiService = new MoviesApiService({ language: currentLanguage});
 const watchedService = new CollectionService('moviesWatched');
 const queueService = new CollectionService('moviesQueue');
@@ -27,23 +28,22 @@ let currentPage = APPLICATION_PAGES.home;
 
 
 
-
-
   testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
  
+
+
+
+
+
+
+
+
 
 //  const isCollection = watchedService.isCollectionExist();
 //  if (isCollection) {
 //   const content = watchedService.getCollectionPage({ page: 1 });
 //   markupRenderer({ loader: moviesApiService.getMoviesBundle.bind(moviesApiService), target: REFS.libraryContainer, content: content });
 //  }
-
-
-
-
-
-
-
 
 
     

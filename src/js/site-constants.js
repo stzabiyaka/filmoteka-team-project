@@ -14,12 +14,13 @@ const LANGUAGES = {
     body: document.body,
     headerContainer: document.querySelector('#header'),
     headerLogo: document.querySelector('#logo'),
+    headerLogoName: document.querySelector('#logo-name'),
     headerHomeBtn: document.querySelector('#home'),
     headerMyLibBtn: document.querySelector('#my-library'),
     collectionsBtnsContainer: document.querySelector('#collections-nav'),
     collectionWatchedBtn: document.querySelector('#watched'),
     collectionQueueBtn: document.querySelector('#queue'),
-    searchFormContainer: document.querySelector('#search-rorm-container'),
+    searchFormContainer: document.querySelector('#search-form-container'),
     searchForm: document.querySelector('#search-form'),
     libraryContainer: document.querySelector('#library'),
     backdrop: document.querySelector('#backdrop'),
@@ -43,7 +44,7 @@ const LANGUAGES = {
             addToQueue: 'add to queue',
             removeFromQueue: 'remove from Queue',
         },
-        
+        logoName: 'Filmoteka',
         searchPlaceholder: 'Search movies',
         notification: 'Search result not successful. Enter the correct movie name and try again',
         movieDetails: {
@@ -69,7 +70,7 @@ const LANGUAGES = {
             addToQueue: 'додати до черги',
             removeFromQueue: 'видалити з черги',
         },
-       
+        logoName: 'Фільмотека',
         searchPlaceholder: 'Пошук фильмів',
         notification: 'Пошук не мав успіху. Введить правильну назву фільму та спробуйте ще раз',
         movieDetails: {

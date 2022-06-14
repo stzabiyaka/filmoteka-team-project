@@ -61,6 +61,8 @@ export default class SiteCurrentPageHandler {
         REFS.headerMyLibBtn.disabled = disable;
         REFS.headerLogo.classList.toggle('disabled');
         REFS.headerContainer.classList.toggle(this.myLibraryClass);
+        REFS.collectionsBtnsContainer.classList.toggle(this.hiderClass);
+        REFS.searchFormContainer.classList.toggle(this.hiderClass);
     }
     #collectionLoad ({ content }) {
         const loader = this.#apiService.getMoviesBundle.bind(this.#apiService);
