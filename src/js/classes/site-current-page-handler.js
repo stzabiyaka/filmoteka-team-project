@@ -2,9 +2,10 @@ import markupRenderer from "../modules/markup-renderer";
 import { APPLICATION_PAGES, REFS, UTILITY_CLASSES } from "../site-constants";
 
 export default class SiteCurrentPageHandler {
-    constructor ({initLoader}) {
+    #apiService;
+    constructor ({apiService}) {
         this.siteCurrentPage = APPLICATION_PAGES.home;
-        this.initLoader = initLoader;
+        this.apiService = apiService;
         this.hiderClass = 'js-hidden';
         this.init();
         this.homeHandler();
@@ -21,7 +22,7 @@ export default class SiteCurrentPageHandler {
         REFS.collectionsBtnsContainer.classList.add(this.hiderClass);
         this.#navBtnsToggle();
         // REFS.paginator.classList.add(this.hiderClass);
-        markupRenderer({ loader: this.initLoader, target: REFS.libraryContainer });
+        markupRenderer({ loader: this.#apiService.getTrendingMovies.bind(this.apiService), target: REFS.libraryContainer });
         console.log(event);
         console.log('HOME PAGE LOADED');
 

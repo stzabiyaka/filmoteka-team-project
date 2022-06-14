@@ -13,7 +13,7 @@ const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
 
 const moviesApiService = new MoviesApiService({ language: currentLanguage});
-const pageHandler = new SiteCurrentPageHandler({ initLoader: moviesApiService.getTrendingMovies.bind(moviesApiService) });
+const pageHandler = new SiteCurrentPageHandler({ apiService: moviesApiService });
 const watchedService = new CollectionService('moviesWatched');
 const queueService = new CollectionService('moviesQueue');
 
