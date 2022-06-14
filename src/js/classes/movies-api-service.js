@@ -36,14 +36,17 @@ export default class MoviesApiService {
         this.genres = genres.genres;
     }
 
-    async getTrendingMovies () {
+    async getTrendingMovies ({ page }) {
+        console.log(page);
+        this.page = page;
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.trending}?api_key=${this.#API_KEY}&page=${this.page}&language=${this.#currentLanguage}`;
         const movies = await this.#getData(url);
         this.#normalizeGenres(movies.results);
         return movies;
     }
 
-    async searchMovies ({ query }) {
+    async searchMovies ({ query, page = 1 }) {
+        this.page = page;
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.search}?api_key=${this.#API_KEY}&language=${this.#currentLanguage}&query=${query}&page=${this.page}&include_adult=false`;
         const movies = await this.#getData(url);
         this.#normalizeGenres(movies.results);

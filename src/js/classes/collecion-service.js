@@ -20,20 +20,16 @@ export default class CollectionService extends LocalStorageService {
             this.#collection = [];
         }
         this.#totalPages = Math.ceil(this.#collection.length / this.perPage);
-
     }
 
     getCollectionPage ({ page = 1}) {
         if(!this.isCollectionExist()) {
-            //remove this after end of development
-            console.log('Collection is empty');
-            //remove this after end of development ^^^
-            return;
+            return 'collection is empty';
+        }
+        if(this.#collection === undefined || this.#collection === [] || !this.#totalPages || !this.isPageExist({ page: page })) {
+            return 'something went wrong';
         }
         this.currentPage = page;
-        if(this.#collection === undefined || this.#collection === [] || this.currentPage > this.#totalPages) {
-            return;
-        }
         const startPosition = (this.currentPage - 1) * this.perPage;
         const bundle = this.#totalPages === 1 ? this.#collection : this.#collection.slice(startPosition, (startPosition + this.perPage));
         return { bundle: bundle, totalPages: this.#totalPages, page: this.currentPage};
@@ -89,5 +85,9 @@ export default class CollectionService extends LocalStorageService {
 
     resetCurrentPage () {
         this.currentPage = 1;
+    }
+
+    isPageExist ({ page = 1}) {
+        return this.#totalPages >= page ? true : false;
     }
 }

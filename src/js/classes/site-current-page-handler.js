@@ -5,11 +5,15 @@ export default class SiteCurrentPageHandler {
     #apiService;
     #watchedService;
     #queueService;
-    constructor ({apiService , wathedService, queueService }) {
+    #markupRender;
+    #modalRender;
+    constructor ({apiService , wathedService, queueService, markupRender, modalRender }) {
         this.siteCurrentPage = APPLICATION_PAGES.home;
         this.#apiService = apiService;
         this.#watchedService = wathedService;
         this.#queueService = queueService;
+        this.#markupRender = markupRender;
+        this.#modalRender = modalRender;
         this.hiderClass = 'js-hidden';
         this.init();
         this.homeHandler();
@@ -22,25 +26,27 @@ export default class SiteCurrentPageHandler {
         REFS.headerMyLibBtn.addEventListener('click', this.watchedHandler.bind(this));
     }
 
-    homeHandler (event) {
+    homeHandler () {
+        const loader = this.#apiService.getTrendingMovies.bind(this.#apiService, { page: 1 });
         REFS.collectionsBtnsContainer.classList.add(this.hiderClass);
         this.#navBtnsToggle();
         // REFS.paginator.classList.add(this.hiderClass);
-        markupRenderer({ loader: this.#apiService.getTrendingMovies.bind(this.#apiService), target: REFS.libraryContainer });
-        console.log('HOME PAGE LOADED');
-
+        
+        this.#markupRender({ loader: loader, target: REFS.libraryContainer });
     }
 
-    searchHandler () {
+    searchHandler ({ searchQuery, page = 1 }) {
+        const loader = this.#apiService.searchMovies.bind(this.#apiService, { searchQuery, page });
         console.log('QUEUE PAGE LOADED');
     }
 
-    watchedHandler () {
+    watchedHandler ({ page = 1 }) {
+        
         this.#navBtnsToggle();
         console.log('WATCHED PAGE LOADED');
     }
 
-    queueHandler () {
+    queueHandler ({ page = 1 }) {
         console.log('QUEUE PAGE LOADED');
     }
 
@@ -53,5 +59,8 @@ export default class SiteCurrentPageHandler {
         REFS.headerHomeBtn.disabled = !disable;
         REFS.headerMyLibBtn.disabled = disable;
         REFS.headerLogo.classList.toggle('disabled');
+    }
+    #collectionLoad ({ content }) {
+        const loader = this.#apiService.getMoviesBundle.bind(this.#apiService);
     }
 }

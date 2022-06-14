@@ -16,7 +16,10 @@ let currentLanguage = userPreferences.getPreferences().language;
 const moviesApiService = new MoviesApiService({ language: currentLanguage});
 const watchedService = new CollectionService('moviesWatched');
 const queueService = new CollectionService('moviesQueue');
-const pageHandler = new SiteCurrentPageHandler({ apiService: moviesApiService, wathedService: watchedService, queueService: queueService });
+
+// site intialisation
+const pageHandler = new SiteCurrentPageHandler({ apiService: moviesApiService, wathedService: watchedService, queueService: queueService, markupRender: markupRenderer });
+// ^^^
 
 let currentPage = APPLICATION_PAGES.home;
 
@@ -27,16 +30,13 @@ let currentPage = APPLICATION_PAGES.home;
 
 
   testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
+ 
 
-
-
-
-
-
-
-
-    
-
+//  const isCollection = watchedService.isCollectionExist();
+//  if (isCollection) {
+//   const content = watchedService.getCollectionPage({ page: 1 });
+//   markupRenderer({ loader: moviesApiService.getMoviesBundle.bind(moviesApiService), target: REFS.libraryContainer, content: content });
+//  }
 
 
 
