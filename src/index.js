@@ -41,7 +41,7 @@ let currentPage = APPLICATION_PAGES.home;
 
 //  const isCollection = watchedService.isCollectionExist();
 //  if (isCollection) {
-//   const content = watchedService.getCollectionPage({ page: 1 });
+//   const content = watchedService.getCollectionPage({ page: 2 });
 //   markupRenderer({ loader: moviesApiService.getMoviesBundle.bind(moviesApiService), target: REFS.libraryContainer, content: content });
 //  }
 

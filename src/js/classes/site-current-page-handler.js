@@ -1,5 +1,5 @@
 import markupRenderer from "../modules/markup-renderer";
-import { APPLICATION_PAGES, REFS, UTILITY_CLASSES } from "../site-constants";
+import { APPLICATION_PAGES, REFS } from "../site-constants";
 
 export default class SiteCurrentPageHandler {
     #apiService;
@@ -17,14 +17,14 @@ export default class SiteCurrentPageHandler {
         this.hiderClass = 'js-hidden';
         this.myLibraryClass = 'my-library';
         this.init();
-        this.homeHandler();
-        
+        this.homeHandler();    
     }
 
     init () {
         REFS.headerLogo.addEventListener('click', this.homeHandler.bind(this));
         REFS.headerHomeBtn.addEventListener('click', this.homeHandler.bind(this));
         REFS.headerMyLibBtn.addEventListener('click', this.watchedHandler.bind(this));
+
     }
 
     homeHandler () {
@@ -61,10 +61,10 @@ export default class SiteCurrentPageHandler {
         REFS.headerMyLibBtn.disabled = disable;
         REFS.headerLogo.classList.toggle('disabled');
         REFS.headerContainer.classList.toggle(this.myLibraryClass);
-        REFS.collectionsBtnsContainer.classList.toggle(this.hiderClass);
         REFS.searchFormContainer.classList.toggle(this.hiderClass);
+        REFS.collectionsBtnsContainer.classList.toggle(this.hiderClass);
     }
     #collectionLoad ({ content }) {
-        const loader = this.#apiService.getMoviesBundle.bind(this.#apiService);
+        const loader = this.#apiService.getMoviesBundle.bind(this.#apiService, content);
     }
 }

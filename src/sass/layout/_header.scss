@@ -201,10 +201,6 @@
      margin: auto; 
     width: 280px;
     height: 20px;
-
-    &.js-hidden {
-        display: none;
-    }
 }
 .search-form__input {
     background: transparent;
@@ -230,10 +226,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    &.js-hidden {
-        display: none;
-    }
     
 &__button{
     width: 130px;
