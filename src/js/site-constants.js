@@ -1,4 +1,37 @@
-export const CAPTIONS = {
+const LANGUAGES = {
+    default: 'english',
+    ukrainian: 'ukrainian',
+  };
+
+  const APPLICATION_PAGES = {
+    home: 'home',
+    search: 'search results',
+    watched: 'watched',
+    queue: 'queue',
+  };
+
+  const REFS = {
+    body: document.body,
+    headerContainer: document.querySelector('#header'),
+    headerLogo: document.querySelector('#logo'),
+    headerHomeBtn: document.querySelector('#home'),
+    headerMyLibBtn: document.querySelector('#my-library'),
+    collectionsBtnsContainer: document.querySelector('#collections-nav'),
+    collectionWatchedBtn: document.querySelector('#watched'),
+    collectionQueueBtn: document.querySelector('#queue'),
+    searchFormContainer: document.querySelector('#search-rorm-container'),
+    searchForm: document.querySelector('#search-form'),
+    libraryContainer: document.querySelector('#library'),
+    backdrop: document.querySelector('#backdrop'),
+    modalContainer: document.querySelector('#modal'),
+    modalAddToWatchedBtn: document.querySelector('#watched-add'),
+    modalAddToQueueBtn: document.querySelector('#queue-add'),
+    modalCloseBtn: document.querySelector('#modal-close'),
+    teamLink: document.querySelector('#team'),
+    paginator: document.querySelector('#paginator'),
+}
+
+  const CAPTIONS = {
     default: {
         buttons: {
             home: 'home',
@@ -52,3 +85,5 @@ export const CAPTIONS = {
         developedWidth: 'Розроблено із',
     }
 }
+
+export { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS }
