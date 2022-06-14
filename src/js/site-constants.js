@@ -23,7 +23,7 @@ const LANGUAGES = {
     searchFormContainer: document.querySelector('#search-form-container'),
     searchForm: document.querySelector('#search-form'),
     libraryContainer: document.querySelector('#library'),
-    backdrop: document.querySelector('#backdrop'),
+    backdrop: document.querySelector('#backdrop-modal-card'),
     modalContainer: document.querySelector('#modal'),
     modalAddToWatchedBtn: document.querySelector('#watched-add'),
     modalAddToQueueBtn: document.querySelector('#queue-add'),
