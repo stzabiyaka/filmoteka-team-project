@@ -13,10 +13,17 @@
     flex-direction: column;
     justify-content: space-between;
 
-    
+    margin-top: -20px;
 
     @include respondTo(tablet) {
         flex-direction: row;
         flex-wrap: wrap;
+        
+        margin-top: -32px;
+        margin-left: -32px;
+    }
+
+    @include respondTo(desktop) {
+        margin-left: -16px;
     }
 }

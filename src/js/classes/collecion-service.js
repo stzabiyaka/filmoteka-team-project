@@ -1,38 +1,38 @@
 import LocalStorageService from "./local-storage-service";
 
 export default class CollectionService extends LocalStorageService {
-    page;
+    currentPage;
     perPage;
     #collection;
     #totalPages;
     constructor(key) {
         super (key);
-        this.#totalPages = 1;
+        this.#totalPages = 0;
         this.perPage = 9;
-        this.page = 1;
+        this.currentPage = 1;
 
         this.#restoreCollection();
     }
 
     #restoreCollection () {
         this.#collection = this.load();
-        if (this.#collection === undefined) {
+        if (!this.#collection) {
             this.#collection = [];
         }
         this.#totalPages = Math.ceil(this.#collection.length / this.perPage);
-
     }
 
-    async loadCollection ({loader}) {
-        if(this.#collection === undefined || this.#collection === [] || this.page > this.#totalPages) {
-            return;
+    getCollectionPage ({ page = 1}) {
+        if(!this.isCollectionExist()) {
+            return 'collection is empty';
         }
-        let query;
-        const startPosition = (this.page - 1) * this.perPage;
-        query = this.#totalPages === 1 ? this.#collection : this.#collection.slice(startPosition, (startPosition + this.perPage));
-        const requests = query.map(id => loader({movieId: id}));
-        const result = await Promise.all(requests);
-        return { results: result, total_pages: this.#totalPages, page: this.page};
+        if(this.#collection === undefined || this.#collection === [] || !this.#totalPages || !this.isPageExist({ page: page })) {
+            return 'something went wrong';
+        }
+        this.currentPage = page;
+        const startPosition = (this.currentPage - 1) * this.perPage;
+        const bundle = this.#totalPages === 1 ? this.#collection : this.#collection.slice(startPosition, (startPosition + this.perPage));
+        return { bundle: bundle, totalPages: this.#totalPages, page: this.currentPage};
     }
 
     #saveCollection () {
@@ -63,12 +63,16 @@ export default class CollectionService extends LocalStorageService {
         return this.#collection.includes(id);
     }
 
-    set page (newPage) {
-        this.page = newPage;
+    isCollectionExist() {
+        return this.#totalPages ? true : false;
     }
 
-    get page () {
-        return this.page;
+    set currentPage (newPage) {
+        this.currentPage = newPage;
+    }
+
+    get currentPage () {
+        return this.currentPage;
     }
 
     set perPage (newPerPage) {
@@ -79,7 +83,11 @@ export default class CollectionService extends LocalStorageService {
         return this.perPage;
     }
 
-    resetPage () {
-        this.page = 1;
+    resetCurrentPage () {
+        this.currentPage = 1;
+    }
+
+    isPageExist ({ page = 1}) {
+        return this.#totalPages >= page ? true : false;
     }
 }

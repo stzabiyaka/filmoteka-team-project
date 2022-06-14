@@ -1,4 +1,37 @@
-export const CAPTIONS = {
+const LANGUAGES = {
+    default: 'english',
+    ukrainian: 'ukrainian',
+  };
+
+  const APPLICATION_PAGES = {
+    home: 'home',
+    search: 'search results',
+    watched: 'watched',
+    queue: 'queue',
+  };
+
+  const REFS = {
+    body: document.body,
+    headerContainer: document.querySelector('#header'),
+    headerLogo: document.querySelector('#logo'),
+    headerHomeBtn: document.querySelector('#home'),
+    headerMyLibBtn: document.querySelector('#my-library'),
+    collectionsBtnsContainer: document.querySelector('#collections-nav'),
+    collectionWatchedBtn: document.querySelector('#watched'),
+    collectionQueueBtn: document.querySelector('#queue'),
+    searchFormContainer: document.querySelector('#search-rorm-container'),
+    searchForm: document.querySelector('#search-form'),
+    libraryContainer: document.querySelector('#library'),
+    backdrop: document.querySelector('#backdrop'),
+    modalContainer: document.querySelector('#modal'),
+    modalAddToWatchedBtn: document.querySelector('#watched-add'),
+    modalAddToQueueBtn: document.querySelector('#queue-add'),
+    modalCloseBtn: document.querySelector('#modal-close'),
+    teamLink: document.querySelector('#team'),
+    paginator: document.querySelector('#paginator'),
+}
+
+  const CAPTIONS = {
     default: {
         buttons: {
             home: 'home',
@@ -11,7 +44,7 @@ export const CAPTIONS = {
             removeFromQueue: 'remove from Queue',
         },
         
-        searchPlaceholder: 'search movies',
+        searchPlaceholder: 'Search movies',
         notification: 'Search result not successful. Enter the correct movie name and try again',
         movieDetails: {
             vote: 'Vote',
@@ -19,7 +52,8 @@ export const CAPTIONS = {
             popularity: 'Popularity',
             title: 'Original Title',
             genre: 'Genre',
-            about: 'About'
+            about: 'About',
+            other: 'Other'
         },
         copyright: 'All Rights Reserved',
         developedWidth: 'Developed with',
@@ -36,7 +70,7 @@ export const CAPTIONS = {
             removeFromQueue: 'видалити з черги',
         },
        
-        searchPlaceholder: 'пошук фильмів',
+        searchPlaceholder: 'Пошук фильмів',
         notification: 'Пошук не мав успіху. Введить правильну назву фільму та спробуйте ще раз',
         movieDetails: {
             vote: 'Голос',
@@ -44,9 +78,12 @@ export const CAPTIONS = {
             popularity: 'Популярнісь',
             title: 'Оригінальна назва',
             genre: 'Жанр',
-            about: 'Опис'
+            about: 'Опис',
+            other: 'Інші'
         },
         copyright: 'Всі права захищено',
         developedWidth: 'Розроблено із',
     }
 }
+
+export { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS, UTILITY_CLASSES }
