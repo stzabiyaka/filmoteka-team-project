@@ -60,6 +60,8 @@
     }
 }
 
+// кнопка закриття модального вікна
+//------------------------------------------------
 .modal-card__close-btn {
     display: flex;
     justify-content: center;
@@ -82,6 +84,9 @@
     stroke: getColor('text-primary');
 }
 
+//карточка фільму
+//---------------------------------
+
 .modal-card__data{
     display: flex;
     max-width: 240px;
@@ -100,6 +105,9 @@
         margin: 0;
     }
 }
+
+//контейнер для картинки в середині карточки
+//----------------------------------------------------
 
 .modal-card-thumb__img {
     display: block;
@@ -136,6 +144,9 @@
     }
 }
 
+//контейнер для відображення всієї інформації про фільм
+//-------------------------------------------------------
+
 .modal-card-thumb__content {
 margin-top: 20px;
 display: flex;
@@ -153,6 +164,121 @@ flex-direction: column;
         height: 478px;
     }
 }
+
+// обгортка для відображення характеристик і опису фільму
+.modal-card-info {
+    margin-bottom: 20px;
+}
+
+//заголовок картки
+//------------------------------------
+
+.modal-card-info__title {
+    margin-bottom: 20px;
+    font-size: 20px;
+    line-height: 1.172em;
+    text-align: left;
+    vertical-align: top;
+    text-transform: uppercase;
+
+    @include respondTo(desktop) {
+        font-size: 30px;
+        line-height: 1.167;
+    }
+}
+
+// обгортка для блоку характеристик фільму
+//--------------------------------
+
+.modal-card__thumb--characteristics {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+//блок назв характеристик фільму
+//--------------------------------------
+
+.modal-card-info__characteristics {
+    width: 108px;
+}
+
+.modal-card-info__characteristics--name {
+    color: getColor('modal-text-secondary');
+}
+
+
+//блок значень характеристик фільму
+// modal-card-info__data
+//-----------------------------------------------
+
+.modal-card-info__data--item {
+    line-height: 1.333em;
+}
+
+.modal-card-info__data--vote,
+.modal-card-info__data--votes {
+    line-height: 1.167em;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    width: 36px;
+    height: 16px;
+    border-radius: 5px;
+}
+
+.modal-card-info__data--slesh {
+    color: getColor('modal-text-secondary');
+    margin-right: 3px;
+}
+
+.modal-card-info__data--vote {
+    color: getColor('text-secondary');
+    background-color: getColor('accent');
+    margin-right: 3px;
+}
+
+.modal-card-info__data--votes {
+    background-color: getColor('background-secondary');
+}
+
+.modal-card-info__data--item,
+.modal-card-info__data--votes {
+    color: getColor('text-primary');
+}
+
+.modal-card-info__data--popularity {
+    line-height: 1.167em;
+}
+
+//спільні стилі для блоку назв характеристик і для блоку значень
+//------------------------------------------------
+
+.modal-card-info__characteristics--item:not(:last-child),
+.modal-card-info__data--item:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+.modal-card-info__characteristics,
+.modal-card-info__data {
+    display: flex;
+    flex-direction: column;
+}
+
+//заголовок опису тексту
+//------------------------------
+
+.modal-card-info-about__title {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    align-self: center;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+//опис тексту
+//-----------------------
 
 .modal-card-info-about__description {
     display: inline-block;    
@@ -172,96 +298,20 @@ flex-direction: column;
     }
 }
 
-.modal-card-info__characteristics--name{
-    color: getColor('modal-text-secondary');   
-}
+// блок кнопок
+//--------------------
 
-.modal-card__thumb--characteristics{
+.modal-card-thumb__btn {
     display: flex;
-    margin-bottom: 20px;
-}
+    justify-content: space-between;
 
-.modal-card-info__characteristics--item:not(:last-child),
-.modal-card-info__data--item:not(:last-child){
-    margin-bottom: 8px;
-}
-
-.modal-card-info__characteristics,
-.modal-card-info__data{
-    display: flex;
-    flex-direction: column;   
-}
-
-.modal-card-info__characteristics{
-    width: 108px;
-}
-
-.modal-card-info__data--item{
-    line-height: 1.333em;
-}
-
-.modal-card-info__data--popularity{
-    line-height: 1.167em;
-}
-
-.modal-card-info__data--vote,
-.modal-card-info__data--votes{    
-    line-height: 1.167em;
-    text-align: center;
-    vertical-align:middle;
-    display: inline-block;
-    width: 36px;
-    height: 16px;
-    border-radius: 5px;
-}
-
-.modal-card-info__data--slesh{
-    color: getColor('modal-text-secondary');
-    margin-right: 3px;
-}
-
-.modal-card-info__data--vote{
-    color: getColor('text-secondary');
-    background-color: getColor('accent');    
-    margin-right: 3px;
-}
-
-.modal-card-info__data--votes{
-    background-color: getColor('background-secondary');    
-}
-
-.modal-card-info__data--item,
-.modal-card-info__data--votes{
-    color: getColor('text-primary');
-}
-
-.modal-card-info__title {
-    margin-bottom: 20px;
-    font-size: 20px;
-    line-height: 1.172em;
-    text-align: left;
-    vertical-align: top;
-    text-transform: uppercase;
-
-    @include respondTo(desktop){
-        font-size: 30px;
-        line-height: 1.167;
+    @include respondTo(tablet) {
+        justify-content: start;
     }
 }
 
-.modal-card-info-about__title{
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    text-align: left;
-    align-self:center;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-}
-
-.modal-card-info{
-    margin-bottom: 20px;
-}
+//кнопка add to Watched
+//--------------------------
 
 .modal-card-btn__watched{
     @extend .button;
@@ -290,19 +340,13 @@ flex-direction: column;
     }
 }
 
+// кнопка add to queue
+//------------------------
+
 .modal-card-btn__queue{
     @extend .modal-card-btn__watched;
 
     @include respondTo(tablet){
         margin-left: 15px;
     }    
-}
-
-.modal-card-thumb__btn{
-    display: flex;
-    justify-content: space-between;
-
-    @include respondTo(tablet){
-        justify-content: start;
-    }
 }
