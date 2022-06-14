@@ -27,7 +27,7 @@
     background-color: getColor('background-primary');
     z-index: 101;
     position: absolute;
-    width: 100%;
+    max-width: 100%;
     height: 90%;
     top: 50%;
     left: 50%;
@@ -45,9 +45,10 @@
     @include respondTo(tablet) {
         height: 552px;
         padding-left: 36px;
-        padding-right: 72px;
+        padding-right: 36px;
         padding-top: 40px;
-        flex-direction: row;        
+        flex-direction: row;   
+        overflow-y:auto;     
     }
 
     @include respondTo(desktop) {
@@ -85,12 +86,12 @@
     display: flex;
     max-width: 240px;
     flex-direction: column;
+    
 
     @include respondTo(tablet){
         flex-direction: row;
         max-width: 596px;
-        height: 472px;
-        margin-top: 2px;
+        height: 472px;    
     }
 
     @include respondTo(desktop){
@@ -162,14 +163,12 @@ flex-direction: column;
 
     @include respondTo(tablet) {
         max-height: 233px;  //не по макету, але так не вилазять кнопки
-        width: 264px;   
-        overflow-y: scroll; //все одно скрол, бо весь текст не завжди влазить      
+        width: 264px;           
     }
 
     @include respondTo(desktop){
         width: 391px;
-        max-height: 253px;
-        overflow-y: scroll;
+        max-height: 253px;        
     }
 }
 
