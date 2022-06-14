@@ -5,10 +5,11 @@ export default class SiteCurrentPageHandler {
     #apiService;
     constructor ({apiService}) {
         this.siteCurrentPage = APPLICATION_PAGES.home;
-        this.apiService = apiService;
+        this.#apiService = apiService;
         this.hiderClass = 'js-hidden';
         this.init();
         this.homeHandler();
+        
     }
 
     init () {
@@ -23,12 +24,11 @@ export default class SiteCurrentPageHandler {
         this.#navBtnsToggle();
         // REFS.paginator.classList.add(this.hiderClass);
         markupRenderer({ loader: this.#apiService.getTrendingMovies.bind(this.#apiService), target: REFS.libraryContainer });
-        console.log(event);
         console.log('HOME PAGE LOADED');
 
     }
 
-    searchHandler ({ loader }) {
+    searchHandler () {
         console.log('QUEUE PAGE LOADED');
     }
 
