@@ -37,7 +37,6 @@ export default class MoviesApiService {
     }
 
     async getTrendingMovies ({ page }) {
-        console.log(page);
         this.page = page;
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.trending}?api_key=${this.#API_KEY}&page=${this.page}&language=${this.#currentLanguage}`;
         const movies = await this.#getData(url);

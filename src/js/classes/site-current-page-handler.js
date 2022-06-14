@@ -15,6 +15,7 @@ export default class SiteCurrentPageHandler {
         this.#markupRender = markupRender;
         this.#modalRender = modalRender;
         this.hiderClass = 'js-hidden';
+        this.myLibraryClass = 'my-library';
         this.init();
         this.homeHandler();
         
@@ -59,6 +60,7 @@ export default class SiteCurrentPageHandler {
         REFS.headerHomeBtn.disabled = !disable;
         REFS.headerMyLibBtn.disabled = disable;
         REFS.headerLogo.classList.toggle('disabled');
+        REFS.headerContainer.classList.toggle(this.myLibraryClass);
     }
     #collectionLoad ({ content }) {
         const loader = this.#apiService.getMoviesBundle.bind(this.#apiService);
