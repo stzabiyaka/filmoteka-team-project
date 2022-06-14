@@ -92,21 +92,29 @@
     background-color: transparent;
     border: none;
 
-    &.current::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        left: 0;
-        bottom: 0;
-        background: getColor('accent');
-        border-bottom: 3px solid getColor('accent'); 
+    &:disabled {
+        &::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            left: 0;
+            bottom: 0;
+            background: getColor('accent');
+            border-bottom: 3px solid getColor('accent'); 
+        }
     }
+    
     }
 }
 
 
 .site-logo {
     text-decoration: none;
+    pointer-events: auto;
+
+    &.disabled {
+        pointer-events: none;
+    }
     
     @include respondTo(tablet) {
     display: flex;

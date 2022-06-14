@@ -6,12 +6,14 @@ import ImagesPathConstructor from './js/classes/images-path-constructor';
 import markupRenderer from './js/modules/markup-renderer';
 import { testRefs } from './js/templates/modal-tmpl';
 import { renderModalCard } from './js/partials/modal';
+import SiteCurrentPageHandler from './js/classes/site-current-page-handler';
 import markupRenderer from './js/modules/markup-renderer';
 
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
 
 const moviesApiService = new MoviesApiService({ language: currentLanguage});
+const pageHandler = new SiteCurrentPageHandler({ initLoader: moviesApiService.getTrendingMovies.bind(moviesApiService) });
 const watchedService = new CollectionService('moviesWatched');
 const queueService = new CollectionService('moviesQueue');
 
@@ -24,8 +26,6 @@ let currentPage = APPLICATION_PAGES.home;
 
 
   testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
-
-  markupRenderer({ loader: moviesApiService.getTrendingMovies.bind(moviesApiService), target: REFS.libraryContainer});
 
 
 
