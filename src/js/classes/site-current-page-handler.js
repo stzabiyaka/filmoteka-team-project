@@ -3,9 +3,13 @@ import { APPLICATION_PAGES, REFS, UTILITY_CLASSES } from "../site-constants";
 
 export default class SiteCurrentPageHandler {
     #apiService;
-    constructor ({apiService}) {
+    #watchedService;
+    #queueService;
+    constructor ({apiService , wathedService, queueService }) {
         this.siteCurrentPage = APPLICATION_PAGES.home;
         this.#apiService = apiService;
+        this.#watchedService = wathedService;
+        this.#queueService = queueService;
         this.hiderClass = 'js-hidden';
         this.init();
         this.homeHandler();
@@ -13,7 +17,6 @@ export default class SiteCurrentPageHandler {
     }
 
     init () {
-        // REFS.headerContainer.addEventListener('click', this.navBtnsHandler)
         REFS.headerLogo.addEventListener('click', this.homeHandler.bind(this));
         REFS.headerHomeBtn.addEventListener('click', this.homeHandler.bind(this));
         REFS.headerMyLibBtn.addEventListener('click', this.watchedHandler.bind(this));
@@ -39,6 +42,10 @@ export default class SiteCurrentPageHandler {
 
     queueHandler () {
         console.log('QUEUE PAGE LOADED');
+    }
+
+    modalHandler ({ content }) {
+        console.log('MODAL LOADED');
     }
 
     #navBtnsToggle () {

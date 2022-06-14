@@ -11,11 +11,12 @@ import markupRenderer from './js/modules/markup-renderer';
 
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
+// currentLanguage = LANGUAGES.ukrainian;
 
 const moviesApiService = new MoviesApiService({ language: currentLanguage});
-const pageHandler = new SiteCurrentPageHandler({ apiService: moviesApiService });
 const watchedService = new CollectionService('moviesWatched');
 const queueService = new CollectionService('moviesQueue');
+const pageHandler = new SiteCurrentPageHandler({ apiService: moviesApiService, wathedService: watchedService, queueService: queueService });
 
 let currentPage = APPLICATION_PAGES.home;
 
@@ -35,7 +36,6 @@ let currentPage = APPLICATION_PAGES.home;
 
 
     
-
 
 
 
