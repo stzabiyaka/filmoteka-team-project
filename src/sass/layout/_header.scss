@@ -7,14 +7,54 @@
     background-repeat: no-repeat;
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
             url(../images/backgrounds/header-background-320.jpg);
+
     @media (min-device-pixel-ratio: 2),
         (-webkit-min-device-pixel-ratio: 2),
         (min-resolution: 192dpi),
         (min-resolution: 2dppx) {
         background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
                 url(../images/backgrounds/header-background-320@2x.jpg);
-        }
+            }
+    &.my-library{
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+                url(../images/backgrounds/header-mylib-background-320.jpg);
+        
+            @media (min-device-pixel-ratio: 2),
+            (-webkit-min-device-pixel-ratio: 2),
+            (min-resolution: 192dpi),
+            (min-resolution: 2dppx) {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+                    url(../images/backgrounds/header-mylib-background-320@2x.jpg);
+            }
 
+    @include respondTo(mobile) {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+            url(../images/backgrounds/header-mylib-background-768.jpg);
+    @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+                url(../images/backgrounds/header-mylib-background-768@2x.jpg);
+        }
+    }  
+     @include respondTo(tablet) {
+             background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+                 url(../images/backgrounds/header-mylib-background-1024.jpg);
+    
+     @media (min-device-pixel-ratio: 2),
+             (-webkit-min-device-pixel-ratio: 2),
+             (min-resolution: 192dpi),
+             (min-resolution: 2dppx) {
+                 background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+                     url(../images/backgrounds/header-mylib-background-1024@2x.jpg);
+             }
+         }
+
+    }
     @include respondTo(mobile) {
         background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
             url(../images/backgrounds/header-background-768.jpg);
@@ -46,7 +86,6 @@
         max-width: $desktop;
         
     }
-
     &__container {
         display: flex;
         flex-wrap: nowrap;
@@ -60,6 +99,7 @@
         @include respondTo(tablet) {
         padding-top: 49px;
         margin-right: 32px;
+        margin-bottom: 40px;
         }
     } 
  }
@@ -106,12 +146,10 @@
     
     }
 }
-
-
 .site-logo {
     text-decoration: none;
     pointer-events: auto;
-
+    
     &.disabled {
         pointer-events: none;
     }
@@ -152,27 +190,68 @@
         }
     }    
 }
- 
-
 .search-form__container {
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    
+     margin: auto; 
     width: 280px;
     height: 20px;
     
 }
-
 .search-form__input {
     background: transparent;
     border: 0;
     border-bottom: 1px solid getColor('text-secondary');
     width: 280px;
+    &::placeholder{
+        font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: getColor('text-secondary');
+    }
+        @include respondTo(tablet) {
+            width: 336px;
+        }
 }
 
 .collections-nav {
     display: flex;
     justify-content: center;
+    align-items: center;
+    &.is-hidden{
+        display: none;
+    }
+&__button{
+    width: 130px;
+    height: 44px;
+    margin-right: 20px;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+    color: getColor('text-secondary');
+    background-color: transparent;
+&:last-child {
+        margin-right: 0;
+    }
+&:hover,
+ &:focus {
+    background-color: getColor('accent');
+         }
+    }
 }
