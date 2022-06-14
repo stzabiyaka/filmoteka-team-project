@@ -50,3 +50,6 @@ let currentPage = APPLICATION_PAGES.home;
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
+
+REFS.libraryContainer.addEventListener('click', renderModalCard);
+

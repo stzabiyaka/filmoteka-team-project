@@ -2,7 +2,7 @@
 //  import { renderModalCard } from "./js/partials/modal";
 // замість того,що був
 // був такий: import { renderModalCard } from "./js/templates/modal-tmpl";
-
+import ImagesPathConstructor from "../classes/images-path-constructor";
 
 export const testRefs = {
     backdrop: document.querySelector('#backdrop-modal-card'),
@@ -11,10 +11,21 @@ export const testRefs = {
     // цей refs тимчасовий, бо у нас ще не всі елементи є на сторінці
 }
 
+// REFS.headerLogoName.textContent = CAPTIONS[this.#currentLanguage].logoName;
+// ImagesPathConstructor.getImagePath({ path:poster_path, width: 'retina' })
 
+export function modalCardMarkUp({overview, backdrop_path, title, original_title, vote_average, vote_count, popularity, genres}) { 
 
-export function modalCardMarkUp({ about, imgSrc, imgAlt, originalTitle, vote, votes, popularity, genre }) { 
+    const about = overview;
+    const imgSrc = ImagesPathConstructor.getImagePath({ path:backdrop_path, width: 'retina' });
+    //poster_path,
+    const imgAlt = title;
+    const originalTitle = original_title;
+    const vote = vote_average;
+    const votes = vote_count;
+    const genre = genres;
 
+        
     return  `
 
         <div class="modal-card-thumb__img" >
@@ -23,7 +34,7 @@ export function modalCardMarkUp({ about, imgSrc, imgAlt, originalTitle, vote, vo
             
         <div class="modal-card-thumb__content">
             <div class="modal-card-info">
-                <h2 class="modal-card-info__title">${originalTitle}</h2>
+                h2 class="modal-card-info__title">${title}</h2>
                 <div class="modal-card__thumb--characteristics">
                     <ul class="modal-card-info__characteristics">
                         <li class="modal-card-info__characteristics--item">
