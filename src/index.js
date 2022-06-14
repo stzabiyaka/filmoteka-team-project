@@ -5,7 +5,7 @@ import CollectionService from './js/classes/collecion-service';
 import ImagesPathConstructor from './js/classes/images-path-constructor';
 import markupRenderer from './js/modules/markup-renderer';
 import { testRefs } from './js/templates/modal-tmpl';
-import { renderModalCard } from './js/partials/modal';
+import { renderModalCard } from './js/templates/modal';
 import SiteCurrentPageHandler from './js/classes/site-current-page-handler';
 import markupRenderer from './js/modules/markup-renderer';
 
