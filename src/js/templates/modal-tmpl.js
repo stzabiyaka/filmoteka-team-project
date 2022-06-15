@@ -8,7 +8,6 @@ let currentLanguage = userPreferences.getPreferences().language;
 
 export const testRefs = {
     backdrop: document.querySelector('#backdrop-modal-card'),
-    testOpenModalCard: document.querySelector('#try-to-open-modal-card'),
     modalContainer: document.querySelector('#modal'),    
     // цей refs тимчасовий, бо у нас ще не всі елементи є на сторінці
 }

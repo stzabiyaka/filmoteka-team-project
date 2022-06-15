@@ -25,7 +25,7 @@ let currentPage = APPLICATION_PAGES.home;
 
 
 
-  testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
+  
 
 
 

@@ -40,6 +40,6 @@ export async function renderModalCard(evt) {
                 REFS.body.classList.add('js-modal-is-open');
                 testRefs.modalContainer.innerHTML = modalCardMarkUp(movieObj);                
             })
-            .catch(error);
+            .catch(error => console.error(error));//тут можемо додати сповіщення про помилку
     };
 }
