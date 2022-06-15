@@ -9,6 +9,7 @@ import { renderModalCard } from './js/templates/modal';
 import SiteCurrentPageHandler from './js/classes/site-current-page-handler';
 import markupRenderer from './js/modules/markup-renderer';
 import SwitchSiteCaptions from './js/classes/switch-site-captons';
+import isContentExist from './js/modules/is-content-exist';
 
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
@@ -29,7 +30,6 @@ let currentPage = APPLICATION_PAGES.home;
 
   testRefs.testOpenModalCard.addEventListener('click', renderModalCard);
  
-
 
 
 
