@@ -8,6 +8,7 @@ import UserPreferencesService from "../classes/user-preferences";
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
 
+REFS.libraryContainer.addEventListener('click', renderModalCard);
 
 export async function renderModalCard(evt) {     
     evt.preventDefault();

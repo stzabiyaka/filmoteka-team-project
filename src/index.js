@@ -51,5 +51,4 @@ let currentPage = APPLICATION_PAGES.home;
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
 
-REFS.libraryContainer.addEventListener('click', renderModalCard);
 
