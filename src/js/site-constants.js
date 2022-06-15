@@ -64,7 +64,7 @@ const LANGUAGES = {
     ukrainian: {
         buttons: {
             home: 'головна',
-            library: 'моя бібліотека',
+            library: 'моя фільмотека',
             watched: 'переглянуті',
             queue: 'у черзі',
             addToWatched: 'додати до переглянутих',
