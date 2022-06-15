@@ -253,3 +253,20 @@
          }
     }
 }
+
+.user-btns-container {
+    display: flex;
+    align-items: center;
+}
+
+.language-select {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.theme-button {
+    width: 20px;
+    height: 20px;
+}
+
+
