@@ -46,35 +46,26 @@ export function modalCardMarkUp({overview, backdrop_path, title, original_title,
                     <ul class="modal-card-info__characteristics">
                         <li class="modal-card-info__characteristics--item">
                             <p class="modal-card-info__characteristics--name">${vote}/${votes}</p>
-                        </li>
-                        <li class="modal-card-info__characteristics--item">
-                            <p class="modal-card-info__characteristics--name">${popularityString}</p>
-                        </li>
-                        <li class="modal-card-info__characteristics--item">
-                            <p class="modal-card-info__characteristics--name">${originalTitle}</p>
-                        </li>
-                        <li class="modal-card-info__characteristics--item">
-                            <p class="modal-card-info__characteristics--name">${genre}</p>
-                        </li>
-                    </ul>
-                    <ul class="modal-card-info__data">
-                        <li class="modal-card-info__data--item">                            
                             <p class="modal-card-info__data--slesh">
                                 <span class="modal-card-info__data--vote">${vote_average}</span>
                                 /
                                 <span class="modal-card-info__data--votes">${vote_count}</span>
                             </p>
                         </li>
-                        <li class="modal-card-info__data--item">
+                        <li class="modal-card-info__characteristics--item">
+                            <p class="modal-card-info__characteristics--name">${popularityString}</p>
                             <p class="modal-card-info__data--popularity">${popularity}</p>
                         </li>
-                        <li class="modal-card-info__data--item">
+                        <li class="modal-card-info__characteristics--item">
+                            <p class="modal-card-info__characteristics--name">${originalTitle}</p>
                             <p class="modal-card-info__data--original-title">${original_title}</p>
                         </li>
-                        <li class="modal-card-info__data--item">
+                        <li class="modal-card-info__characteristics--item">
+                            <p class="modal-card-info__characteristics--name">${genre}</p>
                             <p class="modal-card-info__data--genre">${genres.join(', ')}</p>
                         </li>
                     </ul>
+                    
                 </div>
                 <h3 class="modal-card-info-about__title">${about}</h3>
                 <p class="modal-card-info-about__description">${overview}</p>
