@@ -144,20 +144,8 @@
     display: block;
     object-fit: cover;
     width: inherit;
-    height: inherit; 
-    max-width: 240px;
-    max-height: 357px;
+    height: inherit;     
     border-radius: 5px;
-
-    @include respondTo(tablet) {
-            width: 264px;
-            height: 374px;
-        }
-
-    @include respondTo(desktop) {
-        width: 375px;
-        height: 478px;
-    }
 }
 
 //контейнер для відображення всієї інформації про фільм
@@ -173,7 +161,6 @@ flex-direction: column;
         width: 264px;
         margin-top: 0;
         margin-left: 68px;
-        background-color: chartreuse;
     }
 
     @include respondTo(desktop) {
@@ -225,13 +212,14 @@ flex-direction: column;
 .modal-card-info__characteristics--name {
     color: getColor('modal-text-secondary');
     width: 108px;
-    background-color: coral;
 }
 
 
 //блок значень характеристик фільму
-// modal-card-info__data
 //-----------------------------------------------
+.modal-card-info__data{
+    width: 156px;
+}
 
 
 
@@ -270,11 +258,6 @@ flex-direction: column;
 //------------------------------------------------
 
 .modal-card-info__characteristics--item{
-    border: 1px solid black;
-}
-
-.modal-card-info__characteristics--item{
-    background-color: aqua;
     display: flex;
     flex-direction: row;
 }

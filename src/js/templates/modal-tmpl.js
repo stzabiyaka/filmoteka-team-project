@@ -54,15 +54,15 @@ export function modalCardMarkUp({overview, backdrop_path, title, original_title,
                         </li>
                         <li class="modal-card-info__characteristics--item">
                             <p class="modal-card-info__characteristics--name">${popularityString}</p>
-                            <p class="modal-card-info__data--popularity">${popularity}</p>
+                            <p class="modal-card-info__data modal-card-info__data--popularity">${popularity}</p>
                         </li>
                         <li class="modal-card-info__characteristics--item">
                             <p class="modal-card-info__characteristics--name">${originalTitle}</p>
-                            <p class="modal-card-info__data--original-title">${original_title}</p>
+                            <p class="modal-card-info__data modal-card-info__data--original-title">${original_title}</p>
                         </li>
                         <li class="modal-card-info__characteristics--item">
                             <p class="modal-card-info__characteristics--name">${genre}</p>
-                            <p class="modal-card-info__data--genre">${genres.join(', ')}</p>
+                            <p class="modal-card-info__data modal-card-info__data--genre">${genres.join(', ')}</p>
                         </li>
                     </ul>
                     
