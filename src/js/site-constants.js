@@ -30,6 +30,8 @@ const LANGUAGES = {
     modalCloseBtn: document.querySelector('#modal-close'),
     teamLink: document.querySelector('#team'),
     paginator: document.querySelector('#paginator'),
+    languageSelector: document.querySelector('#language'),
+    themeButton: document.querySelector('theme'),
 }
 
   const CAPTIONS = {
