@@ -81,6 +81,7 @@ export default class SiteCurrentPageHandler {
 
     }
 
+/* Логіка перемикання між колекцією watched, та колекцією queue */ 
     #collectionsBtnsToggle () {
         const disable = REFS.collectionWatchedBtn.disabled;
 
