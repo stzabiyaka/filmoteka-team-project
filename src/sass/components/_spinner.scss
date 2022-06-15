@@ -14,13 +14,13 @@
 }
 
 // =====базовий розмір блоків=====
-.circle{
+.rectangle{
     position: absolute;
     left: 17.2px;
     margin-top: 5px;
 
-    width: 16px;
-    height: 10px;
+    width: 15.5px;
+    height: 9.4px;
 
     background: getColor('text-secondary');
     animation: pulsing 1s infinite;
@@ -28,38 +28,38 @@
             left: 34.5px;
             margin-top: 10px;
 
-            width: 32px;
-            height: 20px;
+            width: 31.1px;
+            height: 18.8px;
         }
 }
 
 // =====позиція верхнього блоку=====
-.circle__one {
-    top: 2.5px;
+.rectangle__one {
+    top: 3px;
 
     animation-delay: 300ms;
     @include respondTo(desktop) {
-            top: 5px;
+            top: 6px;
         }
 }
 
 // =====позиція середнього блоку=====
-.circle__two {
-    top: 15px;
+.rectangle__two {
+    top: 15.2px;
 
     animation-delay: 600ms;
     @include respondTo(desktop) {
-            top: 30px;
+            top: 30.4px;
         }
 }
 
 // =====позиція нижнього блоку=====
-.circle__three {
-    top: 27.2px;
+.rectangle__three {
+    top: 27.7px;
 
     animation-delay: 900ms;
     @include respondTo(desktop) {
-            top: 54.5px;
+            top: 55.4px;
     }
 }
 
