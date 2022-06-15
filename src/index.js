@@ -6,7 +6,6 @@ import ImagesPathConstructor from './js/classes/images-path-constructor';
 import markupRenderer from './js/modules/markup-renderer';
 import { testRefs } from './js/templates/modal-tmpl';
 import { renderModalCard } from './js/templates/modal';
-import { closeModal, onClickBackdrop, onCloseEscKey } from './js/templates/modal-close-btn';
 import SiteCurrentPageHandler from './js/classes/site-current-page-handler';
 import markupRenderer from './js/modules/markup-renderer';
 import SwitchSiteCaptions from './js/classes/switch-site-captons';
@@ -51,5 +50,5 @@ let currentPage = APPLICATION_PAGES.home;
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
-    
+
 
