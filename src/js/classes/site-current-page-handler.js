@@ -23,13 +23,11 @@ export default class SiteCurrentPageHandler {
         REFS.headerLogo.addEventListener('click', this.homeHandler.bind(this));
         REFS.headerHomeBtn.addEventListener('click', this.homeHandler.bind(this));
         REFS.headerMyLibBtn.addEventListener('click', this.watchedHandler.bind(this));
-
     }
 
 /* Формування та логіка головної сторінки сайта */ 
-    homeHandler () {
+    homeHandler () { 
         const loader = this.#apiService.getTrendingMovies.bind(this.#apiService, { page: 1 });
-        REFS.collectionsBtnsContainer.classList.add(this.hiderClass);
         this.#navBtnsToggle();
         // REFS.paginator.classList.add(this.hiderClass);
         
