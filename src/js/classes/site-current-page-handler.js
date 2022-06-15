@@ -22,14 +22,13 @@ export default class SiteCurrentPageHandler {
     init () {
         REFS.headerLogo.addEventListener('click', this.homeHandler.bind(this));
         REFS.headerHomeBtn.addEventListener('click', this.homeHandler.bind(this));
-        REFS.headerMyLibBtn.addEventListener('click', this.watchedHandler.bind(this));
+        REFS.headerMyLibBtn.addEventListener('click', this.watchedHandler.bind(this, {isFromHome: true}) );
 
     }
 
 /* Формування та логіка головної сторінки сайта */ 
     homeHandler () {
         const loader = this.#apiService.getTrendingMovies.bind(this.#apiService, { page: 1 });
-        REFS.collectionsBtnsContainer.classList.add(this.hiderClass);
         this.#navBtnsToggle();
         // REFS.paginator.classList.add(this.hiderClass);
         
@@ -43,15 +42,27 @@ export default class SiteCurrentPageHandler {
     }
 
 /* Формування відображення та логіка колекції watched */ 
-    watchedHandler ({ page = 1 }) {
+    watchedHandler ({ page = 1, isFromHome }) {
+        if (isFromHome) {
+         this.#navBtnsToggle(); 
+
+         const queueCallback = this.queueHandler.bind(this);
+         const watchCallback = this.watchedHandler.bind(this, {isFromHome: false});
+         
+         REFS.collectionQueueBtn.addEventListener('click', queueCallback);
+         REFS.collectionWatchedBtn.addEventListener('click', watchCallback);
+        } 
         
-        this.#navBtnsToggle();
         console.log('WATCHED PAGE LOADED');
+
+        this.#collectionsBtnsToggle ();
     }
 
 /* Формування відображення та логіка колекції queue */ 
     queueHandler ({ page = 1 }) {
         console.log('QUEUE PAGE LOADED');
+
+        this.#collectionsBtnsToggle ();
     }
 
 /* Формування відображення та логіка модального вікна */ 
@@ -68,5 +79,13 @@ export default class SiteCurrentPageHandler {
         REFS.headerContainer.classList.toggle(this.myLibraryClass);
         REFS.searchFormContainer.classList.toggle(this.hiderClass);
         REFS.collectionsBtnsContainer.classList.toggle(this.hiderClass);
+
+    }
+
+    #collectionsBtnsToggle () {
+        const disable = REFS.collectionWatchedBtn.disabled;
+
+        REFS.collectionWatchedBtn.disabled = !disable;
+        REFS.collectionQueueBtn.disabled = disable;
     }
 }
