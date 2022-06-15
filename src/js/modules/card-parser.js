@@ -1,14 +1,16 @@
 import ImagesPathConstructor from "../classes/images-path-constructor";
 
+
 export default function cardParser ({ genres, poster_path, release_date, title, vote_average, id}) {
     
     if (genres.length === 0) {
         return
     } 
-    genres = genres.map (genre => `<span class="movie-card_genres">${genre}</span>`);
+    release_date = release_date.slice(0, 4);
+    genres = genres.map (genre => `<li class="movie-card_genres"> ${genre},</li>`);
     if ( genres.length > 2) {
         genres = genres.slice(0, 2);
-        genres.push(`<span class="movie-card_genres">Other</span>`);
+        genres.push(`<li class="movie-card_genres"> Other </li>`);
     }
    
     return `<article class="movie-card" data-movie-id="${id}">
@@ -18,7 +20,9 @@ export default function cardParser ({ genres, poster_path, release_date, title, 
     </picture>
     <h2 class="movie-card_title">${title}</h2>
     <div class="movie-card_info">
-        ${genres.join(', ')}
+        <ul class="movie-card_list">
+        ${genres.join('')}
+        </ul>
         <p class="movie-card_symbol">|</p>
         <p class="movie-card_date">${release_date}</p>
         <div class="movie-card_avarage">

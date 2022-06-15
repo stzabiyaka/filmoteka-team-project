@@ -13,6 +13,11 @@ export const testRefs = {
     sourseInModalCardMobile: document.querySelector('#sourse-in-modal-card-mobile'),
     imgInModalCardPicture: document.querySelector('#img-in-modal-card-picture'),
     // цей refs тимчасовий, бо у нас ще не всі елементи є на сторінці
+
+    // search form
+    searchFormContainer: document.querySelector('#search-rorm-container'),
+    searchForm: document.querySelector('#search-form'),
+    buttonSearch:document.querySelector('#search-button'),
 }
 
 
