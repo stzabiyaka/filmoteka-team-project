@@ -16,7 +16,8 @@
                 url(../images/backgrounds/header-background-320@2x.jpg);
             }
 
-    @include respondTo(mobile) {
+    @media screen and (min-width: ($mobile + 1)) {
+        max-width: $tablet;
         background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
             url(../images/backgrounds/header-background-768.jpg);
     
@@ -28,10 +29,10 @@
                 url(../images/backgrounds/header-background-768@2x.jpg);
         }
     }
-
-    @include respondTo(tablet) {
+    
+    @media screen and (min-width: ($tablet + 1)) {
+        max-width: $desktop;
         height: 216px;
-        max-width: $tablet;
         background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
                 url(../images/backgrounds/header-background-1024.jpg);
     
@@ -42,11 +43,6 @@
         background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
                 url(../images/backgrounds/header-background-1024@2x.jpg);
         }
-    }
-
-    @include respondTo(desktop) {
-        max-width: $desktop;
-        
     }
 
     &.my-library{
@@ -64,7 +60,8 @@
                 url(../images/backgrounds/header-mylib-background-320@2x.jpg);
         }
 
-        @include respondTo(mobile) {
+        @media screen and (min-width: ($mobile + 1)) {
+            max-width: $tablet;
             background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
                 url(../images/backgrounds/header-mylib-background-768.jpg);
         @media (min-device-pixel-ratio: 2),
@@ -75,7 +72,8 @@
                     url(../images/backgrounds/header-mylib-background-768@2x.jpg);
             }
         }  
-        @include respondTo(tablet) {
+        @media screen and (min-width: ($tablet + 1)) {
+            max-width: $desktop;
                 background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
                     url(../images/backgrounds/header-mylib-background-1024.jpg);
 
@@ -176,21 +174,20 @@
     }
     
     &__name {
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 35px;
+        text-align: center;
+            
+        color: getColor('background-primary');
 
-        @include respondTo(-tablet) {
+        @media screen and (max-width: 499px) {
             display: none;
         }
 
         @include respondTo(tablet) {
             display: flex;
-            align-items: center;
-            text-align: center;
-
-            font-weight: 500;
-            font-size: 30px;
-            line-height: 35px;
-            
-            color: getColor('background-primary');
+            align-items: center;            
         }
     }    
 }
