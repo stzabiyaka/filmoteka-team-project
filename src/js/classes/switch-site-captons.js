@@ -7,6 +7,7 @@ export default class SwitchSiteCaptions {
         this.switchCaptions({ language: this.#currentLanguage });
     }
 
+/* Заміна підписів статичних елементів дизайну сайта */ 
     switchCaptions ({ language = 'default' }) {
         this.#currentLanguage = language;     
         REFS.headerLogoName.textContent = CAPTIONS[this.#currentLanguage].logoName;

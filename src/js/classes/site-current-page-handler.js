@@ -3,15 +3,13 @@ import { APPLICATION_PAGES, REFS } from "../site-constants";
 
 export default class SiteCurrentPageHandler {
     #apiService;
-    #watchedService;
-    #queueService;
+    #collectionsService;
     #markupRender;
     #modalRender;
-    constructor ({apiService , wathedService, queueService, markupRender, modalRender }) {
+    constructor ({apiService , collectionsService, markupRender, modalRender }) {
         this.siteCurrentPage = APPLICATION_PAGES.home;
         this.#apiService = apiService;
-        this.#watchedService = wathedService;
-        this.#queueService = queueService;
+        this.#collectionsService = collectionsService;
         this.#markupRender = markupRender;
         this.#modalRender = modalRender;
         this.hiderClass = 'js-hidden';
@@ -20,6 +18,7 @@ export default class SiteCurrentPageHandler {
         this.homeHandler();    
     }
 
+/* Ініціалізація головної сторінки сайта */ 
     init () {
         REFS.headerLogo.addEventListener('click', this.homeHandler.bind(this));
         REFS.headerHomeBtn.addEventListener('click', this.homeHandler.bind(this));
@@ -27,6 +26,7 @@ export default class SiteCurrentPageHandler {
 
     }
 
+/* Формування та логіка головної сторінки сайта */ 
     homeHandler () {
         const loader = this.#apiService.getTrendingMovies.bind(this.#apiService, { page: 1 });
         REFS.collectionsBtnsContainer.classList.add(this.hiderClass);
@@ -36,25 +36,30 @@ export default class SiteCurrentPageHandler {
         this.#markupRender({ loader: loader, target: REFS.libraryContainer });
     }
 
+/* Формування відображення результату пошуку фільмів за пошуковим запитом */ 
     searchHandler ({ searchQuery, page = 1 }) {
         const loader = this.#apiService.searchMovies.bind(this.#apiService, { searchQuery, page });
         console.log('QUEUE PAGE LOADED');
     }
 
+/* Формування відображення та логіка колекції watched */ 
     watchedHandler ({ page = 1 }) {
         
         this.#navBtnsToggle();
         console.log('WATCHED PAGE LOADED');
     }
 
+/* Формування відображення та логіка колекції queue */ 
     queueHandler ({ page = 1 }) {
         console.log('QUEUE PAGE LOADED');
     }
 
+/* Формування відображення та логіка модального вікна */ 
     modalHandler ({ content }) {
         console.log('MODAL LOADED');
     }
 
+/* Логіка перемикання між головною сторінкою, та сторінкою колекцій */ 
     #navBtnsToggle () {
         const disable = REFS.headerHomeBtn.disabled;
         REFS.headerHomeBtn.disabled = !disable;
@@ -63,8 +68,5 @@ export default class SiteCurrentPageHandler {
         REFS.headerContainer.classList.toggle(this.myLibraryClass);
         REFS.searchFormContainer.classList.toggle(this.hiderClass);
         REFS.collectionsBtnsContainer.classList.toggle(this.hiderClass);
-    }
-    #collectionLoad ({ content }) {
-        const loader = this.#apiService.getMoviesBundle.bind(this.#apiService, content);
     }
 }

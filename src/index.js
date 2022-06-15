@@ -1,4 +1,4 @@
-import { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS } from './js/site-constants';
+import { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS, USER_COLLECTIONS } from './js/site-constants';
 import MoviesApiService from './js/classes/movies-api-service';
 import UserPreferencesService from './js/classes/user-preferences';
 import CollectionService from './js/classes/collecion-service';
@@ -15,12 +15,11 @@ let currentLanguage = userPreferences.getPreferences().language;
 currentLanguage = LANGUAGES.ukrainian;
 const switchCaptions = new SwitchSiteCaptions({ language: currentLanguage });
 const moviesApiService = new MoviesApiService({ language: currentLanguage});
-const watchedService = new CollectionService('moviesWatched');
-const queueService = new CollectionService('moviesQueue');
+const userCollectionsService = new CollectionService('userCollections');
 
-// site intialisation
-const pageHandler = new SiteCurrentPageHandler({ apiService: moviesApiService, wathedService: watchedService, queueService: queueService, markupRender: markupRenderer });
-// ^^^
+// vvv site engine intialisation vvv
+const siteEngine = new SiteCurrentPageHandler({ apiService: moviesApiService, collectionsService: userCollectionsService, markupRender: markupRenderer });
+// ^^^                           ^^^
 
 let currentPage = APPLICATION_PAGES.home;
 
@@ -39,13 +38,14 @@ let currentPage = APPLICATION_PAGES.home;
 
 
 
-//  const isCollection = watchedService.isCollectionExist();
-//  if (isCollection) {
-//   const content = watchedService.getCollectionPage({ page: 2 });
-//   markupRenderer({ loader: moviesApiService.getMoviesBundle.bind(moviesApiService), target: REFS.libraryContainer, content: content });
-//  }
 
 
+
+
+
+
+
+  
     
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших

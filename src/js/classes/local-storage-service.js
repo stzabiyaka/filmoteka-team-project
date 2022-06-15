@@ -4,6 +4,7 @@ export default class LocalStorageService {
         this.#LOCALSTORAGE_KEY = key;
     }
 
+/* запис значення у localStorage */ 
     save(value) {
         try {
            const localStorageState = JSON.stringify(value);
@@ -13,6 +14,7 @@ export default class LocalStorageService {
         }
     }
 
+/* Завантаження поточного стану localStorage */ 
     load() {
         try {
             let localStorageState = localStorage.getItem(this.#LOCALSTORAGE_KEY);
@@ -23,6 +25,7 @@ export default class LocalStorageService {
         }
     }
 
+/* Видалення елементу з localStorage (!!! не юзати !!!) */ 
     remove() {
         localStorage.removeItem(this.#LOCALSTORAGE_KEY);
     }

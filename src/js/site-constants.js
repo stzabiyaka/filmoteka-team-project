@@ -87,4 +87,9 @@ const LANGUAGES = {
     }
 }
 
-export { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS }
+const USER_COLLECTIONS = {
+    watched: 'watched',
+    queue: 'queue'
+}
+
+export { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS, USER_COLLECTIONS };
