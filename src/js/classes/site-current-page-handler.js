@@ -6,6 +6,8 @@ export default class SiteCurrentPageHandler {
     #collectionsService;
     #markupRender;
     #modalRender;
+    #queueCallback;
+    #watchedCallback;
     constructor ({apiService , collectionsService, markupRender, modalRender }) {
         this.siteCurrentPage = APPLICATION_PAGES.home;
         this.#apiService = apiService;
@@ -29,6 +31,7 @@ export default class SiteCurrentPageHandler {
     homeHandler () { 
         const loader = this.#apiService.getTrendingMovies.bind(this.#apiService, { page: 1 });
         this.#navBtnsToggle();
+        this.#removeCollectionsListeners();
         // REFS.paginator.classList.add(this.hiderClass);
         
         this.#markupRender({ loader: loader, target: REFS.libraryContainer });
@@ -44,12 +47,7 @@ export default class SiteCurrentPageHandler {
     watchedHandler ({ page = 1, isFromHome }) {
         if (isFromHome) {
          this.#navBtnsToggle(); 
-
-         const queueCallback = this.queueHandler.bind(this);
-         const watchCallback = this.watchedHandler.bind(this, {isFromHome: false});
-         
-         REFS.collectionQueueBtn.addEventListener('click', queueCallback);
-         REFS.collectionWatchedBtn.addEventListener('click', watchCallback);
+         this.#addCollectionsBtnsListeners();
         } 
         
         console.log('WATCHED PAGE LOADED');
@@ -87,5 +85,18 @@ export default class SiteCurrentPageHandler {
 
         REFS.collectionWatchedBtn.disabled = !disable;
         REFS.collectionQueueBtn.disabled = disable;
+    }
+/* Логіка додавання та прибирання eventListener на кнопках коллекцій */ 
+    #addCollectionsBtnsListeners () {
+        this.#queueCallback = this.queueHandler.bind(this);
+        this.#watchedCallback = this.watchedHandler.bind(this, {isFromHome: false});
+         
+         REFS.collectionQueueBtn.addEventListener('click', this.#queueCallback);
+         REFS.collectionWatchedBtn.addEventListener('click', this.#watchedCallback);
+    }
+
+    #removeCollectionsListeners () {
+        REFS.collectionQueueBtn.removeEventListener('click', this.#queueCallback);
+        REFS.collectionWatchedBtn.removeEventListener('click', this.#watchedCallback);
     }
 }
