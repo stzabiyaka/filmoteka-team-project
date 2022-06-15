@@ -45,7 +45,7 @@
     @include respondTo(tablet) {
         height: 552px;
         padding-left: 36px;
-        padding-right: 36px;
+        padding-right: 72px;
         padding-top: 40px;
         flex-direction: row;   
         overflow-y:auto;     
@@ -113,6 +113,7 @@
     display: block;
     border-radius: 5px;    
     height: 357px;
+    
     @include respondTo(tablet){
         width: 264px;
         height: 374px;
@@ -121,8 +122,16 @@
         width: 375px;
         height: 478px;
     }
-
 }
+
+//стилі для обгортки picture 
+
+.modal-card__picture{
+    width: 100%;
+    height: 100%;
+}
+
+//стилі для тегу img
 
 .modal-card__img{
     display: block;
@@ -284,12 +293,13 @@ flex-direction: column;
     display: inline-block;    
     line-height: 1.667em;
     text-align: left;
-    vertical-align: middle;
-
+    vertical-align: middle; 
+    overflow: visible;
 
     @include respondTo(tablet) {
-        max-height: 233px;  //не по макету, але так не вилазять кнопки
-        width: 264px;           
+        max-height: 196px;  // не по макету, але так, щоб було як намальовано в макеті
+        width: 334px;    //не по макету, але так, щоб було як намальовано в макеті
+        overflow-y: auto;
     }
 
     @include respondTo(desktop){

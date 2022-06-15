@@ -37,8 +37,8 @@ export async function renderModalCard(evt) {
             .then(movieObj => {
                 testRefs.backdrop.classList.remove('js-hidden');
                 REFS.body.classList.add('js-modal-is-open');
-                testRefs.modalContainer.innerHTML = modalCardMarkUp(movieObj);
+                testRefs.modalContainer.innerHTML = modalCardMarkUp(movieObj);                
             })
-            .catch(console.log(error.message));
+            .catch(error);
     };
 }
