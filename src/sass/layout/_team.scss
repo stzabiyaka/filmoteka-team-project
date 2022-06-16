@@ -1,0 +1,146 @@
+.team {
+    background-color: getColor('background-secondary');
+}
+
+.team__name{
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.team-set {
+    display: block;
+}
+
+.team-item {
+    max-width: 450px;
+    height: auto;
+
+    text-align: center;
+
+    background-color: getColor('text-secondary');
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+        0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 0px 0px 5px 5px;
+
+    &:not(:last-child) {
+        margin-bottom: 30px;
+    }
+
+    .photo {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.team-info {
+    padding: 30px;
+
+    &__name {
+        margin-bottom: 10px;
+
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 1.2em;
+        letter-spacing: 0.03em;
+        color: getColor('text-primary');
+    }
+
+    &__profession {
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.03em;
+        color: getColor('text-footer');
+    }
+}
+
+.social-list {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.social-list li:not(:last-child) {
+    margin-right: 10px;
+}
+
+.social-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 5px;
+    fill: getColor('modal-text-secondary');
+    transition: 250ms var(--timing-fuction);
+
+    &:hover,
+    &:focus {
+        background-color: getColor('accent');
+        fill: getColor('text-secondary');
+    }
+}
+
+.team__social-link {
+    background-color: getColor('text-secondary');
+}
+
+@media screen and(min-width: 768px) {
+    .team-set {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .team-item {
+        max-width: 354px;
+        max-height: 536px;
+
+        &:not(:last-child) {
+            margin-bottom: 0;
+        }
+
+        img {
+            width: 354px;
+            height: auto;
+        }
+
+        &:nth-child(2n) {
+            margin-left: 30px;
+        }
+
+        &:nth-child(-n + 2) {
+            margin-bottom: 30px;
+        }
+    }
+}
+
+@media screen and(min-width: 1200px) {
+    .team {
+        padding: 50px 0;
+    }
+
+    .team-item {
+        width: 270px;
+        height: 428px;
+
+        &:not(:last-child) {
+            margin-right: 30px;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 0;
+        }
+
+        &:nth-child(2n) {
+            margin-left: 0;
+        }
+
+        .photo {
+            width: 270px;
+        }
+    }
+}
