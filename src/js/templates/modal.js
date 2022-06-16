@@ -38,8 +38,22 @@ export async function renderModalCard(evt) {
             .then(movieObj => {
                 testRefs.backdrop.classList.remove('js-hidden');
                 REFS.body.classList.add('js-modal-is-open');
-                testRefs.modalContainer.innerHTML = modalCardMarkUp(movieObj);                
+                testRefs.modalContainer.innerHTML = modalCardMarkUp(movieObj);
+
+                if (movieObj.homepage) {
+                    REFS.modalOpenMovie.addEventListener('click', onModalOpenMovieClick);
+                } else {                    
+                    console.log(`Sorry, we can't find it...`);
+                    //add notification
+                }
+                
             })
             .catch(error => console.error(error));//тут можемо додати сповіщення про помилку
     };
+}
+
+function onModalOpenMovieClick(evt) {
+    // evt.preventDefault();
+    // тут можемо якосі гарно оформити
+    console.log('hi');
 }
