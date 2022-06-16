@@ -14,21 +14,24 @@ const LANGUAGES = {
     body: document.body,
     headerContainer: document.querySelector('#header'),
     headerLogo: document.querySelector('#logo'),
+    headerLogoName: document.querySelector('#logo-name'),
     headerHomeBtn: document.querySelector('#home'),
     headerMyLibBtn: document.querySelector('#my-library'),
     collectionsBtnsContainer: document.querySelector('#collections-nav'),
     collectionWatchedBtn: document.querySelector('#watched'),
     collectionQueueBtn: document.querySelector('#queue'),
-    searchFormContainer: document.querySelector('#search-rorm-container'),
+    searchFormContainer: document.querySelector('#search-form-container'),
     searchForm: document.querySelector('#search-form'),
     libraryContainer: document.querySelector('#library'),
-    backdrop: document.querySelector('#backdrop'),
+    backdrop: document.querySelector('#backdrop-modal-card'),
     modalContainer: document.querySelector('#modal'),
     modalAddToWatchedBtn: document.querySelector('#watched-add'),
     modalAddToQueueBtn: document.querySelector('#queue-add'),
     modalCloseBtn: document.querySelector('#modal-close'),
     teamLink: document.querySelector('#team'),
     paginator: document.querySelector('#paginator'),
+    languageSelector: document.querySelector('#language'),
+    themeButton: document.querySelector('theme'),
 }
 
   const CAPTIONS = {
@@ -43,7 +46,7 @@ const LANGUAGES = {
             addToQueue: 'add to queue',
             removeFromQueue: 'remove from Queue',
         },
-        
+        logoName: 'Filmoteka',
         searchPlaceholder: 'Search movies',
         notification: 'Search result not successful. Enter the correct movie name and try again',
         movieDetails: {
@@ -61,7 +64,7 @@ const LANGUAGES = {
     ukrainian: {
         buttons: {
             home: 'головна',
-            library: 'моя бібліотека',
+            library: 'моя фільмотека',
             watched: 'переглянуті',
             queue: 'у черзі',
             addToWatched: 'додати до переглянутих',
@@ -69,7 +72,7 @@ const LANGUAGES = {
             addToQueue: 'додати до черги',
             removeFromQueue: 'видалити з черги',
         },
-       
+        logoName: 'Фільмотека',
         searchPlaceholder: 'Пошук фильмів',
         notification: 'Пошук не мав успіху. Введить правильну назву фільму та спробуйте ще раз',
         movieDetails: {
@@ -86,4 +89,9 @@ const LANGUAGES = {
     }
 }
 
-export { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS, UTILITY_CLASSES }
+const USER_COLLECTIONS = {
+    watched: 'watched',
+    queue: 'queue'
+}
+
+export { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS, USER_COLLECTIONS };

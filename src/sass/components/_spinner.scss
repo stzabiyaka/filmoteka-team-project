@@ -1,7 +1,79 @@
+// =====розмір svg=====
 .spinner {
+    position: relative;
     margin: 0 auto;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
 
     background-image: url(../images/spinner.svg);
+
+    @include respondTo(desktop) {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+// =====базовий розмір блоків=====
+.rectangle{
+    position: absolute;
+    left: 17.2px;
+    margin-top: 5px;
+
+    width: 15.5px;
+    height: 9.4px;
+
+    background: getColor('text-secondary');
+    animation: pulsing 1s infinite;
+    @include respondTo(desktop) {
+            left: 34.5px;
+            margin-top: 10px;
+
+            width: 31.1px;
+            height: 18.8px;
+        }
+}
+
+// =====позиція верхнього блоку=====
+.rectangle__one {
+    top: 3px;
+
+    animation-delay: 300ms;
+    @include respondTo(desktop) {
+            top: 6px;
+        }
+}
+
+// =====позиція середнього блоку=====
+.rectangle__two {
+    top: 15.2px;
+
+    animation-delay: 600ms;
+    @include respondTo(desktop) {
+            top: 30.4px;
+        }
+}
+
+// =====позиція нижнього блоку=====
+.rectangle__three {
+    top: 27.7px;
+
+    animation-delay: 900ms;
+    @include respondTo(desktop) {
+            top: 55.4px;
+    }
+}
+
+// =====анімація з прозорістю кольору=====
+@keyframes pulsing {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

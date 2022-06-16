@@ -1,4 +1,4 @@
-import { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS } from './js/site-constants';
+import { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS, USER_COLLECTIONS } from './js/site-constants';
 import MoviesApiService from './js/classes/movies-api-service';
 import UserPreferencesService from './js/classes/user-preferences';
 import CollectionService from './js/classes/collecion-service';
@@ -8,14 +8,20 @@ import { testRefs } from './js/templates/modal-tmpl';
 import { renderModalCard } from './js/templates/modal';
 import SiteCurrentPageHandler from './js/classes/site-current-page-handler';
 import markupRenderer from './js/modules/markup-renderer';
+import SwitchSiteCaptions from './js/classes/switch-site-captons';
+import { closeModal, onClickBackdrop, onCloseEscKey } from './js/modules/modal-close-btn'
+import isContentExist from './js/modules/is-content-exist';
 
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
-
+currentLanguage = LANGUAGES.ukrainian;
+const switchCaptions = new SwitchSiteCaptions({ language: currentLanguage });
 const moviesApiService = new MoviesApiService({ language: currentLanguage});
-const pageHandler = new SiteCurrentPageHandler({ initLoader: moviesApiService.getTrendingMovies.bind(moviesApiService) });
-const watchedService = new CollectionService('moviesWatched');
-const queueService = new CollectionService('moviesQueue');
+const userCollectionsService = new CollectionService('userCollections');
+
+// vvv site engine intialisation vvv
+const siteEngine = new SiteCurrentPageHandler({ apiService: moviesApiService, collectionsService: userCollectionsService, markupRender: markupRenderer });
+// ^^^                           ^^^
 
 let currentPage = APPLICATION_PAGES.home;
 
@@ -25,16 +31,10 @@ let currentPage = APPLICATION_PAGES.home;
 
 
 
-  
 
 
 
 
-
-
-
-
-    
 
 
 

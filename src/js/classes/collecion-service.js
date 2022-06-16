@@ -1,93 +1,119 @@
+import { USER_COLLECTIONS } from "../site-constants";
 import LocalStorageService from "./local-storage-service";
 
 export default class CollectionService extends LocalStorageService {
-    currentPage;
-    perPage;
-    #collection;
-    #totalPages;
+    currentPage = {};
+    perPage = 9;
+    #collections;
+    #totalPages ={};
+    #collectionssNames = Object.values(USER_COLLECTIONS);
     constructor(key) {
         super (key);
-        this.#totalPages = 0;
-        this.perPage = 9;
-        this.currentPage = 1;
+        this.#collectionssNames.forEach(name => {
+            this.currentPage[name] = 1;
+        });
 
         this.#restoreCollection();
     }
-
+    
+/* Завантаження колекцій користувача з localStorage, якщо користувач новий - створення пустих колекцій, але без запису у localStorage */
     #restoreCollection () {
-        this.#collection = this.load();
-        if (!this.#collection) {
-            this.#collection = [];
+        this.#collections = this.load();
+        if (!this.#collections) {
+            this.#collections = {};
+            this.#collectionssNames.forEach(name => {
+                this.#collections[name] = [];
+                });
         }
-        this.#totalPages = Math.ceil(this.#collection.length / this.perPage);
+                   
+        const keys = Object.keys(this.#collections);
 
+        this.#collectionssNames.forEach(name => {
+            this.#collections[name] = this.#collections[name] ? this.#collections[name] : [];
+        });        
+        keys.forEach(key => {
+            this.#totalPages[key] = Math.ceil(this.#collections[key].length / this.perPage);
+        });
     }
 
-    getCollectionPage ({ page = 1}) {
+/* отримання об'екту з масивом id фільмів з визначеної колекції, з урахуванням потрібної сторінки (за замовчуванням - першої) */
+    getCollectionIdsBundle ({ collection, page = 1}) {
         if(!this.isCollectionExist()) {
-            //remove this after end of development
-            console.log('Collection is empty');
-            //remove this after end of development ^^^
-            return;
+            return 'collection is empty';
         }
-        this.currentPage = page;
-        if(this.#collection === undefined || this.#collection === [] || this.currentPage > this.#totalPages) {
-            return;
+        if(!this.isPageExist({ collection, page: page })) {
+            return 'there is no such page in the collection';
         }
-        const startPosition = (this.currentPage - 1) * this.perPage;
-        const bundle = this.#totalPages === 1 ? this.#collection : this.#collection.slice(startPosition, (startPosition + this.perPage));
-        return { bundle: bundle, totalPages: this.#totalPages, page: this.currentPage};
+        this.currentPage[collection] = page;
+        const startPosition = (this.currentPage[collection] - 1) * this.perPage;
+        const bundleArray = this.#totalPages[collection] === 1 ? this.#collections[collection] : this.#collections[collection].slice(startPosition, (startPosition + this.perPage));
+        return { bundleArray: bundleArray, totalPages: this.#totalPages[collection], page: this.currentPage[collection]};
     }
 
-    #saveCollection () {
-        this.save(this.#collection);
-    }
-
-    addToCollection ({id = null}) {
-        if(!id || this.isInCollection({id: id})){
-            return;
+/* Додавання нового id фільму до визначеної коллекції користувача, та запис колекцій у localStorage */
+    addToCollection ({collection, id}) {
+        if(!id || this.isInCollection({collection: collection, id: id})){
+            return 'this id is already in the collection, or you didn`t spicified an id';
         }
-        this.#collection.push(id);
-        this.#saveCollection();
+        this.#collections[collection].push(id);
+        this.#saveCollections();
     }
 
-    removeFromCollection ({id = null}) {
-        if(!this.isInCollection(id)) {
-            return;
+/* видалення id фільму з визначеної колекції користувача, та запис колекцій у localStorage */
+    removeFromCollection ({collection, id = null}) {
+        if(!this.isInCollection({collection: collection ,id: id})) {
+            return 'there is no such id in the collection';
         }
-        const position = this.#collection.indexOf(id)
-        this.#collection.splice(position, 1);
-        this.#saveCollection();
+        const position = this.#collections[collection].indexOf(id)
+        this.#collections[collection].splice(position, 1);
+        this.#saveCollections();
     }
 
-    isInCollection({id = null}) {
-        if (!id){
-            return;
-        }
-        return this.#collection.includes(id);
+/* Перевірка, чи існує визначена коллекція користувача */
+    isCollectionExist({ collection }) {
+        return this.#totalPages[collection] ? true : false;
     }
 
-    isCollectionExist() {
-        return this.#totalPages ? true : false;
+/* Перевірка, чи визнічена сторінка існує у визначеній колекції користувача */
+isPageExist ({ collection, page = 1}) {
+    return this.#totalPages[collection] >= page ? true : false;
+}
+
+/* Перевірка, чи існує визначений id фільму у визначеній коллекції користувача */
+isInCollection({collection, id = null}) {
+    if (!id){
+        return 'there is no such id in the collection';
+    }
+    return this.#collections[collection].includes(id);
+}
+
+/* Встановлення поточної сторінки визначеної колекції користувача */
+    setCurrentPage ({ collection, newPage }) {
+        this.currentPage[collection] = newPage;
     }
 
-    set currentPage (newPage) {
-        this.currentPage = newPage;
+/* Отримання поточної сторінки визначеної колекції користувача */
+    getCurrentPage ({ collection }) {
+        return this.currentPage[collection];
     }
 
-    get currentPage () {
-        return this.currentPage;
-    }
-
+/* Встановлення кількості елементів на одній сторінці будь-якої колекції користувача (!!!не юзати!!!) */
     set perPage (newPerPage) {
         this.perPage = newPerPage;
     }
 
+/* Отримання кількості елементів на одній сторінці будь-якої колекції користувача */
     get perPage () {
         return this.perPage;
     }
 
-    resetCurrentPage () {
-        this.currentPage = 1;
+/* Встановлення поточної сторінки визначеної колекції на початкове значення */
+    resetCurrentPage ({ collection }) {
+        this.currentPage[collection] = 1;
     }
+
+/* Запис коллекцій користувача в localStorage */
+#saveCollections () {
+    this.save(this.#collections);
+}
 }
