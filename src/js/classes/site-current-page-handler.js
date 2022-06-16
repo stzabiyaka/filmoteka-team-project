@@ -1,5 +1,5 @@
 import markupRenderer from "../modules/markup-renderer";
-import { APPLICATION_PAGES, REFS } from "../site-constants";
+import { APPLICATION_PAGES, REFS, USER_COLLECTIONS } from "../site-constants";
 
 export default class SiteCurrentPageHandler {
     #apiService;
@@ -48,18 +48,19 @@ export default class SiteCurrentPageHandler {
         if (isFromHome) {
          this.#navBtnsToggle(); 
          this.#addCollectionsBtnsListeners();
+         REFS.collectionWatchedBtn.disabled = false;
         } 
         
-        console.log('WATCHED PAGE LOADED');
-
         this.#collectionsBtnsToggle ();
+        
+        this.#renderCollection({collectionName: USER_COLLECTIONS.watched, page: page});
     }
 
 /* Формування відображення та логіка колекції queue */ 
     queueHandler ({ page = 1 }) {
-        console.log('QUEUE PAGE LOADED');
-
         this.#collectionsBtnsToggle ();
+
+        this.#renderCollection({collectionName: USER_COLLECTIONS.queue, page: page});
     }
 
 /* Формування відображення та логіка модального вікна */ 
@@ -98,5 +99,18 @@ export default class SiteCurrentPageHandler {
     #removeCollectionsListeners () {
         REFS.collectionQueueBtn.removeEventListener('click', this.#queueCallback);
         REFS.collectionWatchedBtn.removeEventListener('click', this.#watchedCallback);
+    }
+
+    #renderCollection ({collectionName, page}) {
+        if (!this.#collectionsService.isCollectionExist({collection: collectionName})) {
+            return console.log(`collection ${collectionName} does not exist`);
+        }
+         if (!this.#collectionsService.isPageExist({collection: collectionName, page: page})) {
+            return console.log(`page ${page} does not exist in the collection ${collectionName}`);
+         }
+          const bundle = this.#collectionsService.getCollectionIdsBundle({collection: collectionName, page: page});
+          console.log(bundle);
+        const loader = this.#apiService.getMoviesBundle.bind(this.#apiService);
+        this.#markupRender({loader: loader, target: REFS.libraryContainer, content: bundle}); 
     }
 }
