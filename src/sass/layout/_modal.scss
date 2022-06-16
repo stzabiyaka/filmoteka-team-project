@@ -139,6 +139,7 @@
 }
 
 //стилі для тегу img
+//---------------------------------
 
 .modal-card__img{
     display: block;
@@ -146,6 +147,50 @@
     width: inherit;
     height: inherit;     
     border-radius: 5px;
+}
+
+//стилі для кнопки відкриття фільму
+//---------------------------------
+.modal-card__open-movie{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    height: 34px;
+    position: fixed;
+    left: 123px;
+    top: 208px;
+    padding: 0;
+    background-color: transparent;
+    border: 1px solid getColor('accent');
+    border-radius: 5px;    
+    @include respondTo(tablet){
+        left: 151px;        
+        top: 210px;
+    }
+    @include respondTo(desktop){
+        left: 186px;
+        top: 262px;
+    }
+}
+
+.modal-card__open-movie:hover,
+.modal-card__open-movie:focus {
+    background-color: getColor('accent');
+    transform: scale(1.5);
+}
+
+//стилі для іконки відкриття фільму
+//-----------------------------------
+
+.modal-card__open-movie--icon{    
+    fill:getColor('accent');    
+}
+
+.modal-card__open-movie:hover .modal-card__open-movie--icon,
+.modal-card__open-movie:focus .modal-card__open-movie--icon{
+    fill: getColor('text-secondary');
+    
 }
 
 //контейнер для відображення всієї інформації про фільм
@@ -366,3 +411,4 @@ flex-direction: column;
         margin-left: 15px;
     }    
 }
+

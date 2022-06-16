@@ -32,6 +32,7 @@ const LANGUAGES = {
     paginator: document.querySelector('#paginator'),
     languageSelector: document.querySelector('#language'),
     themeButton: document.querySelector('theme'),
+    modalOpenMovie : document.querySelector('#modal-open-movie'),
 }
 
   const CAPTIONS = {
@@ -95,3 +96,22 @@ const USER_COLLECTIONS = {
 }
 
 export { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS, USER_COLLECTIONS };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// REFS.modalOpenMovie = document.querySelector('#modal-open-movie');

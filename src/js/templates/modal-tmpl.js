@@ -13,7 +13,7 @@ export const testRefs = {
 }
 
 
-export function modalCardMarkUp({overview, backdrop_path, title, original_title, vote_average, vote_count, popularity, genres}) { 
+export function modalCardMarkUp({overview, backdrop_path, title, original_title, vote_average, vote_count, popularity, genres, homepage}) { 
     //poster_path,
 
     const imgSrc = `${ImagesPathConstructor.getImagePath({ path: backdrop_path })}, 1x, ${ImagesPathConstructor.getImagePath({ path: backdrop_path, width: 'retina' }) }, 2x`;
