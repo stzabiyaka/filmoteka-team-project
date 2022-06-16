@@ -218,7 +218,7 @@ flex-direction: column;
 //блок значень характеристик фільму
 //-----------------------------------------------
 .modal-card-info__data{
-    width: 156px;
+    width: 100%;
 }
 
 
@@ -323,6 +323,7 @@ flex-direction: column;
 
     @include respondTo(tablet) {
         justify-content: start;
+        margin-top: auto;
     }
 }
 
