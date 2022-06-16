@@ -65,7 +65,8 @@ const LANGUAGES = {
             title: 'Original Title',
             genre: 'Genre',
             about: 'About',
-            other: 'Other'
+            other: 'Other',
+            poster: 'Poster',
         },
         copyright: 'All Rights Reserved',
         developedWidth: 'Developed with',
@@ -97,7 +98,8 @@ const LANGUAGES = {
             title: 'Оригінальна назва',
             genre: 'Жанр',
             about: 'Опис',
-            other: 'Інші'
+            other: 'Інші',
+            poster: 'Постер',
         },
         copyright: 'Всі права захищено',
         developedWidth: 'Розроблено із',
