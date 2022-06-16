@@ -38,7 +38,7 @@ export default class CollectionService extends LocalStorageService {
 
 /* отримання об'екту з масивом id фільмів з визначеної колекції, з урахуванням потрібної сторінки (за замовчуванням - першої) */
     getCollectionIdsBundle ({ collection, page = 1}) {
-        if(!this.isCollectionExist()) {
+        if(!this.isCollectionExist({collection: collection})) {
             return 'collection is empty';
         }
         if(!this.isPageExist({ collection, page: page })) {
