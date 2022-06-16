@@ -49,7 +49,15 @@ const LANGUAGES = {
         },
         logoName: 'Filmoteka',
         searchPlaceholder: 'Search movies',
-        notification: 'Search result not successful. Enter the correct movie name and try again',
+        notifications: {
+            searchFault: 'Sorry, there are no movies, matching your search query. Please try again.',
+            searchMinLength : 'Please, enter at least two symbols to start search.',
+            searchRestricted : 'Please, do not enter any special characters.',
+            technicalFault: 'Oops (( looks, like some technical troubles occured.',
+            collecionEmpty: 'Looks like you vave not add any movie to this collection, yet.',
+            
+            languageNotify: 'Цей сайт доступний також укріїнською мовою',
+        },
         movieDetails: {
             vote: 'Vote',
             votes: 'Votes',
@@ -75,7 +83,13 @@ const LANGUAGES = {
         },
         logoName: 'Фільмотека',
         searchPlaceholder: 'Пошук фильмів',
-        notification: 'Пошук не мав успіху. Введить правильну назву фільму та спробуйте ще раз',
+        notifications: {
+            searchFault: 'Нажаль, немає фільмів, відповідаючих вашому запиту. Будь ласка, спробуйте ще раз.',
+            searchMinLength : 'Будь ласка, введіть хоча б два символи для початку пошуку.',
+            searchRestricted : 'Будь ласка, не використовуйте будь-які спеціальні символи.',
+            technicalFault: 'От халепа (( схоже, сталась якась технічна проблема.',
+            collecionEmpty: 'Схоже, ви покищо не додали жодного фильму до цієї коллекції.',
+        },
         movieDetails: {
             vote: 'Голос',
             votes: 'Голоси',

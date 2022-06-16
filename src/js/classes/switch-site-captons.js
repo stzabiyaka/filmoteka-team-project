@@ -1,21 +1,20 @@
 import { CAPTIONS, REFS } from "../site-constants";
 
 export default class SwitchSiteCaptions {
-    #currentLanguage;
-    constructor ({ language = 'default' }) {
-        this.#currentLanguage = language;
-        this.switchCaptions({ language: this.#currentLanguage });
+    #captions;
+    constructor () {
     }
 
 /* Заміна підписів статичних елементів дизайну сайта */ 
-    switchCaptions ({ language = 'default' }) {
-        this.#currentLanguage = language;     
-        REFS.headerLogoName.textContent = CAPTIONS[this.#currentLanguage].logoName;
-        REFS.headerHomeBtn.textContent = CAPTIONS[this.#currentLanguage].buttons.home;
-        REFS.headerMyLibBtn.textContent = CAPTIONS[this.#currentLanguage].buttons.library;
-        REFS.collectionWatchedBtn.textContent = CAPTIONS[this.#currentLanguage].buttons.watched;
-        REFS.collectionQueueBtn.textContent = CAPTIONS[this.#currentLanguage].buttons.queue;
-        REFS.searchForm.placeholder = CAPTIONS[this.#currentLanguage].searchPlaceholder;
+    switchCaptions ({ captions }) {
+        this.#captions = captions;
+        console.log(this.#captions);   
+        REFS.headerLogoName.textContent = this.#captions.logoName;
+        REFS.headerHomeBtn.textContent = this.#captions.buttons.home;
+        REFS.headerMyLibBtn.textContent = this.#captions.buttons.library;
+        REFS.collectionWatchedBtn.textContent = this.#captions.buttons.watched;
+        REFS.collectionQueueBtn.textContent = this.#captions.buttons.queue;
+        REFS.searchForm.placeholder = this.#captions.searchPlaceholder;
         }
 
 }
