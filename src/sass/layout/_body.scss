@@ -3,6 +3,10 @@ body {
     font-size: 12px;
     line-height: 1.33em;
     font-weight: 500;
+  
+    &.js-modal-is-open{
+        overflow: hidden;
+    }
 }
 
 .js-hidden {
@@ -17,3 +21,4 @@ body {
     clip-path: inset(50%);
     margin: -1px;
   }
+
