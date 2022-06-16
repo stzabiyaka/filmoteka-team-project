@@ -82,6 +82,12 @@
     cursor: pointer;    
 }
 
+.modal-card__close-btn:hover,
+.modal-card__close-btn:focus{
+    border: 1px solid getColor('accent');
+    border-radius: 5px;
+}
+
 .modal-card__close-btn:hover .modal-card__close-btn-icon,
 .modal-card__close-btn:focus .modal-card__close-btn-icon{
     stroke: getColor('accent');
@@ -218,7 +224,7 @@ flex-direction: column;
 //блок значень характеристик фільму
 //-----------------------------------------------
 .modal-card-info__data{
-    width: 156px;
+    width: 100%;
 }
 
 
@@ -323,6 +329,7 @@ flex-direction: column;
 
     @include respondTo(tablet) {
         justify-content: start;
+        margin-top: auto;
     }
 }
 
