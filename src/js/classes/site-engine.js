@@ -1,50 +1,51 @@
 import markupRenderer from "../modules/markup-renderer";
-import { APPLICATION_PAGES, REFS, USER_COLLECTIONS } from "../site-constants";
+import { REFS, USER_COLLECTIONS } from "../site-constants";
 
-export default class SiteCurrentPageHandler {
-    #apiService;
-    #collectionsService;
-    #markupRender;
-    #modalRender;
+export default class SiteEngine {
+    
+/* Обробники сторінок сайту */
+    #trendingHandler;
+    #collectionHandler;
+    #modalHandler;
+    #searchHandler;
+/* Колбки для eventListeners */
     #queueCallback;
     #watchedCallback;
-    constructor ({apiService , collectionsService, markupRender, modalRender }) {
-        this.siteCurrentPage = APPLICATION_PAGES.home;
-        this.#apiService = apiService;
-        this.#collectionsService = collectionsService;
-        this.#markupRender = markupRender;
-        this.#modalRender = modalRender;
+
+    constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler }) {
+        this.#trendingHandler = trendingHandler;
+        this.#collectionHandler = collectionHandler;
+        this.#modalHandler = modalHandler;
+        this.#searchHandler = searchHandler;
         this.hiderClass = 'js-hidden';
         this.myLibraryClass = 'my-library';
-        this.init();
-        this.homeHandler();    
+        this.#init();
+        this.#handleHome();    
     }
 
 /* Ініціалізація головної сторінки сайта */ 
-    init () {
-        REFS.headerLogo.addEventListener('click', this.homeHandler.bind(this));
-        REFS.headerHomeBtn.addEventListener('click', this.homeHandler.bind(this));
-        REFS.headerMyLibBtn.addEventListener('click', this.watchedHandler.bind(this, {isFromHome: true}) );
+    #init () {
+        REFS.headerLogo.addEventListener('click', this.#handleHome.bind(this));
+        REFS.headerHomeBtn.addEventListener('click', this.#handleHome.bind(this));
+        REFS.headerMyLibBtn.addEventListener('click', this.#handleWatched.bind(this, {isFromHome: true}) );
     }
 
 /* Формування та логіка головної сторінки сайта */ 
-    homeHandler () { 
-        const loader = this.#apiService.getTrendingMovies.bind(this.#apiService, { page: 1 });
+    #handleHome () { 
         this.#navBtnsToggle();
         this.#removeCollectionsListeners();
         // REFS.paginator.classList.add(this.hiderClass);
         
-        this.#markupRender({ loader: loader, target: REFS.libraryContainer });
+        this.#trendingHandler.getTrendingMoviesPage({ page: 1 });
     }
 
 /* Формування відображення результату пошуку фільмів за пошуковим запитом */ 
-    searchHandler ({ searchQuery, page = 1 }) {
-        const loader = this.#apiService.searchMovies.bind(this.#apiService, { searchQuery, page });
-        console.log('QUEUE PAGE LOADED');
+    #handleSearch ({ searchQuery, page = 1 }) {
+        console.log('SEARCH PAGE LOADED');
     }
 
 /* Формування відображення та логіка колекції watched */ 
-    watchedHandler ({ page = 1, isFromHome }) {
+    #handleWatched ({ page = 1, isFromHome }) {
         if (isFromHome) {
          this.#navBtnsToggle(); 
          this.#addCollectionsBtnsListeners();
@@ -53,18 +54,18 @@ export default class SiteCurrentPageHandler {
         
         this.#collectionsBtnsToggle ();
         
-        this.#renderCollection({collectionName: USER_COLLECTIONS.watched, page: page});
+        this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.watched, page: 1 });
     }
 
 /* Формування відображення та логіка колекції queue */ 
-    queueHandler ({ page = 1 }) {
+    #handleQueue ({ page = 1 }) {
         this.#collectionsBtnsToggle ();
 
-        this.#renderCollection({collectionName: USER_COLLECTIONS.queue, page: page});
+        this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
     }
 
 /* Формування відображення та логіка модального вікна */ 
-    modalHandler ({ content }) {
+    #handleModal ({ content }) {
         console.log('MODAL LOADED');
     }
 
@@ -89,8 +90,8 @@ export default class SiteCurrentPageHandler {
     }
 /* Логіка додавання та прибирання eventListener на кнопках коллекцій */ 
     #addCollectionsBtnsListeners () {
-        this.#queueCallback = this.queueHandler.bind(this);
-        this.#watchedCallback = this.watchedHandler.bind(this, {isFromHome: false});
+        this.#queueCallback = this.#handleQueue.bind(this);
+        this.#watchedCallback = this.#handleWatched.bind(this, {isFromHome: false});
          
          REFS.collectionQueueBtn.addEventListener('click', this.#queueCallback);
          REFS.collectionWatchedBtn.addEventListener('click', this.#watchedCallback);
@@ -99,18 +100,5 @@ export default class SiteCurrentPageHandler {
     #removeCollectionsListeners () {
         REFS.collectionQueueBtn.removeEventListener('click', this.#queueCallback);
         REFS.collectionWatchedBtn.removeEventListener('click', this.#watchedCallback);
-    }
-
-    #renderCollection ({collectionName, page}) {
-        if (!this.#collectionsService.isCollectionExist({collection: collectionName})) {
-            return console.log(`collection ${collectionName} does not exist`);
-        }
-         if (!this.#collectionsService.isPageExist({collection: collectionName, page: page})) {
-            return console.log(`page ${page} does not exist in the collection ${collectionName}`);
-         }
-          const bundle = this.#collectionsService.getCollectionIdsBundle({collection: collectionName, page: page});
-          console.log(bundle);
-        const loader = this.#apiService.getMoviesBundle.bind(this.#apiService);
-        this.#markupRender({loader: loader, target: REFS.libraryContainer, content: bundle}); 
     }
 }
