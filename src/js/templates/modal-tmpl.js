@@ -46,7 +46,7 @@ export function modalCardMarkUp({overview, backdrop_path, title, original_title,
                     <ul class="modal-card-info__characteristics">
                         <li class="modal-card-info__characteristics--item">
                             <p class="modal-card-info__characteristics--name">${vote}/${votes}</p>
-                            <p class="modal-card-info__data--slesh">
+                            <p class="modal-card-info__data modal-card-info__data--slesh">
                                 <span class="modal-card-info__data--vote">${vote_average}</span>
                                 /
                                 <span class="modal-card-info__data--votes">${vote_count}</span>
