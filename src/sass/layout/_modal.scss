@@ -82,6 +82,12 @@
     cursor: pointer;    
 }
 
+.modal-card__close-btn:hover,
+.modal-card__close-btn:focus{
+    border: 1px solid getColor('accent');
+    border-radius: 5px;
+}
+
 .modal-card__close-btn:hover .modal-card__close-btn-icon,
 .modal-card__close-btn:focus .modal-card__close-btn-icon{
     stroke: getColor('accent');
