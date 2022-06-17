@@ -1,6 +1,6 @@
-import ImagesPathConstructor from "../classes/images-path-constructor";
+import ImagesPathConstructor from "../classes/utilities/images-path-constructor";
 import { CAPTIONS } from "../site-constants";
-import UserPreferencesService from "../classes/user-preferences";
+import UserPreferencesService from "../classes/services/user-preferences";
 
 
 const userPreferences = new UserPreferencesService('userPreferences');

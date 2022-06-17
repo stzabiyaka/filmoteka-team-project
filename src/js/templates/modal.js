@@ -1,7 +1,7 @@
 import { modalCardMarkUp } from "../templates/modal-tmpl";
 import { REFS } from "../site-constants";
-import MoviesApiService from "../classes/movies-api-service";
-import UserPreferencesService from "../classes/user-preferences";
+import MoviesApiService from "../classes/services/movies-api-service";
+import UserPreferencesService from "../classes/services/user-preferences";
 import { CAPTIONS } from "../site-constants";
 
 

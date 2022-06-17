@@ -1,4 +1,4 @@
-import ImagesPathConstructor from "../classes/images-path-constructor";
+import ImagesPathConstructor from "../classes/utilities/images-path-constructor";
 
 export default function cardParser ({ genres, poster_path, release_date, title, vote_average, id}) {
     

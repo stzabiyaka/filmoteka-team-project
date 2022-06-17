@@ -33,6 +33,7 @@ const LANGUAGES = {
     languageSelector: document.querySelector('#language'),
     themeButton: document.querySelector('theme'),
     modalOpenMovie : document.querySelector('#modal-open-movie'),
+    spinner: document.querySelector('#spinner'),
 }
 
   const CAPTIONS = {
@@ -42,10 +43,14 @@ const LANGUAGES = {
             library: 'my library',
             watched: 'watched',
             queue: 'queue',
-            addToWatched: 'add to Watched',
-            removeFromWatched: 'remove from Watched',
-            addToQueue: 'add to queue',
-            removeFromQueue: 'remove from Queue',
+            addToWatched: {
+                add: 'add to Watched',
+                remove: 'remove from Watched',
+            },
+            addToQueue: {
+                add: 'add to queue',
+                remove: 'remove from Queue',
+            },
         },
         logoName: 'Filmoteka',
         searchPlaceholder: 'Search movies',
@@ -77,10 +82,14 @@ const LANGUAGES = {
             library: 'моя фільмотека',
             watched: 'переглянуті',
             queue: 'у черзі',
-            addToWatched: 'додати до переглянутих',
-            removeFromWatched: 'видалити з переглянутих',
-            addToQueue: 'додати до черги',
-            removeFromQueue: 'видалити з черги',
+            addToWatched: {
+                add: 'додати до переглянутих',
+                remove: 'видалити з переглянутих',
+            },
+            addToQueue: {
+                add: 'додати до черги',
+                remove: 'видалити з черги',
+            },
         },
         logoName: 'Фільмотека',
         searchPlaceholder: 'Пошук фильмів',

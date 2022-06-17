@@ -1,4 +1,4 @@
-import { USER_COLLECTIONS } from "../site-constants";
+import { USER_COLLECTIONS } from "../../site-constants";
 import LocalStorageService from "./local-storage-service";
 
 export default class CollectionService extends LocalStorageService {
@@ -47,7 +47,7 @@ export default class CollectionService extends LocalStorageService {
         this.currentPage[collection] = page;
         const startPosition = (this.currentPage[collection] - 1) * this.perPage;
         const bundleArray = this.#totalPages[collection] === 1 ? this.#collections[collection] : this.#collections[collection].slice(startPosition, (startPosition + this.perPage));
-        return { bundleArray: bundleArray, totalPages: this.#totalPages[collection], page: this.currentPage[collection]};
+        return { bundle: bundleArray, totalPages: this.#totalPages[collection], page: this.currentPage[collection]};
     }
 
 /* Додавання нового id фільму до визначеної коллекції користувача, та запис колекцій у localStorage */

@@ -1,4 +1,4 @@
-import { CAPTIONS, REFS } from "../site-constants";
+import { REFS } from "../../site-constants";
 
 export default class SwitchSiteCaptions {
     #captions;
@@ -15,6 +15,8 @@ export default class SwitchSiteCaptions {
         REFS.collectionWatchedBtn.textContent = this.#captions.buttons.watched;
         REFS.collectionQueueBtn.textContent = this.#captions.buttons.queue;
         REFS.searchForm.placeholder = this.#captions.searchPlaceholder;
+        // REFS.modalAddToWatchedBtn.textContent = this.#captions.addToWatched.add;
+        // REFS.modalAddToQueueBtn.textContent = this.#captions.addToQueue.add;
         }
 
 }
