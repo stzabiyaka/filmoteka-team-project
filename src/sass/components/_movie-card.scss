@@ -20,17 +20,17 @@
 
     &_img{
         width: 100%;
-        // height: 402px;
+        height: 402px;
         border-radius: 5px;
-        // object-fit: cover;
+        object-fit: cover;
         
-        // @include respondTo (tablet) {
+        @include respondTo (tablet) {
        
-        //     height: 455px;
-        // }
-        // @include respondTo (desktop){
-        //     height: 449px;
-        // }
+            height: 455px;
+        }
+        @include respondTo (desktop){
+            height: 449px;
+        }
     }
 
      &_title {

@@ -16,7 +16,7 @@ export default function cardParser ({ genres, poster_path, release_date, title, 
     <h2 class="visually_hidden">${title}</h2>
     <picture>
         <source srcset="${ImagesPathConstructor.getImagePath({ path:poster_path })}, 1x, ${ImagesPathConstructor.getImagePath({ path:poster_path, width: 'retina' })}, 2x" type="image/jpeg">
-        <img class="movie-card_img" src= "${ImagesPathConstructor.getImagePath({ path:poster_path })} " alt=${poster}>
+        <img class="movie-card_img" src= "${ImagesPathConstructor.getImagePath({ path:poster_path })} " alt=${poster} loading="lazy">
     </picture>
     <h2 class="movie-card_title">${title}</h2>
     <div class="movie-card_info">
