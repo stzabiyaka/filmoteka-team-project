@@ -28,6 +28,7 @@ export default class SiteEngine {
         REFS.headerLogo.addEventListener('click', this.#handleHome.bind(this));
         REFS.headerHomeBtn.addEventListener('click', this.#handleHome.bind(this));
         REFS.headerMyLibBtn.addEventListener('click', this.#handleWatched.bind(this, {isFromHome: true}) );
+        REFS.searchForm.addEventListener('input', this.#handleSearch.bind(this));
     }
 
 /* Формування та логіка головної сторінки сайта */ 
@@ -40,8 +41,21 @@ export default class SiteEngine {
     }
 
 /* Формування відображення результату пошуку фільмів за пошуковим запитом */ 
-    #handleSearch ({ searchQuery, page = 1 }) {
-        console.log('SEARCH PAGE LOADED');
+    #handleSearch (event) {
+        const searchQuery = event.currentTarget.value.trim();
+        if ((/^([\s%&#@])*$/.test(searchQuery)) || (/^([>(.*?)<])*$/.test(searchQuery))) {
+            (console.log('недопустимі символи & теги')) 
+            return;
+        }
+        if ((/^([а-яА-ЯёЁ]*)$/.test(searchQuery))) {
+           (console.log('тільки кирилиця'))
+        } 
+        if(searchQuery.length < 2) {
+            console.log('Search was not successful. Please, enter another movie name and try again');
+        return false;
+        } 
+           console.log (`HOORAY! Found total_results movies`);
+           this.#searchHandler.getMoviesBySearch({query: searchQuery, page: 1});
     }
 
 /* Формування відображення та логіка колекції watched */ 
