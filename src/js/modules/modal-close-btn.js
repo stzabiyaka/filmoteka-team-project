@@ -1,31 +1,32 @@
-// import { closeModal, onClickBackdrop, onCloseEscKey } from './js/templates/modal-close-btn';
+// // import { closeModal, onClickBackdrop, onCloseEscKey } from './js/templates/modal-close-btn';
 import { REFS } from '../site-constants';
 
-const { body, backdrop, modalCloseBtn } = REFS;
+const { body, backdrop, modalContainer, modalCloseBtn } = REFS;
 
-modalCloseBtn.addEventListener('click', closeModal);
 backdrop.addEventListener('click', onClickBackdrop);
 window.addEventListener('keydown', onCloseEscKey);
 
 function closeModal() {
   backdrop.classList.add('js-hidden');
   modalContainer.innerHTML = '';
-  //for body no-scroll   //
   body.classList.remove('js-modal-is-open');
-  modalCloseBtn.removeEventListener('click', closeModal);
+  backdrop.removeEventListener('click', onClickBackdrop);
+  window.removeEventListener('keydown', onCloseEscKey);
 }
 
 function onClickBackdrop(e) {
-  if (e.target === e.currentTarget) {
+  console.log(e.target);
+  if (
+    e.target === e.currentTarget ||
+    e.target.parentElement === modalCloseBtn
+  ) {
     closeModal();
-    backdrop.removeEventListener('click', onClickBackdrop);
   }
 }
 
 function onCloseEscKey(e) {
   if (e.key === 'Escape') {
     closeModal();
-    window.removeEventListener('keydown', onCloseEscKey);
   }
 }
 
