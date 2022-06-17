@@ -35,8 +35,10 @@ export function modalCardMarkUp({overview, backdrop_path, title, original_title,
             <picture class="modal-card__picture">                
                 <source srcset="${imgSrc}" type="image/jpeg" class="modal-card__picture--source">
                 <img src="${ImagesPathConstructor.getImagePath({ path: backdrop_path })}" alt="${title}" loading="lazy" class="modal-card__img" type="image/jpeg" id="img-in-modal-card-picture"/>
-            </picture>
-
+            </picture>           
+            <button id="modal-open-movie js-hidden" class="modal-card__open-movie" onclick="window.location.href = '${homepage}';">
+                <div class="modal-card__open-movie--icon" width="24" height="24"></div>
+            </button>
         </div>
             
         <div class="modal-card-thumb__content">
