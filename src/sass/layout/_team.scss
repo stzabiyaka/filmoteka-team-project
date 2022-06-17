@@ -1,79 +1,110 @@
+// =====стилізація блоку=====
 .team {
+    max-width: 100%;
     background-color: getColor('background-secondary');
-}
-
-.team__name{
-    margin-bottom: 30px;
-    text-transform: uppercase;
-}
-
-.team-set {
-    display: block;
-}
-
-.team-item {
-    max-width: 450px;
-    height: auto;
-
+    padding: 15px 0;
     text-align: center;
+
+    @include respondTo(tablet){
+        padding: 30px 0;
+    }
+}
+
+// =====стилізація заголовку=====
+.team__heading{
+    margin-bottom: 15px;
+    text-transform: uppercase;
+
+    @include respondTo(tablet) {
+        margin-bottom: 30px;
+    }
+}
+
+// =====стилізація сітки=====
+.team-set {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+// =====стилізація картки=====
+.team-item {
+    flex-basis: calc(100% / 3 - 16px);
+    min-width: 240px;
+    margin: 8px;
 
     background-color: getColor('text-secondary');
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
         0px 2px 1px rgba(0, 0, 0, 0.2);
     border-radius: 0px 0px 5px 5px;
-
-    &:not(:last-child) {
-        margin-bottom: 30px;
-    }
-
-    .photo {
-        width: 100%;
-        height: auto;
-    }
 }
 
 .team-info {
-    padding: 30px;
+    padding: 15px;
+
+    @include respondTo(tablet) {
+    padding: 20px;
+    }
 
     &__name {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
 
         font-weight: 500;
-        font-size: 16px;
+        font-size: 12px;
         line-height: 1.2em;
         letter-spacing: 0.03em;
         color: getColor('text-primary');
+
+        @include respondTo(tablet) {
+                margin-bottom: 10px;
+                font-size: 16px;
+            }
     }
 
     &__profession {
-        font-size: 16px;
-        line-height: 19px;
+        font-size: 12px;
+        line-height: 1.2em;
         letter-spacing: 0.03em;
         color: getColor('text-footer');
+        @include respondTo(tablet) {
+                font-size: 16px;
+            }
+        }
     }
-}
 
+// =====стилізація соц. мереж=====
 .social-list {
     display: flex;
     justify-content: center;
-    margin-top: 16px;
-}
+    margin-top: 8px;
+    @include respondTo(tablet) {
+            margin-top: 10px;
+        }
+    }
 
 .social-list li:not(:last-child) {
-    margin-right: 10px;
-}
+    margin-right: 5px;
+    @include respondTo(tablet) {
+            margin-right: 10px;
+        }
+    }
 
 .social-link {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 44px;
-    height: 44px;
+    width: 20px;
+    height: 20px;
+
+    @include respondTo(tablet) {
+            width: 30px;
+            height: 30px;
+        }
 
     border-radius: 5px;
     fill: getColor('modal-text-secondary');
-    transition: 250ms var(--timing-fuction);
+    transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
     &:hover,
     &:focus {
@@ -84,63 +115,4 @@
 
 .team__social-link {
     background-color: getColor('text-secondary');
-}
-
-@media screen and(min-width: 768px) {
-    .team-set {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .team-item {
-        max-width: 354px;
-        max-height: 536px;
-
-        &:not(:last-child) {
-            margin-bottom: 0;
-        }
-
-        img {
-            width: 354px;
-            height: auto;
-        }
-
-        &:nth-child(2n) {
-            margin-left: 30px;
-        }
-
-        &:nth-child(-n + 2) {
-            margin-bottom: 30px;
-        }
-    }
-}
-
-@media screen and(min-width: 1200px) {
-    .team {
-        padding: 50px 0;
-    }
-
-    .team-item {
-        width: 270px;
-        height: 428px;
-
-        &:not(:last-child) {
-            margin-right: 30px;
-        }
-
-        &:not(:last-child) {
-            margin-bottom: 0;
-        }
-
-        &:nth-child(2n) {
-            margin-left: 0;
-        }
-
-        .photo {
-            width: 270px;
-        }
-    }
 }
