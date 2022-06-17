@@ -34,6 +34,7 @@ const LANGUAGES = {
     themeButton: document.querySelector('theme'),
     modalOpenMovie : document.querySelector('#modal-open-movie'),
     spinner: document.querySelector('#spinner'),
+    modalCardThumbBtn: document.querySelector('.modal-card-thumb__btn'),
 }
 
   const CAPTIONS = {

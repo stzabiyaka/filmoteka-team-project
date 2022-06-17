@@ -16,10 +16,7 @@ export function modalCardMarkUp({overview, poster_path, title, original_title, v
     const originalTitle = CAPTIONS[currentLanguage].movieDetails.title;
     const genre = CAPTIONS[currentLanguage].movieDetails.genre;
     const about = CAPTIONS[currentLanguage].movieDetails.about;
-    const addToWatched = CAPTIONS[currentLanguage].buttons.addToWatched;
-    const addToQueue = CAPTIONS[currentLanguage].buttons.addToQueue;
     
-
     return  `
 
         <div class="modal-card-thumb__img" >  

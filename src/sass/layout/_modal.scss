@@ -383,10 +383,23 @@ flex-direction: column;
 .modal-card-thumb__btn {
     display: flex;
     justify-content: space-between;
+    bottom: 0;
+    left: 0;
 
     @include respondTo(tablet) {
+        position: absolute;
         justify-content: start;
-        margin-top: auto;
+        bottom: 40px;
+        left: 368px;
+    }
+    @include respondTo(desktop){
+        left: 407px;
+    }
+
+    &.js-hidden {
+        visibility: hidden;
+        pointer-events: none;
+        opacity: 0;
     }
 }
 
@@ -419,11 +432,7 @@ flex-direction: column;
         margin-left: 8px;
     }
 
-    &.js-hidden {
-        visibility: hidden;
-        pointer-events: none;
-        opacity: 0;
-    }
+    
 }
 
 // кнопка add to queue
