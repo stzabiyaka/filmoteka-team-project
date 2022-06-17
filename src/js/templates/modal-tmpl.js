@@ -6,10 +6,9 @@ import UserPreferencesService from "../classes/user-preferences";
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
 
-export function modalCardMarkUp({overview, backdrop_path, title, original_title, vote_average, vote_count, popularity, genres, homepage}) { 
-    //poster_path,
-
-    const imgSrc = `${ImagesPathConstructor.getImagePath({ path: backdrop_path })}, 1x, ${ImagesPathConstructor.getImagePath({ path: backdrop_path, width: 'retina' }) }, 2x`;
+export function modalCardMarkUp({overview, poster_path, title, original_title, vote_average, vote_count, popularity, genres, homepage}) { 
+    
+    const imgSrc = `${ImagesPathConstructor.getImagePath({ path: poster_path })}, 1x, ${ImagesPathConstructor.getImagePath({ path: poster_path, width: 'retina' }) }, 2x`;
     
     const vote = CAPTIONS[currentLanguage].movieDetails.vote;
     const votes = CAPTIONS[currentLanguage].movieDetails.votes;
