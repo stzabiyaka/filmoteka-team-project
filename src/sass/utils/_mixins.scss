@@ -2,7 +2,7 @@
 //Миксин вычисляет flex-basis для flex-элемента
 //Принимает два параметра: (1- количество элементов в строке, 2- ширина промежутка между элементами в пикселях)
 @mixin flexBasis($column: 2, $gap: 32px) {
-  flex-basis: calc((100% - #{$gap} * (#{$column})) / #{$column});
+  flex-basis: calc((100% - #{$gap} * #{$column}) / #{$column});
 }
 
 //transition properties, duration, timing function
