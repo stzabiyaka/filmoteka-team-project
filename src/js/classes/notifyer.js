@@ -34,6 +34,6 @@ export default class Notifyer {
             return;
         }
 
-        this.#renderTarget.innerHtml = `<p class="notifier__message">${message}</p>`;
+        this.#renderTarget.innerHtml = `<p class="notifyer__message">${message}</p>`;
     }
 }
