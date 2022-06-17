@@ -36,7 +36,7 @@ export function modalCardMarkUp({overview, backdrop_path, title, original_title,
                 <source srcset="${imgSrc}" type="image/jpeg" class="modal-card__picture--source">
                 <img src="${ImagesPathConstructor.getImagePath({ path: backdrop_path })}" alt="${title}" loading="lazy" class="modal-card__img" type="image/jpeg" id="img-in-modal-card-picture"/>
             </picture>           
-            <button id="modal-open-movie js-hidden" class="modal-card__open-movie" onclick="window.location.href = '${homepage}';">
+            <button id="modal-open-movie js-hidden" title="open video" aria-label="open video" class="modal-card__open-movie" onclick="window.location.href = '${homepage}';">
                 <div class="modal-card__open-movie--icon" width="24" height="24"></div>
             </button>
         </div>
@@ -73,8 +73,8 @@ export function modalCardMarkUp({overview, backdrop_path, title, original_title,
                 <p class="modal-card-info-about__description">${overview}</p>
             </div>
             <div class="modal-card-thumb__btn">
-                <button type="button" id="watched-add" title="add to Watched" class="modal-card-btn__watched">${addToWatched}</button>
-                <button type="button" id="queue-add" title="add to Queue" class="modal-card-btn__queue">${addToQueue}</button>
+                <button type="button" id="watched-add" title="add to Watched" aria-label="add to Watched" class="modal-card-btn__watched">${addToWatched}</button>
+                <button type="button" id="queue-add" title="add to Queue" aria-label="add to Queue" class="modal-card-btn__queue">${addToQueue}</button>
             </div>
         </div>
     
