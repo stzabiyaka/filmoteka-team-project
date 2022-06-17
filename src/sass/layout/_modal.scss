@@ -418,6 +418,12 @@ flex-direction: column;
         width: 136px;
         margin-left: 8px;
     }
+
+    &.js-hidden {
+        visibility: hidden;
+        pointer-events: none;
+        opacity: 0;
+    }
 }
 
 // кнопка add to queue

@@ -8,9 +8,9 @@ import { CAPTIONS } from "../site-constants";
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
 
-REFS.libraryContainer.addEventListener('click', renderModalCard);
+// REFS.libraryContainer.addEventListener('click', renderModalCard);
 
-export async function renderModalCard(evt) {     
+export async function renderModalCard(evt) {
     evt.preventDefault();
     
     //повісити слухач на картку так, щоб модалка відкривалась по 
@@ -34,24 +34,24 @@ export async function renderModalCard(evt) {
         // і рендеримо сторінку
         const moviesApiService = new MoviesApiService({ language: currentLanguage });
         
-        await moviesApiService.getMovie({ movieId: articleID })
-            .then(movieObj => {
-                REFS.backdrop.classList.remove('js-hidden');
-                REFS.body.classList.add('js-modal-is-open');
-                REFS.modalContainer.innerHTML = modalCardMarkUp(movieObj);
-                REFS.modalAddToWatchedBtn.addEventListener('click', onModalAddToWatchedBtnClick);
-                REFS.modalAddToQueueBtn.addEventListener('click', onModalAddToQueueBtnClick);
-                if (movieObj.homepage) {
-                    REFS.modalOpenMovie.classList.remove('js-hidden');
-                    REFS.modalOpenMovie.addEventListener('click', onModalOpenMovieClick);                    
-                } else {                    
-                    console.log(`Sorry, we can't find it...`);
-                    //add notification
-                }
-                
-            })
-            .catch(error => console.error(error));//тут можемо додати сповіщення про помилку
-    };
+        const result = await moviesApiService.getMovie({ movieId: articleID });
+        try {
+            console.log(result);
+            REFS.backdrop.classList.remove('js-hidden');
+            REFS.body.classList.add('js-modal-is-open');
+            REFS.modalContainer.innerHTML = modalCardMarkUp(result);
+            REFS.modalAddToWatchedBtn.addEventListener('click', onModalAddToWatchedBtnClick);
+            REFS.modalAddToQueueBtn.addEventListener('click', onModalAddToQueueBtnClick);
+            if (result.homepage) {
+                REFS.modalOpenMovie.classList.remove('js-hidden');
+                REFS.modalOpenMovie.addEventListener('click', onModalOpenMovieClick);
+            }
+        } catch (error) {
+            console.log('somthing wrong with modal content');
+            console.log(error);
+        }
+
+    }
 }
 
 function onModalOpenMovieClick(evt) {

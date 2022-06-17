@@ -1,12 +1,25 @@
 <div class="backdrop js-hidden" id="backdrop-modal-card">
     <div class="modal-card container" >
+
         <button type="button" class="modal-card__close-btn" id="modal-close" title="close window" aria-label="close window" data-modal-close>
             <svg class="modal-card__close-btn-icon" width="30" height="30">
                 <use href="./images/icons.svg#icon-close"></use>
             </svg>
         </button> 
+
         <article class="modal-card__data container" id="modal"></article>
-        
+
+        <button id="modal-open-movie" title="open video trailer" aria-label="open video trailer" class="modal-card__open-movie js-hidden">
+            <div class="modal-card__open-movie--icon" width="24" height="24"></div>
+        </button>
+
+        <div class="modal-card-thumb__btn">
+            <button type="button" id="watched-add" title="add to Watched" aria-label="add to Watched"
+                class="modal-card-btn__watched js-hidden">Add to Watched</button>
+            <button type="button" id="queue-add" title="add to Queue" aria-label="add to Queue"
+                class="modal-card-btn__queue js-hidden">Add to Queue</button>
+        </div>
+
     </div>
     
 </div>
