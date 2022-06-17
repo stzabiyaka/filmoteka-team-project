@@ -170,6 +170,7 @@
     background-color: transparent;
     border: 1px solid getColor('accent');
     border-radius: 5px;    
+    cursor: pointer;
     @include respondTo(tablet){
         left: 151px;        
         top: 210px;
@@ -177,6 +178,12 @@
     @include respondTo(desktop){
         left: 186px;
         top: 262px;
+    }
+
+    &.js-hidden{
+        visibility: hidden;
+        pointer-events: none;
+        opacity: 0;
     }
 }
 
@@ -190,12 +197,17 @@
 //-----------------------------------
 
 .modal-card__open-movie--icon{    
-    fill:getColor('accent');    
+    // background-color:getColor('accent');  
+width: 0;
+height: 0;
+border-top: 10px solid transparent;
+border-left: 18px solid getColor('accent');
+border-bottom: 10px solid transparent;
 }
 
 .modal-card__open-movie:hover .modal-card__open-movie--icon,
 .modal-card__open-movie:focus .modal-card__open-movie--icon{
-    fill: getColor('text-secondary');
+border-left: 18px solid getColor('text-secondary');
     
 }
 

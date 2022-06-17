@@ -6,17 +6,9 @@ import UserPreferencesService from "../classes/user-preferences";
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
 
-export const testRefs = {
-    backdrop: document.querySelector('#backdrop-modal-card'),
-    modalContainer: document.querySelector('#modal'),    
-    // цей refs тимчасовий, бо у нас ще не всі елементи є на сторінці
-}
-
-
-export function modalCardMarkUp({overview, backdrop_path, title, original_title, vote_average, vote_count, popularity, genres, homepage}) { 
-    //poster_path,
-
-    const imgSrc = `${ImagesPathConstructor.getImagePath({ path: backdrop_path })}, 1x, ${ImagesPathConstructor.getImagePath({ path: backdrop_path, width: 'retina' }) }, 2x`;
+export function modalCardMarkUp({overview, poster_path, title, original_title, vote_average, vote_count, popularity, genres, homepage}) { 
+    
+    const imgSrc = `${ImagesPathConstructor.getImagePath({ path: poster_path })}, 1x, ${ImagesPathConstructor.getImagePath({ path: poster_path, width: 'retina' }) }, 2x`;
     
     const vote = CAPTIONS[currentLanguage].movieDetails.vote;
     const votes = CAPTIONS[currentLanguage].movieDetails.votes;
@@ -35,8 +27,10 @@ export function modalCardMarkUp({overview, backdrop_path, title, original_title,
             <picture class="modal-card__picture">                
                 <source srcset="${imgSrc}" type="image/jpeg" class="modal-card__picture--source">
                 <img src="${ImagesPathConstructor.getImagePath({ path: backdrop_path })}" alt="${title}" loading="lazy" class="modal-card__img" type="image/jpeg" id="img-in-modal-card-picture"/>
-            </picture>
-
+            </picture>           
+            <button id="modal-open-movie js-hidden" title="open video" aria-label="open video" class="modal-card__open-movie" onclick="window.location.href = '${homepage}';">
+                <div class="modal-card__open-movie--icon" width="24" height="24"></div>
+            </button>
         </div>
             
         <div class="modal-card-thumb__content">
@@ -71,8 +65,8 @@ export function modalCardMarkUp({overview, backdrop_path, title, original_title,
                 <p class="modal-card-info-about__description">${overview}</p>
             </div>
             <div class="modal-card-thumb__btn">
-                <button type="button" id="watched-add" title="add to Watched" class="modal-card-btn__watched">${addToWatched}</button>
-                <button type="button" id="queue-add" title="add to Queue" class="modal-card-btn__queue">${addToQueue}</button>
+                <button type="button" id="watched-add" title="add to Watched" aria-label="add to Watched" class="modal-card-btn__watched">${addToWatched}</button>
+                <button type="button" id="queue-add" title="add to Queue" aria-label="add to Queue" class="modal-card-btn__queue">${addToQueue}</button>
             </div>
         </div>
     
