@@ -17,7 +17,7 @@ const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
 
 const userCollectionsService = new CollectionService('userCollections');
-const notifyer = new Notifyer({ renderTarget: REFS.libraryContainer, timeOut: 2000});
+const notifyer = new Notifyer({ renderTarget: REFS.libraryContainer, timeOut: 30000});
 const languageSet = new LanguageSet({ userPreferences: userPreferences });
 const moviesApiService = new MoviesApiService({ language: currentLanguage});
 const trendingHandler = new TrendingHandler({ apiService: moviesApiService, markupRender: markupRenderer });
@@ -34,6 +34,7 @@ const siteEngine = new SiteEngine({ trendingHandler: trendingHandler, collection
 
 
 
+    // userPreferences.setLanguage({ language: LANGUAGES.ukrainian });
 
 
 
@@ -44,9 +45,8 @@ const siteEngine = new SiteEngine({ trendingHandler: trendingHandler, collection
 
 
 
-
-
-    
+    // notifyer.showNotification( { message: 'Test message', type: 'language' });
+ 
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
     файлах классів чи модулів */
