@@ -6,13 +6,6 @@ import UserPreferencesService from "../classes/user-preferences";
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
 
-export const testRefs = {
-    backdrop: document.querySelector('#backdrop-modal-card'),
-    modalContainer: document.querySelector('#modal'),    
-    // цей refs тимчасовий, бо у нас ще не всі елементи є на сторінці
-}
-
-
 export function modalCardMarkUp({overview, backdrop_path, title, original_title, vote_average, vote_count, popularity, genres, homepage}) { 
     //poster_path,
 

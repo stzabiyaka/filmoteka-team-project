@@ -1,8 +1,8 @@
-import { testRefs } from "../templates/modal-tmpl";
 import { modalCardMarkUp } from "../templates/modal-tmpl";
 import { REFS } from "../site-constants";
 import MoviesApiService from "../classes/movies-api-service";
 import UserPreferencesService from "../classes/user-preferences";
+import { CAPTIONS } from "../site-constants";
 
 
 const userPreferences = new UserPreferencesService('userPreferences');
@@ -36,10 +36,11 @@ export async function renderModalCard(evt) {
         
         await moviesApiService.getMovie({ movieId: articleID })
             .then(movieObj => {
-                testRefs.backdrop.classList.remove('js-hidden');
+                REFS.backdrop.classList.remove('js-hidden');
                 REFS.body.classList.add('js-modal-is-open');
-                testRefs.modalContainer.innerHTML = modalCardMarkUp(movieObj);
-                
+                REFS.modalContainer.innerHTML = modalCardMarkUp(movieObj);
+                REFS.modalAddToWatchedBtn.addEventListener('click', onModalAddToWatchedBtnClick);
+                REFS.modalAddToQueueBtn.addEventListener('click', onModalAddToQueueBtnClick);
                 if (movieObj.homepage) {
                     REFS.modalOpenMovie.classList.remove('js-hidden');
                     REFS.modalOpenMovie.addEventListener('click', onModalOpenMovieClick);                    
@@ -54,7 +55,21 @@ export async function renderModalCard(evt) {
 }
 
 function onModalOpenMovieClick(evt) {
-    // evt.preventDefault();
-    // тут можемо якосі гарно оформити
-    console.log('hi');
+    evt.preventDefault();
+    // очищаємо вміст в модалці і включаємо фільм
+    console.log('відкриваємо фільм');
+}
+
+function onModalAddToWatchedBtnClick(evt) {
+    // зробити перевірку, якщо вже є, то змінити текст, видалити і знов змінити текст
+    //якщо ні, то спочатку додати, потім змінити текст 
+    console.log("we need to change btn ADD TO WATCHED text container");
+    REFS.modalAddToWatchedBtn.textContent = CAPTIONS[currentLanguage].buttons.removeFromWatched;
+}
+
+function onModalAddToQueueBtnClick(evt) {
+     // зробити перевірку, якщо вже є, то змінити текст, видалити і знов змінити текст
+    //якщо ні, то спочатку додати, потім змінити текст 
+    console.log("we need to change btn ADD TO QUEUE text container");
+    REFS.modalAddToQueueBtn.textContent = CAPTIONS[currentLanguage].buttons.removeFromQueue;
 }
