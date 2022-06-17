@@ -57,7 +57,6 @@
        }
 
        &_symbol {
-            margin-left: 4px ;
             color: getColor('accent');
         }
         &_date {
@@ -66,11 +65,9 @@
             
             color: getColor('accent');
         }
-        &_avarage{
+        &_avarage__accent{
             background-color: getColor('accent');
             border-radius: 5px;
-        }
-        &_avarage__accent{
             width: 36px;
             height: 16px;
 
