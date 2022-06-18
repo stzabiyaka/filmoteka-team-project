@@ -12,6 +12,7 @@ import ModalHandler from './js/classes/page-handlers/modal-handler';
 import SearchHandler from './js/classes/page-handlers/searchHandler';
 import LanguageSet from './js/classes/language-set';
 import Notifyer from './js/classes/notifyer';
+import ToTopButton from './js/classes/to-top-button';
 
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
@@ -24,7 +25,7 @@ const trendingHandler = new TrendingHandler({ apiService: moviesApiService, mark
 const collectionHandler = new CollectionHandler({ apiService: moviesApiService, collectionsService: userCollectionsService, markupRender: markupRenderer});
 const modalHandler = new ModalHandler({ apiService: moviesApiService });
 const searchHandler = new SearchHandler({ apiService: moviesApiService, markupRender: markupRenderer});
-
+const ToTopButton = new ToTopButton();
 
 
 /* vvv site engine intialisation vvv */
