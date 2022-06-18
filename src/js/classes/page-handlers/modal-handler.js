@@ -8,6 +8,7 @@ export default class ModalHandler {
     #articleID;
     #closeBtnCallback;
     #escBtnCallback;
+    #movieBtnCallback;
     constructor ({ apiService, markupRender, languageSet, collectionsService }) {
         this.#apiService = apiService;
         this.#markupRender = markupRender;
@@ -34,6 +35,7 @@ export default class ModalHandler {
 
         this.#closeBtnCallback = this.#onClickBackdrop.bind(this);
         this.#escBtnCallback = this.#onCloseEscKey.bind(this);
+        this.#movieBtnCallback = this.#onMovieClick.bind(this);
 
         REFS.backdrop.addEventListener('click', this.#closeBtnCallback);
         window.addEventListener('keydown', this.#escBtnCallback);
@@ -50,7 +52,7 @@ export default class ModalHandler {
             REFS.modalAddToQueueBtn.addEventListener('click', this.#onAddToQueueBtnClick.bind(this));
             if (result.homepage) {
                 REFS.modalOpenMovie.classList.remove('js-hidden');
-                REFS.modalOpenMovie.addEventListener('click', this.#onOpenMovieClick.bind(this));
+                REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);
             }
         }
     }
@@ -112,6 +114,12 @@ export default class ModalHandler {
         // REFS.modalContainer.innerHTML = '';
         REFS.body.classList.remove('js-modal-is-open');
         REFS.backdrop.removeEventListener('click', this.#closeBtnCallback);
-        REFS.window.removeEventListener('keydown', this.#escBtnCallback);
+        window.removeEventListener('keydown', this.#escBtnCallback);
       }
+
+    #onMovieClick(evt) {
+    evt.preventDefault();
+    // очищаємо вміст в модалці і включаємо фільм
+    console.log('відкриваємо фільм');
+}
 }
