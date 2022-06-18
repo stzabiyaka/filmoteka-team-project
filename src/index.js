@@ -12,6 +12,7 @@ import SearchHandler from './js/classes/page-handlers/searchHandler';
 import LanguageSet from './js/classes/language-set';
 import Notifyer from './js/classes/notifyer';
 import { Pagination } from 'tui-pagination';
+import ToTopButton from './js/classes/utilities/to-top-button';
 
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
@@ -25,6 +26,7 @@ const trendingHandler = new TrendingHandler({ apiService: moviesApiService, mark
 const collectionHandler = new CollectionHandler({ apiService: moviesApiService, collectionsService: userCollectionsService, markupRender: markupRender, notifyer: notifyer });
 const searchHandler = new SearchHandler({ apiService: moviesApiService, markupRender: markupRender });
 const modalHandler = new ModalHandler({ apiService: moviesApiService, languageSet: languageSet, markupRender: markupRender, collectionsService: userCollectionsService });
+const toTopButton = new ToTopButton();
 
 
 
@@ -37,8 +39,6 @@ const siteEngine = new SiteEngine({ trendingHandler: trendingHandler, collection
 
 
     // userPreferences.setLanguage({ language: LANGUAGES.ukrainian });
-
-
 
 
 
