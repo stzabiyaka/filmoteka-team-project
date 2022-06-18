@@ -13,24 +13,29 @@ export default class MarkupRender {
     #modalHandler;
     #modalCallback;
 
-    constructor({ notifyer, languageSet, modalHandler }) {
+    constructor({ notifyer, languageSet }) {
         this.#notifyer = notifyer;
-        this.#captions = languageSet.captions;
+        this.#captions = languageSet.captions;        
+    }
+
+    setModalHandler({ modalHandler }) {
         this.#modalHandler = modalHandler;
-        
     }
 
     async renderLiblary({ loader, content }) {
         
-        this.#libraryTarget.removeEventListener('click', this.#modalCallback);
+        if (this.#modalCallback) {
+            this.#libraryTarget.removeEventListener('click', this.#modalCallback);
+        }
         const response = await loader(content);
         try {
             const markup = response.results.map(result => {
             return cardParser({ ...result, captions: this.#captions});
         }).join('');
             this.#libraryTarget.innerHTML = markup;
-            this.#modalCallback = this.#modalHandler.bind(this);
+            this.#modalCallback = this.#modalHandler.modalOpen.bind(this.#modalHandler);
             this.#libraryTarget.addEventListener('click', this.#modalCallback);
+            return true;
         }
         catch {
             const message = 'technicalFault';
@@ -38,9 +43,19 @@ export default class MarkupRender {
         }
     }
 
-    renderModal(result) {
-        const markup = modalCardMarkUp({ ...result, captions: this.#captions });
-        this.#modalTarget.innerHTML = markup;
+    async renderModal({ loader, content }) {
+        const response = await loader(content);
+        try {
+            const markup = modalCardMarkUp({ ...response, captions: this.#captions });
+            this.#modalTarget.innerHTML = markup;
+            return true;
+        }
+        catch {
+           
+            const message = this.#captions.notifications.technicalFault;
+            this.#modalTarget.innerHTML = `<p class="modal__notification">${message}</p>`
+        }
+            
     }
 
 

@@ -33,7 +33,9 @@ export default class SiteEngine {
 /* Формування та логіка головної сторінки сайта */ 
     #handleHome () { 
         this.#navBtnsToggle();
-        this.#removeCollectionsListeners();
+        if (this.#queueCallback || this.#watchedCallback) {
+            this.#removeCollectionsListeners();
+        }
         // REFS.paginator.classList.add(this.hiderClass);
         
         this.#trendingHandler.getTrendingMoviesPage({ page: 1 });

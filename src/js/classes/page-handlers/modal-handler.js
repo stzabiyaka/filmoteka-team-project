@@ -6,15 +6,18 @@ export default class ModalHandler {
     #captions;
     #collectionsService;
     #articleID;
+    #closeBtnCallback;
+    #escBtnCallback;
     constructor ({ apiService, markupRender, languageSet, collectionsService }) {
         this.#apiService = apiService;
         this.#markupRender = markupRender;
         this.#captions = languageSet.captions;
         this.#collectionsService = collectionsService;
+        this.#markupRender.setModalHandler({ modalHandler: this });
     }
 
-    modalOpen(evt) {
-        if(evt.target.nodeName !== 'IMG' && evt.target.nodeName !== 'H2' && evt.target.nodeName !== 'SPAN' && evt.target.nodeName !== 'P' && evt.target.nodeName !== 'A') {
+    async modalOpen(evt) {
+        if(evt.target === evt.currentTarget) {
     return;
         }        
         const selectedElements = evt.path;        
@@ -22,19 +25,26 @@ export default class ModalHandler {
         
         selectedElements.forEach(el => {
             if (el.className === 'movie-card') {
-                this.#articleID = el.getAttribute('data-movie-id');
+                this.#articleID = Number(el.getAttribute('data-movie-id'));
                 return this.#articleID;
             }
         });
         REFS.backdrop.classList.remove('js-hidden');
         REFS.body.classList.add('js-modal-is-open');
-        REFS.backdrop.addEventListener('click', onClickBackdrop);
-        window.addEventListener('keydown', onCloseEscKey);
-        try {
-            const result = this.getMovieById({ movieId: this.#articleID });
-            this.markupRender.renderModal(result);
-            this.#checkBtnState({ collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
-            this.#checkBtnState({ collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
+
+        this.#closeBtnCallback = this.#onClickBackdrop.bind(this);
+        this.#escBtnCallback = this.#onCloseEscKey.bind(this);
+
+        REFS.backdrop.addEventListener('click', this.#closeBtnCallback);
+        window.addEventListener('keydown', this.#escBtnCallback);
+
+        const loader = this.#apiService.getMovie.bind(this.#apiService);
+        const content = { movieId: this.#articleID };
+        
+        const result = this.#markupRender.renderModal({ loader: loader, content: content });
+        if (result) {
+            this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
+            this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
             REFS.modalCardThumbBtn.classList.remove('js-hidden');
             REFS.modalAddToWatchedBtn.addEventListener('click', this.#onAddToWatchedBtnClick.bind(this));
             REFS.modalAddToQueueBtn.addEventListener('click', this.#onAddToQueueBtnClick.bind(this));
@@ -42,19 +52,9 @@ export default class ModalHandler {
                 REFS.modalOpenMovie.classList.remove('js-hidden');
                 REFS.modalOpenMovie.addEventListener('click', this.#onOpenMovieClick.bind(this));
             }
-        } catch (error) {
-            // sorry ...
-            const notification = this.#captions.notifications.technicalFault;
-            
         }
     }
     
-
-    async getMovieById ({ movieId }) {
-        return  await this.#apiService.getMovie.bind(this.#apiService, { movieId: movieId });
-        // this.#markupRender.renderModal({ loader: loader });
-
-    }
 
     #onOpenMovieClick(evt) {
         evt.preventDefault();
@@ -79,11 +79,34 @@ export default class ModalHandler {
         // REFS.modalAddToQueueBtn.textContent = CAPTIONS[currentLanguage].buttons.;
     }
 
-    #checkBtnState({ collection, btnTarget }) {
+    #checkBtnState({ button, collection, btnTarget }) {
         if (this.#collectionsService.isInCollection({ collection: collection, id: this.#articleID })) {
-            REFS.modalAddToWatchedBtn.textContent = this.#captions.buttons[btnTarget].remove;
+            REFS[button].textContent = this.#captions.buttons[btnTarget].remove;
             return;
         }
-        REFS.modalAddToWatchedBtn.textContent = this.#captions.buttons[btnTarget].add;
+        REFS[button].textContent = this.#captions.buttons[btnTarget].add;
     }
+
+    #onClickBackdrop(evt) {
+        if (
+          evt.target === evt.currentTarget ||
+          evt.target.parentElement === REFS.modalCloseBtn
+        ) {
+          this.#closeModal();
+        }
+      }
+
+    #onCloseEscKey(evt) {
+        if (evt.key === 'Escape') {
+          this.#closeModal();
+        }
+      }
+
+    #closeModal() {
+        REFS.backdrop.classList.add('js-hidden');
+        // REFS.modalContainer.innerHTML = '';
+        REFS.body.classList.remove('js-modal-is-open');
+        REFS.backdrop.removeEventListener('click', this.#closeBtnCallback);
+        REFS.window.removeEventListener('keydown', this.#escBtnCallback);
+      }
 }
