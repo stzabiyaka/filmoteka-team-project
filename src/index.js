@@ -19,12 +19,13 @@ let currentLanguage = userPreferences.getPreferences().language;
 const userCollectionsService = new CollectionService('userCollections');
 const languageSet = new LanguageSet({ userPreferences: userPreferences });
 const notifyer = new Notifyer({ renderTarget: REFS.libraryContainer, timeOut: 30000, languageSet: languageSet});
-const markupRender = new MarkupRender({ notifyer: notifyer, languageSet: languageSet});
 const moviesApiService = new MoviesApiService({ language: currentLanguage});
+const modalHandler = new ModalHandler({ apiService: moviesApiService, languageSet: languageSet, collectionsService: userCollectionsService });
+const markupRender = new MarkupRender({ notifyer: notifyer, languageSet: languageSet, modalHandler: modalHandler});
 const trendingHandler = new TrendingHandler({ apiService: moviesApiService, markupRender: markupRender });
 const collectionHandler = new CollectionHandler({ apiService: moviesApiService, collectionsService: userCollectionsService, markupRender: markupRender, notifyer: notifyer });
-const modalHandler = new ModalHandler({ apiService: moviesApiService, languageSet: languageSet });
 const searchHandler = new SearchHandler({ apiService: moviesApiService, markupRender: markupRender });
+
 
 
 
