@@ -13,7 +13,7 @@ export default class LanguageSet {
         if (this.#currentLanguage !== 'default') {
             this.setCurrentLanguage ({ language: this.#currentLanguage });
         }
-
+        this.captions = this.captions = CAPTIONS[language];
     }
 
     setCurrentLanguage ({ language }) {
