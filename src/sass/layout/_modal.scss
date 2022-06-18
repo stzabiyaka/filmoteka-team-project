@@ -126,7 +126,7 @@
     display: block;
     border-radius: 5px;    
     height: 357px;
-    
+    width: 240px;
     @include respondTo(tablet){
         width: 264px;
         height: 374px;
@@ -137,7 +137,7 @@
     }
 }
 
-//стилі для обгортки picture 
+//стилі для обгортки img 
 
 .modal-card__picture{
     width: 100%;
