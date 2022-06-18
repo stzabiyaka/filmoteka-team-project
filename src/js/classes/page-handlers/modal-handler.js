@@ -65,18 +65,23 @@ export default class ModalHandler {
     #onAddToWatchedBtnClick(evt) {
         
         if (REFS.modalAddToWatchedBtn.textContent === this.#captions.buttons.addToWatched.add) {
-            this.#collectionsService.addToCollection({ collection: USER_COLLECTIONS.watched, id: this.#articleID });     
+            this.#collectionsService.addToCollection({ collection: USER_COLLECTIONS.watched, id: this.#articleID });
+            this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });   
             return;
         }
         this.#collectionsService.removeFromCollection({ collection: USER_COLLECTIONS.watched, id: this.#articleID });
-                
+        this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });       
     }
 
     #onAddToQueueBtnClick(evt) {
-     // зробити перевірку, якщо вже є, то змінити текст, видалити і знов змінити текст
-    //якщо ні, то спочатку додати, потім змінити текст 
-    console.log("we need to change btn ADD TO QUEUE text container");
-        // REFS.modalAddToQueueBtn.textContent = CAPTIONS[currentLanguage].buttons.;
+
+        if (REFS.modalAddToQueueBtn.textContent === this.#captions.buttons.addToQueue.add) {
+            this.#collectionsService.addToCollection({ collection: USER_COLLECTIONS.queue, id: this.#articleID });
+            this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });    
+            return;
+        }
+        this.#collectionsService.removeFromCollection({ collection: USER_COLLECTIONS.queue, id: this.#articleID });
+        this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
     }
 
     #checkBtnState({ button, collection, btnTarget }) {
