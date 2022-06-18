@@ -2,6 +2,7 @@ import { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS, USER_COLLECTIONS } from '
 import MoviesApiService from './js/classes/services/movies-api-service';
 import UserPreferencesService from './js/classes/services/user-preferences';
 import CollectionService from './js/classes/services/collecion-service';
+import MarkupRender from './js/classes/utilities/markup-render';
 import markupRenderer from './js/modules/markup-renderer';
 import { renderModalCard } from './js/templates/modal';
 import SiteEngine from './js/classes/site-engine';
@@ -44,8 +45,7 @@ const siteEngine = new SiteEngine({ trendingHandler: trendingHandler, collection
 
 
 
-
-    // notifyer.showNotification( { message: 'Test message', type: 'language' });
+    // notifyer.showNotification( { message: 'Test message' });
  
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших
