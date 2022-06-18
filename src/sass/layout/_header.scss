@@ -110,6 +110,7 @@
     &__buttons{
         display: flex;
         margin-left: auto;
+        
     }
     
     &__buttons-item {
@@ -117,6 +118,7 @@
     }
 
     &__button {
+    cursor: pointer;
     position: relative;
     display: flex;
     justify-content: center;
@@ -148,7 +150,7 @@
     }
 
     &:hover {
-        color: getColor('accent');
+        color: rgba(255, 107, 1, 0.8);
     }
     
     }
@@ -202,15 +204,18 @@
     margin: auto; 
     width: 280px;
     height: 20px;
+    background: transparent;
 }
 .search-form__input {
+    height: 20px;
     background: transparent;
     border: 0;
     border-bottom: 1px solid getColor('text-secondary');
     width: 280px;
+    color: getColor('text-secondary');
 
     &::placeholder{
-        font-family: 'Roboto';
+    font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -230,13 +235,13 @@
     align-items: center;
     
     &__button{
+        cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 130px;
         height: 44px;
         margin-right: 20px;
-
         border: 1px solid #FFFFFF;
         border-radius: 5px;
         font-family: inherit;
@@ -259,6 +264,15 @@
 
         &:hover {
             box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+            background-color: getColor('accent')
+        }
+     @include respondTo(tablet) {
+            width: 152px;
+            height: 44px;
+        }
+    @include respondTo(desktop) {
+            width: 148px;
+            height: 42px;
         }
     }
 }
@@ -266,16 +280,34 @@
 .user-btns-container {
     display: flex;
     align-items: center;
+    margin-top: 20px;
+    margin-right: 20px;
 }
 
 .language-select {
     margin-left: auto;
     margin-right: 10px;
+    width: 32px;
+    height: 24px;
+    border-radius: 5px;
 }
 
 .theme-button {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
+    border-radius: 5px;
+    display: block;
+    background-image: linear-gradient(135deg, white, #02023a);
+    border: none;
+    border-radius: 5px;
+    transition: all 0.25s ease-in;
+    &:hover {
+        transform: scale(110%);
+        background-image: none;
+        background-color: #02023a;
+
+        &.theme-dark {
+            background-color: #FFFFFF;
+        }
+    }
 }
-
-
