@@ -9,11 +9,10 @@ export default class LanguageSet {
         
         this.#currentLanguage = userPreferences.getPreferences().language;
         this.#captionsSwitcher = new SwitchSiteCaptions();
-
+        this.captions = CAPTIONS[this.#currentLanguage];
         if (this.#currentLanguage !== 'default') {
             this.setCurrentLanguage ({ language: this.#currentLanguage });
         }
-
     }
 
     setCurrentLanguage ({ language }) {

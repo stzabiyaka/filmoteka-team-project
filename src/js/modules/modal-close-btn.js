@@ -3,9 +3,6 @@ import { REFS } from '../site-constants';
 
 const { body, backdrop, modalContainer, modalCloseBtn } = REFS;
 
-backdrop.addEventListener('click', onClickBackdrop);
-window.addEventListener('keydown', onCloseEscKey);
-
 function closeModal() {
   backdrop.classList.add('js-hidden');
   modalContainer.innerHTML = '';
