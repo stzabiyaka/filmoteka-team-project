@@ -12,7 +12,7 @@ export default function cardParser ({ genres, poster_path, release_date, title, 
         genres.push('Other');
     }
    const poster = `${title} poster`;
-    return `<article class="movie-card" data-movie-id="${id}">
+    return `<a  class="movie-card" data-movie-id="${id}"><article>
     <h2 class="visually_hidden">${title}</h2>
     <picture>
         <source srcset="${ImagesPathConstructor.getImagePath({ path:poster_path })}, 1x, ${ImagesPathConstructor.getImagePath({ path: poster_path, width: 'retina' })}, 2x" type="image/jpeg">
@@ -27,5 +27,5 @@ export default function cardParser ({ genres, poster_path, release_date, title, 
         <p class="movie-card_date">${release_date}</p>
         <p class="movie-card_avarage__accent">${vote_average}</p>
     </div>
-</article>`;
+</article></a>`;
 }
