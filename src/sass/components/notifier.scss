@@ -1,0 +1,72 @@
+.language{
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 14px;
+  color: getColor('text-footer');
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  position: absolute;
+  padding: 20px;
+  border-radius: 6px;
+  width: 250px;
+  height: 30px;
+  top: 28%;
+  left: 12%;
+  background-color: getColor('background-secondary');
+
+@include respondTo(tablet) {
+  border-radius: 6px;
+  width: 250px;
+  height: 30px;
+  top: 26%;
+  left: 34%;
+}
+
+@include respondTo(desktop) {
+  font-size: 15px;
+  border-radius: 8px;
+  width: 280px;
+  height: 40px;
+  top: 21%;
+  left: 41%;
+}
+}
+
+.warning{
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 14px;
+  color: getColor('warning');
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  position: absolute;
+  padding: 20px;
+  border-radius: 6px;
+  width: 250px;
+  height: 30px;
+  top: 28%;
+  left: 12%;
+  background-color: getColor('background-secondary');
+
+  @include respondTo(tablet) {
+    border-radius: 6px;
+    width: 250px;
+    height: 30px;
+    top: 26%;
+    left: 34%;
+  }
+
+  @include respondTo(desktop) {
+    font-size: 15px;
+    border-radius: 8px;
+    width: 280px;
+    height: 40px;
+    top: 21%;
+    left: 41%;
+  }
+
+}

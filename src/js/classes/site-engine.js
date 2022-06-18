@@ -38,7 +38,6 @@ export default class SiteEngine {
         // REFS.paginator.classList.add(this.hiderClass);
         
         this.#trendingHandler.getTrendingMoviesPage({ page: 1 });
-
     }
 
 /* Формування відображення результату пошуку фільмів за пошуковим запитом */ 
@@ -116,6 +115,4 @@ export default class SiteEngine {
         REFS.collectionQueueBtn.removeEventListener('click', this.#queueCallback);
         REFS.collectionWatchedBtn.removeEventListener('click', this.#watchedCallback);
     }
-
-  
 }

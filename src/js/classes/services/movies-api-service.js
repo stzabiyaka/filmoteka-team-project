@@ -1,7 +1,10 @@
+import Spinner from "../utilities/spinner";
+
 export default class MoviesApiService {
     #API_KEY;
     #BASE_URL;
     #currentLanguage;
+    #spinner;
     constructor ({language = 'default'}) {
         this.#API_KEY = '704d5b04a49684ea4810e36d12ae79df';
         this.#BASE_URL = 'https://api.themoviedb.org/3';
@@ -16,16 +19,19 @@ export default class MoviesApiService {
                 ukrainian: 'uk-UA'
         }
         this.genres = null;
+        this.#spinner = new Spinner();
         this.setCurrentLanguage({ language: this.LANGUAGES[language] });
     }
 
 /* Отримання даних з API за визначеним запитом - базовий метод усього класу */
     async #getData (url) {
+        this.#spinner.showSpinner();
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(response.status);
         }
         const data = await response.json();
+        this.#spinner.hideSpinner();
         return data;
     }
 
@@ -61,8 +67,8 @@ export default class MoviesApiService {
     }
 
 /* Отримання об'екту з масивом фільмів за масивом id */
-    async getMoviesBundle ({ bundleArray, page = 1, total_pages = 1 }) {
-        const requests = bundleArray.map(id => this.getMovie({movieId: id}));
+    async getMoviesBundle ({ bundle, page = 1, total_pages = 1 }) {
+        const requests = bundle.map(id => this.getMovie({movieId: id}));
         const results = await Promise.all(requests);
         return { results: results, page: page, total_pages: total_pages };
     }

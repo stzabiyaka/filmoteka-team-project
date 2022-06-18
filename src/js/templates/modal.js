@@ -1,7 +1,7 @@
 import { modalCardMarkUp } from "../templates/modal-tmpl";
 import { REFS } from "../site-constants";
-import MoviesApiService from "../classes/movies-api-service";
-import UserPreferencesService from "../classes/user-preferences";
+import MoviesApiService from "../classes/services/movies-api-service";
+import UserPreferencesService from "../classes/services/user-preferences";
 import { CAPTIONS } from "../site-constants";
 
 
@@ -40,6 +40,7 @@ export async function renderModalCard(evt) {
             REFS.backdrop.classList.remove('js-hidden');
             REFS.body.classList.add('js-modal-is-open');
             REFS.modalContainer.innerHTML = modalCardMarkUp(result);
+            REFS.modalCardThumbBtn.classList.remove('js-hidden');
             REFS.modalAddToWatchedBtn.addEventListener('click', onModalAddToWatchedBtnClick);
             REFS.modalAddToQueueBtn.addEventListener('click', onModalAddToQueueBtnClick);
             if (result.homepage) {

@@ -2,6 +2,7 @@ import LocalStorageService from "./local-storage-service";
 
 export default class UserPreferencesService extends LocalStorageService {
     #preferences;
+    #isUserNew;
     constructor(key) {
         super (key);
         this.#restorePreferences();
@@ -11,8 +12,11 @@ export default class UserPreferencesService extends LocalStorageService {
     #restorePreferences () {
         this.#preferences = this.load();
         if (!this.#preferences) {
-            this.#preferences = { language: 'default', theme: 'default', user: false};
+            this.#preferences = { language: 'default', theme: 'default'};
+            this.#isUserNew = true;
+            this.save(this.#preferences);
         }
+        this.#isUserNew = false;
     }
 
 /* Отримання даних користувача */ 
@@ -23,14 +27,16 @@ export default class UserPreferencesService extends LocalStorageService {
 /* Встановлення визначеної користувачем мови та запис у localStorage */ 
     setLanguage ({ language }) {
         this.#preferences.language = language;
-        this.#preferences.user = true;
         this.save(this.#preferences);
     }
 
 /* Встановлення визначеної користувачем теми та запис у localStorage */ 
     setTheme ({ theme }) {
         this.#preferences.theme = theme;
-        this.#preferences.user = true;
         this.save(this.#preferences);
+    }
+
+    getIsUserNew () {
+        return this.#isUserNew;
     }
 }

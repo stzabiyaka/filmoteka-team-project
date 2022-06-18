@@ -44,8 +44,5 @@
         <path fill="#0057b8" d="M0 0h640v240H0z"/>
       </g>
     </symbol>
-    <symbol id="icon-play-movie" viewBox="0 0 32 32">
-      <path d="M6 4l20 12-20 12z"></path>
-    </symbol>
   </defs>
 </svg>

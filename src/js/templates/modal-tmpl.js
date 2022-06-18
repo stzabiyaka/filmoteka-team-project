@@ -1,6 +1,6 @@
-import ImagesPathConstructor from "../classes/images-path-constructor";
+import ImagesPathConstructor from "../classes/utilities/images-path-constructor";
 import { CAPTIONS } from "../site-constants";
-import UserPreferencesService from "../classes/user-preferences";
+import UserPreferencesService from "../classes/services/user-preferences";
 
 
 const userPreferences = new UserPreferencesService('userPreferences');
@@ -8,7 +8,11 @@ let currentLanguage = userPreferences.getPreferences().language;
 
 export function modalCardMarkUp({overview, poster_path, title, original_title, vote_average, vote_count, popularity, genres, homepage}) { 
     
-    const imgSrc = `${ImagesPathConstructor.getImagePath({ path: poster_path })}, 1x, ${ImagesPathConstructor.getImagePath({ path: poster_path, width: 'retina' }) }, 2x`;
+    const imgSrcMobile = `${ImagesPathConstructor.getImagePath({ path: poster_path })}`;
+    const imgSrcTablet = `${ImagesPathConstructor.getImagePath({ path: poster_path, width:'retina' })}`;
+    const imgSrcDesktop = `${ImagesPathConstructor.getImagePath({ path: poster_path, width: 'original' })}`;
+
+    const imgSrc =`${imgSrcTablet} 1x, ${imgSrcDesktop} 2x`;
     
     const vote = CAPTIONS[currentLanguage].movieDetails.vote;
     const votes = CAPTIONS[currentLanguage].movieDetails.votes;
@@ -16,21 +20,14 @@ export function modalCardMarkUp({overview, poster_path, title, original_title, v
     const originalTitle = CAPTIONS[currentLanguage].movieDetails.title;
     const genre = CAPTIONS[currentLanguage].movieDetails.genre;
     const about = CAPTIONS[currentLanguage].movieDetails.about;
-    const addToWatched = CAPTIONS[currentLanguage].buttons.addToWatched;
-    const addToQueue = CAPTIONS[currentLanguage].buttons.addToQueue;
     
-
     return  `
 
-        <div class="modal-card-thumb__img" >  
-        
-            <picture class="modal-card__picture">                
-                <source srcset="${imgSrc}" type="image/jpeg" class="modal-card__picture--source">
-                <img src="${ImagesPathConstructor.getImagePath({ path: poster_path })}" alt="${title}" loading="lazy" class="modal-card__img" type="image/jpeg" id="img-in-modal-card-picture"/>
-            </picture>           
-            
-        </div>
-            
+        <div class="modal-card-thumb__img" > 
+            <div class="modal-card__picture" >        
+                <img srcset="${imgSrc}" src="${imgSrcMobile}" alt="${title}" loading="lazy" class="modal-card__img" type="image/jpeg" id="img-in-modal-card-picture"/>
+            </div>
+        </div>    
         <div class="modal-card-thumb__content">
             <div class="modal-card-info">
                 <h2 class="modal-card-info__title">${title}</h2>
