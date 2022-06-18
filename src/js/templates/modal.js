@@ -40,6 +40,7 @@ export async function renderModalCard(evt) {
             REFS.backdrop.classList.remove('js-hidden');
             REFS.body.classList.add('js-modal-is-open');
             REFS.modalContainer.innerHTML = modalCardMarkUp(result);
+            REFS.modalCardThumbBtn.classList.remove('js-hidden');
             REFS.modalAddToWatchedBtn.addEventListener('click', onModalAddToWatchedBtnClick);
             REFS.modalAddToQueueBtn.addEventListener('click', onModalAddToQueueBtnClick);
             if (result.homepage) {
