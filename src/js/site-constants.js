@@ -60,7 +60,7 @@ const LANGUAGES = {
             searchMinLength : 'Please, enter at least two symbols to start search.',
             searchRestricted : 'Please, do not enter any special characters.',
             technicalFault: 'Oops (( looks, like some technical troubles occured.',
-            collecionEmpty: 'Looks like you vave not add any movie to this collection, yet.',
+            collectionEmpty: 'Looks like you vave not add any movie to this collection, yet.',
             
             languageNotify: 'Цей сайт доступний також укріїнською мовою',
         },
@@ -99,7 +99,7 @@ const LANGUAGES = {
             searchMinLength : 'Будь ласка, введіть хоча б два символи для початку пошуку.',
             searchRestricted : 'Будь ласка, не використовуйте будь-які спеціальні символи.',
             technicalFault: 'От халепа (( схоже, сталась якась технічна проблема.',
-            collecionEmpty: 'Схоже, ви покищо не додали жодного фильму до цієї коллекції.',
+            collectionEmpty: 'Схоже, ви покищо не додали жодного фильму до цієї коллекції.',
         },
         movieDetails: {
             vote: 'Голос',

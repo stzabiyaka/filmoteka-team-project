@@ -1,4 +1,3 @@
-import markupRenderer from "../modules/markup-renderer";
 import { REFS, USER_COLLECTIONS } from "../site-constants";
 
 export default class SiteEngine {

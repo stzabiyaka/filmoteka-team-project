@@ -10,7 +10,7 @@ export default class SearchHandler {
 
     getMoviesBySearch ({ query, page = 1 }){
         const loader = this.#apiService.searchMovies.bind(this.#apiService, { query: query, page: page });
-        this.#markupRender({ loader: loader, target: REFS.libraryContainer});
+        this.#markupRender.renderLiblary({ loader: loader });
 
     }
 }

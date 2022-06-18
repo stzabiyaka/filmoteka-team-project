@@ -3,16 +3,16 @@ import { REFS } from "../../site-constants";
 export default class ModalHandler {
     #apiService;
     #markupRender;
-    #currentLanguage;
-    constructor ({ apiService, markupRender, currentLanguage }) {
+    #captions;
+    constructor ({ apiService, markupRender, languageSet }) {
         this.#apiService = apiService;
         this.#markupRender = markupRender;
-        this.#currentLanguage = currentLanguage;
+        this.#captions = languageSet.captions;
     }
 
     getMovieById ({ movieId }) {
         const loader = this.#apiService.getMovie.bind(this.#apiService, { movieId: movieId });
-        // this.#markupRender({ loader: loader, target: REFS.libraryContainer});
+        // this.#markupRender.renderModal({ loader: loader });
 
     }
 }

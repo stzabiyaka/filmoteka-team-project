@@ -2,15 +2,17 @@ export default class Notifyer {
     #renderTarget;
     #notifyerDisplay;
     #timeOut = 500;
+    #notifications;
     #notifyerType = {
         language: 'language',
         warning: 'warning',
     }
-    constructor({ renderTarget, timeOut }) {
+    constructor({ renderTarget, timeOut, languageSet }) {
         this.#renderTarget = renderTarget;
         this.#timeOut = timeOut ? timeOut : this.#timeOut;
         document.body.insertAdjacentHTML('beforeend', '<div id="notifier-display" class="notifier-display js-hidden"></div>');
         this.#notifyerDisplay = document.querySelector('#notifier-display');
+        this.#notifications = languageSet.captions.notifications;
     }
 
     showNotification ({ message, type = 'warning' }) {
@@ -33,7 +35,6 @@ export default class Notifyer {
         if (!message) {
             return;
         }
-
-        this.#renderTarget.innerHtml = `<p class="notifyer__message">${message}</p>`;
+        this.#renderTarget.innerHTML = `<p class="notifyer__message">${this.#notifications[message]}</p>`;
     }
 }

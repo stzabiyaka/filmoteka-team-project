@@ -4,15 +4,20 @@ export default class CollectionHandler {
     #apiService;
     #markupRender;
     #collectionsService;
-    constructor ({ apiService, markupRender, collectionsService }) {
+    #notifyer
+    #collectionEmptyMessage;
+    constructor ({ apiService, markupRender, collectionsService, notifyer }) {
         this.#apiService = apiService;
         this.#collectionsService = collectionsService;
         this.#markupRender = markupRender;
+        this.#notifyer = notifyer;
+        this.#collectionEmptyMessage = 'collectionEmpty';
     }
 
     getCollectionMoviesPage ({ collectionName, page = 1 }) {
         if (!this.#collectionsService.isCollectionExist({collection: collectionName})) {
-            return console.log(`collection ${collectionName} does not exist`);
+            this.#notifyer.renderNotification({ message: this.#collectionEmptyMessage });
+            return;
         }
         if (!this.#collectionsService.isPageExist({collection: collectionName, page: page})) {
             return console.log(`page ${page} does not exist in the collection ${collectionName}`);
@@ -20,6 +25,6 @@ export default class CollectionHandler {
 
         const bundle = this.#collectionsService.getCollectionIdsBundle({collection: collectionName, page: page});
         const loader = this.#apiService.getMoviesBundle.bind(this.#apiService);
-        this.#markupRender({loader: loader, target: REFS.libraryContainer, content: bundle});
+        this.#markupRender.renderLiblary({loader: loader, content: bundle});
     }
 }

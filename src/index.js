@@ -3,8 +3,6 @@ import MoviesApiService from './js/classes/services/movies-api-service';
 import UserPreferencesService from './js/classes/services/user-preferences';
 import CollectionService from './js/classes/services/collecion-service';
 import MarkupRender from './js/classes/utilities/markup-render';
-import markupRenderer from './js/modules/markup-renderer';
-import { renderModalCard } from './js/templates/modal';
 import SiteEngine from './js/classes/site-engine';
 import { closeModal, onClickBackdrop, onCloseEscKey } from './js/modules/modal-close-btn'
 import TrendingHandler from './js/classes/page-handlers/trending-handler';
@@ -19,13 +17,14 @@ const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
 
 const userCollectionsService = new CollectionService('userCollections');
-const notifyer = new Notifyer({ renderTarget: REFS.libraryContainer, timeOut: 30000});
 const languageSet = new LanguageSet({ userPreferences: userPreferences });
+const notifyer = new Notifyer({ renderTarget: REFS.libraryContainer, timeOut: 30000, languageSet: languageSet});
+const markupRender = new MarkupRender({ notifyer: notifyer, languageSet: languageSet});
 const moviesApiService = new MoviesApiService({ language: currentLanguage});
-const trendingHandler = new TrendingHandler({ apiService: moviesApiService, markupRender: markupRenderer });
-const collectionHandler = new CollectionHandler({ apiService: moviesApiService, collectionsService: userCollectionsService, markupRender: markupRenderer});
-const modalHandler = new ModalHandler({ apiService: moviesApiService });
-const searchHandler = new SearchHandler({ apiService: moviesApiService, markupRender: markupRenderer});
+const trendingHandler = new TrendingHandler({ apiService: moviesApiService, markupRender: markupRender });
+const collectionHandler = new CollectionHandler({ apiService: moviesApiService, collectionsService: userCollectionsService, markupRender: markupRender, notifyer: notifyer });
+const modalHandler = new ModalHandler({ apiService: moviesApiService, languageSet: languageSet });
+const searchHandler = new SearchHandler({ apiService: moviesApiService, markupRender: markupRender });
 
 
 
@@ -41,6 +40,7 @@ const siteEngine = new SiteEngine({ trendingHandler: trendingHandler, collection
 
 
 
+    
 
 
 
