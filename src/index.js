@@ -13,6 +13,7 @@ import ModalHandler from './js/classes/page-handlers/modal-handler';
 import SearchHandler from './js/classes/page-handlers/searchHandler';
 import LanguageSet from './js/classes/language-set';
 import Notifyer from './js/classes/notifyer';
+import Pagination from 'tui-pagination';
 
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
