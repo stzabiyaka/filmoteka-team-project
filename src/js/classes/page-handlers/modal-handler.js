@@ -49,9 +49,8 @@ export default class ModalHandler {
         const content = { movieId: this.#articleID };
         
         const result = this.#markupRender.renderModal({ loader: loader, content: content });
-        // console.log(result);// тут проміс зі статусом pending
+        
         result.then(result => {
-            // console.log('result in then', result);//а тут не об'єкт, а true, а нам для роботи потрібен об'єкт
             if (result) {
             this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
             this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
@@ -59,12 +58,10 @@ export default class ModalHandler {
             REFS.modalAddToWatchedBtn.addEventListener('click', this.#addToWatchedCallback);
             REFS.modalAddToQueueBtn.addEventListener('click', this.#addToQueueCallback);
             REFS.modalOpenMovie.classList.remove('js-hidden');
-            REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);
-            
+            REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);            
         }
         }).catch(error=>console.log(error));
         
-
     }
     
 
@@ -72,22 +69,25 @@ export default class ModalHandler {
         
         if (REFS.modalAddToWatchedBtn.textContent === this.#captions.buttons.addToWatched.add) {
             this.#collectionsService.addToCollection({ collection: USER_COLLECTIONS.watched, id: this.#articleID });
-            this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });   
+            this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
+            this.#refreshCollectionPage({ collection: USER_COLLECTIONS.watched, target: evt.currentTarget });
             return;
         }
         this.#collectionsService.removeFromCollection({ collection: USER_COLLECTIONS.watched, id: this.#articleID });
-        this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });       
+        this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
+        this.#refreshCollectionPage({ collection: USER_COLLECTIONS.watched, target: evt.currentTarget });
     }
 
     #onAddToQueueBtnClick(evt) {
-
         if (REFS.modalAddToQueueBtn.textContent === this.#captions.buttons.addToQueue.add) {
             this.#collectionsService.addToCollection({ collection: USER_COLLECTIONS.queue, id: this.#articleID });
-            this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });    
+            this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
+            this.#refreshCollectionPage({ collection: USER_COLLECTIONS.queue, target: evt.currentTarget });
             return;
         }
         this.#collectionsService.removeFromCollection({ collection: USER_COLLECTIONS.queue, id: this.#articleID });
         this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
+        this.#refreshCollectionPage({ collection: USER_COLLECTIONS.queue, target: evt.currentTarget });
     }
 
     #checkBtnState({ button, collection, btnTarget }) {
@@ -100,20 +100,20 @@ export default class ModalHandler {
 
     #onClickBackdrop(evt) {
         if (
-          evt.target === evt.currentTarget ||
-          evt.target.parentElement === REFS.modalCloseBtn ||
-          evt.target.parentElement.parentElement === REFS.modalCloseBtn ||
-          evt.target === REFS.modalCloseBtn
+            evt.target === evt.currentTarget ||
+            evt.target.parentElement === REFS.modalCloseBtn ||
+            evt.target.parentElement.parentElement === REFS.modalCloseBtn ||
+            evt.target === REFS.modalCloseBtn
         ) {
-          this.#closeModal();
+            this.#closeModal();
         }
-      }
+        }
 
     #onCloseEscKey(evt) {
         if (evt.key === 'Escape') {
-          this.#closeModal();
+            this.#closeModal();
         }
-      }
+    }
 
     #closeModal() {
         REFS.backdrop.classList.add('js-hidden');
@@ -124,7 +124,7 @@ export default class ModalHandler {
         window.removeEventListener('keydown', this.#escBtnCallback);        
         REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
         this.#hiddeBtnsThumb();
-      }
+    }
 
     #onMovieClick(evt) {
         evt.preventDefault();
@@ -138,5 +138,29 @@ export default class ModalHandler {
         REFS.modalCardThumbBtn.classList.add('js-hidden');
         REFS.modalAddToWatchedBtn.removeEventListener('click', this.#addToWatchedCallback);
         REFS.modalAddToQueueBtn.removeEventListener('click', this.#addToQueueCallback);
+    }
+
+    async #refreshCollectionPage({ collection, target }) {
+        this.#collectionsService.load();
+        const bundle = this.#collectionsService.getCollectionIdsBundle({ collection });
+        const loader = this.#apiService.getMoviesBundle.bind(this.#apiService);
+        
+        if (!REFS.headerMyLibBtn.disabled) { return }
+        
+        if (
+            REFS.collectionWatchedBtn.attributes.class.value.includes('accent') &&
+            target.attributes.class.value.includes('accent')
+        ) {
+            await this.#markupRender.renderLiblary({ loader: loader, content: bundle });
+            return;
+        }
+
+        if (
+            REFS.collectionQueueBtn.attributes.class.value.includes('accent') &&
+            target.attributes.class.value.includes('accent')
+            ) {
+            await this.#markupRender.renderLiblary({ loader: loader, content: bundle });
+            return;
+        }      
     }
 }
