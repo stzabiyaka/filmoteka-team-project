@@ -72,22 +72,25 @@ export default class ModalHandler {
         
         if (REFS.modalAddToWatchedBtn.textContent === this.#captions.buttons.addToWatched.add) {
             this.#collectionsService.addToCollection({ collection: USER_COLLECTIONS.watched, id: this.#articleID });
-            this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });   
+            this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
+            this.#refreshCollectionPage({ collection: USER_COLLECTIONS.watched, target: evt.currentTarget });
             return;
         }
         this.#collectionsService.removeFromCollection({ collection: USER_COLLECTIONS.watched, id: this.#articleID });
-        this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });       
+        this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
+        this.#refreshCollectionPage({ collection: USER_COLLECTIONS.watched, target: evt.currentTarget });
     }
 
     #onAddToQueueBtnClick(evt) {
-
         if (REFS.modalAddToQueueBtn.textContent === this.#captions.buttons.addToQueue.add) {
             this.#collectionsService.addToCollection({ collection: USER_COLLECTIONS.queue, id: this.#articleID });
-            this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });    
+            this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
+            this.#refreshCollectionPage({ collection: USER_COLLECTIONS.queue, target: evt.currentTarget });
             return;
         }
         this.#collectionsService.removeFromCollection({ collection: USER_COLLECTIONS.queue, id: this.#articleID });
         this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
+        this.#refreshCollectionPage({ collection: USER_COLLECTIONS.queue, target: evt.currentTarget });
     }
 
     #checkBtnState({ button, collection, btnTarget }) {
@@ -138,5 +141,29 @@ export default class ModalHandler {
         REFS.modalCardThumbBtn.classList.add('js-hidden');
         REFS.modalAddToWatchedBtn.removeEventListener('click', this.#addToWatchedCallback);
         REFS.modalAddToQueueBtn.removeEventListener('click', this.#addToQueueCallback);
+    }
+
+    async #refreshCollectionPage({ collection, target }) {
+        this.#collectionsService.load();
+        const bundle = this.#collectionsService.getCollectionIdsBundle({ collection });
+        const loader = this.#apiService.getMoviesBundle.bind(this.#apiService);
+        
+        if (!REFS.headerMyLibBtn.disabled) { return }
+        
+        if (
+            REFS.collectionWatchedBtn.attributes.class.value.includes('accent') &&
+            target.attributes.class.value.includes('accent')
+        ) {
+            await this.#markupRender.renderLiblary({ loader: loader, content: bundle });
+            return;
+        }
+        
+        if (
+            REFS.collectionQueueBtn.attributes.class.value.includes('accent') &&
+            target.attributes.class.value.includes('accent')
+            ) {
+            await this.#markupRender.renderLiblary({ loader: loader, content: bundle });
+            return;
+        }      
     }
 }
