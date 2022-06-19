@@ -100,20 +100,20 @@ export default class ModalHandler {
 
     #onClickBackdrop(evt) {
         if (
-          evt.target === evt.currentTarget ||
-          evt.target.parentElement === REFS.modalCloseBtn ||
-          evt.target.parentElement.parentElement === REFS.modalCloseBtn ||
-          evt.target === REFS.modalCloseBtn
+            evt.target === evt.currentTarget ||
+            evt.target.parentElement === REFS.modalCloseBtn ||
+            evt.target.parentElement.parentElement === REFS.modalCloseBtn ||
+            evt.target === REFS.modalCloseBtn
         ) {
-          this.#closeModal();
+            this.#closeModal();
         }
-      }
+        }
 
     #onCloseEscKey(evt) {
         if (evt.key === 'Escape') {
-          this.#closeModal();
+            this.#closeModal();
         }
-      }
+    }
 
     #closeModal() {
         REFS.backdrop.classList.add('js-hidden');
@@ -124,7 +124,7 @@ export default class ModalHandler {
         window.removeEventListener('keydown', this.#escBtnCallback);        
         REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
         this.#hiddeBtnsThumb();
-      }
+    }
 
     #onMovieClick(evt) {
         evt.preventDefault();
