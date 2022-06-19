@@ -66,6 +66,7 @@ export default class CollectionService extends LocalStorageService {
         const position = this.#collections[collection].indexOf(id)
         this.#collections[collection].splice(position, 1);
         this.#saveCollections();
+        this.#totalPagesCount();
     }
 
 /* Перевірка, чи існує визначена коллекція користувача */
@@ -115,6 +116,8 @@ isInCollection({collection, id = null}) {
 #saveCollections () {
     this.save(this.#collections);
 }
+
+/* Розрахунок кількості сторінок у кожній колекції */
 #totalPagesCount () {
     const keys = Object.keys(this.#collections);
     keys.forEach(key => {

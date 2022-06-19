@@ -1,38 +1,38 @@
 <header id="header" class="site-header my-library">
        <div class="site-header__container">
-            <a id="logo" class="site-logo" href="#">
+            <a id="logo" class="site-logo" href="#" title="Go to home page" aria-label="Site logo">
                 <svg class="site-logo__image">
                     <use href="./images/icons.svg#icon-film"></use>
                 </svg>
                 <span id="logo-name" class="site-logo__name">Filmoteka</span>
             </a>
-            <nav class="site-header-nav"></nav>
-            <ul class="site-header-nav__buttons">
-                <li class="site-header-nav__buttons-item"><button id="home" class="site-header-nav__button" type="button">HOME</button></li>
-                <li class="site-header-nav__buttons-item"><button id="my-library" class="site-header-nav__button" type="button">MY LIBRARY</button></li>
-            </ul>
-        </nav>
+            <nav class="site-header-nav">
+                <ul class="site-header-nav__buttons">
+                    <li class="site-header-nav__buttons-item"><button id="home" class="site-header-nav__button" type="button"  title="Go to home page">HOME</button></li>
+                    <li class="site-header-nav__buttons-item"><button id="my-library" class="site-header-nav__button" type="button"  title="Go to your library page">MY LIBRARY</button></li>
+                </ul>
+            </nav>
         </div>
         <div id="search-form-container" class="search-form__container js-hidden">
             <input id="search-form" class="search-form__input" type="search" name="search"  placeholder="Search movies" />
         </div>
         <div id="collections-nav" class="collections-nav">
-            <button class="collections-nav__button collections-nav__button--accent" id="watched" type="button">WATCHED</button>
-            <button id="queue" class="collections-nav__button" type="button">QUEUE</button>
+            <button class="collections-nav__button collections-nav__button--accent" id="watched" type="button"  title="Go to your Watched collection">WATCHED</button>
+            <button id="queue" class="collections-nav__button" type="button" title="Go to your Queue collection">QUEUE</button>
         </div>
         <div class="user-btns-container">
-            <select id="language" class="language-select" name="language">
-                <option value="default" class ='language-select-svg' selected>
+            <select id="language" class="language-select" name="language" title="Select language" aria-label="Language selector">
+                <option value="default" class ='language-select-svg' selected  title="English">
                     <svg class="site-logo__image">
                         <use href="./images/icons.svg#icon-flag-gb"></use>
                     </svg>
                 </option>
-                <option value="ukrainian">
+                <option value="ukrainian"  title="Українська">
                     <svg class="site-logo__image">
                         <use href="./images/icons.svg#icon-flag-ua"></use>
                     </svg>
                 </option>
               </select>
-            <button id="theme" class="theme-button" type="button"></button>
+            <button id="theme" class="theme-button" type="button"  title="Turn light off" aria-label="Change theme"></button>
         </div>
 </header>

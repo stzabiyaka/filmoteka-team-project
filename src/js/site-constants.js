@@ -60,7 +60,7 @@ const LANGUAGES = {
             searchMinLength : 'Please, enter at least two symbols to start search.',
             searchRestricted : 'Please, do not enter any special characters.',
             technicalFault: 'Oops (( looks, like some technical troubles occured.',
-            collectionEmpty: 'Looks like you vave not add any movie to this collection, yet.',
+            collectionEmpty: 'Looks like you have not add any movie to this collection, yet.',
             
             languageNotify: 'Цей сайт доступний також укріїнською мовою',
         },
