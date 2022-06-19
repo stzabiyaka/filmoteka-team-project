@@ -49,9 +49,8 @@ export default class ModalHandler {
         const content = { movieId: this.#articleID };
         
         const result = this.#markupRender.renderModal({ loader: loader, content: content });
-        // console.log(result);// тут проміс зі статусом pending
+        
         result.then(result => {
-            // console.log('result in then', result);//а тут не об'єкт, а true, а нам для роботи потрібен об'єкт
             if (result) {
             this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
             this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
@@ -59,12 +58,10 @@ export default class ModalHandler {
             REFS.modalAddToWatchedBtn.addEventListener('click', this.#addToWatchedCallback);
             REFS.modalAddToQueueBtn.addEventListener('click', this.#addToQueueCallback);
             REFS.modalOpenMovie.classList.remove('js-hidden');
-            REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);
-            
+            REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);            
         }
         }).catch(error=>console.log(error));
         
-
     }
     
 
@@ -157,7 +154,7 @@ export default class ModalHandler {
             await this.#markupRender.renderLiblary({ loader: loader, content: bundle });
             return;
         }
-        
+
         if (
             REFS.collectionQueueBtn.attributes.class.value.includes('accent') &&
             target.attributes.class.value.includes('accent')
