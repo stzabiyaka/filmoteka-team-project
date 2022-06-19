@@ -17,14 +17,14 @@ export default function cardParser ({ genres, poster_path, release_date, title, 
         <source srcset="${ImagesPathConstructor.getImagePath({ path:poster_path })}, 1x, ${ImagesPathConstructor.getImagePath({ path: poster_path, width: 'retina' })}, 2x" type="image/jpeg">
         <img class="movie-card_img" src= "${ImagesPathConstructor.getImagePath({ path:poster_path })}" alt="${poster}"  loading="lazy">
     </picture>
-    <h2 class="movie-card_title">${title}</h2>
+    <h2 class="movie-card_title" alt = "title">${title}</h2>
     <div class="movie-card_info">
     <p class = "movie-card_genres">
         ${genres.join(', ')}
         </p>
         <p class="movie-card_symbol">|</p>
-        <p class="movie-card_date">${release_date}</p>
-        <p class="movie-card_avarage__accent">${vote_average}</p>
+        <p class="movie-card_date" alt = "release_year">${release_date}</p>
+        <p class="movie-card_avarage__accent" alt ="vote_average">${vote_average}</p>
     </div>
 </article></a>`;
 }
