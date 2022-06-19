@@ -65,15 +65,14 @@ export default class SiteEngine {
 /* Формування відображення результату пошуку фільмів за пошуковим запитом */ 
     async #handleSearch (event) {
         const searchQuery = event.currentTarget.value.trim();
-        // if ((/^([\s%&#@])*$/.test(searchQuery)) || (/^([>(.*?)<])*$/.test(searchQuery))) {
+        // if ((/^([\s%&#@])*$/i.test(searchQuery)) || (/^([>(.*?)<])*$/.test(searchQuery))) {
         //     (console.log('недопустимі символи & теги')) 
         //     return;
         // }
-        if ((/^([а-яА-ЯёЁ]*)$/.test(searchQuery))) {
+        if ((/^([а-яА-ЯёЁ]*)$/i.test(searchQuery))) {
            (console.log('тільки кирилиця'))
-        } 
+        }
         if(!searchQuery.length) {
-            console.log('Please, enter at least one symbol');
             this.#handleHome({ isInit: true });
         return false;
         } 

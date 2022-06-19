@@ -1,4 +1,5 @@
 body {
+    background-color: getColor('background-primary');;
     font-family: $fontPrimary;
     font-size: 12px;
     line-height: 1.33em;
@@ -7,6 +8,12 @@ body {
     &.js-modal-is-open{
         overflow: hidden;
     }
+
+    &.theme-dark {
+        background-color: getColor('text-primary');
+        color: getColor('text-secondary');
+    }
+    
 }
 
 .js-hidden, .visually_hidden {

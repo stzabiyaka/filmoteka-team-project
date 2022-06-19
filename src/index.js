@@ -12,6 +12,7 @@ import SearchHandler from './js/classes/page-handlers/searchHandler';
 import LanguageSet from './js/classes/language-set';
 import Notifyer from './js/classes/notifyer';
 import ToTopButton from './js/classes/utilities/to-top-button';
+import ThemeButton from './js/classes/utilities/theme-button';
 
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
@@ -26,6 +27,7 @@ const collectionHandler = new CollectionHandler({ apiService: moviesApiService, 
 const searchHandler = new SearchHandler({ apiService: moviesApiService, markupRender: markupRender });
 const modalHandler = new ModalHandler({ apiService: moviesApiService, languageSet: languageSet, markupRender: markupRender, collectionsService: userCollectionsService });
 const toTopButton = new ToTopButton();
+const themeButton = new ThemeButton({ languageSet: languageSet, userPreferences: userPreferences});
 
 
 
@@ -43,9 +45,9 @@ const siteEngine = new SiteEngine({ trendingHandler: trendingHandler, collection
 
 
 
-    
 
-    // notifyer.showNotification( { message: 'Test message' });
+
+    // notifyer.showNotification( { message: 'Test message', type: 'language' });
  
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших

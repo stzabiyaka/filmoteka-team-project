@@ -16,6 +16,15 @@ export default class SwitchSiteCaptions {
         REFS.searchForm.placeholder = this.#captions.searchPlaceholder;
         REFS.modalAddToWatchedBtn.textContent = this.#captions.buttons.addToWatched.add;
         REFS.modalAddToQueueBtn.textContent = this.#captions.buttons.addToQueue.add;
+        REFS.headerLogo.title = this.#captions.buttons.homeTitle;
+        REFS.headerHomeBtn.title = this.#captions.buttons.homeTitle;
+        REFS.headerMyLibBtn.title = this.#captions.buttons.libraryTitle;
+        REFS.languageSelector.title = this.#captions.buttons.languageSelectorTitle;
+        REFS.collectionWatchedBtn.title = this.#captions.buttons.watchedTitle;
+        REFS.collectionQueueBtn.title = this.#captions.buttons.queueTitle;
+        REFS.copyright.textContent = this.#captions.copyright;
+        const themeTitle = this.#captions.buttons.themeBtnTitle;
+        REFS.themeButton.title = REFS.themeButton.title === themeTitle.lightsOn ? themeTitle.lightsOn : themeTitle.lightsOff;
         }
 
 }

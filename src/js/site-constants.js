@@ -31,10 +31,11 @@ const LANGUAGES = {
     teamLink: document.querySelector('#team'),
     paginator: document.querySelector('#pagination'),
     languageSelector: document.querySelector('#language'),
-    themeButton: document.querySelector('theme'),
+    themeButton: document.querySelector('#theme'),
     modalOpenMovie : document.querySelector('#modal-open-movie'),
     spinner: document.querySelector('#spinner'),
     modalCardThumbBtn: document.querySelector('.modal-card-thumb__btn'),
+    copyright: document.querySelector('#copyright'),
 }
 
   const CAPTIONS = {
@@ -43,7 +44,7 @@ const LANGUAGES = {
             home: 'home',
             homeTitle: 'Go to home page',
             library: 'my library',
-            libraryTitle: 'Go to your library page',
+            libraryTitle: 'Go to your library',
             watched: 'watched',
             watchedTitle: 'Go to your Watched collection',
             queue: 'queue',
@@ -91,7 +92,7 @@ const LANGUAGES = {
             home: 'головна',
             homeTitle: 'На головну',
             library: 'моя фільмотека',
-            libraryTitle: 'На сторінку вашої фільмотеки',
+            libraryTitle: 'До вашої фільмотеки',
             watched: 'переглянуті',
             watchedTitle: 'До вашої колекції Переглянуті',
             queue: 'у черзі',
