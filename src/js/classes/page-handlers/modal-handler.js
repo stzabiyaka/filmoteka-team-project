@@ -127,10 +127,12 @@ export default class ModalHandler {
         // REFS.modalContainer.innerHTML = '';
         REFS.body.classList.remove('js-modal-is-open');
         REFS.modalCardThumbBtn.classList.add('js-hidden');
+        REFS.modalOpenMovie.classList.add('js-hidden');
         REFS.backdrop.removeEventListener('click', this.#closeBtnCallback);
         window.removeEventListener('keydown', this.#escBtnCallback);
         REFS.modalAddToWatchedBtn.removeEventListener('click', this.#addToWatchedCallback);
         REFS.modalAddToQueueBtn.removeEventListener('click', this.#addToQueueCallback);
+        REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
       }
 
     #onMovieClick(evt) {
