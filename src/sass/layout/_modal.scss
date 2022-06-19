@@ -385,7 +385,7 @@ flex-direction: column;
     justify-content: space-between;
     bottom: 0;
     left: 0;
-
+    width: 100%;
     @include respondTo(tablet) {
         position: absolute;
         justify-content: start;
