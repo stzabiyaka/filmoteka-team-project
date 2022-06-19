@@ -22,7 +22,7 @@ export function modalCardMarkUp({ overview, poster_path, title, original_title, 
             <div class="modal-card__picture" >                 
                 <img srcset="${imgSrc}" src="${imgSrcMobile}" alt="${title}" loading="lazy" class="modal-card__img" type="image/jpeg" id="img-in-modal-card-picture"/>
             </div>
-        </div>    
+        </div>
         <div class="modal-card-thumb__content">
             <div class="modal-card-info">
                 <h2 class="modal-card-info__title">${title}</h2>
