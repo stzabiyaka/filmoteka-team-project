@@ -126,6 +126,7 @@ export default class ModalHandler {
         REFS.backdrop.classList.add('js-hidden');
         // REFS.modalContainer.innerHTML = '';
         REFS.body.classList.remove('js-modal-is-open');
+        REFS.modalCardThumbBtn.classList.add('js-hidden');
         REFS.backdrop.removeEventListener('click', this.#closeBtnCallback);
         window.removeEventListener('keydown', this.#escBtnCallback);
         REFS.modalAddToWatchedBtn.removeEventListener('click', this.#addToWatchedCallback);
