@@ -41,9 +41,18 @@ const LANGUAGES = {
     default: {
         buttons: {
             home: 'home',
+            homeTitle: 'Go to home page',
             library: 'my library',
+            libraryTitle: 'Go to your library page',
             watched: 'watched',
+            watchedTitle: 'Go to your Watched collection',
             queue: 'queue',
+            queueTitle: 'Go to your Queue collection',
+            languageSelectorTitle: 'Select language',
+            themeBtnTitle: {
+                lightsOn: 'Turn light on',
+                lightsOff: 'Turn light off'
+            },
             addToWatched: {
                 add: 'add to Watched',
                 remove: 'remove from Watched',
@@ -80,9 +89,18 @@ const LANGUAGES = {
     ukrainian: {
         buttons: {
             home: 'головна',
+            homeTitle: 'На головну',
             library: 'моя фільмотека',
+            libraryTitle: 'На сторінку вашої фільмотеки',
             watched: 'переглянуті',
+            watchedTitle: 'До вашої колекції Переглянуті',
             queue: 'у черзі',
+            queueTitle: 'До вашої колекції Черга',
+            languageSelectorTitle: 'Оберіть мову',
+            themeBtnTitle: {
+                lightsOn: 'Увімкнути світло',
+                lightsOff: 'Вимкнути світло'
+            },
             addToWatched: {
                 add: 'додати до переглянутих',
                 remove: 'видалити з переглянутих',
