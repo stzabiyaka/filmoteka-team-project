@@ -14,11 +14,12 @@ export function modalCardMarkUp({ overview, poster_path, title, original_title, 
     const originalTitle = captions.movieDetails.title;
     const genre = captions.movieDetails.genre;
     const about = captions.movieDetails.about;
-    
+    const popularityData = popularity.toFixed(2);
+
     return  `
 
-        <div class="modal-card-thumb__img" > 
-            <div class="modal-card__picture" >        
+        <div class="modal-card-thumb__img" >         
+            <div class="modal-card__picture" >                 
                 <img srcset="${imgSrc}" src="${imgSrcMobile}" alt="${title}" loading="lazy" class="modal-card__img" type="image/jpeg" id="img-in-modal-card-picture"/>
             </div>
         </div>    
@@ -37,7 +38,7 @@ export function modalCardMarkUp({ overview, poster_path, title, original_title, 
                         </li>
                         <li class="modal-card-info__characteristics--item">
                             <p class="modal-card-info__characteristics--name">${popularityString}</p>
-                            <p class="modal-card-info__data modal-card-info__data--popularity">${popularity}</p>
+                            <p class="modal-card-info__data modal-card-info__data--popularity">${popularityData}</p>
                         </li>
                         <li class="modal-card-info__characteristics--item">
                             <p class="modal-card-info__characteristics--name">${originalTitle}</p>
