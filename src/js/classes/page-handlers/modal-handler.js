@@ -94,10 +94,11 @@ export default class ModalHandler {
         REFS[button].textContent = this.#captions.buttons[btnTarget].add;
     }
 
-    #onClickBackdrop(evt) {        
+    #onClickBackdrop(evt) {
         if (
           evt.target === evt.currentTarget ||
           evt.target.parentElement === REFS.modalCloseBtn ||
+          evt.target.parentElement.parentElement === REFS.modalCloseBtn ||
           evt.target === REFS.modalCloseBtn
         ) {
           this.#closeModal();
