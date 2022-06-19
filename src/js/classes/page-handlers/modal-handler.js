@@ -9,6 +9,8 @@ export default class ModalHandler {
     #closeBtnCallback;
     #escBtnCallback;
     #movieBtnCallback;
+    #addToQueueCallback;
+    #addToWatchedCallback;
     constructor ({ apiService, markupRender, languageSet, collectionsService }) {
         this.#apiService = apiService;
         this.#markupRender = markupRender;
@@ -36,7 +38,9 @@ export default class ModalHandler {
         this.#closeBtnCallback = this.#onClickBackdrop.bind(this);
         this.#escBtnCallback = this.#onCloseEscKey.bind(this);
         this.#movieBtnCallback = this.#onMovieClick.bind(this);
-
+        this.#addToWatchedCallback = this.#onAddToWatchedBtnClick.bind(this);
+        this.#addToQueueCallback = this.#onAddToQueueBtnClick.bind(this);
+                
         REFS.backdrop.addEventListener('click', this.#closeBtnCallback);
         window.addEventListener('keydown', this.#escBtnCallback);
 
@@ -53,8 +57,8 @@ export default class ModalHandler {
             this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
             this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
             REFS.modalCardThumbBtn.classList.remove('js-hidden');
-            REFS.modalAddToWatchedBtn.addEventListener('click', this.#onAddToWatchedBtnClick.bind(this));
-            REFS.modalAddToQueueBtn.addEventListener('click', this.#onAddToQueueBtnClick.bind(this));
+            REFS.modalAddToWatchedBtn.addEventListener('click', this.#addToWatchedCallback);
+            REFS.modalAddToQueueBtn.addEventListener('click', this.#addToQueueCallback);
             if (result.homepage) {
                 REFS.modalOpenMovie.classList.remove('js-hidden');
                 REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);
@@ -126,6 +130,8 @@ export default class ModalHandler {
         REFS.body.classList.remove('js-modal-is-open');
         REFS.backdrop.removeEventListener('click', this.#closeBtnCallback);
         window.removeEventListener('keydown', this.#escBtnCallback);
+        REFS.modalAddToWatchedBtn.removeEventListener('click', this.#addToWatchedCallback);
+        REFS.modalAddToQueueBtn.removeEventListener('click', this.#addToQueueCallback);
       }
 
     #onMovieClick(evt) {
