@@ -38,7 +38,7 @@ export default class MarkupRender {
             this.#libraryTarget.innerHTML = markup;
             this.#modalCallback = this.#modalHandler.modalOpen.bind(this.#modalHandler);
             this.#libraryTarget.addEventListener('click', this.#modalCallback);
-            return true;
+            return { totalResults: response.total_results };
         }
         catch {
             const message = 'technicalFault';

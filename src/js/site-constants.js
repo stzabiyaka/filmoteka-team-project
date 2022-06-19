@@ -29,7 +29,7 @@ const LANGUAGES = {
     modalAddToQueueBtn: document.querySelector('#queue-add'),
     modalCloseBtn: document.querySelector('#modal-close'),
     teamLink: document.querySelector('#team'),
-    paginator: document.querySelector('#paginator'),
+    paginator: document.querySelector('#pagination'),
     languageSelector: document.querySelector('#language'),
     themeButton: document.querySelector('theme'),
     modalOpenMovie : document.querySelector('#modal-open-movie'),

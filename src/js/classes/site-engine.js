@@ -1,4 +1,6 @@
+import Pagination from "tui-pagination";
 import { REFS, USER_COLLECTIONS } from "../site-constants";
+import { paginatorTemplate } from "../templates/paginator-tmpl";
 
 export default class SiteEngine {
     
@@ -7,9 +9,11 @@ export default class SiteEngine {
     #collectionHandler;
     #modalHandler;
     #searchHandler;
-/* Колбки для eventListeners */
+/* Колбеки для eventListeners */
     #queueCallback;
     #watchedCallback;
+    #paginator;
+    #paginatorAfterCallback;
 
     constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler }) {
         this.#trendingHandler = trendingHandler;
@@ -28,21 +32,35 @@ export default class SiteEngine {
         REFS.headerHomeBtn.addEventListener('click', this.#handleHome.bind(this));
         REFS.headerMyLibBtn.addEventListener('click', this.#handleWatched.bind(this, {isFromHome: true}) );
         REFS.searchForm.addEventListener('input', this.#handleSearch.bind(this));
+        this.#createPaginator();
     }
 
 /* Формування та логіка головної сторінки сайта */ 
-    #handleHome () { 
+    async #handleHome () { 
         this.#navBtnsToggle();
         if (this.#queueCallback || this.#watchedCallback) {
             this.#removeCollectionsListeners();
         }
-        // REFS.paginator.classList.add(this.hiderClass);
+        this.#checkPaginatorOldCallback();
+        try {
+            const result = await this.#trendingHandler.getTrendingMoviesPage({ page: 1 });
+        if (result && result.totalResults && result.totalResults > 20) {
+            this.#paginator.setItemsPerPage(20);
+            this.#paginator.setTotalItems(result.totalResults);
+            this.#paginatorAfterCallback = this.#trendingHandler.getTrendingMoviesPage.bind(this.#trendingHandler);
+            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ page: page }));
+        }
+        this.#paginator.reset();
+        }
+        catch (error) {
+            console.log(error.message);
+        }
         
-        this.#trendingHandler.getTrendingMoviesPage({ page: 1 });
+        
     }
 
 /* Формування відображення результату пошуку фільмів за пошуковим запитом */ 
-    #handleSearch (event) {
+    async #handleSearch (event) {
         const searchQuery = event.currentTarget.value.trim();
         if ((/^([\s%&#@])*$/.test(searchQuery)) || (/^([>(.*?)<])*$/.test(searchQuery))) {
             (console.log('недопустимі символи & теги')) 
@@ -51,16 +69,31 @@ export default class SiteEngine {
         if ((/^([а-яА-ЯёЁ]*)$/.test(searchQuery))) {
            (console.log('тільки кирилиця'))
         } 
-        if(searchQuery.length < 2) {
-            console.log('Search was not successful. Please, enter another movie name and try again');
+        if(!searchQuery.length) {
+            console.log('Please, enter at least one symbol');
+            this.#handleHome();
         return false;
         } 
-           console.log (`HOORAY! Found total_results movies`);
-           this.#searchHandler.getMoviesBySearch({query: searchQuery, page: 1});
+        
+        this.#checkPaginatorOldCallback();
+        try {
+            const result = await this.#searchHandler.getMoviesBySearch({query: searchQuery, page: 1});
+            if (result && result.totalResults && result.totalResults > 20) {
+                this.#paginator.setItemsPerPage(20);
+                this.#paginator.setTotalItems(result.totalResults);
+                this.#paginatorAfterCallback = this.#searchHandler.getMoviesBySearch.bind(this.#searchHandler);
+            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ query: searchQuery, page: page }));  
+            }
+            this.#paginator.reset();
+        }
+        catch (error) {
+            console.log(error.message);
+        }
+           
     }
 
 /* Формування відображення та логіка колекції watched */ 
-    #handleWatched ({ page = 1, isFromHome }) {
+    async #handleWatched ({ page = 1, isFromHome }) {
         if (isFromHome) {
          this.#navBtnsToggle(); 
          this.#addCollectionsBtnsListeners();
@@ -69,14 +102,41 @@ export default class SiteEngine {
         
         this.#collectionsBtnsToggle ();
         
-        this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.watched, page: 1 });
+        this.#checkPaginatorOldCallback();
+        try {
+            const result = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.watched, page: 1 });
+            if (result && result.totalResults && result.totalResults > 9) {
+                this.#paginator.setItemsPerPage(9);
+                this.#paginator.setTotalItems(result.totalResults);
+                this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
+            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.watched, page: page }));   
+            }
+            this.#paginator.reset();
+        }
+        catch (error) {
+            console.log(error.message);
+        }
     }
 
 /* Формування відображення та логіка колекції queue */ 
-    #handleQueue ({ page = 1 }) {
+    async #handleQueue ({ page = 1 }) {
+
         this.#collectionsBtnsToggle ();
 
-        this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
+        this.#checkPaginatorOldCallback();
+        try {
+            const result = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
+            if (result && result.totalResults && result.totalResults > 9) {
+                this.#paginator.setItemsPerPage(9);
+                this.#paginator.setTotalItems(result.totalResults);
+                this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
+                this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.queue, page: page }));   
+            }
+            this.#paginator.reset();
+        }
+        catch (error) {
+            console.log(error.message);
+        }
     }
 
 /* Формування відображення та логіка модального вікна */ 
@@ -115,5 +175,24 @@ export default class SiteEngine {
     #removeCollectionsListeners () {
         REFS.collectionQueueBtn.removeEventListener('click', this.#queueCallback);
         REFS.collectionWatchedBtn.removeEventListener('click', this.#watchedCallback);
+    }
+    #createPaginator () {
+        const paginatorOptions = {
+            totalItems: 0,
+            itemsPerPage: 0,
+            visiblePages: 5,
+            page: 1,
+            centerAlign: true,
+            firstItemClassName: 'btn__pagination',
+            lastItemClassName: 'btn__pagination',
+            template: paginatorTemplate,
+          };
+
+          this.#paginator = new Pagination ('pagination', paginatorOptions);
+    }
+    #checkPaginatorOldCallback () {
+        if (this.#paginator && this.#paginatorAfterCallback) {
+            this.#paginator.off('afterMove', this.#paginatorAfterCallback);
+        }
     }
 }

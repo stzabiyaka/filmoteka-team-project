@@ -14,7 +14,7 @@ export default class CollectionHandler {
         this.#collectionEmptyMessage = 'collectionEmpty';
     }
 
-    getCollectionMoviesPage ({ collectionName, page = 1 }) {
+    async getCollectionMoviesPage ({ collectionName, page = 1 }) {
         if (!this.#collectionsService.isCollectionExist({collection: collectionName})) {
             this.#notifyer.renderNotification({ message: this.#collectionEmptyMessage });
             return;
@@ -25,6 +25,7 @@ export default class CollectionHandler {
 
         const bundle = this.#collectionsService.getCollectionIdsBundle({collection: collectionName, page: page});
         const loader = this.#apiService.getMoviesBundle.bind(this.#apiService);
-        this.#markupRender.renderLiblary({loader: loader, content: bundle});
+        const response = await this.#markupRender.renderLiblary({loader: loader, content: bundle});
+        return response;
     }
 }

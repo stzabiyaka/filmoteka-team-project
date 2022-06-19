@@ -11,7 +11,6 @@ import ModalHandler from './js/classes/page-handlers/modal-handler';
 import SearchHandler from './js/classes/page-handlers/searchHandler';
 import LanguageSet from './js/classes/language-set';
 import Notifyer from './js/classes/notifyer';
-import { Pagination } from 'tui-pagination';
 import ToTopButton from './js/classes/utilities/to-top-button';
 
 const userPreferences = new UserPreferencesService('userPreferences');
@@ -44,6 +43,7 @@ const siteEngine = new SiteEngine({ trendingHandler: trendingHandler, collection
 
 
 
+    
 
     // notifyer.showNotification( { message: 'Test message' });
  

@@ -29,6 +29,7 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
+    text-decoration: none;
     background-color: getColor('text-secondary');
     color: getColor('text-primary');
         @include respondTo(tablet) {
@@ -38,7 +39,7 @@
         &:hover,
         &:focus,
         &:active {
-            background-color: getColor('accent');
+            background-color: rgba(255, 107, 1, 0.5);
             color: getColor('text-secondary');
         }
 }
@@ -55,6 +56,10 @@
     &:focus{
         background-color: #c6c6c6;
     }
+
+    &--disabled {
+        background-color: transparent;
+    }
 }
 
 // =======приховування кнопки========
@@ -63,6 +68,15 @@
 }
 
 // ==========стиль svg-іконки==========
-.icon-arrow-right{
+
+.icon-arrow-prev{
+    width: 16px;
+    height: 16px;
+    stroke: black;
+    fill: none;
+}
+
+.icon-arrow-next{
+    @extend .icon-arrow-prev;
     transform: rotate(180deg);
 }
