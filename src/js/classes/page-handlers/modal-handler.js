@@ -44,7 +44,12 @@ export default class ModalHandler {
         const content = { movieId: this.#articleID };
         
         const result = this.#markupRender.renderModal({ loader: loader, content: content });
-        if (result) {
+        console.log(result);// тут проміс зі статусом pending
+        result.then(result => {
+
+            console.log('result in then', result);//а тут не об'єкт, а true, а нам для роботи потрібен об'єкт
+
+            if (result) {
             this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
             this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
             REFS.modalCardThumbBtn.classList.remove('js-hidden');
@@ -53,8 +58,12 @@ export default class ModalHandler {
             if (result.homepage) {
                 REFS.modalOpenMovie.classList.remove('js-hidden');
                 REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);
-            }
+                }
+                
         }
+        }).catch(error=>console.log(error.message));
+        
+
     }
     
 
