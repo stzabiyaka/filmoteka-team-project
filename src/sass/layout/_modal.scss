@@ -446,3 +446,25 @@ flex-direction: column;
     }    
 }
 
+// сповіщення про помилку
+//------------------------------
+.modal__notification{
+    
+    display: flex;   
+    width: 240px;
+    height: 80px;
+    border-radius: 5px;
+    background-color: getColor('background-secondary');
+    font-size: 20px;
+    margin-top: 150px;
+    justify-content: center;
+    align-items: center;
+    @include respondTo(tablet) {            
+            width: 596px;
+            font-size: 25px;            
+        }
+    @include respondTo(desktop) {
+        width: 782px;
+        font-size: 30px;                        
+    }
+}
