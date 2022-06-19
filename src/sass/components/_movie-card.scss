@@ -1,6 +1,14 @@
 
 .movie-card {
     cursor: pointer;
+    transform: scale(1);
+    transition: transform 250ms linear;
+
+    &:hover,
+    &:focus {
+     transform: scale(1.03);
+    }
+    
     @include respondTo (mobile){
         margin-top: 20px;
     }
@@ -80,5 +88,4 @@
         }
    }
    
-//gerne hover&focus
 
