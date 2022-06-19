@@ -57,10 +57,10 @@ export default class ModalHandler {
             REFS.modalCardThumbBtn.classList.remove('js-hidden');
             REFS.modalAddToWatchedBtn.addEventListener('click', this.#addToWatchedCallback);
             REFS.modalAddToQueueBtn.addEventListener('click', this.#addToQueueCallback);
-            if (result.homepage) {
-                REFS.modalOpenMovie.classList.remove('js-hidden');
-                REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);
-                }
+            // if (result.homepage) {
+            //     REFS.modalOpenMovie.classList.remove('js-hidden');
+            //     REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);
+            //     }
                 
         }
         }).catch(error=>console.log(error.message));
@@ -127,12 +127,12 @@ export default class ModalHandler {
         // REFS.modalContainer.innerHTML = '';
         REFS.body.classList.remove('js-modal-is-open');
         REFS.modalCardThumbBtn.classList.add('js-hidden');
-        REFS.modalOpenMovie.classList.add('js-hidden');
+        // REFS.modalOpenMovie.classList.add('js-hidden');
         REFS.backdrop.removeEventListener('click', this.#closeBtnCallback);
         window.removeEventListener('keydown', this.#escBtnCallback);
         REFS.modalAddToWatchedBtn.removeEventListener('click', this.#addToWatchedCallback);
         REFS.modalAddToQueueBtn.removeEventListener('click', this.#addToQueueCallback);
-        REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
+        // REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
       }
 
     #onMovieClick(evt) {
