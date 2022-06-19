@@ -19,8 +19,7 @@ export function modalCardMarkUp({ overview, poster_path, title, original_title, 
     return  `
 
         <div class="modal-card-thumb__img" >         
-            <div class="modal-card__picture" >  
-                <p class="modal-card__picture--no-found is-hidden">No image found</p>
+            <div class="modal-card__picture" >                 
                 <img srcset="${imgSrc}" src="${imgSrcMobile}" alt="${title}" loading="lazy" class="modal-card__img" type="image/jpeg" id="img-in-modal-card-picture"/>
             </div>
         </div>    
