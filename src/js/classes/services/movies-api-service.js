@@ -28,7 +28,7 @@ export default class MoviesApiService {
         this.#spinner.showSpinner();
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error(response.status);
+            console.log(response.status);
         }
         const data = await response.json();
         this.#spinner.hideSpinner();

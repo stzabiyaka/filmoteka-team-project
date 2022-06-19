@@ -23,7 +23,7 @@ export default class SiteEngine {
         this.hiderClass = 'js-hidden';
         this.myLibraryClass = 'my-library';
         this.#init();
-        this.#handleHome();    
+        this.#handleHome({ isInit: true });    
     }
 
 /* Ініціалізація головної сторінки сайта */ 
@@ -36,10 +36,13 @@ export default class SiteEngine {
     }
 
 /* Формування та логіка головної сторінки сайта */ 
-    async #handleHome () { 
-        this.#navBtnsToggle();
+    async #handleHome ({ isInit }) { 
         if (this.#queueCallback || this.#watchedCallback) {
             this.#removeCollectionsListeners();
+        }
+        
+        if ( !isInit ) {
+            this.#navBtnsToggle();
         }
         this.#checkPaginatorOldCallback();
         try {
@@ -62,16 +65,16 @@ export default class SiteEngine {
 /* Формування відображення результату пошуку фільмів за пошуковим запитом */ 
     async #handleSearch (event) {
         const searchQuery = event.currentTarget.value.trim();
-        if ((/^([\s%&#@])*$/.test(searchQuery)) || (/^([>(.*?)<])*$/.test(searchQuery))) {
-            (console.log('недопустимі символи & теги')) 
-            return;
-        }
+        // if ((/^([\s%&#@])*$/.test(searchQuery)) || (/^([>(.*?)<])*$/.test(searchQuery))) {
+        //     (console.log('недопустимі символи & теги')) 
+        //     return;
+        // }
         if ((/^([а-яА-ЯёЁ]*)$/.test(searchQuery))) {
            (console.log('тільки кирилиця'))
         } 
         if(!searchQuery.length) {
             console.log('Please, enter at least one symbol');
-            this.#handleHome();
+            this.#handleHome({ isInit: true });
         return false;
         } 
         
@@ -150,10 +153,9 @@ export default class SiteEngine {
         REFS.headerHomeBtn.disabled = !disable;
         REFS.headerMyLibBtn.disabled = disable;
         REFS.headerLogo.classList.toggle('disabled');
-        REFS.headerContainer.classList.toggle(this.myLibraryClass);
         REFS.searchFormContainer.classList.toggle(this.hiderClass);
         REFS.collectionsBtnsContainer.classList.toggle(this.hiderClass);
-
+        REFS.headerContainer.classList.toggle(this.myLibraryClass);
     }
 
 /* Логіка перемикання між колекцією watched, та колекцією queue */ 
