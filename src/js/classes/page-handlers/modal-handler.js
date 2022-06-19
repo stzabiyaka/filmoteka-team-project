@@ -11,6 +11,7 @@ export default class ModalHandler {
     #movieBtnCallback;
     #addToQueueCallback;
     #addToWatchedCallback;
+    
     constructor ({ apiService, markupRender, languageSet, collectionsService }) {
         this.#apiService = apiService;
         this.#markupRender = markupRender;
@@ -57,23 +58,15 @@ export default class ModalHandler {
             REFS.modalCardThumbBtn.classList.remove('js-hidden');
             REFS.modalAddToWatchedBtn.addEventListener('click', this.#addToWatchedCallback);
             REFS.modalAddToQueueBtn.addEventListener('click', this.#addToQueueCallback);
-            // if (result.homepage) {
-            //     REFS.modalOpenMovie.classList.remove('js-hidden');
-            //     REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);
-            //     }
-                
+            REFS.modalOpenMovie.classList.remove('js-hidden');
+            REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);
+            
         }
-        }).catch(error=>console.log(error.message));
+        }).catch(error=>console.log(error));
         
 
     }
     
-
-    #onOpenMovieClick(evt) {
-        evt.preventDefault();
-        // очищаємо вміст в модалці і включаємо фільм
-        console.log('відкриваємо фільм');
-}
 
     #onAddToWatchedBtnClick(evt) {
         
@@ -125,19 +118,25 @@ export default class ModalHandler {
     #closeModal() {
         REFS.backdrop.classList.add('js-hidden');
         // REFS.modalContainer.innerHTML = '';
-        REFS.body.classList.remove('js-modal-is-open');
-        REFS.modalCardThumbBtn.classList.add('js-hidden');
-        // REFS.modalOpenMovie.classList.add('js-hidden');
+        REFS.body.classList.remove('js-modal-is-open');        
+        REFS.modalOpenMovie.classList.add('js-hidden');
         REFS.backdrop.removeEventListener('click', this.#closeBtnCallback);
-        window.removeEventListener('keydown', this.#escBtnCallback);
-        REFS.modalAddToWatchedBtn.removeEventListener('click', this.#addToWatchedCallback);
-        REFS.modalAddToQueueBtn.removeEventListener('click', this.#addToQueueCallback);
-        // REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
+        window.removeEventListener('keydown', this.#escBtnCallback);        
+        REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
+        this.#hiddeBtnsThumb();
       }
 
     #onMovieClick(evt) {
-    evt.preventDefault();
+        evt.preventDefault();
     // очищаємо вміст в модалці і включаємо фільм
+        REFS.modalContainer.innerHTML = '';
+        this.#hiddeBtnsThumb();
     console.log('відкриваємо фільм');
-}
+    }
+    
+    #hiddeBtnsThumb() {
+        REFS.modalCardThumbBtn.classList.add('js-hidden');
+        REFS.modalAddToWatchedBtn.removeEventListener('click', this.#addToWatchedCallback);
+        REFS.modalAddToQueueBtn.removeEventListener('click', this.#addToQueueCallback);
+    }
 }

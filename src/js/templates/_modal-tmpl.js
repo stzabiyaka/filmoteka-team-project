@@ -20,9 +20,6 @@ export function modalCardMarkUp({ overview, poster_path, title, original_title, 
         <div class="modal-card-thumb__img" > 
             <div class="modal-card__picture" >        
                 <img srcset="${imgSrc}" src="${imgSrcMobile}" alt="${title}" loading="lazy" class="modal-card__img" type="image/jpeg" id="img-in-modal-card-picture"/>
-                <button id="modal-open-movie" title="open video" aria-label="open video" class="modal-card__open-movie js-hidden">
-                    <div class="modal-card__open-movie--icon" width="24" height="24"></div>
-                </button>
             </div>
         </div>
         <div class="modal-card-thumb__content">
