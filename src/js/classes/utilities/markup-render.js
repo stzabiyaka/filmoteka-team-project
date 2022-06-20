@@ -2,6 +2,7 @@ import cardParser from "../../modules/card-parser";
 import { REFS } from "../../site-constants";
 import { renderModalCard } from "../../templates/modal";
 import { modalCardMarkUp } from "../../templates/_modal-tmpl";
+import { modalMovieMarkUp } from "../../templates/modal-movie";
 
 export default class MarkupRender {
     #cardTemplate = cardParser;
@@ -56,6 +57,26 @@ export default class MarkupRender {
             this.#modalTarget.innerHTML = markup;
             return true;
         }
+        catch {
+           
+            const message = 'technicalFault';
+            this.#notifyer.renderNotification({ message: message, tsget: 'modal' });
+        }
+            
+    }
+
+    async renderMovie({ loader, content }) {
+
+        this.#captions = this.#languageSet.captions;
+
+        const response = await loader(content);
+        // console.log('response', response);
+        try {
+            // console.log('response', response);
+                const markup = modalMovieMarkUp({ ...response, captions: this.#captions });
+                this.#modalTarget.innerHTML = markup;
+            return markup;
+            } 
         catch {
            
             const message = 'technicalFault';
