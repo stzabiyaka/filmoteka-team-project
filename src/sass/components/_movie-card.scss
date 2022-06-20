@@ -1,9 +1,7 @@
 
 .movie-card {
     cursor: pointer;
-    @include respondTo (mobile){
         margin-top: 20px;
-    }
 
     @include respondTo (tablet){
         @include flexBasis (2, 32px);

@@ -2,6 +2,8 @@ import Pagination from "tui-pagination";
 import { REFS, USER_COLLECTIONS } from "../site-constants";
 import { paginatorTemplate } from "../templates/paginator-tmpl";
 
+const debounce = require('lodash.debounce');
+
 export default class SiteEngine {
     
 /* Обробники сторінок сайту */
@@ -9,18 +11,23 @@ export default class SiteEngine {
     #collectionHandler;
     #modalHandler;
     #searchHandler;
+    #paginator;
+    #notifyer;
+    #languageSet;
+    #isUserNew;
 /* Колбеки для eventListeners */
     #queueCallback;
     #watchedCallback;
-    #paginator;
     #paginatorAfterCallback;
-    #paginatorBeforeCallback;
 
-    constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler }) {
+    constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler, notifyer, languageSet }) {
         this.#trendingHandler = trendingHandler;
         this.#collectionHandler = collectionHandler;
         this.#modalHandler = modalHandler;
         this.#searchHandler = searchHandler;
+        this.#languageSet = languageSet;
+        this.#notifyer = notifyer;
+        this.#isUserNew = this.#languageSet.getIsUserNew();
         this.hiderClass = 'js-hidden';
         this.myLibraryClass = 'my-library';
         this.#init();
@@ -32,8 +39,14 @@ export default class SiteEngine {
         REFS.headerLogo.addEventListener('click', this.#handleHome.bind(this));
         REFS.headerHomeBtn.addEventListener('click', this.#handleHome.bind(this));
         REFS.headerMyLibBtn.addEventListener('click', this.#handleWatched.bind(this, {isFromHome: true}) );
-        REFS.searchForm.addEventListener('input', this.#handleSearch.bind(this));
+        REFS.searchForm.addEventListener('input', debounce(this.#handleSearch.bind(this), 300));
         this.#createPaginator();
+        if (this.#isUserNew) {
+            setTimeout(() => {     
+                this.#notifyNewUser();
+              }, 2000);
+            
+        }
     }
 
 /* Формування та логіка головної сторінки сайта */ 
@@ -63,23 +76,29 @@ export default class SiteEngine {
     }
 
 /* Формування відображення результату пошуку фільмів за пошуковим запитом */ 
-    async #handleSearch (event) {
-        const searchQuery = event.currentTarget.value.trim();
-        // if ((/^([\s%&#@])*$/i.test(searchQuery)) || (/^([>(.*?)<])*$/.test(searchQuery))) {
-        //     (console.log('недопустимі символи & теги')) 
-        //     return;
-        // }
-        if ((/^([а-яА-ЯёЁ]*)$/i.test(searchQuery))) {
-           (console.log('тільки кирилиця'))
-        }
+    async #handleSearch () {
+        // console.log(event.currentTarget);
+        const searchQuery = REFS.searchForm.value.trim();
+       
         if(!searchQuery.length) {
-            this.#handleHome({ isInit: true });
+            const message = this.#languageSet.captions.notifications.searchMinLength;
+            this.#notifyer.showNotification({ message: message });
+            this.#onSearchFault();
         return false;
         } 
+
+        if (this.#isUserNew && this.#languageSet.getCurrentLanguage() === 'default' && (/^([а-яА-ЯёЁ]*)$/i.test(searchQuery))) {
+            this.#notifyNewUser();
+            this.#isUserNew = false;
+         }
         
         try {
             const source = await this.#searchHandler.getMoviesBySearch({query: searchQuery, page: 1});
-
+            if(!source || !source.totalResults) {
+                const message =  this.#languageSet.captions.notifications.searchFault;
+                this.#notifyer.showNotification({ message: message });
+                this.#onSearchFault();
+            }
             this.#resetPaginator({ source: source, itemsPerPage: 20 });
             this.#paginatorAfterCallback = this.#searchHandler.getMoviesBySearch.bind(this.#searchHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ query: searchQuery, page: page }));
@@ -87,6 +106,7 @@ export default class SiteEngine {
         catch (error) {
             console.log(error.message);
         }
+
            
     }
 
@@ -209,5 +229,17 @@ export default class SiteEngine {
             this.#paginator.off('afterMove', this.#paginatorAfterCallback);
             // this.#paginator.off('beforeMove', this.#paginatorBeforeCallback);
         }
+    }
+
+    /* Обробка невдалого пошуку */
+    #onSearchFault () {
+        this.#handleHome({ isInit: true });
+    }
+
+    /* Перевірка, чи користувач новий */
+
+    #notifyNewUser () {
+            const message = this.#languageSet.captions.notifications.languageNotify;
+            this.#notifyer.showNotification({ message: message, type: 'language' });
     }
 }

@@ -36,6 +36,7 @@ const LANGUAGES = {
     spinner: document.querySelector('#spinner'),
     modalCardThumbBtn: document.querySelector('.modal-card-thumb__btn'),
     copyright: document.querySelector('#copyright'),
+    notifyerDisplay: document.querySelector('#notifyer-display'),
 }
 
   const CAPTIONS = {
@@ -67,7 +68,7 @@ const LANGUAGES = {
         searchPlaceholder: 'Search movies',
         notifications: {
             searchFault: 'Sorry, there are no movies, matching your search query. Please try again.',
-            searchMinLength : 'Please, enter at least two symbols to start search.',
+            searchMinLength : 'Please, enter at least one symbol to start search.',
             searchRestricted : 'Please, do not enter any special characters.',
             technicalFault: 'Oops (( looks, like some technical troubles occured.',
             collectionEmpty: 'Looks like you have not add any movie to this collection, yet.',
