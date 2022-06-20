@@ -10,16 +10,15 @@ import CollectionHandler from './js/classes/page-handlers/collection-handler';
 import ModalHandler from './js/classes/page-handlers/modal-handler';
 import SearchHandler from './js/classes/page-handlers/searchHandler';
 import LanguageSet from './js/classes/language-set';
-import Notifyer from './js/classes/notifyer';
+import Notifyer from './js/classes/utilities/notifyer';
 import ToTopButton from './js/classes/utilities/to-top-button';
 import ThemeButton from './js/classes/utilities/theme-button';
 
 const userPreferences = new UserPreferencesService('userPreferences');
 let currentLanguage = userPreferences.getPreferences().language;
-
 const userCollectionsService = new CollectionService('userCollections');
 const languageSet = new LanguageSet({ userPreferences: userPreferences });
-const notifyer = new Notifyer({ renderTarget: REFS.libraryContainer, modalTarget: REFS.modalContainer, timeOut: 30000, languageSet: languageSet});
+const notifyer = new Notifyer({ renderTarget: REFS.libraryContainer, modalTarget: REFS.modalContainer, timeOut: 5000, languageSet: languageSet});
 const moviesApiService = new MoviesApiService({ language: currentLanguage});
 const markupRender = new MarkupRender({ notifyer: notifyer, languageSet: languageSet });
 const trendingHandler = new TrendingHandler({ apiService: moviesApiService, markupRender: markupRender });
@@ -33,13 +32,12 @@ const themeButton = new ThemeButton({ languageSet: languageSet, userPreferences:
 
 
 /* vvv site engine intialisation vvv */
-const siteEngine = new SiteEngine({ trendingHandler: trendingHandler, collectionHandler: collectionHandler, modalHandler: modalHandler, searchHandler: searchHandler });
+const siteEngine = new SiteEngine({ trendingHandler: trendingHandler, collectionHandler: collectionHandler, modalHandler: modalHandler, searchHandler: searchHandler, notifyer: notifyer, languageSet: languageSet });
 /* ^^^                           ^^^ */
 
 
 
 
-    // userPreferences.setLanguage({ language: LANGUAGES.ukrainian });
 
 
 
@@ -47,7 +45,7 @@ const siteEngine = new SiteEngine({ trendingHandler: trendingHandler, collection
 
 
 
-    // notifyer.showNotification( { message: 'Test message', type: 'language' });
+
  
 /* додавайте всі свої тимчасові імпорти та необхідний для розробки код нижче цієї строки
     не забувайте перед пулл-реквестом прибирати весь свій код все повинно бути лише у ваших

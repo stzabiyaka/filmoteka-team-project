@@ -65,7 +65,6 @@ export default class MarkupRender {
             
     }
 
-
     async renderMovie({ loader, content }) {
 
         this.#captions = this.#languageSet.captions;

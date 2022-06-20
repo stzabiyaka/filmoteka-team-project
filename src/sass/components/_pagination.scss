@@ -4,6 +4,10 @@
     justify-content: center;
     padding-bottom: 40px;
 
+    &.js-hidden {
+        display: none;
+    }
+
     @include respondTo(tablet) {
             padding-bottom: 60px;
         }

@@ -1,9 +1,11 @@
+import { REFS } from "../../site-constants";
+
 export default class Notifyer {
     #renderTarget;
     #modalTarget;
-    #notifyerDisplay;
     #timeOut = 500;
     #notifications;
+    #isRun;
     #notifyerType = {
         language: 'language',
         warning: 'warning',
@@ -12,24 +14,24 @@ export default class Notifyer {
         this.#renderTarget = renderTarget;
         this.#modalTarget = modalTarget;
         this.#timeOut = timeOut ? timeOut : this.#timeOut;
-        document.body.insertAdjacentHTML('beforeend', '<div id="notifier-display" class="notifier-display js-hidden"></div>');
-        this.#notifyerDisplay = document.querySelector('#notifier-display');
         this.#notifications = languageSet.captions.notifications;
     }
 
     showNotification ({ message, type = 'warning' }) {
-        if (!message || !Object.keys(this.#notifyerType).includes(type)) {
+        if (!message || !Object.keys(this.#notifyerType).includes(type) || this.#isRun) {
             return;
         }
 
-        this.#notifyerDisplay.innerHTML = message;
-        this.#notifyerDisplay.classList.add(this.#notifyerType[type]);
-        this.#notifyerDisplay.classList.remove('js-hidden');
+        REFS.notifyerDisplay.textContent = message;
+        REFS.notifyerDisplay.classList.add(this.#notifyerType[type]);
+        REFS.notifyerDisplay.classList.remove('js-hidden');
+        this.#isRun = true;
         
-        setTimeout(() => {     
-            this.#notifyerDisplay.innerHTML = '';
-            this.#notifyerDisplay.classList.add('js-hidden');
-            this.#notifyerDisplay.classList.remove(this.#notifyerType[type]);
+        setTimeout(() => {
+            REFS.notifyerDisplay.classList.add('js-hidden');
+            REFS.notifyerDisplay.classList.remove(this.#notifyerType[type]);
+            REFS.notifyerDisplay.textContent = '';
+            this.#isRun =false;
           }, this.#timeOut);
     }
 

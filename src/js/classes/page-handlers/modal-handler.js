@@ -161,16 +161,16 @@ export default class ModalHandler {
         if (!REFS.headerMyLibBtn.disabled) { return }
         
         if (
-            REFS.collectionWatchedBtn.attributes.class.value.includes('accent') &&
-            target.attributes.class.value.includes('accent')
+            REFS.collectionWatchedBtn.disabled &&
+            target === REFS.modalAddToWatchedBtn
         ) {
             await this.#markupRender.renderLiblary({ loader: loader, content: bundle });
             return;
         }
 
         if (
-            REFS.collectionQueueBtn.attributes.class.value.includes('accent') &&
-            target.attributes.class.value.includes('accent')
+            REFS.collectionQueueBtn.disabled &&
+            target === REFS.modalAddToQueueBtn
             ) {
             await this.#markupRender.renderLiblary({ loader: loader, content: bundle });
             return;

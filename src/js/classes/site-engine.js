@@ -2,6 +2,8 @@ import Pagination from "tui-pagination";
 import { REFS, USER_COLLECTIONS } from "../site-constants";
 import { paginatorTemplate } from "../templates/paginator-tmpl";
 
+const debounce = require('lodash.debounce');
+
 export default class SiteEngine {
     
 /* Обробники сторінок сайту */
@@ -9,17 +11,23 @@ export default class SiteEngine {
     #collectionHandler;
     #modalHandler;
     #searchHandler;
+    #paginator;
+    #notifyer;
+    #languageSet;
+    #isUserNew;
 /* Колбеки для eventListeners */
     #queueCallback;
     #watchedCallback;
-    #paginator;
     #paginatorAfterCallback;
 
-    constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler }) {
+    constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler, notifyer, languageSet }) {
         this.#trendingHandler = trendingHandler;
         this.#collectionHandler = collectionHandler;
         this.#modalHandler = modalHandler;
         this.#searchHandler = searchHandler;
+        this.#languageSet = languageSet;
+        this.#notifyer = notifyer;
+        this.#isUserNew = this.#languageSet.getIsUserNew();
         this.hiderClass = 'js-hidden';
         this.myLibraryClass = 'my-library';
         this.#init();
@@ -31,8 +39,14 @@ export default class SiteEngine {
         REFS.headerLogo.addEventListener('click', this.#handleHome.bind(this));
         REFS.headerHomeBtn.addEventListener('click', this.#handleHome.bind(this));
         REFS.headerMyLibBtn.addEventListener('click', this.#handleWatched.bind(this, {isFromHome: true}) );
-        REFS.searchForm.addEventListener('input', this.#handleSearch.bind(this));
+        REFS.searchForm.addEventListener('input', debounce(this.#handleSearch.bind(this), 300));
         this.#createPaginator();
+        if (this.#isUserNew) {
+            setTimeout(() => {     
+                this.#notifyNewUser();
+              }, 2000);
+            
+        }
     }
 
 /* Формування та логіка головної сторінки сайта */ 
@@ -44,16 +58,15 @@ export default class SiteEngine {
         if ( !isInit ) {
             this.#navBtnsToggle();
         }
-        this.#checkPaginatorOldCallback();
+        
         try {
-            const result = await this.#trendingHandler.getTrendingMoviesPage({ page: 1 });
-        if (result && result.totalResults && result.totalResults > 20) {
-            this.#paginator.setItemsPerPage(20);
-            this.#paginator.setTotalItems(result.totalResults);
+            const source = await this.#trendingHandler.getTrendingMoviesPage({ page: 1 });
+            
+            this.#resetPaginator({ source: source, itemsPerPage: 20 });
             this.#paginatorAfterCallback = this.#trendingHandler.getTrendingMoviesPage.bind(this.#trendingHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ page: page }));
-        }
-        this.#paginator.reset();
+        
+        
         }
         catch (error) {
             console.log(error.message);
@@ -63,34 +76,37 @@ export default class SiteEngine {
     }
 
 /* Формування відображення результату пошуку фільмів за пошуковим запитом */ 
-    async #handleSearch (event) {
-        const searchQuery = event.currentTarget.value.trim();
-        // if ((/^([\s%&#@])*$/i.test(searchQuery)) || (/^([>(.*?)<])*$/.test(searchQuery))) {
-        //     (console.log('недопустимі символи & теги')) 
-        //     return;
-        // }
-        if ((/^([а-яА-ЯёЁ]*)$/i.test(searchQuery))) {
-           (console.log('тільки кирилиця'))
-        }
+    async #handleSearch () {
+        // console.log(event.currentTarget);
+        const searchQuery = REFS.searchForm.value.trim();
+       
         if(!searchQuery.length) {
-            this.#handleHome({ isInit: true });
+            const message = this.#languageSet.captions.notifications.searchMinLength;
+            this.#notifyer.showNotification({ message: message });
+            this.#onSearchFault();
         return false;
         } 
+
+        if (this.#isUserNew && this.#languageSet.getCurrentLanguage() === 'default' && (/^([а-яА-ЯёЁ]*)$/i.test(searchQuery))) {
+            this.#notifyNewUser();
+            this.#isUserNew = false;
+         }
         
-        this.#checkPaginatorOldCallback();
         try {
-            const result = await this.#searchHandler.getMoviesBySearch({query: searchQuery, page: 1});
-            if (result && result.totalResults && result.totalResults > 20) {
-                this.#paginator.setItemsPerPage(20);
-                this.#paginator.setTotalItems(result.totalResults);
-                this.#paginatorAfterCallback = this.#searchHandler.getMoviesBySearch.bind(this.#searchHandler);
-            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ query: searchQuery, page: page }));  
+            const source = await this.#searchHandler.getMoviesBySearch({query: searchQuery, page: 1});
+            if(!source || !source.totalResults) {
+                const message =  this.#languageSet.captions.notifications.searchFault;
+                this.#notifyer.showNotification({ message: message });
+                this.#onSearchFault();
             }
-            this.#paginator.reset();
+            this.#resetPaginator({ source: source, itemsPerPage: 20 });
+            this.#paginatorAfterCallback = this.#searchHandler.getMoviesBySearch.bind(this.#searchHandler);
+            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ query: searchQuery, page: page }));
         }
         catch (error) {
             console.log(error.message);
         }
+
            
     }
 
@@ -103,17 +119,15 @@ export default class SiteEngine {
         } 
         
         this.#collectionsBtnsToggle ();
-        
-        this.#checkPaginatorOldCallback();
+
         try {
-            const result = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.watched, page: 1 });
-            if (result && result.totalResults && result.totalResults > 9) {
-                this.#paginator.setItemsPerPage(9);
-                this.#paginator.setTotalItems(result.totalResults);
-                this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
+            const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.watched, page: 1 });
+            
+            this.#resetPaginator({ source: source, itemsPerPage: 9 });
+            this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.watched, page: page }));   
-            }
-            this.#paginator.reset();
+            // }
+            // this.#paginator.reset();
         }
         catch (error) {
             console.log(error.message);
@@ -125,16 +139,14 @@ export default class SiteEngine {
 
         this.#collectionsBtnsToggle ();
 
-        this.#checkPaginatorOldCallback();
         try {
-            const result = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
-            if (result && result.totalResults && result.totalResults > 9) {
-                this.#paginator.setItemsPerPage(9);
-                this.#paginator.setTotalItems(result.totalResults);
-                this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
-                this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.queue, page: page }));   
-            }
-            this.#paginator.reset();
+            const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
+
+            this.#resetPaginator({ source: source, itemsPerPage: 9 });
+            this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
+            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.queue, page: page }));   
+            // }
+            // this.#paginator.reset();
         }
         catch (error) {
             console.log(error.message);
@@ -192,10 +204,42 @@ export default class SiteEngine {
           this.#paginator = new Pagination ('pagination', paginatorOptions);
     }
 
+    #resetPaginator ({ source, itemsPerPage }) {
+        this.#checkPaginatorOldCallback();
+        let totalItems;
+        if(!source) {
+            totalItems = 0;
+        } else {
+            totalItems = source.totalResults;
+        }
+
+        this.#paginator.setItemsPerPage(itemsPerPage);
+        this.#paginator.reset(totalItems);
+
+        if( totalItems <= itemsPerPage) {
+            REFS.paginator.classList.add('js-hidden');
+        } else if ( REFS.paginator.classList.contains('js-hidden')) {
+            REFS.paginator.classList.remove('js-hidden');
+        } 
+    }
+
 /* Прибирання eventListener з пагінації */
     #checkPaginatorOldCallback () {
         if (this.#paginator && this.#paginatorAfterCallback) {
             this.#paginator.off('afterMove', this.#paginatorAfterCallback);
+            // this.#paginator.off('beforeMove', this.#paginatorBeforeCallback);
         }
+    }
+
+    /* Обробка невдалого пошуку */
+    #onSearchFault () {
+        this.#handleHome({ isInit: true });
+    }
+
+    /* Перевірка, чи користувач новий */
+
+    #notifyNewUser () {
+            const message = this.#languageSet.captions.notifications.languageNotify;
+            this.#notifyer.showNotification({ message: message, type: 'language' });
     }
 }

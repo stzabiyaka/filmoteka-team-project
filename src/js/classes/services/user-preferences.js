@@ -15,6 +15,7 @@ export default class UserPreferencesService extends LocalStorageService {
             this.#preferences = { language: 'default', theme: 'default'};
             this.#isUserNew = true;
             this.save(this.#preferences);
+            return;
         }
         this.#isUserNew = false;
     }
