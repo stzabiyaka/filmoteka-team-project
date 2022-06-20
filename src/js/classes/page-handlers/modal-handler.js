@@ -120,6 +120,7 @@ export default class ModalHandler {
         // REFS.modalContainer.innerHTML = '';
         REFS.body.classList.remove('js-modal-is-open');        
         REFS.modalOpenMovie.classList.add('js-hidden');
+        REFS.modalContainer.parentElement.classList.remove('js-video-open');
         REFS.backdrop.removeEventListener('click', this.#closeBtnCallback);
         window.removeEventListener('keydown', this.#escBtnCallback);        
         REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
@@ -128,10 +129,22 @@ export default class ModalHandler {
 
     #onMovieClick(evt) {
         evt.preventDefault();
-    // очищаємо вміст в модалці і включаємо фільм
-        REFS.modalContainer.innerHTML = '';
+    
         this.#hiddeBtnsThumb();
-    console.log('відкриваємо фільм');
+        REFS.modalOpenMovie.classList.add('js-hidden');
+        REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
+        
+        const loader = this.#apiService.getVideo.bind(this.#apiService);
+        const content = { movieId: this.#articleID };
+        
+        const result = this.#markupRender.renderMovie({ loader: loader, content: content });
+        
+        result.then(result => {
+            if (result) {
+                REFS.modalContainer.parentElement.classList.add('js-video-open');
+        }
+        }).catch(error=>console.log(error));
+
     }
     
     #hiddeBtnsThumb() {

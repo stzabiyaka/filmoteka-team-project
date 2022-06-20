@@ -95,4 +95,12 @@ export default class MoviesApiService {
         this.#currentLanguage = Object.values(this.LANGUAGES).includes(language) ? language : this.LANGUAGES.default;
         this.getGenres();
     }
+
+/* Отримання відео одного  фільму */
+    async getVideo({ movieId }) {
+        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.movieDetails}/${movieId}/videos?api_key=${this.#API_KEY}&language=${this.#currentLanguage}`;
+        const video = await this.#getData(url);        
+        return video;
+    }
+
 }
