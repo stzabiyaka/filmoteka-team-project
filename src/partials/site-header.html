@@ -24,17 +24,9 @@
             <button id="queue" class="collections-nav__button" type="button" title="Go to your Queue collection">QUEUE</button>
         </div>
         <div class="user-btns-container">
-            <select id="language" class="language-select" name="language" title="Select language" aria-label="Language selector">
-                <option value="default" class ='language-select-svg' selected  title="English">
-                    <svg class="site-logo__image">
-                        <use href="./images/icons.svg#icon-flag-gb"></use>
-                    </svg>
-                </option>
-                <option value="ukrainian"  title="Українська">
-                    <svg class="site-logo__image">
-                        <use href="./images/icons.svg#icon-flag-ua"></use>
-                    </svg>
-                </option>
+            <select id="language" class="language-selector" name="language" title="Select language" aria-label="Language selector">
+                <option class="language-selector__option" value="default" class ='language-select-svg' selected  title="English">EN</option>
+                <option class="language-selector__option" value="ukrainian"  title="Українська">UA</option>
               </select>
             <button id="theme" class="theme-button" type="button"  title="Turn light off" aria-label="Change theme"></button>
         </div>

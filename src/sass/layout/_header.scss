@@ -293,15 +293,21 @@
     margin-top: auto;
 }
 
-.language-select {
+.language-selector {
     margin-left: auto;
     margin-right: 10px;
-    width: 32px;
+    width: 40px;
     height: 24px;
     border-radius: 5px;
     color: getColor('text-secondary');
     background-color: transparent;
     border: none;
+    cursor: pointer;
+}
+
+.language-selector__option {
+    display: block;
+    background-color: getColor('text-primary');
 }
 
 .theme-button {
@@ -312,6 +318,7 @@
     background-image: linear-gradient(135deg, getColor('text-secondary'), getColor('text-primary'));
     border: none;
     border-radius: 5px;
+    cursor: pointer;
     @include cssTransition( transform border);
     &:hover {
         transform: scale(110%);
