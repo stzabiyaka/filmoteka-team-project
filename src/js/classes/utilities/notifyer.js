@@ -4,6 +4,7 @@ export default class Notifyer {
     #renderTarget;
     #modalTarget;
     #timeOut = 500;
+    #languageSet;
     #notifications;
     #isRun;
     #notifyerType = {
@@ -14,6 +15,7 @@ export default class Notifyer {
         this.#renderTarget = renderTarget;
         this.#modalTarget = modalTarget;
         this.#timeOut = timeOut ? timeOut : this.#timeOut;
+        this.#languageSet = languageSet
         this.#notifications = languageSet.captions.notifications;
     }
 
@@ -21,6 +23,7 @@ export default class Notifyer {
         if (!message || !Object.keys(this.#notifyerType).includes(type) || this.#isRun) {
             return;
         }
+        this.#notifications = this.#languageSet.captions.notifications;
 
         REFS.notifyerDisplay.textContent = message;
         REFS.notifyerDisplay.classList.add(this.#notifyerType[type]);
@@ -39,6 +42,7 @@ export default class Notifyer {
         if (!message) {
             return;
         }
+        this.#notifications = this.#languageSet.captions.notifications;
         let messageContainer;
         messageContainer = target ? this.#modalTarget : this.#renderTarget;
         messageContainer.innerHTML = `<p class="notifyer__message">${this.#notifications[message]}</p>`;

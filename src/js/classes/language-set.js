@@ -35,6 +35,10 @@ export default class LanguageSet {
         const selectedLanguage = this.#languageSelector.value;
         this.#currentLanguage = selectedLanguage;
         this.#setCurrentLanguage({ language: selectedLanguage });
+        this.#refreshPage();
+    }
+
+    #refreshPage () {
         if(this.#paginator) {
             const currentPage = this.#paginator.getCurrentPage();
             this.#paginator.movePageTo(currentPage);
@@ -56,4 +60,5 @@ export default class LanguageSet {
     setPaginator ({ paginator }) {
         this.#paginator = paginator;
     }
+
 }

@@ -44,6 +44,7 @@ export default class SiteEngine {
         REFS.searchForm.addEventListener('input', debounce(this.#handleSearch.bind(this), 300));
         this.#createPaginator();
         this.#languageSet.setPaginator({ paginator: this.#paginator});
+        this.#modalHandler.setPaginator({ paginator: this.#paginator});
         if (this.#isUserNew) {
             setTimeout(() => {     
                 this.#notifyNewUser();
@@ -133,8 +134,7 @@ export default class SiteEngine {
             this.#resetPaginator({ source: source, itemsPerPage: 9 });
             this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.watched, page: page }));   
-            // }
-            // this.#paginator.reset();
+            
         }
         catch (error) {
             console.log(error.message);
@@ -152,8 +152,7 @@ export default class SiteEngine {
             this.#resetPaginator({ source: source, itemsPerPage: 9 });
             this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.queue, page: page }));   
-            // }
-            // this.#paginator.reset();
+            
         }
         catch (error) {
             console.log(error.message);

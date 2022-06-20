@@ -13,6 +13,7 @@ export default class ModalHandler {
     #addToWatchedCallback;
     #languageSet;
     #notifyer;
+    #paginator;
     
     constructor ({ apiService, markupRender, languageSet, collectionsService, notifyer }) {
         this.#apiService = apiService;
@@ -74,24 +75,24 @@ export default class ModalHandler {
         if (REFS.modalAddToWatchedBtn.textContent === this.#captions.buttons.addToWatched.add) {
             this.#collectionsService.addToCollection({ collection: USER_COLLECTIONS.watched, id: this.#articleID });
             this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
-            this.#refreshCollectionPage({ collection: USER_COLLECTIONS.watched, target: evt.currentTarget });
+            this.#refreshCollectionPage({ collection: USER_COLLECTIONS.watched });
             return;
         }
         this.#collectionsService.removeFromCollection({ collection: USER_COLLECTIONS.watched, id: this.#articleID });
         this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
-        this.#refreshCollectionPage({ collection: USER_COLLECTIONS.watched, target: evt.currentTarget });
+        this.#refreshCollectionPage({ collection: USER_COLLECTIONS.watched });
     }
 
     #onAddToQueueBtnClick(evt) {
         if (REFS.modalAddToQueueBtn.textContent === this.#captions.buttons.addToQueue.add) {
             this.#collectionsService.addToCollection({ collection: USER_COLLECTIONS.queue, id: this.#articleID });
             this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
-            this.#refreshCollectionPage({ collection: USER_COLLECTIONS.queue, target: evt.currentTarget });
+            this.#refreshCollectionPage({ collection: USER_COLLECTIONS.queue });
             return;
         }
         this.#collectionsService.removeFromCollection({ collection: USER_COLLECTIONS.queue, id: this.#articleID });
         this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
-        this.#refreshCollectionPage({ collection: USER_COLLECTIONS.queue, target: evt.currentTarget });
+        this.#refreshCollectionPage({ collection: USER_COLLECTIONS.queue });
     }
 
     #checkBtnState({ button, collection, btnTarget }) {
@@ -157,27 +158,19 @@ export default class ModalHandler {
         REFS.modalAddToQueueBtn.removeEventListener('click', this.#addToQueueCallback);
     }
 
-    async #refreshCollectionPage({ collection, target }) {
-        this.#collectionsService.load();
-        const bundle = this.#collectionsService.getCollectionIdsBundle({ collection });
-        const loader = this.#apiService.getMoviesBundle.bind(this.#apiService);
-        
-        if (!REFS.headerMyLibBtn.disabled) { return }
-        
-        if (
-            REFS.collectionWatchedBtn.disabled &&
-            target === REFS.modalAddToWatchedBtn
-        ) {
-            await this.#markupRender.renderLiblary({ loader: loader, content: bundle });
+    #refreshCollectionPage({ collection }) {
+        if (!this.#collectionsService.isCollectionExist({ collection: collection })) {
+            this.#notifyer.renderNotification ({ message: 'collectionEmpty' });
             return;
         }
+        if(this.#paginator) {
+            const currentPage = this.#paginator.getCurrentPage();
+            this.#paginator.movePageTo(currentPage);
+            
+        }   
+    }
 
-        if (
-            REFS.collectionQueueBtn.disabled &&
-            target === REFS.modalAddToQueueBtn
-            ) {
-            await this.#markupRender.renderLiblary({ loader: loader, content: bundle });
-            return;
-        }      
+    setPaginator ({ paginator }) {
+        this.#paginator = paginator;
     }
 }
