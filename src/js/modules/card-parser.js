@@ -37,12 +37,12 @@ export default function cardParser({
     </picture>
     <h2 class="movie-card_title" >${title}</h2>
     <div class="movie-card_info">
-    <p class = "movie-card_genres" title = "genres">
+    <p class = "movie-card_genres" title = "${captions.movieDetails.genres}">
         ${genres.join(', ')}
         </p>
         <p class="movie-card_symbol">|</p>
-        <p class="movie-card_date" title = "release year">${release_date}</p>
-        <p class="movie-card_avarage__accent" title ="vote average">${vote_average}</p>
+        <p class="movie-card_date" title = "${captions.movieDetails.release}">${release_date}</p>
+        <p class="movie-card_avarage__accent" title ="${captions.movieDetails.rating}">${vote_average}</p>
     </div>
 </article></a>`;
 }

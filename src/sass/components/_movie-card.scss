@@ -4,12 +4,11 @@
   
     cursor: pointer;
   
-    transform: scale(1);
-    transition: transform 250ms linear;
+    @include cssTransition(transform);
 
     &:hover,
     &:focus {
-     transform: scale(1.03);
+     transform: scale(1.02);
     }
         
 

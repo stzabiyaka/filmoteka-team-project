@@ -165,6 +165,10 @@
     align-items: center;
     text-decoration: none;
     pointer-events: auto;
+
+    background-color: transparent;
+
+    @include cssTransition(text-shadow);
     
     &.disabled {
         pointer-events: none;
@@ -174,6 +178,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    }
+
+    &:hover, &:focus {
+            
+        text-shadow: 0 0 50px getColor('accent');
+
     }
     
     &__image{
@@ -185,6 +195,8 @@
         @include respondTo(tablet) {
             margin-right: 8px;
         }
+
+        
     }
     
     &__name {

@@ -14,6 +14,7 @@ export default class ModalHandler {
     #languageSet;
     #notifyer;
     #paginator;
+    #currentSitePage;
     
     constructor ({ apiService, markupRender, languageSet, collectionsService, notifyer }) {
         this.#apiService = apiService;
@@ -159,6 +160,9 @@ export default class ModalHandler {
     }
 
     #refreshCollectionPage({ collection }) {
+        if(this.#currentSitePage !== 'library') {
+            return;
+        }
         if (!this.#collectionsService.isCollectionExist({ collection: collection })) {
             this.#notifyer.renderNotification ({ message: 'collectionEmpty' });
             return;
@@ -172,5 +176,9 @@ export default class ModalHandler {
 
     setPaginator ({ paginator }) {
         this.#paginator = paginator;
+    }
+
+    setCurrentSitePage ({ page }) {
+        this.#currentSitePage = page;
     }
 }

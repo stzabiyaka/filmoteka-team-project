@@ -5,7 +5,7 @@ import { paginatorTemplate } from "../templates/paginator-tmpl";
 const debounce = require('lodash.debounce');
 
 export default class SiteEngine {
-    
+    #currentSitePage;
 /* Обробники сторінок сайту */
     #trendingHandler;
     #collectionHandler;
@@ -32,7 +32,7 @@ export default class SiteEngine {
         this.#isUserNew = this.#languageSet.getIsUserNew();
         this.hiderClass = 'js-hidden';
         this.myLibraryClass = 'my-library';
-        this.#init().then(this.#handleHome({ isInit: true })).catch(console.log);
+        this.#init().then(this.#handleHome()).catch(console.log);
             
     }
 
@@ -58,13 +58,12 @@ export default class SiteEngine {
     }
 
 /* Формування та логіка головної сторінки сайта */ 
-    async #handleHome ({ isInit }) { 
+    async #handleHome () { 
+        this.#currentSitePage = 'home';
+        this.#setSitePage();
+
         if (this.#queueCallback || this.#watchedCallback) {
             this.#removeCollectionsListeners();
-        }
-        
-        if ( !isInit ) {
-            this.#navBtnsToggle();
         }
         
         try {
@@ -77,7 +76,7 @@ export default class SiteEngine {
         
         }
         catch (error) {
-            console.log(error.message);
+            this.#notifyer.renderNotification ({ message: 'technicalFault' });
         }
         
         
@@ -85,13 +84,14 @@ export default class SiteEngine {
 
 /* Формування відображення результату пошуку фільмів за пошуковим запитом */ 
     async #handleSearch () {
-        // console.log(event.currentTarget);
+        this.#currentSitePage = 'search';
+        this.#setSitePage();
         const searchQuery = REFS.searchForm.value.trim();
        
         if(!searchQuery.length) {
             const message = this.#languageSet.captions.notifications.searchMinLength;
             this.#notifyer.showNotification({ message: message });
-            this.#onSearchFault();
+            this.#handleHome();
         return false;
         } 
 
@@ -105,7 +105,7 @@ export default class SiteEngine {
             if(!source || !source.totalResults) {
                 const message =  this.#languageSet.captions.notifications.searchFault;
                 this.#notifyer.showNotification({ message: message });
-                this.#onSearchFault();
+                this.#handleHome();
             }
             this.#resetPaginator({ source: source, itemsPerPage: 20 });
             this.#paginatorAfterCallback = this.#searchHandler.getMoviesBySearch.bind(this.#searchHandler);
@@ -119,9 +119,11 @@ export default class SiteEngine {
     }
 
 /* Формування відображення та логіка колекції watched */ 
-    async #handleWatched ({ page = 1, isFromHome }) {
+    async #handleWatched ({ isFromHome }) {
+        this.#currentSitePage = 'library';
+        this.#setSitePage();
+
         if (isFromHome) {
-         this.#navBtnsToggle(); 
          this.#addCollectionsBtnsListeners();
          REFS.collectionWatchedBtn.disabled = false;
         } 
@@ -142,7 +144,7 @@ export default class SiteEngine {
     }
 
 /* Формування відображення та логіка колекції queue */ 
-    async #handleQueue ({ page = 1 }) {
+    async #handleQueue () {
 
         this.#collectionsBtnsToggle ();
 
@@ -159,20 +161,35 @@ export default class SiteEngine {
         }
     }
 
-/* Формування відображення та логіка модального вікна */ 
-    // #handleModal ({ content }) {
-    //     console.log('MODAL LOADED');
-    // }
+/* Встановлення стану поточної сторінки сайту */ 
+    #setSitePage () {
+        switch (this.#currentSitePage) {
+        case 'home':
+            REFS.headerHomeBtn.disabled = true;
+            REFS.headerMyLibBtn.disabled = false;
+            REFS.searchFormContainer.classList.remove(this.hiderClass);
+            REFS.collectionsBtnsContainer.classList.add(this.hiderClass);
+            REFS.headerContainer.classList.remove(this.myLibraryClass);
+        break;
 
-/* Логіка перемикання між головною сторінкою, та сторінкою колекцій */ 
-    #navBtnsToggle () {
-        const disable = REFS.headerHomeBtn.disabled;
-        REFS.headerHomeBtn.disabled = !disable;
-        REFS.headerMyLibBtn.disabled = disable;
-        REFS.headerLogo.classList.toggle('disabled');
-        REFS.searchFormContainer.classList.toggle(this.hiderClass);
-        REFS.collectionsBtnsContainer.classList.toggle(this.hiderClass);
-        REFS.headerContainer.classList.toggle(this.myLibraryClass);
+        case 'library':
+            REFS.headerHomeBtn.disabled = false;
+            REFS.headerMyLibBtn.disabled = true;
+            REFS.searchFormContainer.classList.add(this.hiderClass);
+            REFS.collectionsBtnsContainer.classList.remove(this.hiderClass);
+            REFS.headerContainer.classList.add(this.myLibraryClass);
+        break;
+
+        case 'search':
+            REFS.headerHomeBtn.disabled = false;
+            REFS.headerMyLibBtn.disabled = false;
+            REFS.searchFormContainer.classList.remove(this.hiderClass);
+            REFS.collectionsBtnsContainer.classList.add(this.hiderClass);
+            REFS.headerContainer.classList.remove(this.myLibraryClass);
+        break;
+        }
+
+        this.#modalHandler.setCurrentSitePage ({ page: this.#currentSitePage });
     }
 
 /* Логіка перемикання між колекцією watched, та колекцією queue */ 
@@ -235,11 +252,6 @@ export default class SiteEngine {
             this.#paginator.off('afterMove', this.#paginatorAfterCallback);
             // this.#paginator.off('beforeMove', this.#paginatorBeforeCallback);
         }
-    }
-
-    /* Обробка невдалого пошуку */
-    #onSearchFault () {
-        this.#handleHome({ isInit: true });
     }
 
     /* Перевірка, чи користувач новий */
