@@ -14,6 +14,7 @@ export default class SiteEngine {
     #watchedCallback;
     #paginator;
     #paginatorAfterCallback;
+    #paginatorBeforeCallback;
 
     constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler }) {
         this.#trendingHandler = trendingHandler;
@@ -44,16 +45,15 @@ export default class SiteEngine {
         if ( !isInit ) {
             this.#navBtnsToggle();
         }
-        this.#checkPaginatorOldCallback();
+        
         try {
-            const result = await this.#trendingHandler.getTrendingMoviesPage({ page: 1 });
-        if (result && result.totalResults && result.totalResults > 20) {
-            this.#paginator.setItemsPerPage(20);
-            this.#paginator.setTotalItems(result.totalResults);
+            const source = await this.#trendingHandler.getTrendingMoviesPage({ page: 1 });
+            
+            this.#resetPaginator({ source: source, itemsPerPage: 20 });
             this.#paginatorAfterCallback = this.#trendingHandler.getTrendingMoviesPage.bind(this.#trendingHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ page: page }));
-        }
-        this.#paginator.reset();
+        
+        
         }
         catch (error) {
             console.log(error.message);
@@ -77,16 +77,12 @@ export default class SiteEngine {
         return false;
         } 
         
-        this.#checkPaginatorOldCallback();
         try {
-            const result = await this.#searchHandler.getMoviesBySearch({query: searchQuery, page: 1});
-            if (result && result.totalResults && result.totalResults > 20) {
-                this.#paginator.setItemsPerPage(20);
-                this.#paginator.setTotalItems(result.totalResults);
-                this.#paginatorAfterCallback = this.#searchHandler.getMoviesBySearch.bind(this.#searchHandler);
-            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ query: searchQuery, page: page }));  
-            }
-            this.#paginator.reset();
+            const source = await this.#searchHandler.getMoviesBySearch({query: searchQuery, page: 1});
+
+            this.#resetPaginator({ source: source, itemsPerPage: 20 });
+            this.#paginatorAfterCallback = this.#searchHandler.getMoviesBySearch.bind(this.#searchHandler);
+            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ query: searchQuery, page: page }));
         }
         catch (error) {
             console.log(error.message);
@@ -103,17 +99,15 @@ export default class SiteEngine {
         } 
         
         this.#collectionsBtnsToggle ();
-        
-        this.#checkPaginatorOldCallback();
+
         try {
-            const result = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.watched, page: 1 });
-            if (result && result.totalResults && result.totalResults > 9) {
-                this.#paginator.setItemsPerPage(9);
-                this.#paginator.setTotalItems(result.totalResults);
-                this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
+            const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.watched, page: 1 });
+            
+            this.#resetPaginator({ source: source, itemsPerPage: 9 });
+            this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.watched, page: page }));   
-            }
-            this.#paginator.reset();
+            // }
+            // this.#paginator.reset();
         }
         catch (error) {
             console.log(error.message);
@@ -125,16 +119,14 @@ export default class SiteEngine {
 
         this.#collectionsBtnsToggle ();
 
-        this.#checkPaginatorOldCallback();
         try {
-            const result = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
-            if (result && result.totalResults && result.totalResults > 9) {
-                this.#paginator.setItemsPerPage(9);
-                this.#paginator.setTotalItems(result.totalResults);
-                this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
-                this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.queue, page: page }));   
-            }
-            this.#paginator.reset();
+            const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
+
+            this.#resetPaginator({ source: source, itemsPerPage: 9 });
+            this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
+            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.queue, page: page }));   
+            // }
+            // this.#paginator.reset();
         }
         catch (error) {
             console.log(error.message);
@@ -192,10 +184,30 @@ export default class SiteEngine {
           this.#paginator = new Pagination ('pagination', paginatorOptions);
     }
 
+    #resetPaginator ({ source, itemsPerPage }) {
+        this.#checkPaginatorOldCallback();
+        let totalItems;
+        if(!source) {
+            totalItems = 0;
+        } else {
+            totalItems = source.totalResults;
+        }
+
+        this.#paginator.setItemsPerPage(itemsPerPage);
+        this.#paginator.reset(totalItems);
+
+        if( totalItems <= itemsPerPage) {
+            REFS.paginator.classList.add('js-hidden');
+        } else if ( REFS.paginator.classList.contains('js-hidden')) {
+            REFS.paginator.classList.remove('js-hidden');
+        } 
+    }
+
 /* Прибирання eventListener з пагінації */
     #checkPaginatorOldCallback () {
         if (this.#paginator && this.#paginatorAfterCallback) {
             this.#paginator.off('afterMove', this.#paginatorAfterCallback);
+            // this.#paginator.off('beforeMove', this.#paginatorBeforeCallback);
         }
     }
 }
