@@ -23,14 +23,14 @@ export default function cardParser ({ genres, poster_path, release_date, title, 
         <source srcset="${image}, 1x, ${imageRetina}, 2x" type="image/jpeg">
         <img class="movie-card_img" src= "${image}" alt="${poster}"  loading="lazy">
     </picture>
-    <h2 class="movie-card_title">${title}</h2>
+    <h2 class="movie-card_title" >${title}</h2>
     <div class="movie-card_info">
-    <p class = "movie-card_genres">
+    <p class = "movie-card_genres" title = "genres">
         ${genres.join(', ')}
         </p>
         <p class="movie-card_symbol">|</p>
-        <p class="movie-card_date">${release_date}</p>
-        <p class="movie-card_avarage__accent">${vote_average}</p>
+        <p class="movie-card_date" title = "release year">${release_date}</p>
+        <p class="movie-card_avarage__accent" title ="vote average">${vote_average}</p>
     </div>
 </article></a>`;
 }
