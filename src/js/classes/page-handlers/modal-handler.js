@@ -12,11 +12,13 @@ export default class ModalHandler {
     #addToQueueCallback;
     #addToWatchedCallback;
     #languageSet;
+    #notifyer;
     
-    constructor ({ apiService, markupRender, languageSet, collectionsService }) {
+    constructor ({ apiService, markupRender, languageSet, collectionsService, notifyer }) {
         this.#apiService = apiService;
         this.#markupRender = markupRender;
         this.#languageSet = languageSet;
+        this.#notifyer = notifyer;
         this.#collectionsService = collectionsService;
         this.#markupRender.setModalHandler({ modalHandler: this });
     }
