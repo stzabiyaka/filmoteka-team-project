@@ -4,8 +4,13 @@ export default class MoviesApiService {
     #API_KEY;
     #BASE_URL;
     #currentLanguage;
+    #languageSet;
     #spinner;
-    constructor ({language = 'default'}) {
+    #genres = {
+        default: undefined,
+        ukrainian: undefined,
+    };
+    constructor ({languageSet}) {
         this.#API_KEY = '704d5b04a49684ea4810e36d12ae79df';
         this.#BASE_URL = 'https://api.themoviedb.org/3';
         this.URL_PARAMETERS = {
@@ -18,9 +23,9 @@ export default class MoviesApiService {
                 default: 'en-US',
                 ukrainian: 'uk-UA'
         }
-        this.genres = null;
         this.#spinner = new Spinner();
-        this.setCurrentLanguage({ language: this.LANGUAGES[language] });
+        this.#languageSet = languageSet;
+        // this.#setCurrentLanguage();
     }
 
 /* Отримання даних з API за визначеним запитом - базовий метод усього класу */
@@ -37,13 +42,18 @@ export default class MoviesApiService {
 
 /* Отримання об'екту з масивом id та відповідних назв жанрів */
     async getGenres () {
-        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.genres}?api_key=${this.#API_KEY}&language=${this.#currentLanguage}`;
-        const genres = await this.#getData(url);
-        this.genres = genres.genres;
+        const urlDef = `${this.#BASE_URL}/${this.URL_PARAMETERS.genres}?api_key=${this.#API_KEY}&language=${this.LANGUAGES.default}`;
+        const def = this.#getData(urlDef);
+        const urlUkr = `${this.#BASE_URL}/${this.URL_PARAMETERS.genres}?api_key=${this.#API_KEY}&language=${this.LANGUAGES.ukrainian}`;
+        const ukr = this.#getData(urlUkr);
+        const result = await Promise.all([def, ukr]);
+        this.#genres.default = result[0].genres;
+        this.#genres.ukrainian = result[1].genres;
     }
 
 /* Отримання об'екту з масивом об'ектів популярних фільмів */
     async getTrendingMovies ({ page = 1 }) {
+        this.#setCurrentLanguage();
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.trending}?api_key=${this.#API_KEY}&page=${page}&language=${this.#currentLanguage}`;
         const movies = await this.#getData(url);
         this.#normalizeGenres(movies.results);
@@ -52,6 +62,7 @@ export default class MoviesApiService {
 
 /* Отримання об'екту з масивом об'ектів фільмів за пошуковим запитом */
     async searchMovies ({ query, page = 1 }) {
+        this.#setCurrentLanguage();
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.search}?api_key=${this.#API_KEY}&language=${this.#currentLanguage}&query=${query}&page=${page}&include_adult=false`;
         const movies = await this.#getData(url);
         this.#normalizeGenres(movies.results);
@@ -60,6 +71,7 @@ export default class MoviesApiService {
 
 /* Отримання об'екту одного фільма за id */
     async getMovie ({ movieId }) {
+        this.#setCurrentLanguage();
         const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.movieDetails}/${movieId}?api_key=${this.#API_KEY}&language=${this.#currentLanguage}`;
         const movie = await this.#getData(url);
         this.#flatGenres(movie);
@@ -77,7 +89,7 @@ export default class MoviesApiService {
     #normalizeGenres(movies) {
         movies.forEach(movie => {
             movie.genre_ids = movie.genre_ids.map(genre => {
-                const genreObj = this.genres.find(element => element.id === genre);
+                const genreObj = this.#genres[this.#languageSet.getCurrentLanguage()].find(element => element.id === genre);
                 return genreObj.name;
             });
             movie['genres'] = movie['genre_ids'];
@@ -91,9 +103,8 @@ export default class MoviesApiService {
     }
 
 /* Встановлення поточної мови запиту */ 
-    setCurrentLanguage({language}) {
-        this.#currentLanguage = Object.values(this.LANGUAGES).includes(language) ? language : this.LANGUAGES.default;
-        this.getGenres();
+    #setCurrentLanguage() {
+        this.#currentLanguage = this.LANGUAGES[this.#languageSet.getCurrentLanguage ()];
     }
 
 /* Отримання відео одного  фільму */
@@ -102,5 +113,4 @@ export default class MoviesApiService {
         const video = await this.#getData(url);        
         return video;
     }
-
 }

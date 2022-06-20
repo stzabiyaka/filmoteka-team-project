@@ -15,27 +15,29 @@ export default class SiteEngine {
     #notifyer;
     #languageSet;
     #isUserNew;
+    #apiService;
 /* Колбеки для eventListeners */
     #queueCallback;
     #watchedCallback;
     #paginatorAfterCallback;
 
-    constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler, notifyer, languageSet }) {
+    constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler, notifyer, languageSet, apiService }) {
         this.#trendingHandler = trendingHandler;
         this.#collectionHandler = collectionHandler;
         this.#modalHandler = modalHandler;
         this.#searchHandler = searchHandler;
         this.#languageSet = languageSet;
         this.#notifyer = notifyer;
+        this.#apiService = apiService;
         this.#isUserNew = this.#languageSet.getIsUserNew();
         this.hiderClass = 'js-hidden';
         this.myLibraryClass = 'my-library';
-        this.#init();
-        this.#handleHome({ isInit: true });    
+        this.#init().then(this.#handleHome({ isInit: true })).catch(console.log);
+            
     }
 
 /* Ініціалізація головної сторінки сайта */ 
-    #init () {
+    async #init () {
         REFS.headerLogo.addEventListener('click', this.#handleHome.bind(this));
         REFS.headerHomeBtn.addEventListener('click', this.#handleHome.bind(this));
         REFS.headerMyLibBtn.addEventListener('click', this.#handleWatched.bind(this, {isFromHome: true}) );
@@ -47,6 +49,10 @@ export default class SiteEngine {
               }, 2000);
             
         }
+
+        
+            await this.#apiService.getGenres();
+        
     }
 
 /* Формування та логіка головної сторінки сайта */ 
