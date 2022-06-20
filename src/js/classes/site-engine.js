@@ -142,9 +142,9 @@ export default class SiteEngine {
     }
 
 /* Формування відображення та логіка модального вікна */ 
-    #handleModal ({ content }) {
-        console.log('MODAL LOADED');
-    }
+    // #handleModal ({ content }) {
+    //     console.log('MODAL LOADED');
+    // }
 
 /* Логіка перемикання між головною сторінкою, та сторінкою колекцій */ 
     #navBtnsToggle () {
@@ -191,6 +191,8 @@ export default class SiteEngine {
 
           this.#paginator = new Pagination ('pagination', paginatorOptions);
     }
+
+/* Прибирання eventListener з пагінації */
     #checkPaginatorOldCallback () {
         if (this.#paginator && this.#paginatorAfterCallback) {
             this.#paginator.off('afterMove', this.#paginatorAfterCallback);
