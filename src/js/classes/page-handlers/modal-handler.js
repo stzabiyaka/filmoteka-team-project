@@ -11,11 +11,12 @@ export default class ModalHandler {
     #movieBtnCallback;
     #addToQueueCallback;
     #addToWatchedCallback;
+    #languageSet;
     
     constructor ({ apiService, markupRender, languageSet, collectionsService }) {
         this.#apiService = apiService;
         this.#markupRender = markupRender;
-        this.#captions = languageSet.captions;
+        this.#languageSet = languageSet;
         this.#collectionsService = collectionsService;
         this.#markupRender.setModalHandler({ modalHandler: this });
     }
@@ -23,7 +24,8 @@ export default class ModalHandler {
     async modalOpen(evt) {
         if(evt.target === evt.currentTarget) {
     return;
-        }        
+        }
+        this.#captions = this.#languageSet.captions;        
         const selectedElements = evt.path;        
         
         
