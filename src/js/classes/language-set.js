@@ -9,6 +9,7 @@ export default class LanguageSet {
     #languageSelector;
     captions;
     #languageSelectorActive;
+    #paginator;
     constructor ({ userPreferences }) {
         this.#userPreferences = userPreferences;
         this.#isUserNew = this.#userPreferences.getIsUserNew();
@@ -34,6 +35,10 @@ export default class LanguageSet {
         const selectedLanguage = this.#languageSelector.value;
         this.#currentLanguage = selectedLanguage;
         this.#setCurrentLanguage({ language: selectedLanguage });
+        if(this.#paginator) {
+            const currentPage = this.#paginator.getCurrentPage();
+            this.#paginator.movePageTo(currentPage);
+        }
     }
 
     get captions () {
@@ -46,5 +51,9 @@ export default class LanguageSet {
 
     getIsUserNew () {
         return this.#isUserNew;
+    }
+
+    setPaginator ({ paginator }) {
+        this.#paginator = paginator;
     }
 }

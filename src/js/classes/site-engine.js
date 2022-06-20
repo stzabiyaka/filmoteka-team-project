@@ -43,6 +43,7 @@ export default class SiteEngine {
         REFS.headerMyLibBtn.addEventListener('click', this.#handleWatched.bind(this, {isFromHome: true}) );
         REFS.searchForm.addEventListener('input', debounce(this.#handleSearch.bind(this), 300));
         this.#createPaginator();
+        this.#languageSet.setPaginator({ paginator: this.#paginator});
         if (this.#isUserNew) {
             setTimeout(() => {     
                 this.#notifyNewUser();
