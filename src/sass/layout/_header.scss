@@ -1,7 +1,16 @@
 .site-header {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
     height: 230px;
     max-width: $mobile;
+    min-width: 300px;
     margin: 0 auto;
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -30,6 +39,12 @@
         }
     }
     
+    @include respondTo(tablet) {
+        padding-top: 45px;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
     @media screen and (min-width: ($tablet + 1)) {
         max-width: $desktop;
         height: 216px;
@@ -91,25 +106,16 @@
     &__container {
         display: flex;
         flex-wrap: nowrap;
-        padding-top: 44px;
-        margin-right: 20px;
-        margin-left: 20px;
         align-items: center;
         justify-content: center;
-        margin-bottom: 60px;
-
-        @include respondTo(tablet) {
-        padding-top: 49px;
-        margin-right: 32px;
-        margin-bottom: 40px;
-        }
     } 
  }
 
 .site-header-nav {
+    margin-left: auto;
     &__buttons{
         display: flex;
-        margin-left: auto;
+        
         
     }
     
@@ -149,13 +155,14 @@
         }
     }
 
-    &:hover {
+    &:hover, &:focus {
         color: rgba(255, 107, 1, 0.8);
     }
     
     }
 }
 .site-logo {
+    align-items: center;
     text-decoration: none;
     pointer-events: auto;
     
@@ -176,24 +183,19 @@
         fill: none;
            
         @include respondTo(tablet) {
-            margin-right: 10px;
+            margin-right: 8px;
         }
     }
     
     &__name {
+        display: inline-block;
         font-weight: 500;
         font-size: 30px;
-        line-height: 35px;
-            
+        line-height: 1.172;
         color: getColor('background-primary');
 
         @media screen and (max-width: 499px) {
             display: none;
-        }
-
-        @include respondTo(tablet) {
-            display: flex;
-            align-items: center;            
         }
     }    
 }
@@ -201,16 +203,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto; 
+    margin: auto;
+    margin-top: 40px; 
     width: 280px;
+    min-width: 280px;
     height: 20px;
     background: transparent;
+    border-bottom: 1px solid getColor('text-secondary');
 }
 .search-form__input {
-    height: 20px;
+    height: 100%;
     background: transparent;
     border: 0;
-    border-bottom: 1px solid getColor('text-secondary');
+    
     width: 280px;
     color: getColor('text-secondary');
 
@@ -229,43 +234,48 @@
         }
 }
 
+.search-form__icon {
+    width: 12px;
+    height: 12px;
+    stroke: getColor('text-secondary');
+    fill: none;
+}
+
 .collections-nav {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 60px;
+
+    @include respondTo(tablet) {
+        margin-top: 40px;
+    }
     
     &__button{
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 130px;
-        height: 44px;
+        @extend .button;
+        @extend .button--inverse;
+
         margin-right: 20px;
-        border: 1px solid #FFFFFF;
-        border-radius: 5px;
-        font-family: inherit;
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 16px;
-        text-transform: uppercase;
-        color: getColor('text-secondary');
-        background-color: transparent;
+        
         @include cssTransition(background-color box-shadow);
 
         &:last-child {
                 margin-right: 0;
             }
 
-        &:disabled {
-            background-color: getColor('accent');
-            border: none;
+        &:hover, &:focus {
+            @extend .button--shadow;
+            color: getColor('accent');
+            border-color: getColor('accent');
         }
 
-        &:hover {
-            box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
-            background-color: getColor('accent')
+        &:disabled {
+            @extend .button--accent;
+            &:hover {
+                color: white;
+            }
         }
+        
      @include respondTo(tablet) {
             width: 152px;
             height: 44px;
@@ -277,34 +287,50 @@
     }
 }
 
-.user-btns-container {
+.user-interacnion__container {
     display: flex;
     align-items: center;
-    margin-top: 20px;
-    margin-right: 20px;
+    margin-top: auto;
 }
 
-.language-select {
+.user-interaction__btns-container {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+}
+
+.language-selector {
     margin-left: auto;
     margin-right: 10px;
-    width: 32px;
+    width: 40px;
     height: 24px;
     border-radius: 5px;
+    color: getColor('text-secondary');
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.language-selector__option {
+    display: block;
+    background-color: getColor('text-primary');
 }
 
 .theme-button {
+    display: block;
     width: 24px;
     height: 24px;
     border-radius: 5px;
-    display: block;
-    background-image: linear-gradient(135deg, white, #02023a);
+    background-image: linear-gradient(135deg, getColor('text-secondary'), getColor('text-primary'));
     border: none;
     border-radius: 5px;
-    transition: all 0.25s ease-in;
+    cursor: pointer;
+    @include cssTransition( transform border);
     &:hover {
         transform: scale(110%);
         background-image: none;
         background-color: #02023a;
+        border: 1px solid getColor('text-secondary');
 
         &.theme-dark {
             background-color: #FFFFFF;

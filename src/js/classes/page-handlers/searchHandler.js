@@ -8,9 +8,9 @@ export default class SearchHandler {
         this.#markupRender = markupRender;
     }
 
-    getMoviesBySearch ({ query, page = 1 }){
+    async getMoviesBySearch ({ query, page = 1 }){
         const loader = this.#apiService.searchMovies.bind(this.#apiService, { query: query, page: page });
-        this.#markupRender.renderLiblary({ loader: loader });
-
+        const response = await this.#markupRender.renderLiblary({ loader: loader });
+        return response;
     }
 }

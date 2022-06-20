@@ -4,10 +4,13 @@ import SwitchSiteCaptions from "./utilities/switch-site-captons";
 export default class LanguageSet {
     #currentLanguage;
     #captionsSwitcher;
+    #userPreferences;
+    #isUserNew;
     captions;
     constructor ({ userPreferences }) {
-        
-        this.#currentLanguage = userPreferences.getPreferences().language;
+        this.#userPreferences = userPreferences;
+        this.#isUserNew = this.#userPreferences.getIsUserNew();
+        this.#currentLanguage = this.#userPreferences.getPreferences().language;
         this.#captionsSwitcher = new SwitchSiteCaptions();
         this.captions = CAPTIONS[this.#currentLanguage];
         if (this.#currentLanguage !== 'default') {
@@ -26,5 +29,9 @@ export default class LanguageSet {
 
     getCurrentLanguage () {
         return this.#currentLanguage;
+    }
+
+    getIsUserNew () {
+        return this.#isUserNew;
     }
 }

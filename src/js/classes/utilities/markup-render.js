@@ -9,13 +9,14 @@ export default class MarkupRender {
     #libraryTarget = REFS.libraryContainer;
     #modalTarget = REFS.modalContainer;
     #notifyer;
+    #languageSet;
     #captions;
     #modalHandler;
     #modalCallback;
 
     constructor({ notifyer, languageSet }) {
         this.#notifyer = notifyer;
-        this.#captions = languageSet.captions;        
+        this.#languageSet = languageSet;        
     }
 
     setModalHandler({ modalHandler }) {
@@ -23,6 +24,8 @@ export default class MarkupRender {
     }
 
     async renderLiblary({ loader, content }) {
+        
+        this.#captions = this.#languageSet.captions;
         
         if (this.#modalCallback) {
             this.#libraryTarget.removeEventListener('click', this.#modalCallback);
@@ -35,7 +38,7 @@ export default class MarkupRender {
             this.#libraryTarget.innerHTML = markup;
             this.#modalCallback = this.#modalHandler.modalOpen.bind(this.#modalHandler);
             this.#libraryTarget.addEventListener('click', this.#modalCallback);
-            return true;
+            return { totalResults: response.total_results };
         }
         catch {
             const message = 'technicalFault';
@@ -44,6 +47,9 @@ export default class MarkupRender {
     }
 
     async renderModal({ loader, content }) {
+
+        this.#captions = this.#languageSet.captions;
+
         const response = await loader(content);
         try {
             const markup = modalCardMarkUp({ ...response, captions: this.#captions });
@@ -52,11 +58,10 @@ export default class MarkupRender {
         }
         catch {
            
-            const message = this.#captions.notifications.technicalFault;
-            this.#modalTarget.innerHTML = `<p class="modal__notification">${message}</p>`
+            const message = 'technicalFault';
+            this.#notifyer.renderNotification({ message: message, tsget: 'modal' });
         }
             
     }
-
 
 }

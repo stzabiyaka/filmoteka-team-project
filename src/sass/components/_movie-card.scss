@@ -1,6 +1,9 @@
 
 .movie-card {
+    margin-top: 20px;
+  
     cursor: pointer;
+  
     transform: scale(1);
     transition: transform 250ms linear;
 
@@ -8,10 +11,7 @@
     &:focus {
      transform: scale(1.03);
     }
-    
-    @include respondTo (mobile){
-        margin-top: 20px;
-    }
+        
 
     @include respondTo (tablet){
         @include flexBasis (2, 32px);
@@ -43,8 +43,6 @@
 
      &_title {
             text-transform: uppercase;
-            font-family: $fontPrimary;
-            color: getColor('text-primary');
             line-height: 1.33;
             margin-top: 8px;
             margin-bottom: 5px;

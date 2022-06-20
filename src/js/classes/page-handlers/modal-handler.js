@@ -9,6 +9,9 @@ export default class ModalHandler {
     #closeBtnCallback;
     #escBtnCallback;
     #movieBtnCallback;
+    #addToQueueCallback;
+    #addToWatchedCallback;
+    
     constructor ({ apiService, markupRender, languageSet, collectionsService }) {
         this.#apiService = apiService;
         this.#markupRender = markupRender;
@@ -36,7 +39,9 @@ export default class ModalHandler {
         this.#closeBtnCallback = this.#onClickBackdrop.bind(this);
         this.#escBtnCallback = this.#onCloseEscKey.bind(this);
         this.#movieBtnCallback = this.#onMovieClick.bind(this);
-
+        this.#addToWatchedCallback = this.#onAddToWatchedBtnClick.bind(this);
+        this.#addToQueueCallback = this.#onAddToQueueBtnClick.bind(this);
+                
         REFS.backdrop.addEventListener('click', this.#closeBtnCallback);
         window.addEventListener('keydown', this.#escBtnCallback);
 
@@ -44,46 +49,45 @@ export default class ModalHandler {
         const content = { movieId: this.#articleID };
         
         const result = this.#markupRender.renderModal({ loader: loader, content: content });
-        if (result) {
+        
+        result.then(result => {
+            if (result) {
             this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
             this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
             REFS.modalCardThumbBtn.classList.remove('js-hidden');
-            REFS.modalAddToWatchedBtn.addEventListener('click', this.#onAddToWatchedBtnClick.bind(this));
-            REFS.modalAddToQueueBtn.addEventListener('click', this.#onAddToQueueBtnClick.bind(this));
-            if (result.homepage) {
-                REFS.modalOpenMovie.classList.remove('js-hidden');
-                REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);
-            }
+            REFS.modalAddToWatchedBtn.addEventListener('click', this.#addToWatchedCallback);
+            REFS.modalAddToQueueBtn.addEventListener('click', this.#addToQueueCallback);
+            REFS.modalOpenMovie.classList.remove('js-hidden');
+            REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);            
         }
+        }).catch(error=>console.log(error));
+        
     }
     
-
-    #onOpenMovieClick(evt) {
-        evt.preventDefault();
-        // очищаємо вміст в модалці і включаємо фільм
-        console.log('відкриваємо фільм');
-}
 
     #onAddToWatchedBtnClick(evt) {
         
         if (REFS.modalAddToWatchedBtn.textContent === this.#captions.buttons.addToWatched.add) {
             this.#collectionsService.addToCollection({ collection: USER_COLLECTIONS.watched, id: this.#articleID });
-            this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });   
+            this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
+            this.#refreshCollectionPage({ collection: USER_COLLECTIONS.watched, target: evt.currentTarget });
             return;
         }
         this.#collectionsService.removeFromCollection({ collection: USER_COLLECTIONS.watched, id: this.#articleID });
-        this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });       
+        this.#checkBtnState({ button: 'modalAddToWatchedBtn', collection: USER_COLLECTIONS.watched, btnTarget: 'addToWatched' });
+        this.#refreshCollectionPage({ collection: USER_COLLECTIONS.watched, target: evt.currentTarget });
     }
 
     #onAddToQueueBtnClick(evt) {
-
         if (REFS.modalAddToQueueBtn.textContent === this.#captions.buttons.addToQueue.add) {
             this.#collectionsService.addToCollection({ collection: USER_COLLECTIONS.queue, id: this.#articleID });
-            this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });    
+            this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
+            this.#refreshCollectionPage({ collection: USER_COLLECTIONS.queue, target: evt.currentTarget });
             return;
         }
         this.#collectionsService.removeFromCollection({ collection: USER_COLLECTIONS.queue, id: this.#articleID });
         this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
+        this.#refreshCollectionPage({ collection: USER_COLLECTIONS.queue, target: evt.currentTarget });
     }
 
     #checkBtnState({ button, collection, btnTarget }) {
@@ -96,30 +100,67 @@ export default class ModalHandler {
 
     #onClickBackdrop(evt) {
         if (
-          evt.target === evt.currentTarget ||
-          evt.target.parentElement === REFS.modalCloseBtn
+            evt.target === evt.currentTarget ||
+            evt.target.parentElement === REFS.modalCloseBtn ||
+            evt.target.parentElement.parentElement === REFS.modalCloseBtn ||
+            evt.target === REFS.modalCloseBtn
         ) {
-          this.#closeModal();
+            this.#closeModal();
         }
-      }
+        }
 
     #onCloseEscKey(evt) {
         if (evt.key === 'Escape') {
-          this.#closeModal();
+            this.#closeModal();
         }
-      }
+    }
 
     #closeModal() {
         REFS.backdrop.classList.add('js-hidden');
         // REFS.modalContainer.innerHTML = '';
-        REFS.body.classList.remove('js-modal-is-open');
+        REFS.body.classList.remove('js-modal-is-open');        
+        REFS.modalOpenMovie.classList.add('js-hidden');
         REFS.backdrop.removeEventListener('click', this.#closeBtnCallback);
-        window.removeEventListener('keydown', this.#escBtnCallback);
-      }
+        window.removeEventListener('keydown', this.#escBtnCallback);        
+        REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
+        this.#hiddeBtnsThumb();
+    }
 
     #onMovieClick(evt) {
-    evt.preventDefault();
+        evt.preventDefault();
     // очищаємо вміст в модалці і включаємо фільм
+        REFS.modalContainer.innerHTML = '';
+        this.#hiddeBtnsThumb();
     console.log('відкриваємо фільм');
-}
+    }
+    
+    #hiddeBtnsThumb() {
+        REFS.modalCardThumbBtn.classList.add('js-hidden');
+        REFS.modalAddToWatchedBtn.removeEventListener('click', this.#addToWatchedCallback);
+        REFS.modalAddToQueueBtn.removeEventListener('click', this.#addToQueueCallback);
+    }
+
+    async #refreshCollectionPage({ collection, target }) {
+        this.#collectionsService.load();
+        const bundle = this.#collectionsService.getCollectionIdsBundle({ collection });
+        const loader = this.#apiService.getMoviesBundle.bind(this.#apiService);
+        
+        if (!REFS.headerMyLibBtn.disabled) { return }
+        
+        if (
+            REFS.collectionWatchedBtn.disabled &&
+            target === REFS.modalAddToWatchedBtn
+        ) {
+            await this.#markupRender.renderLiblary({ loader: loader, content: bundle });
+            return;
+        }
+
+        if (
+            REFS.collectionQueueBtn.disabled &&
+            target === REFS.modalAddToQueueBtn
+            ) {
+            await this.#markupRender.renderLiblary({ loader: loader, content: bundle });
+            return;
+        }      
+    }
 }

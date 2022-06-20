@@ -1,6 +1,7 @@
 .library__section {
     padding-top: 20px;
     padding-bottom: 40px;
+    min-width: 300px;
     
     @include respondTo(tablet) {
         padding-top: 60px;
@@ -11,7 +12,7 @@
 .library__container {
     display: flex;
     flex-direction: column;
-    min-height: 50vh;
+    min-height: 40vh;
     margin-top: -20px;
 
     @include respondTo(tablet) {
@@ -25,4 +26,13 @@
     @include respondTo(desktop) {
         margin-left: -16px;
     }
+}
+
+.welcome {
+    display: block;
+    margin: auto;
+
+    font-size: 30px;
+    color: getColor('text-footer');
+
 }

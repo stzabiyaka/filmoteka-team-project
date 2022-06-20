@@ -29,21 +29,32 @@ const LANGUAGES = {
     modalAddToQueueBtn: document.querySelector('#queue-add'),
     modalCloseBtn: document.querySelector('#modal-close'),
     teamLink: document.querySelector('#team'),
-    paginator: document.querySelector('#paginator'),
+    paginator: document.querySelector('#pagination'),
     languageSelector: document.querySelector('#language'),
-    themeButton: document.querySelector('theme'),
+    themeButton: document.querySelector('#theme'),
     modalOpenMovie : document.querySelector('#modal-open-movie'),
     spinner: document.querySelector('#spinner'),
     modalCardThumbBtn: document.querySelector('.modal-card-thumb__btn'),
+    copyright: document.querySelector('#copyright'),
+    notifyerDisplay: document.querySelector('#notifyer-display'),
 }
 
   const CAPTIONS = {
     default: {
         buttons: {
             home: 'home',
+            homeTitle: 'Go to home page',
             library: 'my library',
+            libraryTitle: 'Go to your library',
             watched: 'watched',
+            watchedTitle: 'Go to your Watched collection',
             queue: 'queue',
+            queueTitle: 'Go to your Queue collection',
+            languageSelectorTitle: 'Select language',
+            themeBtnTitle: {
+                lightsOn: 'Turn light on',
+                lightsOff: 'Turn light off'
+            },
             addToWatched: {
                 add: 'add to Watched',
                 remove: 'remove from Watched',
@@ -57,10 +68,10 @@ const LANGUAGES = {
         searchPlaceholder: 'Search movies',
         notifications: {
             searchFault: 'Sorry, there are no movies, matching your search query. Please try again.',
-            searchMinLength : 'Please, enter at least two symbols to start search.',
+            searchMinLength : 'Please, enter at least one symbol to start search.',
             searchRestricted : 'Please, do not enter any special characters.',
             technicalFault: 'Oops (( looks, like some technical troubles occured.',
-            collectionEmpty: 'Looks like you vave not add any movie to this collection, yet.',
+            collectionEmpty: 'Looks like you have not add any movie to this collection, yet.',
             
             languageNotify: 'Цей сайт доступний також укріїнською мовою',
         },
@@ -80,9 +91,18 @@ const LANGUAGES = {
     ukrainian: {
         buttons: {
             home: 'головна',
+            homeTitle: 'На головну',
             library: 'моя фільмотека',
+            libraryTitle: 'До вашої фільмотеки',
             watched: 'переглянуті',
+            watchedTitle: 'До вашої колекції Переглянуті',
             queue: 'у черзі',
+            queueTitle: 'До вашої колекції Черга',
+            languageSelectorTitle: 'Оберіть мову',
+            themeBtnTitle: {
+                lightsOn: 'Увімкнути світло',
+                lightsOff: 'Вимкнути світло'
+            },
             addToWatched: {
                 add: 'додати до переглянутих',
                 remove: 'видалити з переглянутих',

@@ -1,0 +1,96 @@
+.notifyer__container {
+  visibility: visible;
+  opacity: 1;
+  width: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 10px;
+  color: getColor('text-secondary');
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+
+  transition: opacity 1000ms ease-in-out 250ms;
+
+  &.js-hidden {
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+    color: getColor('text-secondary');
+
+}
+
+  @media screen and (min-width: 500px) {
+      padding-left: 74px;
+  }
+
+ 
+}
+
+.language{
+  margin-top: auto;
+  margin-left: auto;
+  width: 200px;
+  height: 40px;
+  padding: 5px;
+
+  color: getColor('text-secondary');
+  border-radius: 6px;
+  
+  background-image: linear-gradient(to bottom, rgba(5, 5, 87, 0.685) 45%, rgba(105, 105, 5, 0.788) 55%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.753);
+
+@include respondTo(tablet) {
+  border-radius: 3px;
+  width: 250px;
+}
+
+@include respondTo(desktop) {
+  border-radius: 8px;
+  width: 280px;
+}
+}
+
+.warning{
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
+  min-width: 150px;
+  height: 40px;
+  padding: 5px;
+
+  color: getColor('warning');
+  border-radius: 3px;
+  
+  background-color: rgba(34, 33, 33, 0.438);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.74);
+
+  @include respondTo(tablet) {
+    border-radius: 3px;
+  }
+
+  @include respondTo(desktop) {
+    border-radius: 8px;
+  }
+
+}
+
+.notifyer__message {
+  display: block;
+  margin: auto;
+  font-size: 20px;
+  line-height: 1.25;
+  text-align: center;
+  color: rgb(172, 171, 171);
+
+  @include respondTo(tablet) {
+    font-size: 30px;
+  }
+
+  @include respondTo(tablet) {
+    font-size: 40px;
+  }
+}

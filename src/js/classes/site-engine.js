@@ -1,4 +1,8 @@
+import Pagination from "tui-pagination";
 import { REFS, USER_COLLECTIONS } from "../site-constants";
+import { paginatorTemplate } from "../templates/paginator-tmpl";
+
+const debounce = require('lodash.debounce');
 
 export default class SiteEngine {
     
@@ -7,19 +11,27 @@ export default class SiteEngine {
     #collectionHandler;
     #modalHandler;
     #searchHandler;
-/* Колбки для eventListeners */
+    #paginator;
+    #notifyer;
+    #languageSet;
+    #isUserNew;
+/* Колбеки для eventListeners */
     #queueCallback;
     #watchedCallback;
+    #paginatorAfterCallback;
 
-    constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler }) {
+    constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler, notifyer, languageSet }) {
         this.#trendingHandler = trendingHandler;
         this.#collectionHandler = collectionHandler;
         this.#modalHandler = modalHandler;
         this.#searchHandler = searchHandler;
+        this.#languageSet = languageSet;
+        this.#notifyer = notifyer;
+        this.#isUserNew = this.#languageSet.getIsUserNew();
         this.hiderClass = 'js-hidden';
         this.myLibraryClass = 'my-library';
         this.#init();
-        this.#handleHome();    
+        this.#handleHome({ isInit: true });    
     }
 
 /* Ініціалізація головної сторінки сайта */ 
@@ -27,40 +39,79 @@ export default class SiteEngine {
         REFS.headerLogo.addEventListener('click', this.#handleHome.bind(this));
         REFS.headerHomeBtn.addEventListener('click', this.#handleHome.bind(this));
         REFS.headerMyLibBtn.addEventListener('click', this.#handleWatched.bind(this, {isFromHome: true}) );
-        REFS.searchForm.addEventListener('input', this.#handleSearch.bind(this));
+        REFS.searchForm.addEventListener('input', debounce(this.#handleSearch.bind(this), 300));
+        this.#createPaginator();
+        if (this.#isUserNew) {
+            setTimeout(() => {     
+                this.#notifyNewUser();
+              }, 2000);
+            
+        }
     }
 
 /* Формування та логіка головної сторінки сайта */ 
-    #handleHome () { 
-        this.#navBtnsToggle();
+    async #handleHome ({ isInit }) { 
         if (this.#queueCallback || this.#watchedCallback) {
             this.#removeCollectionsListeners();
         }
-        // REFS.paginator.classList.add(this.hiderClass);
         
-        this.#trendingHandler.getTrendingMoviesPage({ page: 1 });
+        if ( !isInit ) {
+            this.#navBtnsToggle();
+        }
+        
+        try {
+            const source = await this.#trendingHandler.getTrendingMoviesPage({ page: 1 });
+            
+            this.#resetPaginator({ source: source, itemsPerPage: 20 });
+            this.#paginatorAfterCallback = this.#trendingHandler.getTrendingMoviesPage.bind(this.#trendingHandler);
+            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ page: page }));
+        
+        
+        }
+        catch (error) {
+            console.log(error.message);
+        }
+        
+        
     }
 
 /* Формування відображення результату пошуку фільмів за пошуковим запитом */ 
-    #handleSearch (event) {
-        const searchQuery = event.currentTarget.value.trim();
-        if ((/^([\s%&#@])*$/.test(searchQuery)) || (/^([>(.*?)<])*$/.test(searchQuery))) {
-            (console.log('недопустимі символи & теги')) 
-            return;
-        }
-        if ((/^([а-яА-ЯёЁ]*)$/.test(searchQuery))) {
-           (console.log('тільки кирилиця'))
-        } 
-        if(searchQuery.length < 2) {
-            console.log('Search was not successful. Please, enter another movie name and try again');
+    async #handleSearch () {
+        // console.log(event.currentTarget);
+        const searchQuery = REFS.searchForm.value.trim();
+       
+        if(!searchQuery.length) {
+            const message = this.#languageSet.captions.notifications.searchMinLength;
+            this.#notifyer.showNotification({ message: message });
+            this.#onSearchFault();
         return false;
         } 
-           console.log (`HOORAY! Found total_results movies`);
-           this.#searchHandler.getMoviesBySearch({query: searchQuery, page: 1});
+
+        if (this.#isUserNew && this.#languageSet.getCurrentLanguage() === 'default' && (/^([а-яА-ЯёЁ]*)$/i.test(searchQuery))) {
+            this.#notifyNewUser();
+            this.#isUserNew = false;
+         }
+        
+        try {
+            const source = await this.#searchHandler.getMoviesBySearch({query: searchQuery, page: 1});
+            if(!source || !source.totalResults) {
+                const message =  this.#languageSet.captions.notifications.searchFault;
+                this.#notifyer.showNotification({ message: message });
+                this.#onSearchFault();
+            }
+            this.#resetPaginator({ source: source, itemsPerPage: 20 });
+            this.#paginatorAfterCallback = this.#searchHandler.getMoviesBySearch.bind(this.#searchHandler);
+            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ query: searchQuery, page: page }));
+        }
+        catch (error) {
+            console.log(error.message);
+        }
+
+           
     }
 
 /* Формування відображення та логіка колекції watched */ 
-    #handleWatched ({ page = 1, isFromHome }) {
+    async #handleWatched ({ page = 1, isFromHome }) {
         if (isFromHome) {
          this.#navBtnsToggle(); 
          this.#addCollectionsBtnsListeners();
@@ -68,21 +119,44 @@ export default class SiteEngine {
         } 
         
         this.#collectionsBtnsToggle ();
-        
-        this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.watched, page: 1 });
+
+        try {
+            const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.watched, page: 1 });
+            
+            this.#resetPaginator({ source: source, itemsPerPage: 9 });
+            this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
+            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.watched, page: page }));   
+            // }
+            // this.#paginator.reset();
+        }
+        catch (error) {
+            console.log(error.message);
+        }
     }
 
 /* Формування відображення та логіка колекції queue */ 
-    #handleQueue ({ page = 1 }) {
+    async #handleQueue ({ page = 1 }) {
+
         this.#collectionsBtnsToggle ();
 
-        this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
+        try {
+            const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
+
+            this.#resetPaginator({ source: source, itemsPerPage: 9 });
+            this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
+            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.queue, page: page }));   
+            // }
+            // this.#paginator.reset();
+        }
+        catch (error) {
+            console.log(error.message);
+        }
     }
 
 /* Формування відображення та логіка модального вікна */ 
-    #handleModal ({ content }) {
-        console.log('MODAL LOADED');
-    }
+    // #handleModal ({ content }) {
+    //     console.log('MODAL LOADED');
+    // }
 
 /* Логіка перемикання між головною сторінкою, та сторінкою колекцій */ 
     #navBtnsToggle () {
@@ -90,10 +164,9 @@ export default class SiteEngine {
         REFS.headerHomeBtn.disabled = !disable;
         REFS.headerMyLibBtn.disabled = disable;
         REFS.headerLogo.classList.toggle('disabled');
-        REFS.headerContainer.classList.toggle(this.myLibraryClass);
         REFS.searchFormContainer.classList.toggle(this.hiderClass);
         REFS.collectionsBtnsContainer.classList.toggle(this.hiderClass);
-
+        REFS.headerContainer.classList.toggle(this.myLibraryClass);
     }
 
 /* Логіка перемикання між колекцією watched, та колекцією queue */ 
@@ -115,5 +188,58 @@ export default class SiteEngine {
     #removeCollectionsListeners () {
         REFS.collectionQueueBtn.removeEventListener('click', this.#queueCallback);
         REFS.collectionWatchedBtn.removeEventListener('click', this.#watchedCallback);
+    }
+    #createPaginator () {
+        const paginatorOptions = {
+            totalItems: 0,
+            itemsPerPage: 0,
+            visiblePages: 5,
+            page: 1,
+            centerAlign: true,
+            firstItemClassName: 'btn__pagination',
+            lastItemClassName: 'btn__pagination',
+            template: paginatorTemplate,
+          };
+
+          this.#paginator = new Pagination ('pagination', paginatorOptions);
+    }
+
+    #resetPaginator ({ source, itemsPerPage }) {
+        this.#checkPaginatorOldCallback();
+        let totalItems;
+        if(!source) {
+            totalItems = 0;
+        } else {
+            totalItems = source.totalResults;
+        }
+
+        this.#paginator.setItemsPerPage(itemsPerPage);
+        this.#paginator.reset(totalItems);
+
+        if( totalItems <= itemsPerPage) {
+            REFS.paginator.classList.add('js-hidden');
+        } else if ( REFS.paginator.classList.contains('js-hidden')) {
+            REFS.paginator.classList.remove('js-hidden');
+        } 
+    }
+
+/* Прибирання eventListener з пагінації */
+    #checkPaginatorOldCallback () {
+        if (this.#paginator && this.#paginatorAfterCallback) {
+            this.#paginator.off('afterMove', this.#paginatorAfterCallback);
+            // this.#paginator.off('beforeMove', this.#paginatorBeforeCallback);
+        }
+    }
+
+    /* Обробка невдалого пошуку */
+    #onSearchFault () {
+        this.#handleHome({ isInit: true });
+    }
+
+    /* Перевірка, чи користувач новий */
+
+    #notifyNewUser () {
+            const message = this.#languageSet.captions.notifications.languageNotify;
+            this.#notifyer.showNotification({ message: message, type: 'language' });
     }
 }

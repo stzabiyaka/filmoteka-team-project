@@ -45,7 +45,8 @@ export default class CollectionService extends LocalStorageService {
         this.currentPage[collection] = page;
         const startPosition = (this.currentPage[collection] - 1) * this.perPage;
         const bundleArray = this.#totalPages[collection] === 1 ? this.#collections[collection] : this.#collections[collection].slice(startPosition, (startPosition + this.perPage));
-        return { bundle: bundleArray, totalPages: this.#totalPages[collection], page: this.currentPage[collection]};
+        const totalResults = this.#collections[collection].length;
+        return { bundle: bundleArray, totalPages: this.#totalPages[collection], page: this.currentPage[collection], total_results: totalResults};
     }
 
 /* Додавання нового id фільму до визначеної коллекції користувача, та запис колекцій у localStorage */
@@ -66,6 +67,7 @@ export default class CollectionService extends LocalStorageService {
         const position = this.#collections[collection].indexOf(id)
         this.#collections[collection].splice(position, 1);
         this.#saveCollections();
+        this.#totalPagesCount();
     }
 
 /* Перевірка, чи існує визначена коллекція користувача */
@@ -115,6 +117,8 @@ isInCollection({collection, id = null}) {
 #saveCollections () {
     this.save(this.#collections);
 }
+
+/* Розрахунок кількості сторінок у кожній колекції */
 #totalPagesCount () {
     const keys = Object.keys(this.#collections);
     keys.forEach(key => {
