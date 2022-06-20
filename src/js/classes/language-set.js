@@ -8,6 +8,7 @@ export default class LanguageSet {
     #isUserNew;
     #languageSelector;
     captions;
+    #languageSelectorActive;
     constructor ({ userPreferences }) {
         this.#userPreferences = userPreferences;
         this.#isUserNew = this.#userPreferences.getIsUserNew();
@@ -19,6 +20,8 @@ export default class LanguageSet {
             this.#setCurrentLanguage ({ language: this.#currentLanguage });
         }
         this.#languageSelector.addEventListener('change', this.#selectLanguage.bind(this));
+        this.#languageSelectorActive = document.querySelector(`option[value="${this.#currentLanguage}"]`);
+        this.#languageSelectorActive.selected = true;
     }
 
     #setCurrentLanguage ({ language }) {
