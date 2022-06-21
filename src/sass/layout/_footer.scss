@@ -34,23 +34,6 @@
     }
 }
 
-// =========декоративні вертикальні лінії============
-
-.text__line {
-    &:before {
-        content: '';
-        border-right: 2px solid getColor('text-footer');
-        margin-right: 9px;
-        margin-left: 5px;
-    }
-
-    &:after {
-        content: '';
-        border-right: 2px solid getColor('text-footer');
-        margin-left: 9px;
-        margin-right: 5px;
-    }
-}
 
 // ========перехід тексту при mobile-first=========
 
