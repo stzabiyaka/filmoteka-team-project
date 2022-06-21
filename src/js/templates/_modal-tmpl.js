@@ -40,15 +40,14 @@ export function modalCardMarkUp({
   const popularityData = Number(popularity).toFixed(2);
 
   return `
-        <h2 class="visually_hidden">Movie's Details</h2>
-        <div class="modal-card-thumb__img" >         
+        <article class="modal-card-thumb__img" >         
             <div class="modal-card__picture" >                 
                 <img class="modal-card__img  lazyload" data-sizes="auto" data-src="${imgSrcMobile}" data-srcset="${imgSrcMobile} 342w, ${imgSrcTablet} 780w" alt="${title}" loading="lazy" type="image/jpeg" id="img-in-modal-card-picture"/>
             </div>
-        </div>
-        <div class="modal-card-thumb__content">
+        </article>
+        <article class="modal-card-thumb__content">
             <div class="modal-card-info">
-                <h3 class="modal-card-info__title">${title}</h3>
+                <h2 class="modal-card-info__title">${title}</h2>
                 <div class="modal-card__thumb--characteristics">
                     <ul class="modal-card-info__characteristics">
                         <li class="modal-card-info__characteristics--item">
@@ -80,7 +79,7 @@ export function modalCardMarkUp({
                 <p class="modal-card-info-about__description">${overview}</p>
             </div>
             
-        </div>
+        </article>
     
     `;
 }
