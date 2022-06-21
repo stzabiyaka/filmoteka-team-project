@@ -42,6 +42,7 @@ export default class SiteEngine {
         REFS.headerHomeBtn.addEventListener('click', this.#handleHome.bind(this));
         REFS.headerMyLibBtn.addEventListener('click', this.#handleWatched.bind(this, {isFromHome: true}) );
         REFS.searchForm.addEventListener('input', debounce(this.#handleSearch.bind(this), 300));
+        REFS.teamLink.addEventListener('click', this.#handleTeam.bind(this));
         this.#createPaginator();
         this.#languageSet.setPaginator({ paginator: this.#paginator});
         this.#modalHandler.setPaginator({ paginator: this.#paginator});
@@ -260,5 +261,12 @@ export default class SiteEngine {
     #notifyNewUser () {
             const message = this.#languageSet.captions.notifications.languageNotify;
             this.#notifyer.showNotification({ message: message, type: 'language' });
+    }
+
+    /* Відобращення команди */
+    #handleTeam(evt) {
+        evt.preventDefault();
+        this.#modalHandler.openModalShell();
+        REFS.backdropTeam.classList.remove('js-hidden');
     }
 }

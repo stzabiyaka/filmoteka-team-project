@@ -37,6 +37,7 @@ const LANGUAGES = {
     modalCardThumbBtn: document.querySelector('.modal-card-thumb__btn'),
     copyright: document.querySelector('#copyright'),
     notifyerDisplay: document.querySelector('#notifyer-display'),
+    backdropTeam:document.querySelector('#backdrop-team'),
 }
 
   const CAPTIONS = {

@@ -24,14 +24,25 @@ export default class ModalHandler {
         this.#collectionsService = collectionsService;
         this.#markupRender.setModalHandler({ modalHandler: this });
     }
+    
+    openModalShell() {        
+        REFS.body.classList.add('js-modal-is-open');
+        this.#closeBtnCallback = this.#onClickBackdrop.bind(this);
+        this.#escBtnCallback = this.#onCloseEscKey.bind(this);
+        REFS.backdrop.addEventListener('click', this.#closeBtnCallback);
+        window.addEventListener('keydown', this.#escBtnCallback);
+    }
+
 
     async modalOpen(evt) {
         if(evt.target === evt.currentTarget) {
     return;
         }
+        this.openModalShell();
+        REFS.backdrop.classList.remove('js-hidden');
+
         this.#captions = this.#languageSet.captions;        
         const selectedElements = evt.path;        
-        
         
         selectedElements.forEach(el => {
             if (el.className === 'movie-card') {
@@ -39,17 +50,10 @@ export default class ModalHandler {
                 return this.#articleID;
             }
         });
-        REFS.backdrop.classList.remove('js-hidden');
-        REFS.body.classList.add('js-modal-is-open');
-
-        this.#closeBtnCallback = this.#onClickBackdrop.bind(this);
-        this.#escBtnCallback = this.#onCloseEscKey.bind(this);
+        
         this.#movieBtnCallback = this.#onMovieClick.bind(this);
         this.#addToWatchedCallback = this.#onAddToWatchedBtnClick.bind(this);
-        this.#addToQueueCallback = this.#onAddToQueueBtnClick.bind(this);
-                
-        REFS.backdrop.addEventListener('click', this.#closeBtnCallback);
-        window.addEventListener('keydown', this.#escBtnCallback);
+        this.#addToQueueCallback = this.#onAddToQueueBtnClick.bind(this);   
 
         const loader = this.#apiService.getMovie.bind(this.#apiService);
         const content = { movieId: this.#articleID };
@@ -123,6 +127,7 @@ export default class ModalHandler {
 
     #closeModal() {
         REFS.backdrop.classList.add('js-hidden');
+        REFS.backdropTeam.classList.add('js-hidden');
         // REFS.modalContainer.innerHTML = '';
         REFS.body.classList.remove('js-modal-is-open');        
         REFS.modalOpenMovie.classList.add('js-hidden');        
@@ -134,8 +139,7 @@ export default class ModalHandler {
 
     #onMovieClick(evt) {
         evt.preventDefault();
-    
-        this.#hiddeBtnsThumb();
+        
         REFS.modalOpenMovie.classList.add('js-hidden');
         REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
         
