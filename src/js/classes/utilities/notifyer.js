@@ -45,6 +45,6 @@ export default class Notifyer {
         this.#notifications = this.#languageSet.captions.notifications;
         let messageContainer;
         messageContainer = target ? this.#modalTarget : this.#renderTarget;
-        messageContainer.innerHTML = `<p class="notifyer__message">${this.#notifications[message]}</p>`;
+        messageContainer.innerHTML = `<div class="notifyer__message">${this.#notifications[message]}</div>`;
     }
 }
