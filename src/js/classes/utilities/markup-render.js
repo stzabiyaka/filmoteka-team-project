@@ -56,6 +56,9 @@ export default class MarkupRender {
 
         const response = await loader(content);
         try {
+            if (response.homepage) {
+                REFS.modalOpenMovie.classList.remove('js-hidden');
+            }
             const markup = modalCardMarkUp({ ...response, captions: this.#captions });
             this.#modalTarget.innerHTML = markup;
             return true;
