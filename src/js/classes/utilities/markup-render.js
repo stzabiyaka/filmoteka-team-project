@@ -9,6 +9,7 @@ export default class MarkupRender {
     #modalTemplate = renderModalCard;
     #libraryTarget = REFS.libraryContainer;
     #modalTarget = REFS.modalContainer;
+    #movieTarget;
     #notifyer;
     #languageSet;
     #captions;
@@ -73,11 +74,11 @@ export default class MarkupRender {
         this.#captions = this.#languageSet.captions;
 
         const response = await loader(content);
-        // console.log('response', response);
+        
         try {
-            // console.log('response', response);
-                const markup = modalMovieMarkUp({ ...response, captions: this.#captions });
-                this.#modalTarget.innerHTML = markup;
+            const markup = modalMovieMarkUp({ ...response, captions: this.#captions });
+            this.#movieTarget = REFS.modalContainer.firstElementChild;
+            this.#movieTarget.innerHTML = markup;
             return markup;
             } 
         catch {

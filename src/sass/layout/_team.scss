@@ -109,3 +109,28 @@
         fill: getColor('text-secondary');
     }
 }
+
+// =====стилізація кнопки закриття =====
+.team__close-btn{
+display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: transparent;
+    border: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+.team__close-btn:hover,
+.team__close-btn:focus {
+    border: 1px solid getColor('accent');
+    border-radius: 5px;
+}
+
+.team__close-btn:hover .modal-card__close-btn-icon,
+.team__close-btn:focus .modal-card__close-btn-icon {
+    stroke: getColor('accent');
+}

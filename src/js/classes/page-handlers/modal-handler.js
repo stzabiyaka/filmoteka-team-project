@@ -24,14 +24,25 @@ export default class ModalHandler {
         this.#collectionsService = collectionsService;
         this.#markupRender.setModalHandler({ modalHandler: this });
     }
+    
+    openModalShell() {        
+        REFS.body.classList.add('js-modal-is-open');
+        this.#closeBtnCallback = this.onClickBackdrop.bind(this);
+        this.#escBtnCallback = this.#onCloseEscKey.bind(this);        
+        window.addEventListener('keydown', this.#escBtnCallback);
+    }
+
 
     async modalOpen(evt) {
         if(evt.target === evt.currentTarget) {
     return;
         }
+        this.openModalShell();
+        REFS.backdrop.classList.remove('js-hidden');
+        REFS.backdrop.addEventListener('click', this.#closeBtnCallback);
+
         this.#captions = this.#languageSet.captions;        
         const selectedElements = evt.path;        
-        
         
         selectedElements.forEach(el => {
             if (el.className === 'movie-card') {
@@ -39,17 +50,10 @@ export default class ModalHandler {
                 return this.#articleID;
             }
         });
-        REFS.backdrop.classList.remove('js-hidden');
-        REFS.body.classList.add('js-modal-is-open');
-
-        this.#closeBtnCallback = this.#onClickBackdrop.bind(this);
-        this.#escBtnCallback = this.#onCloseEscKey.bind(this);
+        
         this.#movieBtnCallback = this.#onMovieClick.bind(this);
         this.#addToWatchedCallback = this.#onAddToWatchedBtnClick.bind(this);
-        this.#addToQueueCallback = this.#onAddToQueueBtnClick.bind(this);
-                
-        REFS.backdrop.addEventListener('click', this.#closeBtnCallback);
-        window.addEventListener('keydown', this.#escBtnCallback);
+        this.#addToQueueCallback = this.#onAddToQueueBtnClick.bind(this);   
 
         const loader = this.#apiService.getMovie.bind(this.#apiService);
         const content = { movieId: this.#articleID };
@@ -104,12 +108,16 @@ export default class ModalHandler {
         REFS[button].textContent = this.#captions.buttons[btnTarget].add;
     }
 
-    #onClickBackdrop(evt) {
+    onClickBackdrop(evt) {
+        
         if (
             evt.target === evt.currentTarget ||
             evt.target.parentElement === REFS.modalCloseBtn ||
             evt.target.parentElement.parentElement === REFS.modalCloseBtn ||
-            evt.target === REFS.modalCloseBtn
+            evt.target === REFS.modalCloseBtn ||
+            evt.target.parentElement === REFS.teamCloseBtn ||
+            evt.target.parentElement.parentElement === REFS.teamCloseBtn ||
+            evt.target === REFS.teamCloseBtn
         ) {
             this.#closeModal();
         }
@@ -123,20 +131,20 @@ export default class ModalHandler {
 
     #closeModal() {
         REFS.backdrop.classList.add('js-hidden');
+        REFS.backdropTeam.classList.add('js-hidden');
         // REFS.modalContainer.innerHTML = '';
         REFS.body.classList.remove('js-modal-is-open');        
-        REFS.modalOpenMovie.classList.add('js-hidden');
-        REFS.modalContainer.parentElement.classList.remove('js-video-open');
+        REFS.modalOpenMovie.classList.add('js-hidden');        
         REFS.backdrop.removeEventListener('click', this.#closeBtnCallback);
         window.removeEventListener('keydown', this.#escBtnCallback);        
         REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
+        REFS.backdropTeam.removeEventListener('click', this.onClickBackdrop.bind(this));
         this.#hiddeBtnsThumb();
     }
 
     #onMovieClick(evt) {
         evt.preventDefault();
-    
-        this.#hiddeBtnsThumb();
+        
         REFS.modalOpenMovie.classList.add('js-hidden');
         REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
         
@@ -146,8 +154,7 @@ export default class ModalHandler {
         const result = this.#markupRender.renderMovie({ loader: loader, content: content });
         
         result.then(result => {
-            if (result) {
-                REFS.modalContainer.parentElement.classList.add('js-video-open');
+            if (result) {              
         }
         }).catch(error=>console.log(error));
 

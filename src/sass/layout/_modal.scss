@@ -23,7 +23,6 @@
 //модалка фільму
 
 .modal-card {
-    opacity: 1;
     background-color: getColor('background-primary');
     z-index: 101;
     position: absolute;
@@ -64,17 +63,6 @@
         padding-right: 16px;
     }
 
-        &.js-video-open {
-            height: 238px;
-
-            @include respondTo(tablet){
-                height: 552px;
-            }
-            @include respondTo(desktop){
-                height: 558px;
-            }
-    
-        }
 }
 
 // кнопка закриття модального вікна
@@ -152,7 +140,7 @@
 .modal-card__picture{
     width: 100%;
     height: 100%;
-    background-color: getColor('background-secondary');    
+    background-color: url(./../images/poster.svg);    
 }
 
 //стилі для тегу img
@@ -284,7 +272,7 @@ flex-direction: column;
 
 .modal-card-info__characteristics--name {
     color: getColor('modal-text-secondary');
-    width: 108px;
+    width: 116px;
 }
 
 
@@ -301,6 +289,7 @@ flex-direction: column;
     line-height: 1.167em;
     text-align: center;
     vertical-align: middle;
+    align-self: center;
     display: inline-block;
     width: 36px;
     height: 16px;
@@ -308,8 +297,7 @@ flex-direction: column;
 }
 
 .modal-card-info__data--slesh {
-    color: getColor('modal-text-secondary');
-    margin-right: 3px;
+    color: getColor('modal-text-secondary');    
 }
 
 .modal-card-info__data--vote {
@@ -321,6 +309,7 @@ flex-direction: column;
 .modal-card-info__data--votes {
     background-color: getColor('background-secondary');
     color: getColor('text-primary');
+    margin-left: 3px;
 }
 
 .modal-card-info__data--popularity {
@@ -483,12 +472,17 @@ flex-direction: column;
 //---------------------------------
 
 .iframe{
-    width: 240px;
     object-fit: cover;
+    height: 357px;
+    width: 240px;
+    
     @include respondTo(tablet) {
-        width: 596px;            
-    }    
+        width: 264px;
+        height: 374px;
+    }
+    
     @include respondTo(desktop) {
-        width: 782px;            
+        width: 375px;
+        height: 478px;
     }
 }
