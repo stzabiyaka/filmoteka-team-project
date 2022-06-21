@@ -13,6 +13,7 @@ import LanguageSet from './js/classes/language-set';
 import Notifyer from './js/classes/utilities/notifyer';
 import ToTopButton from './js/classes/utilities/to-top-button';
 import ThemeButton from './js/classes/utilities/theme-button';
+import 'lazysizes';
 
 const userPreferences = new UserPreferencesService('userPreferences');
 const userCollectionsService = new CollectionService('userCollections');

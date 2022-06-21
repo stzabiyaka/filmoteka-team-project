@@ -5,6 +5,7 @@ const paginatorTemplate = {
                 '<a href="#" class="btn__pagination btn__arrow-{{type}}">' +
                   '<div class="icon-arrow-{{type}}"></div>' +
                 '</a>',
+
                 // moveButton: type => {
                 //   let template = '';
               

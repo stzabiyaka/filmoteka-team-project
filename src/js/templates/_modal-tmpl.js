@@ -44,7 +44,7 @@ export function modalCardMarkUp({
 
         <div class="modal-card-thumb__img" >         
             <div class="modal-card__picture" >                 
-                <img srcset="${imgSrc}" src="${imgSrcMobile}" alt="${title}" loading="lazy" class="modal-card__img" type="image/jpeg" id="img-in-modal-card-picture"/>
+                <img class="modal-card__img  lazyload" data-sizes="auto" data-src="${imgSrcMobile}" data-srcset="${imgSrcMobile} 342w, ${imgSrcTablet} 780w" alt="${title}" loading="lazy" type="image/jpeg" id="img-in-modal-card-picture"/>
             </div>
         </div>
         <div class="modal-card-thumb__content">
