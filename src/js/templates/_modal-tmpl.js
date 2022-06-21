@@ -48,7 +48,7 @@ export function modalCardMarkUp({
         </div>
         <div class="modal-card-thumb__content">
             <div class="modal-card-info">
-                <h2 class="modal-card-info__title">${title}</h2>
+                <h3 class="modal-card-info__title">${title}</h3>
                 <div class="modal-card__thumb--characteristics">
                     <ul class="modal-card-info__characteristics">
                         <li class="modal-card-info__characteristics--item">
