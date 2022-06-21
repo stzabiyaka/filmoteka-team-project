@@ -33,6 +33,7 @@ export default class SiteEngine {
         this.hiderClass = 'js-hidden';
         this.myLibraryClass = 'my-library';
         this.#init().then(this.#handleHome()).catch(console.log);
+        
             
     }
 
@@ -44,7 +45,6 @@ export default class SiteEngine {
         REFS.searchForm.addEventListener('input', debounce(this.#handleSearch.bind(this), 300));
         REFS.teamLink.addEventListener('click', this.#handleTeam.bind(this));
         this.#createPaginator();
-        console.dir(this.#paginator);
         this.#languageSet.setPaginator({ paginator: this.#paginator});
         this.#modalHandler.setPaginator({ paginator: this.#paginator});
         if (this.#isUserNew) {

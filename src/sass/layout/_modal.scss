@@ -77,13 +77,13 @@
     background-color: transparent;
     border: transparent;
     padding: 0;    
-    cursor: pointer;    
-}
-
-.modal-card__close-btn:hover,
-.modal-card__close-btn:focus{
+    cursor: pointer; 
+    
+    &:hover,
+    &:focus{
     border: 1px solid getColor('accent');
     border-radius: 5px;
+}
 }
 
 .modal-card__close-btn:hover .modal-card__close-btn-icon,
@@ -179,17 +179,17 @@
         top: 262px;
     }
 
+    &:hover,
+    &:focus {
+    background-color: getColor('accent');
+    transform: scale(1.5);
+}
+
     &.js-hidden{
         visibility: hidden;
         pointer-events: none;
         opacity: 0;
     }
-}
-
-.modal-card__open-movie:hover,
-.modal-card__open-movie:focus {
-    background-color: getColor('accent');
-    transform: scale(1.5);
 }
 
 //стилі для іконки відкриття фільму
@@ -268,52 +268,52 @@ flex-direction: column;
 
 .modal-card-info__characteristics {
     width: 108px;
+
+    &--name {
+        color: getColor('modal-text-secondary');
+        width: 116px;
+    }
 }
 
-.modal-card-info__characteristics--name {
-    color: getColor('modal-text-secondary');
-    width: 116px;
-}
+
 
 
 //блок значень характеристик фільму
 //-----------------------------------------------
 .modal-card-info__data{
     width: 100%;
-}
 
+    &--vote, &--votes {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 16px;
 
+        line-height: 1.167;
+        text-align: center;
+        border-radius: 5px;
+    }
 
-.modal-card-info__data--vote,
-.modal-card-info__data--votes {
-    line-height: 1.167em;
-    text-align: center;
-    vertical-align: middle;
-    align-self: center;
-    display: inline-block;
-    width: 36px;
-    height: 16px;
-    border-radius: 5px;
-}
+    &--vote {
+        color: getColor('text-secondary');
+        background-color: getColor('accent');
+        margin-right: 3px;
+    }
 
-.modal-card-info__data--slesh {
-    color: getColor('modal-text-secondary');    
-}
+    &--votes {
+        background-color: getColor('background-secondary');
+        color: getColor('text-primary');
+        margin-left: 3px;
+    }
 
-.modal-card-info__data--vote {
-    color: getColor('text-secondary');
-    background-color: getColor('accent');
-    margin-right: 3px;
-}
+    &--slesh {
+        color: getColor('modal-text-secondary');    
+    }
 
-.modal-card-info__data--votes {
-    background-color: getColor('background-secondary');
-    color: getColor('text-primary');
-    margin-left: 3px;
-}
-
-.modal-card-info__data--popularity {
-    line-height: 1.167em;
+    &--popularity {
+        line-height: 1.167em;
+    }
 }
 
 //спільні стилі для блоку назв характеристик і для блоку значень
@@ -321,11 +321,11 @@ flex-direction: column;
 
 .modal-card-info__characteristics--item{
     display: flex;
-    flex-direction: row;
-}
+    align-items: center;
 
-.modal-card-info__characteristics--item:not(:last-child){
-    margin-bottom: 8px;
+    &:not(:last-child){
+        margin-bottom: 8px;
+    }
 }
 
 .modal-card-info__characteristics{
@@ -408,9 +408,6 @@ flex-direction: column;
 .modal-card-btn__watched{
     @extend .button;
     font-family: $fontPrimary;
-    font-size: 12px;
-    line-height: 1.333;
-    font-weight: 500;
     cursor: pointer;
     width: 110px;
 
