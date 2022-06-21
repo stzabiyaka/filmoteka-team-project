@@ -30,6 +30,8 @@
 
     &--shadow {
         box-shadow: 0 8px 43px rgba(255, 107, 1, 0.6);
+        color: getColor('accent');
+        border-color: getColor('accent');
     }
 
 

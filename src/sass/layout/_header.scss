@@ -277,8 +277,6 @@
 
         &:hover, &:focus {
             @extend .button--shadow;
-            color: getColor('accent');
-            border-color: getColor('accent');
         }
 
         &:disabled {

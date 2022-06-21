@@ -63,6 +63,14 @@
         padding-right: 16px;
     }
 
+    .body.theme-dark & {
+        background-color: getColor('text-primary');
+
+        color: getColor('text-secondary');
+
+        box-shadow: 0 0 50px getColor('text-secondary');
+    }
+
 }
 
 // кнопка закриття модального вікна
@@ -78,7 +86,7 @@
     border: transparent;
     padding: 0;    
     cursor: pointer; 
-    
+
     &:hover,
     &:focus{
     border: 1px solid getColor('accent');
@@ -86,14 +94,19 @@
 }
 }
 
+.modal-card__close-btn-icon {
+    stroke: getColor('text-primary');
+    
+    .body.theme-dark & {
+        stroke: getColor('text-secondary');
+    }
+}
+
 .modal-card__close-btn:hover .modal-card__close-btn-icon,
 .modal-card__close-btn:focus .modal-card__close-btn-icon{
     stroke: getColor('accent');
 }
 
-.modal-card__close-btn-icon {
-    stroke: getColor('text-primary');
-}
 
 //карточка фільму
 //---------------------------------
@@ -411,12 +424,17 @@ flex-direction: column;
     cursor: pointer;
     width: 110px;
 
+    .body.theme-dark & {
+        @extend .button--inverse
+    }
+
     &:hover,
     &:focus{
+        @extend .button--accent;
+        @extend .button--shadow;
+
         color: getColor('text-secondary');
-            background-color: getColor('accent');
-            border-color: transparent;
-            box-shadow: 0 8px 43px rgba(255, 107, 1, 0.6);
+        border: none;
     }
 
     @include respondTo(tablet){

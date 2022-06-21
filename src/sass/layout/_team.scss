@@ -7,6 +7,8 @@
     justify-content: flex-start;
     align-items: center;
     overflow: auto;
+
+    color: inherit;
 }
 
 // =====стилізація заголовку=====
@@ -39,11 +41,14 @@
     border: 1px solid getColor('text-primary');
     border-radius: 5px;
 
+    .body.theme-dark & {
+        border-color: getColor('text-secondary');
+    }
+
     &__name {
         margin-bottom: 5px;
         line-height: 1.2;
         letter-spacing: 0.03;
-        color: getColor('text-primary');
 
     &__profession {
         margin-bottom: 5px;
@@ -77,10 +82,18 @@
     fill: getColor('text-primary');
     transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
+    .body.theme-dark & {
+        fill: getColor('text-secondary');
+    }
+
     &:hover,
     &:focus {
         background-color: getColor('accent');
         fill: getColor('text-secondary');
+
+        .body.theme-dark & {
+            fill: getColor('text-primary');
+        }
     }
 }
 
@@ -108,3 +121,4 @@ display: flex;
 .team__close-btn:focus .modal-card__close-btn-icon {
     stroke: getColor('accent');
 }
+
