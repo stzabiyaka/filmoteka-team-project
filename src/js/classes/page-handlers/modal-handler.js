@@ -66,8 +66,7 @@ export default class ModalHandler {
             this.#checkBtnState({ button: 'modalAddToQueueBtn', collection: USER_COLLECTIONS.queue, btnTarget: 'addToQueue' });
             REFS.modalCardThumbBtn.classList.remove('js-hidden');
             REFS.modalAddToWatchedBtn.addEventListener('click', this.#addToWatchedCallback);
-            REFS.modalAddToQueueBtn.addEventListener('click', this.#addToQueueCallback);
-            REFS.modalOpenMovie.classList.remove('js-hidden');
+            REFS.modalAddToQueueBtn.addEventListener('click', this.#addToQueueCallback);            
             REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);            
         }
         }).catch(error=>console.log(error));
@@ -131,8 +130,7 @@ export default class ModalHandler {
 
     #closeModal() {
         REFS.backdrop.classList.add('js-hidden');
-        REFS.backdropTeam.classList.add('js-hidden');
-        // REFS.modalContainer.innerHTML = '';
+        REFS.backdropTeam.classList.add('js-hidden');        
         REFS.body.classList.remove('js-modal-is-open');        
         REFS.modalOpenMovie.classList.add('js-hidden');        
         REFS.backdrop.removeEventListener('click', this.#closeBtnCallback);
@@ -140,6 +138,7 @@ export default class ModalHandler {
         REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
         REFS.backdropTeam.removeEventListener('click', this.onClickBackdrop.bind(this));
         this.#hiddeBtnsThumb();
+        REFS.modalContainer.innerHTML = '';
     }
 
     #onMovieClick(evt) {
