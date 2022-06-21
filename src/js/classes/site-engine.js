@@ -164,6 +164,14 @@ export default class SiteEngine {
         }
     }
 
+/* Відображення сторінки команди */
+    #handleTeam(evt) {
+    evt.preventDefault();
+    this.#modalHandler.openModalShell();
+    REFS.backdropTeam.classList.remove(this.hiderClass);
+    REFS.backdropTeam.addEventListener('click', this.#modalHandler.onClickBackdrop.bind(this.#modalHandler));        
+}
+
 /* Встановлення стану поточної сторінки сайту */ 
     #setSitePage () {
         this.#modalHandler.setCurrentSitePage ({ page: this.#currentSitePage });
@@ -269,13 +277,5 @@ export default class SiteEngine {
     #notifyNewUser () {
             const message = this.#languageSet.captions.notifications.languageNotify;
             this.#notifyer.showNotification({ message: message, type: 'language' });
-    }
-
-    /* Відобращення команди */
-    #handleTeam(evt) {
-        evt.preventDefault();
-        this.#modalHandler.openModalShell();
-        REFS.backdropTeam.classList.remove('js-hidden');
-        REFS.backdropTeam.addEventListener('click', this.#modalHandler.onClickBackdrop.bind(this.#modalHandler));        
     }
 }
