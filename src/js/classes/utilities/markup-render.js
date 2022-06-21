@@ -1,4 +1,4 @@
-import cardParser from "../../modules/card-parser";
+import cardParser from "../../templates/card-parser";
 import { REFS } from "../../site-constants";
 import { renderModalCard } from "../../templates/modal";
 import { modalCardMarkUp } from "../../templates/_modal-tmpl";

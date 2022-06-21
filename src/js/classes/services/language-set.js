@@ -1,5 +1,5 @@
-import { CAPTIONS, REFS } from "../site-constants";
-import SwitchSiteCaptions from "./utilities/switch-site-captons";
+import { CAPTIONS, REFS } from "../../site-constants";
+import SwitchSiteCaptions from "../utilities/switch-site-captons";
 
 export default class LanguageSet {
     #currentLanguage;

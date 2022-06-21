@@ -18,6 +18,7 @@ export default class MoviesApiService {
             search: 'search/movie',
             movieDetails: 'movie',
             genres: 'genre/movie/list',
+            videos: 'videos',
         }
         this.LANGUAGES = {
                 default: 'en-US',
@@ -40,15 +41,17 @@ export default class MoviesApiService {
         return data;
     }
 
-/* Отримання об'екту з масивом id та відповідних назв жанрів */
+/* Отримання та запис масиву об'ектів з id та відповідними назвами жанрів */
     async getGenres () {
-        const urlDef = `${this.#BASE_URL}/${this.URL_PARAMETERS.genres}?api_key=${this.#API_KEY}&language=${this.LANGUAGES.default}`;
-        const def = this.#getData(urlDef);
-        const urlUkr = `${this.#BASE_URL}/${this.URL_PARAMETERS.genres}?api_key=${this.#API_KEY}&language=${this.LANGUAGES.ukrainian}`;
-        const ukr = this.#getData(urlUkr);
-        const result = await Promise.all([def, ukr]);
-        this.#genres.default = result[0].genres;
-        this.#genres.ukrainian = result[1].genres;
+        const requests = Object.keys(this.#genres).map(key => {
+            return this.#getData(`${this.#BASE_URL}/${this.URL_PARAMETERS.genres}?api_key=${this.#API_KEY}&language=${this.LANGUAGES[key]}`)
+        });
+        const result = await Promise.all(requests);
+        let index = 0;
+        Object.keys(this.#genres).forEach(key => {
+            this.#genres[key] = result[index].genres;
+            index += 1;
+        });
     }
 
 /* Отримання об'екту з масивом об'ектів популярних фільмів */
@@ -84,6 +87,14 @@ export default class MoviesApiService {
         const results = await Promise.all(requests);
         return { results: results, page: page, total_pages: total_pages, total_results: total_results };
     }
+
+/* Отримання відео трейлеру одного  фільму */
+async getVideo({ movieId }) {
+    this.#setCurrentLanguage();
+    const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.movieDetails}/${movieId}/${this.URL_PARAMETERS.videos}?api_key=${this.#API_KEY}&language=${this.#currentLanguage}`;
+    const video = await this.#getData(url);        
+    return video;
+    }
     
 /* Нормалізація масиву назв жанрів фільму за масивом id */    
     #normalizeGenres(movies) {
@@ -105,12 +116,5 @@ export default class MoviesApiService {
 /* Встановлення поточної мови запиту */ 
     #setCurrentLanguage() {
         this.#currentLanguage = this.LANGUAGES[this.#languageSet.getCurrentLanguage ()];
-    }
-
-/* Отримання відео одного  фільму */
-    async getVideo({ movieId }) {
-        const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.movieDetails}/${movieId}/videos?api_key=${this.#API_KEY}&language=${this.#currentLanguage}`;
-        const video = await this.#getData(url);        
-        return video;
     }
 }

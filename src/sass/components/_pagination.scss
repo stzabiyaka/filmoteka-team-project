@@ -91,9 +91,11 @@
 }
 .icon-arrow-first {
     @extend .icon-arrow-prev;
+    background-image: url(../images/icons/arrow-first.svg);
 
 }
 
 .icon-arrow-last {
-    @extend .icon-arrow-next;
+    @extend .icon-arrow-first;
+    transform: rotate(180deg);
 }
