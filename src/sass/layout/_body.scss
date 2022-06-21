@@ -2,7 +2,7 @@ body {
     background-color: getColor('background-primary');;
     font-family: $fontPrimary;
     font-size: 12px;
-    line-height: 1.33em;
+    line-height: 1.334;
     font-weight: 500;
   
     &.js-modal-is-open{
@@ -44,6 +44,6 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 107, 1, 0.8);
+  background-color: #ff6b0871;
   border-radius: 5px;
 }

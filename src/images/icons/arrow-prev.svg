@@ -1,7 +1,4 @@
-<svg aria-hidden="true" style="position:absolute;width:0;height:0" xmlns="http://www.w3.org/2000/svg" overflow="hidden">
-  <defs>
-    <symbol id="icon-arrow-prev" viewBox="0 0 32 32">
-      <path stroke-linejoin="round" stroke-linecap="round" fill="none" stroke="#000000" stroke-width="2.667" d="M25.333 16H6.666M16 25.334l-9.333-9.333L16 6.668"/>
-    </symbol>
-  </defs>
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.6667 8H3.33337" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8.00004 12.6668L3.33337 8.00016L8.00004 3.3335" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

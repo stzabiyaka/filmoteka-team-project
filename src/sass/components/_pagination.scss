@@ -13,26 +13,21 @@
         }
 }
 
-// =======приховування блоку========
-.pagination__container.is-hidden{
-    display: none;
-}
-
 // ===========стиль кнопок===========
-.btn__pagination{
-    font-size: 12px;
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-    border: none;
+.btn__pagination {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     margin: 0px 2px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+
+    border-radius: 5px;
+    border: none;
+    
+    cursor: pointer;
+    
     text-decoration: none;
     background-color: getColor('text-secondary');
     color: getColor('text-primary');
@@ -46,6 +41,14 @@
             background-color: rgba(255, 107, 1, 0.5);
             color: getColor('text-secondary');
         }
+
+    &--more {
+        display: none;
+
+        @include respondTo(tablet) {
+            display: flex;
+        }
+    }
 }
 
 .btn__number--active{
@@ -62,7 +65,7 @@
     }
 
     &--disabled {
-        background-color: transparent;
+        opacity: 0.5;
     }
 }
 
@@ -73,14 +76,21 @@
 
 // ==========стиль svg-іконки==========
 
-.icon-arrow-prev{
+.icon-arrow-prev {
     width: 16px;
     height: 16px;
-    stroke: black;
-    fill: none;
+    background-image: url(../images/icons/arrow-prev.svg);
+    background-size: cover;
 }
 
-.icon-arrow-next{
+.icon-arrow-next {
     @extend .icon-arrow-prev;
     transform: rotate(180deg);
+}
+.icon-arrow-first {
+    @extend .icon-arrow-prev;
+}
+
+.icon-arrow-last {
+    @extend .icon-arrow-next;
 }

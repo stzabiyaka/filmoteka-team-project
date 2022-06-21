@@ -25,13 +25,14 @@ export default class ToTopButton {
     }
 
     
-    scrollToTop() {
-      
-      window.setTimeout( window.scroll({
-            top: 0,
-            behavior: "smooth",
-          }), 250)
-      }
+    scrollToTop() {      
+      setTimeout( () => {
+        window.scroll({
+          top: 0,
+          behavior: "smooth",
+        });
+      }, 250)
+    }
 
 
      
