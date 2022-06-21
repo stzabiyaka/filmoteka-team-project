@@ -1,77 +1,58 @@
 // =====стилізація блоку=====
 .team {
-    background-color: getColor('background-secondary');
-    padding: 15px 0;
+    background-color: transparent;
+    max-height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-
-    @include respondTo(tablet){
-        padding: 30px 0;
-    }
+    overflow: auto;
 }
 
 // =====стилізація заголовку=====
 .team__heading{
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     text-transform: uppercase;
-
-    @include respondTo(tablet) {
-        margin-bottom: 30px;
-    }
 }
 
 // =====стилізація сітки=====
 .team-set {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    max-width: 800px;
+    justify-content: space-between;
 }
 
 // =====стилізація картки=====
 .team-item {
-    flex-basis: calc(100% / 3 - 16px);
-    max-width: 200px;
-    margin: 8px;
+    flex: 1;
+    margin: 5px;
     text-align: center;
 }
 
 .team-photo{
-    border-radius: 5px 5px;
+    border-radius: 5px;
     margin-bottom: 5px;
 }
 
 .team-info {
     padding: 5px;
     border: 1px solid getColor('text-primary');
-    border-radius: 5px 5px;
+    border-radius: 5px;
 
     &__name {
         margin-bottom: 5px;
-
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 1.2em;
-        letter-spacing: 0.03em;
+        line-height: 1.2;
+        letter-spacing: 0.03;
         color: getColor('text-primary');
 
-        @include respondTo(tablet) {
-                font-size: 16px;
-            }
-    }
-
     &__profession {
-        font-size: 12px;
-        line-height: 1.2em;
-        letter-spacing: 0.03em;
+        margin-bottom: 5px;
+        line-height: 1.2;
+        letter-spacing: 0.03;
         color: getColor('accent');
-        @include respondTo(tablet) {
-                font-size: 16px;
-            }
         }
     }
+}
 
 // =====стилізація соц. мереж=====
 .social-list {
@@ -81,9 +62,7 @@
 
 .social-list li:not(:last-child) {
     margin-right: 10px;
-    @include respondTo(tablet) {
-            margin-right: 15px;
-        }
+    
     }
 
 .social-link {
@@ -91,13 +70,8 @@
     justify-content: center;
     align-items: center;
 
-    width: 25px;
-    height: 25px;
-
-    @include respondTo(tablet) {
-            width: 30px;
-            height: 30px;
-        }
+    width: 20px;
+    height: 20px;
 
     border-radius: 5px;
     fill: getColor('text-primary');
@@ -122,12 +96,12 @@ display: flex;
     border: transparent;
     padding: 0;
     cursor: pointer;
-}
 
-.team__close-btn:hover,
-.team__close-btn:focus {
+    &:hover,
+    &:focus {
     border: 1px solid getColor('accent');
     border-radius: 5px;
+}
 }
 
 .team__close-btn:hover .modal-card__close-btn-icon,
