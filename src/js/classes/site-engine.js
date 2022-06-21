@@ -203,6 +203,7 @@ export default class SiteEngine {
         REFS.collectionWatchedBtn.disabled = !disable;
         REFS.collectionQueueBtn.disabled = disable;
     }
+
 /* Логіка додавання та прибирання eventListener на кнопках коллекцій */ 
     #addCollectionsBtnsListeners () {
         this.#queueCallback = this.#handleQueue.bind(this);
@@ -212,10 +213,13 @@ export default class SiteEngine {
          REFS.collectionWatchedBtn.addEventListener('click', this.#watchedCallback);
     }
 
+/* Логіка прибирання eventListener на пагінаторі */ 
     #removeCollectionsListeners () {
         REFS.collectionQueueBtn.removeEventListener('click', this.#queueCallback);
         REFS.collectionWatchedBtn.removeEventListener('click', this.#watchedCallback);
     }
+
+/* Створення нового пагінатора */ 
     #createPaginator () {
         const paginatorOptions = {
             totalItems: 0,
@@ -231,6 +235,7 @@ export default class SiteEngine {
           this.#paginator = new Pagination ('pagination', paginatorOptions);
     }
 
+/* Зміна параметрів пагінатора */ 
     #resetPaginator ({ source, itemsPerPage }) {
         this.#checkPaginatorOldCallback();
         let totalItems;
@@ -258,7 +263,7 @@ export default class SiteEngine {
         }
     }
 
-    /* Перевірка, чи користувач новий */
+    /* Перевірка, та нотифікування щодо мови, якщо користувач новий */
 
     #notifyNewUser () {
             const message = this.#languageSet.captions.notifications.languageNotify;

@@ -5,10 +5,12 @@ export default class ToTopButton {
         this.show();
     }
 
+/* Відображення кнопки */ 
     show() {
       window.addEventListener('scroll', this.checkHandler);
     }
 
+/* Логіка відображення та ховання кнопки */ 
     check() {
         if (document.documentElement.scrollTop > 70) {
           this.button.classList.add('is-visible');
@@ -19,12 +21,13 @@ export default class ToTopButton {
         }
       }
 
+/* Видалення EventListener */ 
     remove() {
       window.removeEventListener('scroll', this.checkHandler);
       alert('removed');
     }
 
-    
+/* Скролл до початку сторінки сайту */     
     scrollToTop() {      
       setTimeout( () => {
         window.scroll({

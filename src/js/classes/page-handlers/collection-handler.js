@@ -14,6 +14,7 @@ export default class CollectionHandler {
         this.#collectionEmptyMessage = 'collectionEmpty';
     }
 
+/* Отримання та відображення поточної сторінки поточної колекції користувача */ 
     async getCollectionMoviesPage ({ collectionName, page = 1 }) {
         if (!this.#collectionsService.isCollectionExist({collection: collectionName})) {
             this.#notifyer.renderNotification({ message: this.#collectionEmptyMessage });

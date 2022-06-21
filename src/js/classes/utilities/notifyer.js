@@ -19,6 +19,7 @@ export default class Notifyer {
         this.#notifications = languageSet.captions.notifications;
     }
 
+/* Відображення повідомлення у контейнері хедера */ 
     showNotification ({ message, type = 'warning' }) {
         if (!message || !Object.keys(this.#notifyerType).includes(type) || this.#isRun) {
             return;
@@ -38,6 +39,7 @@ export default class Notifyer {
           }, this.#timeOut);
     }
 
+/* Рендеринг повідомлення у контейнері фільмотеки/модального вікна */ 
     renderNotification ({ message, target }) {
         if (!message) {
             return;

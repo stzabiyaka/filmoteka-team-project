@@ -17,6 +17,7 @@ export default class ThemeButton {
         REFS.themeButton.addEventListener('click', this.#changeTheme.bind(this));
     }
 
+/* Ініціалізація кнопки при створенні */ 
     #initTheme() {
         this.#captions = this.#languageSet.captions;
         this.#userTheme = this.#userPreferences.getPreferences().theme;
@@ -29,6 +30,7 @@ export default class ThemeButton {
         this.#toggleClass();
     }
 
+/* Зміна теми сайту */ 
     #changeTheme() {
         this.#captions = this.#languageSet.captions;
         this.#toggleClass();
@@ -37,16 +39,18 @@ export default class ThemeButton {
         this.#userPreferences.setTheme({ theme: this.#userTheme});       
     }
 
-
+/* Встановлення титулу кнопки, відповідно до поточної теми */ 
     #setBtnTitle () {
         const switcher = this.#userTheme === 'default' ? 'lightsOff' : 'lightsOn';
         REFS.themeButton.title = this.#captions.buttons.themeBtnTitle[switcher];
     }
 
+/* Інверсія поточної теми сайту */ 
     #inverseTheme () {
         this.#userTheme = this.#userTheme === 'default' ? 'dark' : 'default';        
     }
 
+/* Перемикання класу теми на цільових елементах сайту */ 
     #toggleClass() {
         const values = Object.values(this.#themeRefs);
         for (const value of values) {
