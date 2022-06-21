@@ -10,7 +10,6 @@ export function modalCardMarkUp({
   vote_count,
   popularity,
   genres,
-  homepage,
   captions,
 }) {
   let imgSrcMobile = noPoster;
@@ -38,10 +37,10 @@ export function modalCardMarkUp({
   const originalTitle = captions.movieDetails.title;
   const genre = captions.movieDetails.genre;
   const about = captions.movieDetails.about;
-  const popularityData = popularity.toFixed(2);
+  const popularityData = Number(popularity).toFixed(2);
 
   return `
-
+        <h2 class="visually_hidden">Movie's Details</h2>
         <div class="modal-card-thumb__img" >         
             <div class="modal-card__picture" >                 
                 <img class="modal-card__img  lazyload" data-sizes="auto" data-src="${imgSrcMobile}" data-srcset="${imgSrcMobile} 342w, ${imgSrcTablet} 780w" alt="${title}" loading="lazy" type="image/jpeg" id="img-in-modal-card-picture"/>
