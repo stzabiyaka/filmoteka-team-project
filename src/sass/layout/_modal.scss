@@ -64,17 +64,6 @@
         padding-right: 16px;
     }
 
-        &.js-video-open {
-            height: 238px;
-
-            @include respondTo(tablet){
-                height: 552px;
-            }
-            @include respondTo(desktop){
-                height: 558px;
-            }
-    
-        }
 }
 
 // кнопка закриття модального вікна
@@ -483,12 +472,17 @@ flex-direction: column;
 //---------------------------------
 
 .iframe{
-    width: 240px;
     object-fit: cover;
+    height: 357px;
+    width: 240px;
+    
     @include respondTo(tablet) {
-        width: 596px;            
-    }    
+        width: 264px;
+        height: 374px;
+    }
+    
     @include respondTo(desktop) {
-        width: 782px;            
+        width: 375px;
+        height: 478px;
     }
 }
