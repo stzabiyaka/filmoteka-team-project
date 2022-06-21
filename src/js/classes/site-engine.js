@@ -268,5 +268,6 @@ export default class SiteEngine {
         evt.preventDefault();
         this.#modalHandler.openModalShell();
         REFS.backdropTeam.classList.remove('js-hidden');
+        REFS.backdropTeam.addEventListener('click', this.#modalHandler.onClickBackdrop.bind(this.#modalHandler));        
     }
 }

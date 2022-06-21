@@ -27,9 +27,8 @@ export default class ModalHandler {
     
     openModalShell() {        
         REFS.body.classList.add('js-modal-is-open');
-        this.#closeBtnCallback = this.#onClickBackdrop.bind(this);
-        this.#escBtnCallback = this.#onCloseEscKey.bind(this);
-        REFS.backdrop.addEventListener('click', this.#closeBtnCallback);
+        this.#closeBtnCallback = this.onClickBackdrop.bind(this);
+        this.#escBtnCallback = this.#onCloseEscKey.bind(this);        
         window.addEventListener('keydown', this.#escBtnCallback);
     }
 
@@ -40,6 +39,7 @@ export default class ModalHandler {
         }
         this.openModalShell();
         REFS.backdrop.classList.remove('js-hidden');
+        REFS.backdrop.addEventListener('click', this.#closeBtnCallback);
 
         this.#captions = this.#languageSet.captions;        
         const selectedElements = evt.path;        
@@ -108,12 +108,16 @@ export default class ModalHandler {
         REFS[button].textContent = this.#captions.buttons[btnTarget].add;
     }
 
-    #onClickBackdrop(evt) {
+    onClickBackdrop(evt) {
+        console.log('evt.target', evt.target);
         if (
             evt.target === evt.currentTarget ||
             evt.target.parentElement === REFS.modalCloseBtn ||
             evt.target.parentElement.parentElement === REFS.modalCloseBtn ||
-            evt.target === REFS.modalCloseBtn
+            evt.target === REFS.modalCloseBtn ||
+            evt.target.parentElement === REFS.teamCloseBtn ||
+            evt.target.parentElement.parentElement === REFS.teamCloseBtn ||
+            evt.target === REFS.teamCloseBtn
         ) {
             this.#closeModal();
         }
@@ -134,6 +138,7 @@ export default class ModalHandler {
         REFS.backdrop.removeEventListener('click', this.#closeBtnCallback);
         window.removeEventListener('keydown', this.#escBtnCallback);        
         REFS.modalOpenMovie.removeEventListener('click', this.#movieBtnCallback);
+        REFS.backdropTeam.removeEventListener('click', this.onClickBackdrop.bind(this));
         this.#hiddeBtnsThumb();
     }
 
