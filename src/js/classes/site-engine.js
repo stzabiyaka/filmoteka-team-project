@@ -170,6 +170,7 @@ export default class SiteEngine {
             REFS.searchFormContainer.classList.remove(this.hiderClass);
             REFS.collectionsBtnsContainer.classList.add(this.hiderClass);
             REFS.headerContainer.classList.remove(this.myLibraryClass);
+            REFS.searchForm.value = '';
         break;
 
         case 'library':
