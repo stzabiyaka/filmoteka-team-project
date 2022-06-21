@@ -14,6 +14,10 @@
     @include respondTo(desktop) {
         height: 77px;
     }
+
+    .body.theme-dark & {
+        background-color: rgb(41, 41, 41);
+    }
 }
 
 // ==========текст==========
@@ -31,6 +35,10 @@
         width: 100%;
         font-size: 16px;
         line-height: 1.2em;
+    }
+
+    .body.theme-dark & {
+        color: #8d8d8d;
     }
 }
 
@@ -77,4 +85,8 @@
 
 .footer__link {
     color: getColor('text-footer');
+    
+    .body.theme-dark & {
+        color: #8d8d8d;
+    }
 }
