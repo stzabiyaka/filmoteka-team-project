@@ -24,6 +24,7 @@ export default class SwitchSiteCaptions {
         REFS.collectionQueueBtn.title = this.#captions.buttons.queueTitle;
         const themeTitle = this.#captions.buttons.themeBtnTitle;
         REFS.themeButton.title = REFS.themeButton.title === themeTitle.lightsOn ? themeTitle.lightsOn : themeTitle.lightsOff;
+        REFS.modalOpenMovie.title = this.#captions.buttons.openMovie;
         }
 
 }
