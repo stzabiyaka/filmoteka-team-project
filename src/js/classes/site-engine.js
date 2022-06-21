@@ -165,7 +165,6 @@ export default class SiteEngine {
 /* Встановлення стану поточної сторінки сайту */ 
     #setSitePage () {
         this.#modalHandler.setCurrentSitePage ({ page: this.#currentSitePage });
-        console.log('current:', this.#currentSitePage)
         switch (this.#currentSitePage) {
         case 'home':
             REFS.headerHomeBtn.disabled = true;

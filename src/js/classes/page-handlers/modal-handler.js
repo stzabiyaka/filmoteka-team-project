@@ -160,7 +160,6 @@ export default class ModalHandler {
     }
 
     #refreshCollectionPage({ collection }) {
-        console.log(this.#currentSitePage, collection)
         if (!this.#collectionsService.isCollectionExist({ collection: collection }) && this.#currentSitePage === USER_COLLECTIONS[collection]) {
             this.#notifyer.renderNotification ({ message: 'collectionEmpty' });
             return;
