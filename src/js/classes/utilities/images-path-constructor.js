@@ -5,6 +5,8 @@ export default class ImagesPathConstructor {
         retina: 'w780',
         original: 'original'
     }
+
+/* Отримання зібраного шляху до зображення */     
     static getImagePath({path, width}) {
         const size = Object.keys(this.width).includes(width) ? this.width[width] : this.width.default;
         return `${this.BASE_URL}${size}${path}`;

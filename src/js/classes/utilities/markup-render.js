@@ -1,4 +1,4 @@
-import cardParser from "../../modules/card-parser";
+import cardParser from "../../templates/card-parser";
 import { REFS } from "../../site-constants";
 import { renderModalCard } from "../../templates/modal";
 import { modalCardMarkUp } from "../../templates/_modal-tmpl";
@@ -25,6 +25,7 @@ export default class MarkupRender {
         this.#modalHandler = modalHandler;
     }
 
+/* Рендеринг розмітки сторінки із картками фильмів */ 
     async renderLiblary({ loader, content }) {
         
         this.#captions = this.#languageSet.captions;
@@ -48,6 +49,7 @@ export default class MarkupRender {
         }
     }
 
+/* Рндеринг сторінки із подробицями фільму у модальному вікні */ 
     async renderModal({ loader, content }) {
 
         this.#captions = this.#languageSet.captions;
@@ -66,6 +68,7 @@ export default class MarkupRender {
             
     }
 
+/* Рендеринг відео трейлеру фільму у модальному вікні */ 
     async renderMovie({ loader, content }) {
 
         this.#captions = this.#languageSet.captions;

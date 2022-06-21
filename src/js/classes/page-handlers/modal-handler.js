@@ -167,14 +167,11 @@ export default class ModalHandler {
     }
 
     #refreshCollectionPage({ collection }) {
-        if(this.#currentSitePage !== 'library') {
-            return;
-        }
-        if (!this.#collectionsService.isCollectionExist({ collection: collection })) {
+        if (!this.#collectionsService.isCollectionExist({ collection: collection }) && this.#currentSitePage === USER_COLLECTIONS[collection]) {
             this.#notifyer.renderNotification ({ message: 'collectionEmpty' });
             return;
         }
-        if(this.#paginator) {
+        if(this.#paginator && this.#currentSitePage === USER_COLLECTIONS[collection]) {
             const currentPage = this.#paginator.getCurrentPage();
             this.#paginator.movePageTo(currentPage);
             

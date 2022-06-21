@@ -37,6 +37,7 @@ export default class UserPreferencesService extends LocalStorageService {
         this.save(this.#preferences);
     }
 
+/* Отримання перевірки чи користувач вперше на сайті */ 
     getIsUserNew () {
         return this.#isUserNew;
     }

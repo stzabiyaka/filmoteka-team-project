@@ -19,6 +19,7 @@ export default class Notifyer {
         this.#notifications = languageSet.captions.notifications;
     }
 
+/* Відображення повідомлення у контейнері хедера */ 
     showNotification ({ message, type = 'warning' }) {
         if (!message || !Object.keys(this.#notifyerType).includes(type) || this.#isRun) {
             return;
@@ -38,6 +39,7 @@ export default class Notifyer {
           }, this.#timeOut);
     }
 
+/* Рендеринг повідомлення у контейнері фільмотеки/модального вікна */ 
     renderNotification ({ message, target }) {
         if (!message) {
             return;
@@ -45,6 +47,6 @@ export default class Notifyer {
         this.#notifications = this.#languageSet.captions.notifications;
         let messageContainer;
         messageContainer = target ? this.#modalTarget : this.#renderTarget;
-        messageContainer.innerHTML = `<p class="notifyer__message">${this.#notifications[message]}</p>`;
+        messageContainer.innerHTML = `<div class="notifyer__message">${this.#notifications[message]}</div>`;
     }
 }

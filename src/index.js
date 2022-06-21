@@ -9,10 +9,11 @@ import TrendingHandler from './js/classes/page-handlers/trending-handler';
 import CollectionHandler from './js/classes/page-handlers/collection-handler';
 import ModalHandler from './js/classes/page-handlers/modal-handler';
 import SearchHandler from './js/classes/page-handlers/searchHandler';
-import LanguageSet from './js/classes/language-set';
+import LanguageSet from './js/classes/services/language-set';
 import Notifyer from './js/classes/utilities/notifyer';
 import ToTopButton from './js/classes/utilities/to-top-button';
 import ThemeButton from './js/classes/utilities/theme-button';
+import 'lazysizes';
 
 const userPreferences = new UserPreferencesService('userPreferences');
 const userCollectionsService = new CollectionService('userCollections');

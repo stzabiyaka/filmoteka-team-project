@@ -1,5 +1,5 @@
-import { CAPTIONS, REFS } from "../site-constants";
-import SwitchSiteCaptions from "./utilities/switch-site-captons";
+import { CAPTIONS, REFS } from "../../site-constants";
+import SwitchSiteCaptions from "../utilities/switch-site-captons";
 
 export default class LanguageSet {
     #currentLanguage;
@@ -10,6 +10,7 @@ export default class LanguageSet {
     captions;
     #languageSelectorActive;
     #paginator;
+    #currentSitePage;
     constructor ({ userPreferences }) {
         this.#userPreferences = userPreferences;
         this.#isUserNew = this.#userPreferences.getIsUserNew();
@@ -25,12 +26,14 @@ export default class LanguageSet {
         this.#languageSelectorActive.selected = true;
     }
 
+/* Встановлення поточної мови відображення сайту та заміна усіх написів на відповідні обраною мовою */ 
     #setCurrentLanguage ({ language }) {
         this.captions = CAPTIONS[language];
         this.#captionsSwitcher.switchCaptions ({ captions: this.captions });
         this.#userPreferences.setLanguage({ language: this.#currentLanguage });    
     }
 
+/* Перемикання мови за допомогою селектора */ 
     #selectLanguage () {
         const selectedLanguage = this.#languageSelector.value;
         this.#currentLanguage = selectedLanguage;
@@ -38,6 +41,7 @@ export default class LanguageSet {
         this.#refreshPage();
     }
 
+/* Оновлення поточної сторінки сайту для вірного відображення обраною мовою */ 
     #refreshPage () {
         if(this.#paginator) {
             const currentPage = this.#paginator.getCurrentPage();
@@ -45,20 +49,29 @@ export default class LanguageSet {
         }
     }
 
+/* Отримання написів сайту поточною мовою */ 
     get captions () {
         return this.captions;
     }
 
+/* Отримання поточної мови сайту */ 
     getCurrentLanguage () {
         return this.#currentLanguage;
     }
 
+/* Отримання перевірки чи користувач вперше на сайті */ 
     getIsUserNew () {
         return this.#isUserNew;
     }
 
+/* Встановлення пагінатора */ 
     setPaginator ({ paginator }) {
         this.#paginator = paginator;
+    }
+
+ /* Встановлення поточної сторінки сайту */ 
+    setCurrentSitePage ({ page }) {
+        this.#currentSitePage = page;
     }
 
 }

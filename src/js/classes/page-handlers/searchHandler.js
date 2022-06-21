@@ -8,6 +8,7 @@ export default class SearchHandler {
         this.#markupRender = markupRender;
     }
 
+/* Отримання та відображення поточної сторінки за пошуковим запитом */ 
     async getMoviesBySearch ({ query, page = 1 }){
         const loader = this.#apiService.searchMovies.bind(this.#apiService, { query: query, page: page });
         const response = await this.#markupRender.renderLiblary({ loader: loader });

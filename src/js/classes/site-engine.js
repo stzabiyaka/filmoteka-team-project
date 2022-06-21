@@ -44,6 +44,7 @@ export default class SiteEngine {
         REFS.searchForm.addEventListener('input', debounce(this.#handleSearch.bind(this), 300));
         REFS.teamLink.addEventListener('click', this.#handleTeam.bind(this));
         this.#createPaginator();
+        console.dir(this.#paginator);
         this.#languageSet.setPaginator({ paginator: this.#paginator});
         this.#modalHandler.setPaginator({ paginator: this.#paginator});
         if (this.#isUserNew) {
@@ -121,7 +122,7 @@ export default class SiteEngine {
 
 /* Формування відображення та логіка колекції watched */ 
     async #handleWatched ({ isFromHome }) {
-        this.#currentSitePage = 'library';
+        this.#currentSitePage = 'watched';
         this.#setSitePage();
 
         if (isFromHome) {
@@ -148,7 +149,8 @@ export default class SiteEngine {
     async #handleQueue () {
 
         this.#collectionsBtnsToggle ();
-
+        this.#currentSitePage = 'queue';
+        this.#setSitePage();
         try {
             const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
 
@@ -164,6 +166,8 @@ export default class SiteEngine {
 
 /* Встановлення стану поточної сторінки сайту */ 
     #setSitePage () {
+        this.#modalHandler.setCurrentSitePage ({ page: this.#currentSitePage });
+        this.#languageSet.setCurrentSitePage ({ page: this.#currentSitePage });
         switch (this.#currentSitePage) {
         case 'home':
             REFS.headerHomeBtn.disabled = true;
@@ -174,7 +178,8 @@ export default class SiteEngine {
             REFS.searchForm.value = '';
         break;
 
-        case 'library':
+        case 'watched':
+        case 'queue':
             REFS.headerHomeBtn.disabled = false;
             REFS.headerMyLibBtn.disabled = true;
             REFS.searchFormContainer.classList.add(this.hiderClass);
@@ -190,8 +195,6 @@ export default class SiteEngine {
             REFS.headerContainer.classList.remove(this.myLibraryClass);
         break;
         }
-
-        this.#modalHandler.setCurrentSitePage ({ page: this.#currentSitePage });
     }
 
 /* Логіка перемикання між колекцією watched, та колекцією queue */ 
@@ -201,6 +204,7 @@ export default class SiteEngine {
         REFS.collectionWatchedBtn.disabled = !disable;
         REFS.collectionQueueBtn.disabled = disable;
     }
+
 /* Логіка додавання та прибирання eventListener на кнопках коллекцій */ 
     #addCollectionsBtnsListeners () {
         this.#queueCallback = this.#handleQueue.bind(this);
@@ -210,10 +214,13 @@ export default class SiteEngine {
          REFS.collectionWatchedBtn.addEventListener('click', this.#watchedCallback);
     }
 
+/* Логіка прибирання eventListener на пагінаторі */ 
     #removeCollectionsListeners () {
         REFS.collectionQueueBtn.removeEventListener('click', this.#queueCallback);
         REFS.collectionWatchedBtn.removeEventListener('click', this.#watchedCallback);
     }
+
+/* Створення нового пагінатора */ 
     #createPaginator () {
         const paginatorOptions = {
             totalItems: 0,
@@ -229,6 +236,7 @@ export default class SiteEngine {
           this.#paginator = new Pagination ('pagination', paginatorOptions);
     }
 
+/* Зміна параметрів пагінатора */ 
     #resetPaginator ({ source, itemsPerPage }) {
         this.#checkPaginatorOldCallback();
         let totalItems;
@@ -245,7 +253,7 @@ export default class SiteEngine {
             REFS.paginator.classList.add('js-hidden');
         } else if ( REFS.paginator.classList.contains('js-hidden')) {
             REFS.paginator.classList.remove('js-hidden');
-        } 
+        }
     }
 
 /* Прибирання eventListener з пагінації */
@@ -256,7 +264,7 @@ export default class SiteEngine {
         }
     }
 
-    /* Перевірка, чи користувач новий */
+    /* Перевірка, та нотифікування щодо мови, якщо користувач новий */
 
     #notifyNewUser () {
             const message = this.#languageSet.captions.notifications.languageNotify;

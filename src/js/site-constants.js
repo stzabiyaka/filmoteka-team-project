@@ -74,8 +74,8 @@ const LANGUAGES = {
             searchRestricted : 'Please, do not enter any special characters.',
             technicalFault: 'Oops (( looks, like some technical troubles occured.',
             collectionEmpty: 'Looks like you have not add any movie to this collection, yet.',
-            
-            languageNotify: 'Цей сайт доступний також укріїнською мовою',
+            welcome: 'Welcome to Filmoteka - your movies library.',
+            languageNotify: 'Цей сайт доступний також українською мовою',
         },
         movieDetails: {
             vote: 'Vote',
@@ -121,10 +121,12 @@ const LANGUAGES = {
         searchPlaceholder: 'Пошук фильмів',
         notifications: {
             searchFault: 'Нажаль, немає фільмів, відповідаючих вашому запиту. Будь ласка, спробуйте ще раз.',
-            searchMinLength : 'Будь ласка, введіть хоча б два символи для початку пошуку.',
+            searchMinLength : 'Будь ласка, введіть хоча б один символ для початку пошуку.',
             searchRestricted : 'Будь ласка, не використовуйте будь-які спеціальні символи.',
             technicalFault: 'От халепа (( схоже, сталась якась технічна проблема.',
             collectionEmpty: 'Схоже, ви покищо не додали жодного фильму до цієї коллекції.',
+            welcome: 'Welcome to Filmoteka - your movies library.',
+            languageNotify: 'This site awailable in English',
         },
         movieDetails: {
             vote: 'Голос',
