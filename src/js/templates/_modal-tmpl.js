@@ -1,22 +1,46 @@
-import ImagesPathConstructor from "../classes/utilities/images-path-constructor";
+import ImagesPathConstructor from '../classes/utilities/images-path-constructor';
+import noPoster from '../../images/poster.svg';
 
-export function modalCardMarkUp({ overview, poster_path, title, original_title, vote_average, vote_count, popularity, genres, homepage, captions }) { 
-    
-    const imgSrcMobile = `${ImagesPathConstructor.getImagePath({ path: poster_path })}`;
-    const imgSrcTablet = `${ImagesPathConstructor.getImagePath({ path: poster_path, width:'retina' })}`;
-    const imgSrcDesktop = `${ImagesPathConstructor.getImagePath({ path: poster_path, width: 'original' })}`;
+export function modalCardMarkUp({
+  overview,
+  poster_path,
+  title,
+  original_title,
+  vote_average,
+  vote_count,
+  popularity,
+  genres,
+  homepage,
+  captions,
+}) {
+  let imgSrcMobile = noPoster;
+  let imgSrcTablet = noPoster;
+  let imgSrcDesktop = noPoster;
+  if (poster_path) {
+    imgSrcMobile = `${ImagesPathConstructor.getImagePath({
+      path: poster_path,
+    })}`;
+    imgSrcTablet = `${ImagesPathConstructor.getImagePath({
+      path: poster_path,
+      width: 'retina',
+    })}`;
 
-    const imgSrc =`${imgSrcTablet} 1x, ${imgSrcDesktop} 2x`;
-    
-    const vote = captions.movieDetails.vote;
-    const votes = captions.movieDetails.votes;
-    const popularityString = captions.movieDetails.popularity;
-    const originalTitle = captions.movieDetails.title;
-    const genre = captions.movieDetails.genre;
-    const about = captions.movieDetails.about;
-    const popularityData = popularity.toFixed(2);
+    imgSrcDesktop = `${ImagesPathConstructor.getImagePath({
+      path: poster_path,
+      width: 'original',
+    })}`;
+  }
+  const imgSrc = `${imgSrcTablet} 1x, ${imgSrcDesktop} 2x`;
 
-    return  `
+  const vote = captions.movieDetails.vote;
+  const votes = captions.movieDetails.votes;
+  const popularityString = captions.movieDetails.popularity;
+  const originalTitle = captions.movieDetails.title;
+  const genre = captions.movieDetails.genre;
+  const about = captions.movieDetails.about;
+  const popularityData = popularity.toFixed(2);
+
+  return `
 
         <div class="modal-card-thumb__img" >         
             <div class="modal-card__picture" >                 
@@ -46,7 +70,9 @@ export function modalCardMarkUp({ overview, poster_path, title, original_title, 
                         </li>
                         <li class="modal-card-info__characteristics--item">
                             <p class="modal-card-info__characteristics--name">${genre}</p>
-                            <p class="modal-card-info__data modal-card-info__data--genre">${genres.join(', ')}</p>
+                            <p class="modal-card-info__data modal-card-info__data--genre">${genres.join(
+                              ', '
+                            )}</p>
                         </li>
                     </ul>
                     
@@ -57,5 +83,5 @@ export function modalCardMarkUp({ overview, poster_path, title, original_title, 
             
         </div>
     
-    `
+    `;
 }
