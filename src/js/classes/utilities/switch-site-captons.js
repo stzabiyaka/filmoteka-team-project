@@ -22,7 +22,6 @@ export default class SwitchSiteCaptions {
         REFS.languageSelector.title = this.#captions.buttons.languageSelectorTitle;
         REFS.collectionWatchedBtn.title = this.#captions.buttons.watchedTitle;
         REFS.collectionQueueBtn.title = this.#captions.buttons.queueTitle;
-        REFS.copyright.textContent = this.#captions.copyright;
         const themeTitle = this.#captions.buttons.themeBtnTitle;
         REFS.themeButton.title = REFS.themeButton.title === themeTitle.lightsOn ? themeTitle.lightsOn : themeTitle.lightsOff;
         }

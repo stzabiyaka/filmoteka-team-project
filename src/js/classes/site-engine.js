@@ -120,7 +120,7 @@ export default class SiteEngine {
 
 /* Формування відображення та логіка колекції watched */ 
     async #handleWatched ({ isFromHome }) {
-        this.#currentSitePage = 'library';
+        this.#currentSitePage = 'watched';
         this.#setSitePage();
 
         if (isFromHome) {
@@ -147,7 +147,8 @@ export default class SiteEngine {
     async #handleQueue () {
 
         this.#collectionsBtnsToggle ();
-
+        this.#currentSitePage = 'queue';
+        this.#setSitePage();
         try {
             const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
 
@@ -163,6 +164,8 @@ export default class SiteEngine {
 
 /* Встановлення стану поточної сторінки сайту */ 
     #setSitePage () {
+        this.#modalHandler.setCurrentSitePage ({ page: this.#currentSitePage });
+        console.log('current:', this.#currentSitePage)
         switch (this.#currentSitePage) {
         case 'home':
             REFS.headerHomeBtn.disabled = true;
@@ -173,7 +176,8 @@ export default class SiteEngine {
             REFS.searchForm.value = '';
         break;
 
-        case 'library':
+        case 'watched':
+        case 'queue':
             REFS.headerHomeBtn.disabled = false;
             REFS.headerMyLibBtn.disabled = true;
             REFS.searchFormContainer.classList.add(this.hiderClass);
@@ -189,8 +193,6 @@ export default class SiteEngine {
             REFS.headerContainer.classList.remove(this.myLibraryClass);
         break;
         }
-
-        this.#modalHandler.setCurrentSitePage ({ page: this.#currentSitePage });
     }
 
 /* Логіка перемикання між колекцією watched, та колекцією queue */ 
