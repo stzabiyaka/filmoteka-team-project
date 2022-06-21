@@ -10,6 +10,7 @@ export default class LanguageSet {
     captions;
     #languageSelectorActive;
     #paginator;
+    #currentSitePage;
     constructor ({ userPreferences }) {
         this.#userPreferences = userPreferences;
         this.#isUserNew = this.#userPreferences.getIsUserNew();
@@ -59,6 +60,10 @@ export default class LanguageSet {
 
     setPaginator ({ paginator }) {
         this.#paginator = paginator;
+    }
+
+    setCurrentSitePage ({ page }) {
+        this.#currentSitePage = page;
     }
 
 }

@@ -43,6 +43,7 @@ export default class SiteEngine {
         REFS.headerMyLibBtn.addEventListener('click', this.#handleWatched.bind(this, {isFromHome: true}) );
         REFS.searchForm.addEventListener('input', debounce(this.#handleSearch.bind(this), 300));
         this.#createPaginator();
+        console.dir(this.#paginator);
         this.#languageSet.setPaginator({ paginator: this.#paginator});
         this.#modalHandler.setPaginator({ paginator: this.#paginator});
         if (this.#isUserNew) {
@@ -165,6 +166,7 @@ export default class SiteEngine {
 /* Встановлення стану поточної сторінки сайту */ 
     #setSitePage () {
         this.#modalHandler.setCurrentSitePage ({ page: this.#currentSitePage });
+        this.#languageSet.setCurrentSitePage ({ page: this.#currentSitePage });
         switch (this.#currentSitePage) {
         case 'home':
             REFS.headerHomeBtn.disabled = true;
@@ -245,7 +247,7 @@ export default class SiteEngine {
             REFS.paginator.classList.add('js-hidden');
         } else if ( REFS.paginator.classList.contains('js-hidden')) {
             REFS.paginator.classList.remove('js-hidden');
-        } 
+        }
     }
 
 /* Прибирання eventListener з пагінації */
