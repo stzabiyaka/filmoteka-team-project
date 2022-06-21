@@ -93,7 +93,7 @@ export default class MoviesApiService {
     async getVideo({ movieId }) {
     this.#spinner.showSpinner();
     this.#setCurrentLanguage();
-    const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.movieDetails}/${movieId}/${this.URL_PARAMETERS.videos}?api_key=${this.#API_KEY}&language=${this.#currentLanguage}`;
+    const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.movieDetails}/${movieId}/${this.URL_PARAMETERS.videos}?api_key=${this.#API_KEY}`;
     const video = await this.#getData(url);        
     return video;
     }
