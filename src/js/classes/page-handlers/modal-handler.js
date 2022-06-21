@@ -109,7 +109,7 @@ export default class ModalHandler {
     }
 
     onClickBackdrop(evt) {
-        console.log('evt.target', evt.target);
+        
         if (
             evt.target === evt.currentTarget ||
             evt.target.parentElement === REFS.modalCloseBtn ||
