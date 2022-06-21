@@ -76,18 +76,22 @@ export default class MarkupRender {
 
         this.#captions = this.#languageSet.captions;
 
-        const response = await loader(content);
+        this.#movieTarget = REFS.modalContainer.firstElementChild;
+        let markup;
         
         try {
-            const markup = modalMovieMarkUp({ ...response, captions: this.#captions });
-            this.#movieTarget = REFS.modalContainer.firstElementChild;
+            const response = await loader(content);
+            markup = modalMovieMarkUp({ ...response, captions: this.#captions });
+            if(!markup) {
+                markup = `<div class="notifyer__message">${this.#captions.notifications.videoUnavailable}</div>`;
+            }
             this.#movieTarget.innerHTML = markup;
             return markup;
             } 
         catch {
            
             const message = 'technicalFault';
-            this.#notifyer.renderNotification({ message: message, tsget: 'modal' });
+            this.#notifyer.renderNotification({ message: message, target: 'modal' });
         }
             
     }

@@ -155,7 +155,7 @@ export default class ModalHandler {
         result.then(result => {
             if (result) {              
         }
-        }).catch(error=>console.log(error));
+        }).catch(console.log);
 
     }
     

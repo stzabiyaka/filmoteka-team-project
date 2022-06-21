@@ -89,10 +89,6 @@
   @include respondTo(tablet) {
     font-size: 30px;
   }
-
-  @include respondTo(tablet) {
-    font-size: 40px;
-  }
 }
 
 .notifyer__image {
