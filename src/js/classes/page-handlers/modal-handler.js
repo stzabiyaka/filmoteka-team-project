@@ -69,7 +69,7 @@ export default class ModalHandler {
             REFS.modalAddToQueueBtn.addEventListener('click', this.#addToQueueCallback);            
             REFS.modalOpenMovie.addEventListener('click', this.#movieBtnCallback);            
         }
-        }).catch(error=>console.log(error));
+        }).catch(console.log);
         
     }
     
