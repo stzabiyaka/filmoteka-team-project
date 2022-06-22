@@ -10,11 +10,10 @@
 }
 
 .library__container {
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
-    min-height: 40vh;
     margin-top: -20px;
-    margin-bottom: 40px;
 
     @include respondTo(tablet) {
         flex-direction: row;
@@ -22,7 +21,6 @@
         
         margin-top: -32px;
         margin-left: -32px;
-        margin-bottom: 60px;
     }
 
     @include respondTo(desktop) {

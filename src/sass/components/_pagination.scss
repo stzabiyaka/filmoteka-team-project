@@ -3,6 +3,12 @@
     display: flex;
     justify-content: center;
     min-width: 300px;
+    
+    margin-top: 40px;
+
+    @include respondTo(tablet) {
+        margin-top: 60px;
+    }
 
     &.js-hidden {
         display: none;
