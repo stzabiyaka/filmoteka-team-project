@@ -130,7 +130,7 @@ const LANGUAGES = {
             collectionEmpty: 'Схоже, ви покищо не додали жодного фильму до цієї коллекції.',
             welcome: 'Welcome to Filmoteka - your movies library.',
             languageNotify: 'This site available in English.',
-            videoUnavailable: 'Вибачте, нажаль дане відео недоступне українською мовою.',
+            videoUnavailable: 'Вибачте, нажаль це відео недоступне українською мовою.',
         },
         movieDetails: {
             vote: 'Голос',
