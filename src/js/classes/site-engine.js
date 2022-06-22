@@ -44,9 +44,6 @@ export default class SiteEngine {
         REFS.headerMyLibBtn.addEventListener('click', this.#handleWatched.bind(this, {isFromHome: true}) );
         REFS.searchForm.addEventListener('input', debounce(this.#handleSearch.bind(this), 300));
         REFS.teamLink.addEventListener('click', this.#handleTeam.bind(this));
-        this.#createPaginator();
-        this.#languageSet.setPaginator({ paginator: this.#paginator});
-        this.#modalHandler.setPaginator({ paginator: this.#paginator});
         if (this.#isUserNew) {
             setTimeout(() => {     
                 this.#notifyNewUser();
@@ -71,7 +68,7 @@ export default class SiteEngine {
         try {
             const source = await this.#trendingHandler.getTrendingMoviesPage({ page: 1 });
             
-            this.#resetPaginator({ source: source, itemsPerPage: 20 });
+            this.#createPaginator({ source: source, itemsPerPage: 20 });
             this.#paginatorAfterCallback = this.#trendingHandler.getTrendingMoviesPage.bind(this.#trendingHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ page: page }));
         
@@ -109,7 +106,7 @@ export default class SiteEngine {
                 this.#notifyer.showNotification({ message: message });
                 this.#handleHome();
             }
-            this.#resetPaginator({ source: source, itemsPerPage: 20 });
+            this.#createPaginator({ source: source, itemsPerPage: 20 });
             this.#paginatorAfterCallback = this.#searchHandler.getMoviesBySearch.bind(this.#searchHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ query: searchQuery, page: page }));
         }
@@ -135,7 +132,7 @@ export default class SiteEngine {
         try {
             const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.watched, page: 1 });
             
-            this.#resetPaginator({ source: source, itemsPerPage: 9 });
+            this.#createPaginator({ source: source, itemsPerPage: 20 });
             this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.watched, page: page }));   
             
@@ -154,7 +151,7 @@ export default class SiteEngine {
         try {
             const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
 
-            this.#resetPaginator({ source: source, itemsPerPage: 9 });
+            this.#createPaginator({ source: source, itemsPerPage: 20 });
             this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.queue, page: page }));   
             
@@ -229,10 +226,23 @@ export default class SiteEngine {
     }
 
 /* Створення нового пагінатора */ 
-    #createPaginator () {
+    #createPaginator ({ source, itemsPerPage }) {
+        let totalItems;
+        if(!source) {
+            totalItems = 0;
+        } else {
+            totalItems = source.totalResults;
+        }
+
+        if( totalItems <= itemsPerPage) {
+            REFS.paginator.classList.add('js-hidden');
+        } else if ( REFS.paginator.classList.contains('js-hidden')) {
+            REFS.paginator.classList.remove('js-hidden');
+        }
+
         const paginatorOptions = {
-            totalItems: 0,
-            itemsPerPage: 0,
+            totalItems: totalItems,
+            itemsPerPage: itemsPerPage,
             visiblePages: 5,
             page: 1,
             centerAlign: true,
@@ -241,7 +251,9 @@ export default class SiteEngine {
             template: paginatorTemplate,
           };
 
-          this.#paginator = new Pagination ('pagination', paginatorOptions);
+            this.#paginator = new Pagination ('pagination', paginatorOptions);
+            this.#languageSet.setPaginator({ paginator: this.#paginator});
+            this.#modalHandler.setPaginator({ paginator: this.#paginator});
     }
 
 /* Зміна параметрів пагінатора */ 
