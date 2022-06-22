@@ -132,7 +132,7 @@ export default class SiteEngine {
         try {
             const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.watched, page: 1 });
             
-            this.#createPaginator({ source: source, itemsPerPage: 20 });
+            this.#createPaginator({ source: source, itemsPerPage: 9 });
             this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.watched, page: page }));   
             
@@ -151,7 +151,7 @@ export default class SiteEngine {
         try {
             const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
 
-            this.#createPaginator({ source: source, itemsPerPage: 20 });
+            this.#createPaginator({ source: source, itemsPerPage: 9 });
             this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.queue, page: page }));   
             
@@ -227,6 +227,9 @@ export default class SiteEngine {
 
 /* Створення нового пагінатора */ 
     #createPaginator ({ source, itemsPerPage }) {
+        if (this.#paginator && this.#paginatorAfterCallback) {
+            this.#paginator.off('afterMove', this.#paginatorAfterCallback);
+        }
         let totalItems;
         if(!source) {
             totalItems = 0;
@@ -254,34 +257,6 @@ export default class SiteEngine {
             this.#paginator = new Pagination ('pagination', paginatorOptions);
             this.#languageSet.setPaginator({ paginator: this.#paginator});
             this.#modalHandler.setPaginator({ paginator: this.#paginator});
-    }
-
-/* Зміна параметрів пагінатора */ 
-    #resetPaginator ({ source, itemsPerPage }) {
-        this.#checkPaginatorOldCallback();
-        let totalItems;
-        if(!source) {
-            totalItems = 0;
-        } else {
-            totalItems = source.totalResults;
-        }
-
-        this.#paginator.setItemsPerPage(itemsPerPage);
-        this.#paginator.reset(totalItems);
-
-        if( totalItems <= itemsPerPage) {
-            REFS.paginator.classList.add('js-hidden');
-        } else if ( REFS.paginator.classList.contains('js-hidden')) {
-            REFS.paginator.classList.remove('js-hidden');
-        }
-    }
-
-/* Прибирання eventListener з пагінації */
-    #checkPaginatorOldCallback () {
-        if (this.#paginator && this.#paginatorAfterCallback) {
-            this.#paginator.off('afterMove', this.#paginatorAfterCallback);
-            // this.#paginator.off('beforeMove', this.#paginatorBeforeCallback);
-        }
     }
 
     /* Перевірка, та нотифікування щодо мови, якщо користувач новий */
