@@ -1,6 +1,6 @@
 export function modalMovieMarkUp(obj) {
     let key;
-    obj.results.forEach(el => {
+    obj.results.find(el => {
         if (el.name === "Official Trailer") {
             key = el.key;
             return;
