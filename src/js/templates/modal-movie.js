@@ -1,17 +1,26 @@
 export function modalMovieMarkUp(obj) {
+    if(obj.results.length === 0 ) {
+        return false;
+    }
     let key;
     obj.results.find(el => {
         if (el.name === "Official Trailer") {
             key = el.key;
             return;
-        }        
+        }     
     });
 
-    if(obj.results.length === 0 ) {
-        return false;
-    }
     if(!key) {
-        key = obj.results[0].key;
+        obj.results.find(el => {
+            if (el.official) {
+                key = el.key;
+                return;
+            } 
+        });
+    }
+
+    if(!key) {
+            key = obj.results[0].key;
     }
   
 
