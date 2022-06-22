@@ -91,7 +91,6 @@ export default class MoviesApiService {
 
 /* Отримання відео трейлеру одного  фільму */
     async getVideo({ movieId }) {
-    this.#spinner.showSpinner();
     this.#setCurrentLanguage();
     const url = `${this.#BASE_URL}/${this.URL_PARAMETERS.movieDetails}/${movieId}/${this.URL_PARAMETERS.videos}?api_key=${this.#API_KEY}&language=${this.#currentLanguage}`;
     const video = await this.#getData(url);        
