@@ -45,6 +45,12 @@
         padding-right: 32px;
     }
 
+    @include respondTo(desktop) {
+        padding-top: 45px;
+        padding-left: 71px;
+        padding-right: 71px;
+    }
+
     @media screen and (min-width: ($tablet + 1)) {
         max-width: $desktop;
         height: 216px;
@@ -193,7 +199,7 @@
         fill: none;
            
         @include respondTo(tablet) {
-            margin-right: 8px;
+            margin-right: 10px;
         }
 
         
@@ -266,10 +272,20 @@
     &__button{
         @extend .button;
         @extend .button--inverse;
+        width: 130px;
 
         margin-right: 20px;
         
         @include cssTransition(background-color box-shadow);
+
+        @include respondTo(tablet) {
+            margin-right: 32px;
+        }
+        @include respondTo(desktop) {
+            width: 148px;
+            height: 42px;
+            margin-right: 16px;
+        }
 
         &:last-child {
                 margin-right: 0;
@@ -284,15 +300,6 @@
             &:hover {
                 color: white;
             }
-        }
-        
-     @include respondTo(tablet) {
-            width: 152px;
-            height: 44px;
-        }
-    @include respondTo(desktop) {
-            width: 148px;
-            height: 42px;
         }
     }
 }
