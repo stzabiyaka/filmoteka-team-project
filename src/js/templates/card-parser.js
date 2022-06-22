@@ -29,7 +29,7 @@ export default function cardParser({
     genres.push(captions.movieDetails.other);
   }
   const poster = `${title} ${captions.movieDetails.poster}`;
-  return `<a  class="movie-card" data-movie-id="${id}"><article>
+  return `<li class="movie-card" data-movie-id="${id}"><article>
     <h2 class="visually_hidden">${title}</h2>
         <img class="movie-card_img lazyload" data-sizes="auto" data-src="${image}" data-srcset="${image} 342w, ${imageRetina} 780w" alt="${poster}"  loading="lazy">
     <h2 class="movie-card_title" >${title}</h2>
@@ -41,5 +41,5 @@ export default function cardParser({
         <p class="movie-card_date" title = "${captions.movieDetails.release}">${release_date}</p>
         <p class="movie-card_avarage__accent" title ="${captions.movieDetails.rating}">${vote_average}</p>
     </div>
-</article></a>`;
+</article></li>`;
 }
