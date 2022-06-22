@@ -269,19 +269,14 @@
     @include respondTo(tablet) {
         margin-top: 40px;
     }
-    
-    &__button{
-        @extend .button;
-        @extend .button--inverse;
-        width: 130px;
 
+    &__item{
         margin-right: 20px;
-        
-        @include cssTransition(background-color box-shadow);
 
         @include respondTo(tablet) {
             margin-right: 32px;
         }
+
         @include respondTo(desktop) {
             width: 148px;
             height: 42px;
@@ -291,6 +286,15 @@
         &:last-child {
                 margin-right: 0;
             }
+    }
+    
+    &__button{
+        @extend .button;
+        @extend .button--inverse;
+        width: 130px;
+
+        @include cssTransition(background-color box-shadow);
+
 
         &:hover, &:focus {
             @extend .button--shadow;
@@ -315,11 +319,18 @@
     display: flex;
     align-items: center;
     margin-top: auto;
+    margin-left: auto;
+}
+
+.user-interaction__btns-container__item {
+    margin-right: 10px;
+
+    &:last-child {
+        margin-right: 0;
+    }
 }
 
 .language-selector {
-    margin-left: auto;
-    margin-right: 10px;
     width: 40px;
     height: 24px;
     border-radius: 5px;

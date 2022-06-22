@@ -30,7 +30,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 1.5em;
+    line-height: 1.172;
     color: getColor('text-footer');
 
     @include respondTo(tablet) {
@@ -49,7 +49,7 @@
 
 .text__sub {
     display: inline-block;
-    margin-top: 10px;
+    margin-top: 9px;
 
     @include respondTo(tablet) {
         margin-top: 0;
