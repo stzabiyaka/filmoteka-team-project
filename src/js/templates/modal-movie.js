@@ -4,7 +4,7 @@ export function modalMovieMarkUp(obj) {
     }
     let key;
     obj.results.find(el => {
-        if (el.name === "Official Trailer") {
+        if (el.name.includes('Official Trailer')) {
             key = el.key;
             return;
         }     
