@@ -4,12 +4,12 @@ export function modalMovieMarkUp(obj) {
     }
     let key;
     obj.results.find(el => {
-        if (el.name.toLowerCase().includes('official trailer')) {
+        if (el.name.toLowerCase().includes('official') && el.name.toLowerCase().includes('trailer')) {
             key = el.key;
             return;
         }     
     });
-
+    
     if(!key) {
         obj.results.find(el => {
             if (el.official) {
