@@ -76,8 +76,8 @@ const LANGUAGES = {
             technicalFault: 'Oops (( looks, like some technical troubles occured. Please, reload the page.',
             collectionEmpty: 'Looks like you have not add any movie to this collection, yet.',
             welcome: 'Welcome to Filmoteka - your movies library.',
-            languageNotify: 'Цей сайт доступний також українською мовою',
-            videoUnavailable: 'Sorry, this video is not available',
+            languageNotify: 'Цей сайт доступний також українською мовою.',
+            videoUnavailable: 'Sorry, this video is not available.',
         },
         movieDetails: {
             vote: 'Vote',
@@ -129,8 +129,8 @@ const LANGUAGES = {
             technicalFault: 'От халепа (( схоже, сталась якась технічна проблема. Будь ласка, перезавантажте сторінку.',
             collectionEmpty: 'Схоже, ви покищо не додали жодного фильму до цієї коллекції.',
             welcome: 'Welcome to Filmoteka - your movies library.',
-            languageNotify: 'This site available in English',
-            videoUnavailable: 'Вибачте, дане відео недоступне українською мовою',
+            languageNotify: 'This site available in English.',
+            videoUnavailable: 'Вибачте, нажаль дане відео недоступне українською мовою.',
         },
         movieDetails: {
             vote: 'Голос',
