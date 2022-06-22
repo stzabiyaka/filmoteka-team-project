@@ -491,6 +491,8 @@ flex-direction: column;
     object-fit: cover;
     height: 357px;
     width: 240px;
+
+    border-radius: 5px;
     
     @include respondTo(tablet) {
         width: 264px;
