@@ -21,12 +21,12 @@ export function modalCardMarkUp({
     })}`;
     imgSrcTablet = `${ImagesPathConstructor.getImagePath({
       path: poster_path,
-      width: 'retina',
+      width: 'middle',
     })}`;
 
     imgSrcDesktop = `${ImagesPathConstructor.getImagePath({
       path: poster_path,
-      width: 'original',
+      width: 'retina',
     })}`;
   }
   
@@ -43,7 +43,7 @@ export function modalCardMarkUp({
     <article class="modal-card__article">
         <div class="modal-card-thumb__img" >         
             <div class="modal-card__picture" >                 
-                <img class="modal-card__img  lazyload" data-src="${imgSrcMobile}" data-srcset="${imgSrcMobile} 342w, ${imgSrcTablet} 780w" alt="${title}" sizes="300px" loading="lazy" type="image/jpeg" id="img-in-modal-card-picture"/>
+                <img class="modal-card__img  lazyload" data-src="${imgSrcMobile}" data-srcset="${imgSrcMobile} 342w, ${imgSrcTablet} 500w, ${imgSrcDesktop} 780w" alt="${title}" sizes="300px" loading="lazy" type="image/jpeg" id="img-in-modal-card-picture"/>
             </div>
         </div>
         <div class="modal-card-thumb__content">
