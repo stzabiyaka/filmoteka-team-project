@@ -34,7 +34,7 @@ export default function cardParser({
     genres.push(captions.movieDetails.other);
   }
   const poster = `${title} ${captions.movieDetails.poster}`;
-  return `<li class="movie-card" data-movie-id="${id}"><a class="movie-card__link" href="#"><article>
+  return `<li class="movie-card" data-movie-id="${id}"><a class="movie-card__link" href="#" title ="${title}"><article>
     <h2 class="visually_hidden">${title}</h2>
         <img class="movie-card__img lazyload" data-src="${image}" data-srcset="${image} 342w, ${ImageMiddle} 500w, ${imageRetina} 780w" sizes="342px" alt="${poster}"  loading="lazy">
     <h2 class="movie-card__title" >${title}</h2>
