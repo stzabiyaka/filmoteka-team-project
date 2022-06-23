@@ -2,6 +2,7 @@ export default class ImagesPathConstructor {
     static BASE_URL = 'https://image.tmdb.org/t/p/';
     static width = {
         default: 'w342',
+        middle: 'w500',
         retina: 'w780',
         original: 'original'
     }

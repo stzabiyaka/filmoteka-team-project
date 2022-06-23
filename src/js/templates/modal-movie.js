@@ -23,7 +23,6 @@ export function modalMovieMarkUp(obj) {
             key = obj.results[0].key;
     }
   
-
     return `
         <iframe class="iframe" frameborder="0" allowfullscreen allow='autoplay'
             src="https://www.youtube.com/embed/${key}?autoplay=1" >

@@ -114,15 +114,15 @@ isInCollection({collection, id = null}) {
     }
 
 /* Запис коллекцій користувача в localStorage */
-#saveCollections () {
-    this.save(this.#collections);
-}
+    #saveCollections () {
+        this.save(this.#collections);
+    }
 
 /* Розрахунок кількості сторінок у кожній колекції */
-#totalPagesCount () {
-    const keys = Object.keys(this.#collections);
-    keys.forEach(key => {
-        this.#totalPages[key] = Math.ceil(this.#collections[key].length / this.perPage);
-    });
-}
+    #totalPagesCount () {
+        const keys = Object.keys(this.#collections);
+        keys.forEach(key => {
+            this.#totalPages[key] = Math.ceil(this.#collections[key].length / this.perPage);
+        });
+    }
 }

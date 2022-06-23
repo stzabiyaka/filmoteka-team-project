@@ -66,7 +66,6 @@ export default class MarkupRender {
             const message = 'technicalFault';
             this.#notifyer.renderNotification({ message: message, tsget: 'modal' });
         }
-            
     }
 
 /* Рендеринг відео трейлеру фільму у модальному вікні */ 

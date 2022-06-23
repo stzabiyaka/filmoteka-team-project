@@ -26,7 +26,6 @@ export default class MoviesApiService {
         }
         this.#spinner = new Spinner();
         this.#languageSet = languageSet;
-        // this.#setCurrentLanguage();
     }
 
 /* Отримання даних з API за визначеним запитом - базовий метод усього класу */

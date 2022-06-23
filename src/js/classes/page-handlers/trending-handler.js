@@ -1,10 +1,6 @@
-import { REFS } from "../../site-constants";
-
 export default class TrendingHandler {
     #apiService;
     #markupRender;
-    #captions;
-    #paginator;
     constructor ({ apiService, markupRender }) {
         this.#apiService = apiService;
         this.#markupRender = markupRender;
