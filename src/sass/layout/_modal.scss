@@ -223,6 +223,24 @@ border-left: 18px solid getColor('text-secondary');
     
 }
 
+//стилі акрикла
+
+.modal-card__article{
+    display: flex;
+    flex-direction: column;
+    @include respondTo(tablet){
+        flex-direction: row;
+    }
+         overflow-y: auto;
+         -ms-overflow-style: none;
+         scrollbar-width: none;
+    
+         &::-webkit-scrollbar {
+             width: 0;
+             height: 0;
+         }
+}
+
 //контейнер для відображення всієї інформації про фільм
 //-------------------------------------------------------
 
