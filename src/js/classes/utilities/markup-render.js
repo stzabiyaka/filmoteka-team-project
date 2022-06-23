@@ -73,7 +73,7 @@ export default class MarkupRender {
 
         this.#captions = this.#languageSet.captions;
 
-        this.#movieTarget = REFS.modalContainer.firstElementChild;
+        this.#movieTarget = REFS.modalContainer.firstElementChild.firstElementChild;
         let markup;
         
         try {
