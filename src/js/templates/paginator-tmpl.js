@@ -1,8 +1,8 @@
 const paginatorTemplate = {
-              page: '<a href="#" class="btn__pagination">{{page}}</a>',
-              currentPage: '<strong class="btn__pagination btn__number--active">{{page}}</strong>',
+              page: '<a href="#" class="btn__pagination" title="Page {{page}}">{{page}}</a>',
+              currentPage: '<strong class="btn__pagination btn__number--active" title="Current page">{{page}}</strong>',
               moveButton:
-                '<a href="#" class="btn__pagination btn__arrow-{{type}}">' +
+                '<a href="#" class="btn__pagination btn__arrow-{{type}}" title="Go to {{type}}">' +
                   '<div class="icon-arrow-{{type}}"></div>' +
                 '</a>',
 
