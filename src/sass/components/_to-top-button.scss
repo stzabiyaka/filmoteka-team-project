@@ -1,11 +1,16 @@
 #to-top-button {
     display: block;
     position: fixed;
-        bottom: 20px;
-        right: 30px;
+        bottom: 50px;
+        right: 10px;
         z-index: 99;
         width: 40px;
         height: 40px;
+
+        @include respondTo(tablet) {
+            bottom: 20px;
+            right: 30px;
+        }
         
         visibility: hidden;
         pointer-events: none;

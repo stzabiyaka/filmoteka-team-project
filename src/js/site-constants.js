@@ -70,7 +70,7 @@ const LANGUAGES = {
             collectionEmpty: 'Looks like you have not add any movie to this collection, yet.',
             pageNotExist: 'Looks like this page does no exist',
             welcome: 'Welcome to Filmoteka - your movies library.',
-            languageNotify: 'Цей сайт доступний також українською мовою.',
+            languageNotify: 'Цей сайт доступний також українською.',
             videoUnavailable: 'Sorry, this video is not available.',
         },
         movieDetails: {
