@@ -34,17 +34,16 @@ export default function cardParser({
     genres.push(captions.movieDetails.other);
   }
   const poster = `${title} ${captions.movieDetails.poster}`;
-  return `<li class="movie-card" data-movie-id="${id}"><article>
+  return `<li class="movie-card" data-movie-id="${id}"><a class="movie-card__link" href="#"><article>
     <h2 class="visually_hidden">${title}</h2>
-        <img class="movie-card_img lazyload" data-src="${image}" data-srcset="${image} 342w, ${ImageMiddle} 500w, ${imageRetina} 780w" sizes="342px" alt="${poster}"  loading="lazy">
-    <h2 class="movie-card_title" >${title}</h2>
-    <div class="movie-card_info">
-    <p class = "movie-card_genres" title = "${captions.movieDetails.genres}">
+        <img class="movie-card__img lazyload" data-src="${image}" data-srcset="${image} 342w, ${ImageMiddle} 500w, ${imageRetina} 780w" sizes="342px" alt="${poster}"  loading="lazy">
+    <h2 class="movie-card__title" >${title}</h2>
+    <div class="movie-card__info">
+    <p class = "movie-card__genres" title = "${captions.movieDetails.genres}">
         ${genres.join(', ')}
-        </p>
-        <p class="movie-card_symbol">|</p>
-        <p class="movie-card_date" title = "${captions.movieDetails.release}">${release_date}</p>
-        <p class="movie-card_avarage__accent" title ="${captions.movieDetails.rating}">${vote_average}</p>
+        |<span class="movie-card__date" title = "${captions.movieDetails.release}">${release_date}</span>
+        <span class="movie-card__avarage" title ="${captions.movieDetails.rating}">${vote_average}</span>
+    </p>
     </div>
-</article></li>`;
+</article></a></li>`;
 }
