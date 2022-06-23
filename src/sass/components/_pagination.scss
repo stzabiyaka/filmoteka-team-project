@@ -31,8 +31,13 @@
     cursor: pointer;
     
     text-decoration: none;
-    background-color: getColor('text-secondary');
+    background-color: transparent;
     color: getColor('text-primary');
+
+    .body.theme-dark & {
+        color: getColor('text-secondary');
+    }
+
         @include respondTo(tablet) {
             margin: 0px 1px;
         }
@@ -59,7 +64,7 @@
 }
 
 .btn__arrow {
-    background-color: getColor('background-secondary');
+    
 
     &:hover,
     &:focus{
@@ -67,7 +72,7 @@
     }
 
     &--disabled {
-        opacity: 0.5;
+        opacity: 0.3;
     }
 
     &-first, &-last {
@@ -89,6 +94,10 @@
     height: 16px;
     background-image: url(../images/icons/arrow-prev.svg);
     background-size: cover;
+
+    .body.theme-dark & {
+        filter:invert(1);
+    }
 }
 
 .icon-arrow-next {
