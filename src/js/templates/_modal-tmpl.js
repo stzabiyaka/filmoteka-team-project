@@ -40,7 +40,7 @@ export function modalCardMarkUp({
   const popularityData = Number(popularity).toFixed(2);
 
   return `
-    <article>
+    <article class="modal-card__article">
         <div class="modal-card-thumb__img" >         
             <div class="modal-card__picture" >                 
                 <img class="modal-card__img  lazyload" data-src="${imgSrcMobile}" data-srcset="${imgSrcMobile} 342w, ${imgSrcTablet} 780w" alt="${title}" sizes="300px" loading="lazy" type="image/jpeg" id="img-in-modal-card-picture"/>
