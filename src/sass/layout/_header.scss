@@ -239,13 +239,13 @@
     color: getColor('text-secondary');
 
     &::placeholder{
-    font-family: 'Roboto';
-    font-style: normal;
+    display: flex;
+    align-items: center;
+    
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
-    display: flex;
-    align-items: center;
+    
     color: getColor('text-secondary');
     }
         @include respondTo(tablet) {
