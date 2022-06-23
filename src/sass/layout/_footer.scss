@@ -62,13 +62,14 @@
     margin-left: 5px;
 }
 
-// .icon-heart {
-//     animation-name: 'heart';
-//     animation-duration: 600ms;
-//     animation-iteration-count: infinite;
-//     animation-direction: alternate;
-//     animation-timing-function: ease-in;
-// }
+.icon-heart {
+    animation-name: 'heart';
+    animation-duration: 600ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in;
+    animation-delay: 2s;
+}
 
 @keyframes heart {
     from {
