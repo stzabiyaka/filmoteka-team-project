@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     height: $footerHeight;
-    min-width: 300px;
+    min-width: 320px;
     background-color: getColor('background-secondary');
 
     @include respondTo(tablet) {
@@ -25,16 +25,13 @@
 // ==========текст==========
 
 .footer__text {
-    width: 236px;
     text-align: center;
-    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.172;
     color: getColor('text-footer');
 
     @include respondTo(tablet) {
-        width: 100%;
         font-size: 16px;
         line-height: 1.2em;
     }
@@ -65,13 +62,13 @@
     margin-left: 5px;
 }
 
-.icon-heart {
-    animation-name: 'heart';
-    animation-duration: 600ms;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-timing-function: ease-in;
-}
+// .icon-heart {
+//     animation-name: 'heart';
+//     animation-duration: 600ms;
+//     animation-iteration-count: infinite;
+//     animation-direction: alternate;
+//     animation-timing-function: ease-in;
+// }
 
 @keyframes heart {
     from {
