@@ -1,12 +1,12 @@
 import cardParser from "../../templates/card-parser";
 import { REFS } from "../../site-constants";
-import { renderModalCard } from "../../templates/modal";
+
 import { modalCardMarkUp } from "../../templates/_modal-tmpl";
 import { modalMovieMarkUp } from "../../templates/modal-movie";
 
 export default class MarkupRender {
     #cardTemplate = cardParser;
-    #modalTemplate = renderModalCard;
+    
     #libraryTarget = REFS.libraryContainer;
     #modalTarget = REFS.modalContainer;
     #movieTarget;
