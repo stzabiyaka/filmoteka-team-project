@@ -42,7 +42,7 @@ export function modalCardMarkUp({
   return `
         <article class="modal-card-thumb__img" >         
             <div class="modal-card__picture" >                 
-                <img class="modal-card__img  lazyload" data-sizes="auto" data-src="${imgSrcMobile}" data-srcset="${imgSrcMobile} 342w, ${imgSrcTablet} 780w" alt="${title}" loading="lazy" type="image/jpeg" id="img-in-modal-card-picture"/>
+                <img class="modal-card__img  lazyload" data-src="${imgSrcMobile}" data-srcset="${imgSrcMobile} 342w, ${imgSrcTablet} 780w" alt="${title}" loading="lazy" type="image/jpeg" id="img-in-modal-card-picture"/>
             </div>
         </article>
         <article class="modal-card-thumb__content">

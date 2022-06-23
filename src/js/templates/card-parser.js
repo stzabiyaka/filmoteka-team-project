@@ -31,7 +31,7 @@ export default function cardParser({
   const poster = `${title} ${captions.movieDetails.poster}`;
   return `<li class="movie-card" data-movie-id="${id}"><article>
     <h2 class="visually_hidden">${title}</h2>
-        <img class="movie-card_img lazyload" data-sizes="auto" data-src="${image}" data-srcset="${image} 342w, ${imageRetina} 780w" alt="${poster}"  loading="lazy">
+        <img class="movie-card_img lazyload" data-src="${image}" data-srcset="${image} 342w, ${imageRetina} 780w" alt="${poster}"  loading="lazy">
     <h2 class="movie-card_title" >${title}</h2>
     <div class="movie-card_info">
     <p class = "movie-card_genres" title = "${captions.movieDetails.genres}">
