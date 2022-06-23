@@ -29,7 +29,7 @@ export function modalCardMarkUp({
       width: 'original',
     })}`;
   }
-  const imgSrc = `${imgSrcTablet} 1x, ${imgSrcDesktop} 2x`;
+  
 
   const vote = captions.movieDetails.vote;
   const votes = captions.movieDetails.votes;
@@ -40,13 +40,13 @@ export function modalCardMarkUp({
   const popularityData = Number(popularity).toFixed(2);
 
   return `
-  
-        <article class="modal-card-thumb__img" >         
+    <article>
+        <div class="modal-card-thumb__img" >         
             <div class="modal-card__picture" >                 
                 <img class="modal-card__img  lazyload" data-src="${imgSrcMobile}" data-srcset="${imgSrcMobile} 342w, ${imgSrcTablet} 780w" alt="${title}" sizes="300px" loading="lazy" type="image/jpeg" id="img-in-modal-card-picture"/>
             </div>
-        </article>
-        <article class="modal-card-thumb__content">
+        </div>
+        <div class="modal-card-thumb__content">
             <div class="modal-card-info">
                 <h2 class="modal-card-info__title">${title}</h2>
                 <div class="modal-card__thumb--characteristics">
@@ -80,7 +80,7 @@ export function modalCardMarkUp({
                 <p class="modal-card-info-about__description">${overview}</p>
             </div>
             
-        </article>
-    
+        </div>
+    </article>
     `;
 }
