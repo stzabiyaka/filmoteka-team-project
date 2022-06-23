@@ -32,9 +32,7 @@ export default class SiteEngine {
         this.#isUserNew = this.#languageSet.getIsUserNew();
         this.hiderClass = 'js-hidden';
         this.myLibraryClass = 'my-library';
-        this.#init().then(this.#handleHome()).catch(console.log);
-        
-            
+        this.#init().then(this.#handleHome()).catch(console.log);        
     }
 
 /* Ініціалізація головної сторінки сайта */ 
@@ -44,16 +42,11 @@ export default class SiteEngine {
         REFS.headerMyLibBtn.addEventListener('click', this.#handleWatched.bind(this, {isFromHome: true}) );
         REFS.searchForm.addEventListener('input', debounce(this.#handleSearch.bind(this), 300));
         REFS.teamLink.addEventListener('click', this.#handleTeam.bind(this));
-        if (this.#isUserNew) {
-            setTimeout(() => {     
-                this.#notifyNewUser();
-              }, 2000);
-            
+        if (this.#isUserNew) {   
+            this.#notifyNewUser();
         }
-
         
             await this.#apiService.getGenres();
-        
     }
 
 /* Формування та логіка головної сторінки сайта */ 
@@ -71,14 +64,10 @@ export default class SiteEngine {
             this.#createPaginator({ source: source, itemsPerPage: 20 });
             this.#paginatorAfterCallback = this.#trendingHandler.getTrendingMoviesPage.bind(this.#trendingHandler);
             this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ page: page }));
-        
-        
         }
         catch (error) {
             this.#notifyer.renderNotification ({ message: 'technicalFault' });
-        }
-        
-        
+        }  
     }
 
 /* Формування відображення результату пошуку фільмів за пошуковим запитом */ 
@@ -112,9 +101,7 @@ export default class SiteEngine {
         }
         catch (error) {
             console.log(error.message);
-        }
-
-           
+        }     
     }
 
 /* Формування відображення та логіка колекції watched */ 
@@ -263,6 +250,9 @@ export default class SiteEngine {
 
     #notifyNewUser () {
             const message = this.#languageSet.captions.notifications.languageNotify;
-            this.#notifyer.showNotification({ message: message, type: 'language' });
+            setTimeout(() => {     
+                this.#notifyer.showNotification({ message: message, type: 'language' });
+              }, 2000);  
+            
     }
 }

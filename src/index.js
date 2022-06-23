@@ -1,10 +1,9 @@
-import { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS, USER_COLLECTIONS } from './js/site-constants';
+import { REFS } from './js/site-constants';
 import MoviesApiService from './js/classes/services/movies-api-service';
 import UserPreferencesService from './js/classes/services/user-preferences';
 import CollectionService from './js/classes/services/collecion-service';
 import MarkupRender from './js/classes/utilities/markup-render';
 import SiteEngine from './js/classes/site-engine';
-import { closeModal, onClickBackdrop, onCloseEscKey } from './js/modules/modal-close-btn'
 import TrendingHandler from './js/classes/page-handlers/trending-handler';
 import CollectionHandler from './js/classes/page-handlers/collection-handler';
 import ModalHandler from './js/classes/page-handlers/modal-handler';

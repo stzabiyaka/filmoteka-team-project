@@ -3,13 +3,6 @@ const LANGUAGES = {
     ukrainian: 'ukrainian',
   };
 
-  const APPLICATION_PAGES = {
-    home: 'home',
-    search: 'search results',
-    watched: 'watched',
-    queue: 'queue',
-  };
-
   const REFS = {
     body: document.body,
     headerContainer: document.querySelector('#header'),
@@ -157,23 +150,4 @@ const USER_COLLECTIONS = {
     queue: 'queue'
 }
 
-export { LANGUAGES, APPLICATION_PAGES, REFS, CAPTIONS, USER_COLLECTIONS };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// REFS.modalOpenMovie = document.querySelector('#modal-open-movie');
+export { LANGUAGES, REFS, CAPTIONS, USER_COLLECTIONS };

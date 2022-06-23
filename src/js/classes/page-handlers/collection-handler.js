@@ -1,5 +1,3 @@
-import { REFS } from "../../site-constants";
-
 export default class CollectionHandler {
     #apiService;
     #markupRender;
