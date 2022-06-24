@@ -16,12 +16,13 @@ export default class SiteEngine {
     #languageSet;
     #isUserNew;
     #apiService;
+    #markupRender;
 /* Колбеки для eventListeners */
     #queueCallback;
     #watchedCallback;
     #paginatorAfterCallback;
 
-    constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler, notifyer, languageSet, apiService }) {
+    constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler, notifyer, languageSet, apiService, markupRender }) {
         this.#trendingHandler = trendingHandler;
         this.#collectionHandler = collectionHandler;
         this.#modalHandler = modalHandler;
@@ -29,6 +30,7 @@ export default class SiteEngine {
         this.#languageSet = languageSet;
         this.#notifyer = notifyer;
         this.#apiService = apiService;
+        this.#markupRender = markupRender;
         this.#isUserNew = this.#languageSet.getIsUserNew();
         this.hiderClass = 'js-hidden';
         this.myLibraryClass = 'my-library';
@@ -152,8 +154,7 @@ export default class SiteEngine {
     #handleTeam(evt) {
     evt.preventDefault();
     this.#modalHandler.openModalShell();
-    REFS.backdropTeam.classList.remove(this.hiderClass);
-    REFS.backdropTeam.addEventListener('click', this.#modalHandler.onClickBackdrop.bind(this.#modalHandler));        
+    this.#markupRender.renderTeam();
 }
 
 /* Встановлення стану поточної сторінки сайту */ 

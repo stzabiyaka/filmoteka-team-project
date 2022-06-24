@@ -1,19 +1,19 @@
-<div id="backdrop-team" class="backdrop js-hidden">
-    <div class="modal-team container">
-        <button type="button" class="team__close-btn" id="team-close" title="close window" aria-label="close window"
-        data-modal-close>
-        <svg class="modal-card__close-btn-icon" width="20" height="20">
-            <use href="./images/icons/icons.svg#icon-close"></use>
-        </svg>
-        </button>
+import  stanislavMobWebp  from "../../images/team-photo/stanislav_mobile.webp";
+import  stanislavMobWebp2x  from "../../images/team-photo/stanislav_mobile@2x.webp";
+import  stanislavDesktopWebp  from "../../images/team-photo/stanislav_desktop.webp";
+import  stanislavDesktopWebp2x  from "../../images/team-photo/stanislav_desktop@2x.webp";
+
+
+export function teamMarkUp() {
+    return `    
         <div class="team ">
         <h2 class="team__heading">Anonymous Codeholics Team</h2>
         <ul class="team-set">
             <!-- =====Станіслав===== -->
             <li class="team-item">
                 <picture>
-                    <source srcset="images/team-photo/stanislav_mobile.webp 230w, images/team-photo/stanislav_mobile@2x.webp 460w" type="image/webp" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="images/team-photo/stanislav_desktop.webp 170w, images/team-photo/stanislav_desktop@2x.webp 340w" type="image/webp" media="(min-width: 768px)" sizes="170px" />
+                    <source srcset="${stanislavMobWebp} 230w, ${stanislavMobWebp2x} 460w" type="image/webp" media="(max-width: 767px)" sizes="230px" />
+                    <source srcset="${stanislavDesktopWebp} 170w, ${stanislavDesktopWebp2x} 340w" type="image/webp" media="(min-width: 768px)" sizes="170px" />
                     <source srcset="images/team-photo/stanislav_mobile.jpg 230w, images/team-photo/stanislav_mobile@2x.jpg 460w" type="image/jpg" media="(max-width: 767px)" sizes="230px" />
                     <source srcset="images/team-photo/stanislav_desktop.jpg 170w, images/team-photo/stanislav_desktop@2x.jpg 340w" type="image/jpg" media="(min-width: 768px)" sizes="170px" />
                     <img class="team-photo lazyload" data-src="images/team-photo/stanislav_mobile.jpg" src="images/icons/developer.svg" alt="Станіслав Забіяка"  loading="lazy" />
@@ -424,5 +424,6 @@
             </li>
             </ul>
         </div>
-    </div>
-</div>
+    
+    `
+}

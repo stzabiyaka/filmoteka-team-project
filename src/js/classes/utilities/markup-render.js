@@ -2,6 +2,7 @@ import cardParser from "../../templates/card-parser";
 import { REFS } from "../../site-constants";
 import { modalCardMarkUp } from "../../templates/_modal-tmpl";
 import { modalMovieMarkUp } from "../../templates/modal-movie";
+import { teamMarkUp } from "../../templates/team-tmpl";
 
 export default class MarkupRender {
     #cardTemplate = cardParser;
@@ -91,4 +92,8 @@ export default class MarkupRender {
             
     }
 
+    /* Рендеринг команди у модальному вікні */ 
+    renderTeam() {
+        this.#modalTarget.innerHTML = teamMarkUp();
+    }
 }

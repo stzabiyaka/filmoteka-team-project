@@ -30,6 +30,8 @@ export default class ModalHandler {
         this.#closeBtnCallback = this.onClickBackdrop.bind(this);
         this.#escBtnCallback = this.#onCloseEscKey.bind(this);        
         window.addEventListener('keydown', this.#escBtnCallback);
+        REFS.backdrop.classList.remove('js-hidden');
+        REFS.backdrop.addEventListener('click', this.#closeBtnCallback);
     }
 
 
@@ -37,9 +39,7 @@ export default class ModalHandler {
         if(evt.target === evt.currentTarget) {
     return;
         }
-        this.openModalShell();
-        REFS.backdrop.classList.remove('js-hidden');
-        REFS.backdrop.addEventListener('click', this.#closeBtnCallback);
+        this.openModalShell();        
 
         this.#captions = this.#languageSet.captions;        
         const selectedElements = evt.path;        
@@ -113,10 +113,7 @@ export default class ModalHandler {
             evt.target === evt.currentTarget ||
             evt.target.parentElement === REFS.modalCloseBtn ||
             evt.target.parentElement.parentElement === REFS.modalCloseBtn ||
-            evt.target === REFS.modalCloseBtn ||
-            evt.target.parentElement === REFS.teamCloseBtn ||
-            evt.target.parentElement.parentElement === REFS.teamCloseBtn ||
-            evt.target === REFS.teamCloseBtn
+            evt.target === REFS.modalCloseBtn
         ) {
             this.#closeModal();
         }
