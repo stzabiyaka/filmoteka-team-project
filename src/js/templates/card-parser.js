@@ -42,7 +42,7 @@ export default function cardParser({
     <p class = "movie-card__genres" title = "${captions.movieDetails.genres}">
         ${genres.join(', ')}
         |<span class="movie-card__date" title = "${captions.movieDetails.release}">${release_date}</span>
-        <span class="movie-card__avarage" title ="${captions.movieDetails.rating}">${vote_average}</span>
+        <span class="movie-card__avarage" title ="${captions.movieDetails.rating}">${vote_average.toFixed(1)}</span>
     </p>
     </div>
 </article></a></li>`;
