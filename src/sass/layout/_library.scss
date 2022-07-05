@@ -1,38 +1,37 @@
 .library__section {
-    padding-top: 20px;
-    padding-bottom: 40px;
-    min-width: 300px;
-    
-    @include respondTo(tablet) {
-        padding-top: 60px;
-        padding-bottom: 60px;
-    }
+  padding-top: 20px;
+  padding-bottom: 40px;
+  min-width: 300px;
+
+  @include respondTo(tablet) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
 }
 
 .library__container {
-    min-height: 50vh;
-    display: flex;
-    flex-direction: column;
-    margin-top: -20px;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  margin-top: -20px;
 
-    @include respondTo(tablet) {
-        flex-direction: row;
-        flex-wrap: wrap;
-        
-        margin-top: -32px;
-        margin-left: -32px;
-    }
+  @include respondTo(tablet) {
+    flex-direction: row;
+    flex-wrap: wrap;
 
-    @include respondTo(desktop) {
-        margin-left: -16px;
-    }
+    margin-top: -32px;
+    margin-left: -32px;
+  }
+
+  @include respondTo(desktop) {
+    margin-left: -16px;
+  }
 }
 
 .welcome {
-    display: block;
-    margin: auto;
+  display: block;
+  margin: auto;
 
-    font-size: 30px;
-    color: getColor('text-footer');
-
+  font-size: 30px;
+  color: getColor('text-footer');
 }

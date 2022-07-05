@@ -15,13 +15,13 @@ $colors: (
   'text-primary': #000000,
   'text-secondary': #ffffff,
   'text-footer': #545454,
-  'accent': #FF6B08,
-  'warning': #FF001B,
+  'accent': #ff6b08,
+  'warning': #ff001b,
   'background-primary': #ffffff,
-  'background-secondary': #F7F7F7,
+  'background-secondary': #f7f7f7,
   'header-gradient': rgba(0, 0, 0, 0.56),
   'backdrop': rgba(0, 0, 0, 0.25),
-  'modal-text-secondary':#8C8C8C,
+  'modal-text-secondary': #8c8c8c,
 );
 
 // site fonts
@@ -33,13 +33,40 @@ $transitionTiming: cubic-bezier(0.4, 0, 0.2, 1);
 
 // breakpoints map for respondTo() mixin
 $breakpoints: (
-  'mobile': (min-width: #{$mobile},),
-  'tablet': (min-width: #{$tablet},),
-  'desktop': (min-width: #{$desktop},),
-  '-mobile': (max-width: #{$mobile - 1},),
-  '-tablet': (max-width: #{$tablet - 1},),
-  '-desktop': (max-width: #{$desktop - 1},),
-  'mobile-tablet': (min-width: #{$mobile},) #{and} (max-width: #{$tablet - 1},),
-  'mobile-desktop': (min-width: #{$mobile},) #{and} (max-width: #{$desktop - 1},),
-  'tablet-desktop': (min-width: #{$tablet},) #{and} (max-width: #{$desktop - 1},),
+  'mobile': (
+    min-width: #{$mobile},
+  ),
+  'tablet': (
+    min-width: #{$tablet},
+  ),
+  'desktop': (
+    min-width: #{$desktop},
+  ),
+  '-mobile': (
+    max-width: #{$mobile - 1},
+  ),
+  '-tablet': (
+    max-width: #{$tablet - 1},
+  ),
+  '-desktop': (
+    max-width: #{$desktop - 1},
+  ),
+  'mobile-tablet': (
+    min-width: #{$mobile},
+  )
+  #{and} (
+    max-width: #{$tablet - 1},
+  ),
+  'mobile-desktop': (
+    min-width: #{$mobile},
+  )
+  #{and} (
+    max-width: #{$desktop - 1},
+  ),
+  'tablet-desktop': (
+    min-width: #{$tablet},
+  )
+  #{and} (
+    max-width: #{$desktop - 1},
+  ),
 ) !default;

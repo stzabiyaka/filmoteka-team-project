@@ -1,116 +1,114 @@
 // ==========стиль блоку пагінація=======
-.pagination__container{
-    display: flex;
-    justify-content: center;
-    min-width: 200px;
-    
-    margin-top: 40px;
+.pagination__container {
+  display: flex;
+  justify-content: center;
+  min-width: 200px;
 
-    @include respondTo(tablet) {
-        margin-top: 60px;
-    }
+  margin-top: 40px;
 
-    &.js-hidden {
-        display: none;
-    }
+  @include respondTo(tablet) {
+    margin-top: 60px;
+  }
+
+  &.js-hidden {
+    display: none;
+  }
 }
 
 // ===========стиль кнопок===========
 .btn__pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0px 2px;
-    min-width: 40px;
-    width: 40px;
-    height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 2px;
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
 
-    border-radius: 5px;
-    border: none;
-    
-    cursor: pointer;
-    
-    text-decoration: none;
-    background-color: transparent;
-    color: getColor('text-primary');
+  border-radius: 5px;
+  border: none;
 
-    .body.theme-dark & {
-        color: getColor('text-secondary');
+  cursor: pointer;
+
+  text-decoration: none;
+  background-color: transparent;
+  color: getColor('text-primary');
+
+  .body.theme-dark & {
+    color: getColor('text-secondary');
+  }
+
+  @include respondTo(tablet) {
+    margin: 0px 1px;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: rgba(255, 107, 1, 0.5);
+    color: getColor('text-secondary');
+  }
+
+  &--more {
+    display: none;
+
+    @include respondTo(tablet) {
+      display: flex;
     }
-
-        @include respondTo(tablet) {
-            margin: 0px 1px;
-        }
-
-        &:hover,
-        &:focus,
-        &:active {
-            background-color: rgba(255, 107, 1, 0.5);
-            color: getColor('text-secondary');
-        }
-
-    &--more {
-        display: none;
-
-        @include respondTo(tablet) {
-            display: flex;
-        }
-    }
+  }
 }
 
-.btn__number--active{
-    background-color: getColor('accent');
-    color: getColor('text-secondary');
+.btn__number--active {
+  background-color: getColor('accent');
+  color: getColor('text-secondary');
 }
 
 .btn__arrow {
-    
+  &:hover,
+  &:focus {
+    background-color: #c6c6c6;
+  }
 
-    &:hover,
-    &:focus{
-        background-color: #c6c6c6;
-    }
+  &--disabled {
+    opacity: 0.3;
+  }
 
-    &--disabled {
-        opacity: 0.3;
+  &-first,
+  &-last {
+    @include respondTo(-tablet) {
+      display: none;
     }
-
-    &-first, &-last {
-        @include respondTo(-tablet) {
-            display: none;
-        }
-    }
+  }
 }
 
 // =======приховування кнопки========
 .btn__dots.is-hidden {
-    display: none;
+  display: none;
 }
 
 // ==========стиль svg-іконки==========
 
 .icon-arrow-prev {
-    width: 16px;
-    height: 16px;
-    background-image: url(../images/icons/arrow-prev.svg);
-    background-size: cover;
+  width: 16px;
+  height: 16px;
+  background-image: url(../images/icons/arrow-prev.svg);
+  background-size: cover;
 
-    .body.theme-dark & {
-        filter:invert(1);
-    }
+  .body.theme-dark & {
+    filter: invert(1);
+  }
 }
 
 .icon-arrow-next {
-    @extend .icon-arrow-prev;
-    transform: rotate(180deg);
+  @extend .icon-arrow-prev;
+  transform: rotate(180deg);
 }
 .icon-arrow-first {
-    @extend .icon-arrow-prev;
-    background-image: url(../images/icons/arrow-first.svg);
-
+  @extend .icon-arrow-prev;
+  background-image: url(../images/icons/arrow-first.svg);
 }
 
 .icon-arrow-last {
-    @extend .icon-arrow-first;
-    transform: rotate(180deg);
+  @extend .icon-arrow-first;
+  transform: rotate(180deg);
 }

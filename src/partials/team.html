@@ -1,428 +1,960 @@
 <div id="backdrop-team" class="backdrop js-hidden">
-    <div class="modal-team container">
-        <button type="button" class="team__close-btn" id="team-close" title="close window" aria-label="close window"
-        data-modal-close>
-        <svg class="modal-card__close-btn-icon" width="20" height="20">
-            <use href="./images/icons/icons.svg#icon-close"></use>
-        </svg>
-        </button>
-        <div class="team ">
-        <h2 class="team__heading">Anonymous Codeholics Team</h2>
-        <ul class="team-set">
-            <!-- =====Станіслав===== -->
-            <li class="team-item">
-                <picture>
-                    <source srcset="images/team-photo/stanislav_mobile.webp 230w, images/team-photo/stanislav_mobile@2x.webp 460w" type="image/webp" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="images/team-photo/stanislav_desktop.webp 170w, images/team-photo/stanislav_desktop@2x.webp 340w" type="image/webp" media="(min-width: 768px)" sizes="170px" />
-                    <source srcset="images/team-photo/stanislav_mobile.jpg 230w, images/team-photo/stanislav_mobile@2x.jpg 460w" type="image/jpg" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="images/team-photo/stanislav_desktop.jpg 170w, images/team-photo/stanislav_desktop@2x.jpg 340w" type="image/jpg" media="(min-width: 768px)" sizes="170px" />
-                    <img class="team-photo lazyload" data-src="images/team-photo/stanislav_mobile.jpg" src="images/icons/developer.svg" alt="Станіслав Забіяка"  loading="lazy" />
-                </picture>
-                <div class="team-info">
-                    <h3 class="team-info__name">Станіслав Забіяка</h3>
-                    <p class="team-info__profession" lang="en">Team Lead</p>
-                    <ul class="social-list">
-                        <li>
-                            <a href="#" class="social-link" aria-label="Instagram" rel="noopener noreferrer nofollow">
-                                <svg class="social-icon" width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-instagram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="Linkedin" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-linkedin"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="Telegram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-telegram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="GitHub" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-github"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <!-- =====Марина===== -->
-            <li class="team-item">
-                <picture>
-                    <source srcset="./images/team-photo/maryna_mobile.webp 230w, ./images/team-photo/maryna_mobile@2x.webp 460w" type="image/webp" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/maryna_desktop.webp 170w, ./images/team-photo/maryna_desktop@2x.webp 340w" type="image/webp" media="(min-width: 768px)" sizes="170px" />                    
-                    <source srcset="./images/team-photo/maryna_mobile.jpg 230w, ./images/team-photo/maryna_mobile@2x.jpg 460w" type="image/jpg" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/maryna_desktop.jpg 170w, ./images/team-photo/maryna_desktop@2x.jpg 340w" type="image/jpg" media="(min-width: 768px)" sizes="170px" />
-                    <img class="team-photo lazyload" data-src="./images/team-photo/maryna_desktop.jpg" src="images/icons/developer.svg" alt="Марина Шеремета"  loading="lazy"  />
-                </picture>
-                <div class="team-info">
-                    <h3 class="team-info__name">Марина Шеремета</h3>
-                    <p class="team-info__profession" lang="en">Scrum Master</p>
-                    <ul class="social-list">
-                        <li>
-                            <a href="https://www.instagram.com/emsheremeta/" target="_blank" class="social-link" aria-label="Instagram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-instagram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="Linkedin" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-linkedin"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="Telegram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-telegram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/emsheremeta" class="social-link" target="_blank" aria-label="GitHub" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-github"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <!-- =====Ольга===== -->
-            <li class="team-item">
-                <picture>
-                    <source srcset="./images/team-photo/olga_mobile.webp 230w, ./images/team-photo/olga_mobile@2x.webp 460w" type="image/webp" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/olga_desktop.webp 170w, ./images/team-photo/olga_desktop@2x.webp 340w" type="image/webp" media="(min-width: 768px)" sizes="170px" />
-                    <source srcset="./images/team-photo/olga_mobile.jpg 230w, ./images/team-photo/olga_mobile@2x.jpg 460w" type="image/jpg" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/olga_desktop.jpg 170w, ./images/team-photo/olga_desktop@2x.jpg 340w" type="image/jpg" media="(min-width: 768px)" sizes="170px" />
-                    <img class="team-photo lazyload" data-src="./images/team-photo/olga_desktop.jpg" src="images/icons/developer.svg" alt="Ольга Сумарук" loading="lazy" />
-                </picture>
-                <div class="team-info">
-                    <h3 class="team-info__name">Ольга Сумарук</h3>
-                    <p class="team-info__profession" lang="en">Developer</p>
-                    <ul class="social-list">
-                        <li>
-                            <a href="#" class="social-link" aria-label="Instagram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-instagram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="Linkedin" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-linkedin"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="Telegram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-telegram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="GitHub" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-github"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <!-- =====Наталія===== -->
-            <li class="team-item">
-                <picture>
-                    <source srcset="./images/team-photo/natalia_mobile.webp 230w, ./images/team-photo/natalia_mobile@2x.webp 460w" type="image/webp" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/natalia_desktop.webp 170w, ./images/team-photo/natalia_desktop@2x.webp 340w" type="image/webp" media="(min-width: 768px)" sizes="170px" />
-                    <source srcset="./images/team-photo/natalia_mobile.jpg 230w, ./images/team-photo/natalia_mobile@2x.jpg 460w" type="image/jpg" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/natalia_desktop.jpg 170w, ./images/team-photo/natalia_desktop@2x.jpg 340w" type="image/jpg" media="(min-width: 768px)" sizes="170px" />
-                    <img class="team-photo lazyload" data-src="./images/team-photo/natalia_desktop.jpg" src="images/icons/developer.svg" alt="Наталія Гордієнко" loading="lazy" />
-                </picture>
-                <div class="team-info">
-                    <h3 class="team-info__name">Наталія Гордієнко</h3>
-                    <p class="team-info__profession" lang="en">Developer</p>
-                    <ul class="social-list">
-                        <li>
-                            <a href="#" class="social-link" aria-label="Instagram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-instagram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="Linkedin" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-linkedin"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://t.me/NataliGordienko610" target="_blank" class="social-link" aria-label="Telegram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-telegram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/61083nataliG0rdienk0" target="_blank" class="social-link" aria-label="GitHub" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-github"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <!-- =====Віталій===== -->
-            <li class="team-item">
-                <picture>
-                    <source srcset="./images/team-photo/vitaliy_mobile.webp 230w, ./images/team-photo/vitaliy_mobile@2x.webp 460w" type="image/webp" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/vitaliy_desktop.webp 170w, ./images/team-photo/vitaliy_desktop@2x.webp 340w" type="image/webp" media="(min-width: 768px)" sizes="170px" />
-                    <source srcset="./images/team-photo/vitaliy_mobile.jpg 230w, ./images/team-photo/vitaliy_mobile@2x.jpg 460w" type="image/jpg" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/vitaliy_desktop.jpg 170w, ./images/team-photo/vitaliy_desktop@2x.jpg 340w" type="image/jpg" media="(min-width: 768px)" sizes="170px" />
-                    <img class="team-photo lazyload" data-src="./images/team-photo/vitaliy_desktop.jpg" src="images/icons/developer.svg" alt="Віталій Пилипенко" loading="lazy" />
-                </picture>
-                <div class="team-info">
-                    <h3 class="team-info__name">Віталій Пилипенко</h3>
-                    <p class="team-info__profession" lang="en">Developer</p>
-                    <ul class="social-list">
-                        <li>
-                            <a href="#" class="social-link" aria-label="Instagram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-instagram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="Linkedin" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-linkedin"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="Telegram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-telegram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/VitenFra" target="_blank" class="social-link" aria-label="GitHub"
-                                rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-github"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <!-- =====Юлія===== -->
-            <li class="team-item">
-                <picture>
-                    <source srcset="./images/team-photo/julia_mobile.webp 230w, ./images/team-photo/julia_mobile@2x.webp 460w" type="image/webp" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/julia_desktop.webp 170w, ./images/team-photo/julia_desktop@2x.webp 340w" type="image/webp" media="(min-width: 768px)" sizes="170px" />
-                    <source srcset="./images/team-photo/julia_mobile.jpg 230w, ./images/team-photo/julia_mobile@2x.jpg 460w" type="image/jpg" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/julia_desktop.jpg 170w, ./images/team-photo/julia_desktop@2x.jpg 340w" type="image/jpg" media="(min-width: 768px)" sizes="170px" />
-                    <img class="team-photo lazyload" data-src="./images/team-photo/julia_desktop.jpg" src="images/icons/developer.svg" alt="Юлія Ананьева" loading="lazy" />
-                </picture>
-                <div class="team-info">
-                    <h3 class="team-info__name">Юлія Ананьева</h3>
-                    <p class="team-info__profession" lang="en">Developer</p>
-                    <ul class="social-list">
-                        <li>
-                            <a href="#" class="social-link" aria-label="Instagram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-instagram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="Linkedin" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-linkedin"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="Telegram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-telegram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="GitHub" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-github"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <!-- =====Микола===== -->
-            <li class="team-item">
-                <picture>
-                    <source srcset="./images/team-photo/mykola_mobile.webp 230w, ./images/team-photo/mykola_mobile@2x.webp 460w" type="image/webp" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/mykola_desktop.webp 170w, ./images/team-photo/mykola_desktop@2x.webp 340w" type="image/webp" media="(min-width: 768px)" sizes="170px" />
-                    <source srcset="./images/team-photo/mykola_desktop.jpg 170w, ./images/team-photo/mykola_desktop@2x.jpg 340w" type="image/jpg" media="(min-width: 768px)" sizes="170px" />
-                    <source srcset="./images/team-photo/mykola_mobile.jpg 230w, ./images/team-photo/mykola_mobile@2x.jpg 460w" type="image/jpg" media="(max-width: 767px)" sizes="230px" />
-                    <img class="team-photo lazyload" data-src="./images/team-photo/mykola_desktop.jpg" src="images/icons/developer.svg" alt="Микола Гонюк" loading="lazy" />
-                </picture>
-                <div class="team-info">
-                    <h3 class="team-info__name">Микола Гонюк</h3>
-                    <p class="team-info__profession" lang="en">Developer</p>
-                    <ul class="social-list">
-                        <li>
-                            <a href="https://instagram.com/kolya8077" target="_blank" class="social-link" aria-label="Instagram"
-                                rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-instagram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/in/%D0%BA%D0%BE%D0%BB%D1%8F-%D0%B3%D0%BE%D0%BD%D1%8E%D0%BA-8a5058187"
-                                target="_blank" class="social-link" aria-label="Linkedin" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-linkedin"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://t.me/kolya8077" target="_blank" class="social-link" aria-label="Telegram"
-                                rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-telegram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/kolya8077" target="_blank" class="social-link" aria-label="GitHub"
-                                rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-github"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <!-- =====Світлана===== -->
-            <li class="team-item">
-                <picture>
-                    <source srcset="./images/team-photo/svitlana_mobile.webp 230w, ./images/team-photo/svitlana_mobile@2x.webp 460w" type="image/webp" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/svitlana_desktop.webp 170w, ./images/team-photo/svitlana_desktop@2x.webp 340w" type="image/webp" media="(min-width: 768px)" sizes="170px" />
-                    <source srcset="./images/team-photo/svitlana_mobile.jpg 230w, ./images/team-photo/svitlana_mobile@2x.jpg 460w" type="image/jpg" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/svitlana_desktop.jpg 170w, ./images/team-photo/svitlana_desktop@2x.jpg 340w" type="image/jpg" media="(min-width: 768px)" sizes="170px" />
-                    <img class="team-photo lazyload" data-src="./images/team-photo/svitlana_desktop.jpg" src="./images/team-photo/svitlana_desktop.jpg" alt="Світлана Киричун" loading="lazy" />
-                </picture>
-                <div class="team-info">
-                    <h3 class="team-info__name">Світлана Киричун</h3>
-                    <p class="team-info__profession" lang="en">Developer</p>
-                    <ul class="social-list">
-                        <li>
-                            <a href="#" class="social-link" aria-label="Instagram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-instagram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="Linkedin" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-linkedin"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="social-link" aria-label="Telegram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-telegram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/SvetlanaZt" target="_blank" class="social-link" aria-label="GitHub"
-                                rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-github"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            
-            <!-- =====Роман===== -->
-            <li class="team-item">
-                <picture>
-                    <source srcset="./images/team-photo/roman_mobile.webp 230w, ./images/team-photo/roman_mobile@2x.webp 460w" type="image/webp" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/roman_desktop.webp 170w, ./images/team-photo/roman_desktop@2x.webp 340w" type="image/webp" media="(min-width: 768px)" sizes="170px" />
-                    <source srcset="./images/team-photo/roman_mobile.jpg 230w, ./images/team-photo/roman_mobile@2x.jpg 460w" type="image/jpg" media="(max-width: 767px)" sizes="230px" />
-                    <source srcset="./images/team-photo/roman_desktop.jpg 170w, ./images/team-photo/roman_desktop@2x.jpg 340w" type="image/jpg" media="(min-width: 768px)" sizes="170px" />
-                    <img class="team-photo lazyload" data-src="./images/team-photo/roman_desktop.jpg" src="images/icons/developer.svg" alt="Роман Безуглий" loading="lazy" />
-                </picture>
-                <div class="team-info">
-                    <h3 class="team-info__name">Роман Безуглий</h3>
-                    <p class="team-info__profession" lang="en">Developer</p>
-                    <ul class="social-list">
-                        <li>
-                            <a href="#" class="social-link" aria-label="Instagram" rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-instagram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/in/romanbezuhlyi" target="_blank" class="social-link" aria-label="Linkedin"
-                                rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-linkedin"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://t.me/Bezuglijj7" target="_blank" class="social-link" aria-label="Telegram"
-                                rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-telegram"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/RomanBezuhlyi" target="_blank" class="social-link" aria-label="GitHub"
-                                rel="noopener noreferrer nofollow">
-                                <svg width="15px" height="15px">
-                                    <use href="images/icons/icons.svg#icon-github"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+  <div class="modal-team container">
+    <button
+      type="button"
+      class="team__close-btn"
+      id="team-close"
+      title="close window"
+      aria-label="close window"
+      data-modal-close
+    >
+      <svg class="modal-card__close-btn-icon" width="20" height="20">
+        <use href="./images/icons/icons.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="team">
+      <h2 class="team__heading">Anonymous Codeholics Team</h2>
+      <ul class="team-set">
+        <!-- =====Станіслав===== -->
+        <li class="team-item">
+          <picture>
+            <source
+              srcset="
+                images/team-photo/stanislav_mobile.webp    230w,
+                images/team-photo/stanislav_mobile@2x.webp 460w
+              "
+              type="image/webp"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                images/team-photo/stanislav_desktop.webp    170w,
+                images/team-photo/stanislav_desktop@2x.webp 340w
+              "
+              type="image/webp"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <source
+              srcset="
+                images/team-photo/stanislav_mobile.jpg    230w,
+                images/team-photo/stanislav_mobile@2x.jpg 460w
+              "
+              type="image/jpg"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                images/team-photo/stanislav_desktop.jpg    170w,
+                images/team-photo/stanislav_desktop@2x.jpg 340w
+              "
+              type="image/jpg"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <img
+              class="team-photo lazyload"
+              data-src="images/team-photo/stanislav_mobile.jpg"
+              src="images/icons/developer.svg"
+              alt="Станіслав Забіяка"
+              loading="lazy"
+            />
+          </picture>
+          <div class="team-info">
+            <h3 class="team-info__name">Станіслав Забіяка</h3>
+            <p class="team-info__profession" lang="en">Team Lead</p>
+            <ul class="social-list">
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Instagram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg class="social-icon" width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-instagram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Linkedin"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-linkedin"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Telegram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-telegram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="GitHub"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-github"></use>
+                  </svg>
+                </a>
+              </li>
             </ul>
-        </div>
+          </div>
+        </li>
+
+        <!-- =====Марина===== -->
+        <li class="team-item">
+          <picture>
+            <source
+              srcset="
+                ./images/team-photo/maryna_mobile.webp    230w,
+                ./images/team-photo/maryna_mobile@2x.webp 460w
+              "
+              type="image/webp"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/maryna_desktop.webp    170w,
+                ./images/team-photo/maryna_desktop@2x.webp 340w
+              "
+              type="image/webp"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/maryna_mobile.jpg    230w,
+                ./images/team-photo/maryna_mobile@2x.jpg 460w
+              "
+              type="image/jpg"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/maryna_desktop.jpg    170w,
+                ./images/team-photo/maryna_desktop@2x.jpg 340w
+              "
+              type="image/jpg"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <img
+              class="team-photo lazyload"
+              data-src="./images/team-photo/maryna_desktop.jpg"
+              src="images/icons/developer.svg"
+              alt="Марина Шеремета"
+              loading="lazy"
+            />
+          </picture>
+          <div class="team-info">
+            <h3 class="team-info__name">Марина Шеремета</h3>
+            <p class="team-info__profession" lang="en">Scrum Master</p>
+            <ul class="social-list">
+              <li>
+                <a
+                  href="https://www.instagram.com/emsheremeta/"
+                  target="_blank"
+                  class="social-link"
+                  aria-label="Instagram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-instagram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Linkedin"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-linkedin"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Telegram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-telegram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/emsheremeta"
+                  class="social-link"
+                  target="_blank"
+                  aria-label="GitHub"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-github"></use>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- =====Ольга===== -->
+        <li class="team-item">
+          <picture>
+            <source
+              srcset="
+                ./images/team-photo/olga_mobile.webp    230w,
+                ./images/team-photo/olga_mobile@2x.webp 460w
+              "
+              type="image/webp"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/olga_desktop.webp    170w,
+                ./images/team-photo/olga_desktop@2x.webp 340w
+              "
+              type="image/webp"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/olga_mobile.jpg    230w,
+                ./images/team-photo/olga_mobile@2x.jpg 460w
+              "
+              type="image/jpg"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/olga_desktop.jpg    170w,
+                ./images/team-photo/olga_desktop@2x.jpg 340w
+              "
+              type="image/jpg"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <img
+              class="team-photo lazyload"
+              data-src="./images/team-photo/olga_desktop.jpg"
+              src="images/icons/developer.svg"
+              alt="Ольга Сумарук"
+              loading="lazy"
+            />
+          </picture>
+          <div class="team-info">
+            <h3 class="team-info__name">Ольга Сумарук</h3>
+            <p class="team-info__profession" lang="en">Developer</p>
+            <ul class="social-list">
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Instagram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-instagram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Linkedin"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-linkedin"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Telegram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-telegram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="GitHub"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-github"></use>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- =====Наталія===== -->
+        <li class="team-item">
+          <picture>
+            <source
+              srcset="
+                ./images/team-photo/natalia_mobile.webp    230w,
+                ./images/team-photo/natalia_mobile@2x.webp 460w
+              "
+              type="image/webp"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/natalia_desktop.webp    170w,
+                ./images/team-photo/natalia_desktop@2x.webp 340w
+              "
+              type="image/webp"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/natalia_mobile.jpg    230w,
+                ./images/team-photo/natalia_mobile@2x.jpg 460w
+              "
+              type="image/jpg"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/natalia_desktop.jpg    170w,
+                ./images/team-photo/natalia_desktop@2x.jpg 340w
+              "
+              type="image/jpg"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <img
+              class="team-photo lazyload"
+              data-src="./images/team-photo/natalia_desktop.jpg"
+              src="images/icons/developer.svg"
+              alt="Наталія Гордієнко"
+              loading="lazy"
+            />
+          </picture>
+          <div class="team-info">
+            <h3 class="team-info__name">Наталія Гордієнко</h3>
+            <p class="team-info__profession" lang="en">Developer</p>
+            <ul class="social-list">
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Instagram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-instagram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Linkedin"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-linkedin"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://t.me/NataliGordienko610"
+                  target="_blank"
+                  class="social-link"
+                  aria-label="Telegram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-telegram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/61083nataliG0rdienk0"
+                  target="_blank"
+                  class="social-link"
+                  aria-label="GitHub"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-github"></use>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- =====Віталій===== -->
+        <li class="team-item">
+          <picture>
+            <source
+              srcset="
+                ./images/team-photo/vitaliy_mobile.webp    230w,
+                ./images/team-photo/vitaliy_mobile@2x.webp 460w
+              "
+              type="image/webp"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/vitaliy_desktop.webp    170w,
+                ./images/team-photo/vitaliy_desktop@2x.webp 340w
+              "
+              type="image/webp"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/vitaliy_mobile.jpg    230w,
+                ./images/team-photo/vitaliy_mobile@2x.jpg 460w
+              "
+              type="image/jpg"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/vitaliy_desktop.jpg    170w,
+                ./images/team-photo/vitaliy_desktop@2x.jpg 340w
+              "
+              type="image/jpg"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <img
+              class="team-photo lazyload"
+              data-src="./images/team-photo/vitaliy_desktop.jpg"
+              src="images/icons/developer.svg"
+              alt="Віталій Пилипенко"
+              loading="lazy"
+            />
+          </picture>
+          <div class="team-info">
+            <h3 class="team-info__name">Віталій Пилипенко</h3>
+            <p class="team-info__profession" lang="en">Developer</p>
+            <ul class="social-list">
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Instagram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-instagram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Linkedin"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-linkedin"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Telegram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-telegram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/VitenFra"
+                  target="_blank"
+                  class="social-link"
+                  aria-label="GitHub"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-github"></use>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- =====Юлія===== -->
+        <li class="team-item">
+          <picture>
+            <source
+              srcset="
+                ./images/team-photo/julia_mobile.webp    230w,
+                ./images/team-photo/julia_mobile@2x.webp 460w
+              "
+              type="image/webp"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/julia_desktop.webp    170w,
+                ./images/team-photo/julia_desktop@2x.webp 340w
+              "
+              type="image/webp"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/julia_mobile.jpg    230w,
+                ./images/team-photo/julia_mobile@2x.jpg 460w
+              "
+              type="image/jpg"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/julia_desktop.jpg    170w,
+                ./images/team-photo/julia_desktop@2x.jpg 340w
+              "
+              type="image/jpg"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <img
+              class="team-photo lazyload"
+              data-src="./images/team-photo/julia_desktop.jpg"
+              src="images/icons/developer.svg"
+              alt="Юлія Ананьева"
+              loading="lazy"
+            />
+          </picture>
+          <div class="team-info">
+            <h3 class="team-info__name">Юлія Ананьева</h3>
+            <p class="team-info__profession" lang="en">Developer</p>
+            <ul class="social-list">
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Instagram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-instagram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Linkedin"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-linkedin"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Telegram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-telegram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="GitHub"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-github"></use>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- =====Микола===== -->
+        <li class="team-item">
+          <picture>
+            <source
+              srcset="
+                ./images/team-photo/mykola_mobile.webp    230w,
+                ./images/team-photo/mykola_mobile@2x.webp 460w
+              "
+              type="image/webp"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/mykola_desktop.webp    170w,
+                ./images/team-photo/mykola_desktop@2x.webp 340w
+              "
+              type="image/webp"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/mykola_desktop.jpg    170w,
+                ./images/team-photo/mykola_desktop@2x.jpg 340w
+              "
+              type="image/jpg"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/mykola_mobile.jpg    230w,
+                ./images/team-photo/mykola_mobile@2x.jpg 460w
+              "
+              type="image/jpg"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <img
+              class="team-photo lazyload"
+              data-src="./images/team-photo/mykola_desktop.jpg"
+              src="images/icons/developer.svg"
+              alt="Микола Гонюк"
+              loading="lazy"
+            />
+          </picture>
+          <div class="team-info">
+            <h3 class="team-info__name">Микола Гонюк</h3>
+            <p class="team-info__profession" lang="en">Developer</p>
+            <ul class="social-list">
+              <li>
+                <a
+                  href="https://instagram.com/kolya8077"
+                  target="_blank"
+                  class="social-link"
+                  aria-label="Instagram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-instagram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/%D0%BA%D0%BE%D0%BB%D1%8F-%D0%B3%D0%BE%D0%BD%D1%8E%D0%BA-8a5058187"
+                  target="_blank"
+                  class="social-link"
+                  aria-label="Linkedin"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-linkedin"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://t.me/kolya8077"
+                  target="_blank"
+                  class="social-link"
+                  aria-label="Telegram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-telegram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/kolya8077"
+                  target="_blank"
+                  class="social-link"
+                  aria-label="GitHub"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-github"></use>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- =====Світлана===== -->
+        <li class="team-item">
+          <picture>
+            <source
+              srcset="
+                ./images/team-photo/svitlana_mobile.webp    230w,
+                ./images/team-photo/svitlana_mobile@2x.webp 460w
+              "
+              type="image/webp"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/svitlana_desktop.webp    170w,
+                ./images/team-photo/svitlana_desktop@2x.webp 340w
+              "
+              type="image/webp"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/svitlana_mobile.jpg    230w,
+                ./images/team-photo/svitlana_mobile@2x.jpg 460w
+              "
+              type="image/jpg"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/svitlana_desktop.jpg    170w,
+                ./images/team-photo/svitlana_desktop@2x.jpg 340w
+              "
+              type="image/jpg"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <img
+              class="team-photo lazyload"
+              data-src="./images/team-photo/svitlana_desktop.jpg"
+              src="./images/team-photo/svitlana_desktop.jpg"
+              alt="Світлана Киричун"
+              loading="lazy"
+            />
+          </picture>
+          <div class="team-info">
+            <h3 class="team-info__name">Світлана Киричун</h3>
+            <p class="team-info__profession" lang="en">Developer</p>
+            <ul class="social-list">
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Instagram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-instagram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Linkedin"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-linkedin"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Telegram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-telegram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/SvetlanaZt"
+                  target="_blank"
+                  class="social-link"
+                  aria-label="GitHub"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-github"></use>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- =====Роман===== -->
+        <li class="team-item">
+          <picture>
+            <source
+              srcset="
+                ./images/team-photo/roman_mobile.webp    230w,
+                ./images/team-photo/roman_mobile@2x.webp 460w
+              "
+              type="image/webp"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/roman_desktop.webp    170w,
+                ./images/team-photo/roman_desktop@2x.webp 340w
+              "
+              type="image/webp"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/roman_mobile.jpg    230w,
+                ./images/team-photo/roman_mobile@2x.jpg 460w
+              "
+              type="image/jpg"
+              media="(max-width: 767px)"
+              sizes="230px"
+            />
+            <source
+              srcset="
+                ./images/team-photo/roman_desktop.jpg    170w,
+                ./images/team-photo/roman_desktop@2x.jpg 340w
+              "
+              type="image/jpg"
+              media="(min-width: 768px)"
+              sizes="170px"
+            />
+            <img
+              class="team-photo lazyload"
+              data-src="./images/team-photo/roman_desktop.jpg"
+              src="images/icons/developer.svg"
+              alt="Роман Безуглий"
+              loading="lazy"
+            />
+          </picture>
+          <div class="team-info">
+            <h3 class="team-info__name">Роман Безуглий</h3>
+            <p class="team-info__profession" lang="en">Developer</p>
+            <ul class="social-list">
+              <li>
+                <a
+                  href="#"
+                  class="social-link"
+                  aria-label="Instagram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-instagram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/romanbezuhlyi"
+                  target="_blank"
+                  class="social-link"
+                  aria-label="Linkedin"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-linkedin"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://t.me/Bezuglijj7"
+                  target="_blank"
+                  class="social-link"
+                  aria-label="Telegram"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-telegram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/RomanBezuhlyi"
+                  target="_blank"
+                  class="social-link"
+                  aria-label="GitHub"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <svg width="15px" height="15px">
+                    <use href="images/icons/icons.svg#icon-github"></use>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
     </div>
+  </div>
 </div>

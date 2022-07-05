@@ -1,11 +1,11 @@
 // =====розмір svg=====
 .spinner {
-    background-image: url(../images/icons/spinner.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 50px auto;
-    
-    @include respondTo(tablet) {
-        background-size: 100px auto;
-    }
+  background-image: url(../images/icons/spinner.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50px auto;
+
+  @include respondTo(tablet) {
+    background-size: 100px auto;
+  }
 }

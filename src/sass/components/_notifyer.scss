@@ -10,9 +10,9 @@
   padding-right: 15px;
   margin-right: 10px;
   color: getColor('text-secondary');
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
 
   transition: opacity 1000ms ease-in-out 250ms;
 
@@ -21,17 +21,14 @@
     pointer-events: none;
     opacity: 0;
     color: getColor('text-secondary');
-
-}
-
-  @media screen and (min-width: 500px) {
-      padding-left: 74px;
   }
 
- 
+  @media screen and (min-width: 500px) {
+    padding-left: 74px;
+  }
 }
 
-.language{
+.language {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,9 +42,14 @@
 
   color: getColor('text-secondary');
   border-radius: 5px;
-  
-  background-image: linear-gradient(to bottom, rgba(7, 7, 167, 0.8) 50%, rgba(175, 135, 2, 0.8) 50%);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.603), 0 0 50px rgba(255, 107, 1, 0.6);
+
+  background-image: linear-gradient(
+    to bottom,
+    rgba(7, 7, 167, 0.8) 50%,
+    rgba(175, 135, 2, 0.8) 50%
+  );
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.603),
+    0 0 50px rgba(255, 107, 1, 0.6);
 
   &::after {
     content: '';
@@ -69,16 +71,16 @@
     animation-timing-function: ease-in;
   }
 
-@include respondTo(tablet) {
-  width: 250px;
+  @include respondTo(tablet) {
+    width: 250px;
+  }
+
+  @include respondTo(desktop) {
+    width: 280px;
+  }
 }
 
-@include respondTo(desktop) {
-  width: 280px;
-}
-}
-
-.warning{
+.warning {
   display: flex;
   align-items: center;
   margin-top: auto;
@@ -91,10 +93,9 @@
 
   color: getColor('warning');
   border-radius: 5px;
-  
+
   background-color: rgba(34, 33, 33, 0.733);
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.74);
-
 }
 
 .notifyer__message {
@@ -120,10 +121,10 @@
 
 @keyframes arrow {
   from {
-      transform: scale(1);
+    transform: scale(1);
   }
 
   to {
-      transform: scale(2);
+    transform: scale(2);
   }
 }

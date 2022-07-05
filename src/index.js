@@ -17,18 +17,52 @@ import 'lazysizes';
 const userPreferences = new UserPreferencesService('userPreferences');
 const userCollectionsService = new CollectionService('userCollections');
 const languageSet = new LanguageSet({ userPreferences: userPreferences });
-const notifyer = new Notifyer({ renderTarget: REFS.libraryContainer, modalTarget: REFS.modalContainer, timeOut: 5000, languageSet: languageSet});
-const moviesApiService = new MoviesApiService({ languageSet: languageSet});
-const markupRender = new MarkupRender({ notifyer: notifyer, languageSet: languageSet });
-const trendingHandler = new TrendingHandler({ apiService: moviesApiService, markupRender: markupRender });
-const collectionHandler = new CollectionHandler({ apiService: moviesApiService, collectionsService: userCollectionsService, markupRender: markupRender, notifyer: notifyer });
-const searchHandler = new SearchHandler({ apiService: moviesApiService, markupRender: markupRender });
-const modalHandler = new ModalHandler({ apiService: moviesApiService, languageSet: languageSet, markupRender: markupRender, collectionsService: userCollectionsService, notifyer: notifyer });
+const notifyer = new Notifyer({
+  renderTarget: REFS.libraryContainer,
+  modalTarget: REFS.modalContainer,
+  timeOut: 5000,
+  languageSet: languageSet,
+});
+const moviesApiService = new MoviesApiService({ languageSet: languageSet });
+const markupRender = new MarkupRender({
+  notifyer: notifyer,
+  languageSet: languageSet,
+});
+const trendingHandler = new TrendingHandler({
+  apiService: moviesApiService,
+  markupRender: markupRender,
+});
+const collectionHandler = new CollectionHandler({
+  apiService: moviesApiService,
+  collectionsService: userCollectionsService,
+  markupRender: markupRender,
+  notifyer: notifyer,
+});
+const searchHandler = new SearchHandler({
+  apiService: moviesApiService,
+  markupRender: markupRender,
+});
+const modalHandler = new ModalHandler({
+  apiService: moviesApiService,
+  languageSet: languageSet,
+  markupRender: markupRender,
+  collectionsService: userCollectionsService,
+  notifyer: notifyer,
+});
 const toTopButton = new ToTopButton();
-const themeButton = new ThemeButton({ languageSet: languageSet, userPreferences: userPreferences});
-
-
+const themeButton = new ThemeButton({
+  languageSet: languageSet,
+  userPreferences: userPreferences,
+});
 
 /* vvv site engine intialisation vvv */
-const siteEngine = new SiteEngine({ apiService: moviesApiService, trendingHandler: trendingHandler, collectionHandler: collectionHandler, modalHandler: modalHandler, searchHandler: searchHandler, notifyer: notifyer, languageSet: languageSet });
+const siteEngine = new SiteEngine({
+  apiService: moviesApiService,
+  trendingHandler: trendingHandler,
+  collectionHandler: collectionHandler,
+  modalHandler: modalHandler,
+  searchHandler: searchHandler,
+  notifyer: notifyer,
+  languageSet: languageSet,
+});
 /* ^^^                           ^^^ */

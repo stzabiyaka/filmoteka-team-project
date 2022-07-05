@@ -1,45 +1,43 @@
 #to-top-button {
-    display: block;
-    position: fixed;
-        bottom: 50px;
-        right: 10px;
-        z-index: 99;
-        width: 40px;
-        height: 40px;
+  display: block;
+  position: fixed;
+  bottom: 50px;
+  right: 10px;
+  z-index: 99;
+  width: 40px;
+  height: 40px;
 
-        @include respondTo(tablet) {
-            bottom: 20px;
-            right: 30px;
-        }
-        
-        visibility: hidden;
-        pointer-events: none;
+  @include respondTo(tablet) {
+    bottom: 20px;
+    right: 30px;
+  }
 
-        border: none;
-        outline: none;
-        background-image: url(../images/icons/arrow-up2.svg);
-        background-position: center;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-color: getColor('accent');
-        
-        cursor: pointer;
-        padding: 15px;
-        font-size: 18px;
-        border: none;
-        border-radius: 5px;
+  visibility: hidden;
+  pointer-events: none;
 
-        
+  border: none;
+  outline: none;
+  background-image: url(../images/icons/arrow-up2.svg);
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-color: getColor('accent');
 
-        transition: all 0.35s ease-in;
+  cursor: pointer;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
 
-    &.is-visible {
-        visibility: visible;
-        opacity: 0.5;
-        pointer-events: auto;
+  transition: all 0.35s ease-in;
 
-        &:hover {
-            opacity: 1;
-        }
+  &.is-visible {
+    visibility: visible;
+    opacity: 0.5;
+    pointer-events: auto;
+
+    &:hover {
+      opacity: 1;
     }
-    }
+  }
+}

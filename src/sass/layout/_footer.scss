@@ -1,92 +1,90 @@
- // ============блок footer=============
+// ============блок footer=============
 
 .footer {
-    margin-top: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: $footerHeight;
-    min-width: 320px;
-    background-color: getColor('background-secondary');
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $footerHeight;
+  min-width: 320px;
+  background-color: getColor('background-secondary');
 
-    @include respondTo(tablet) {
-        height: $footerHeightTablet;
-    }
+  @include respondTo(tablet) {
+    height: $footerHeightTablet;
+  }
 
-    @include respondTo(desktop) {
-        height: $footerHeightDesktop;
-    }
+  @include respondTo(desktop) {
+    height: $footerHeightDesktop;
+  }
 
-    .body.theme-dark & {
-        background-color: rgb(41, 41, 41);
-    }
+  .body.theme-dark & {
+    background-color: rgb(41, 41, 41);
+  }
 }
 
 // ==========текст==========
 
 .footer__text {
-    text-align: center;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.172;
-    color: getColor('text-footer');
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.172;
+  color: getColor('text-footer');
 
-    @include respondTo(tablet) {
-        font-size: 16px;
-        line-height: 1.2em;
-    }
+  @include respondTo(tablet) {
+    font-size: 16px;
+    line-height: 1.2em;
+  }
 
-    .body.theme-dark & {
-        color: #8d8d8d;
-    }
+  .body.theme-dark & {
+    color: #8d8d8d;
+  }
 }
-
 
 // ========перехід тексту при mobile-first=========
 
 .text__sub {
-    display: inline-block;
-    margin-top: 9px;
+  display: inline-block;
+  margin-top: 9px;
 
-    @include respondTo(tablet) {
-        margin-top: 0;
-    }
-
+  @include respondTo(tablet) {
+    margin-top: 0;
+  }
 }
 
 // ==============SVG-анімація=================
 
 .icon-heart {
-    fill: getColor('accent');
-    margin-right: 5px;
-    margin-left: 5px;
+  fill: getColor('accent');
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 .icon-heart {
-    animation-name: 'heart';
-    animation-duration: 600ms;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-timing-function: ease-in;
-    animation-delay: 2s;
+  animation-name: 'heart';
+  animation-duration: 600ms;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in;
+  animation-delay: 2s;
 }
 
 @keyframes heart {
-    from {
-        transform: scale(1);
-    }
+  from {
+    transform: scale(1);
+  }
 
-    to {
-        transform: scale(1.2);
-    }
+  to {
+    transform: scale(1.2);
+  }
 }
 
 // =========посилання=============
 
 .footer__link {
-    color: getColor('text-footer');
-    
-    .body.theme-dark & {
-        color: #8d8d8d;
-    }
+  color: getColor('text-footer');
+
+  .body.theme-dark & {
+    color: #8d8d8d;
+  }
 }

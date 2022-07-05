@@ -1,111 +1,101 @@
-
 .movie-card {
-    margin-top: 20px;
+  margin-top: 20px;
 
-    animation: 1.5s show ease;
-  
-    cursor: pointer;
-  
-    @include cssTransition(transform);
+  animation: 1.5s show ease;
 
-    &:hover,
+  cursor: pointer;
+
+  @include cssTransition(transform);
+
+  &:hover,
+  &:focus {
+    transform: scale(1.02);
+  }
+
+  @include respondTo(tablet) {
+    @include flexBasis(2, 32px);
+    margin-left: 32px;
+  }
+
+  @include respondTo(desktop) {
+    @include flexBasis(3, 16px);
+    margin-left: 16px;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+    font-family: $fontPrimary;
+    font-style: normal;
+
     &:focus {
-     transform: scale(1.02);
+      outline: auto;
     }
-        
+  }
 
-    @include respondTo (tablet){
-        @include flexBasis (2, 32px);
-        margin-left: 32px;
+  &__img {
+    width: 100%;
+    height: 402px;
+    border-radius: 5px;
+    object-fit: cover;
 
+    @include respondTo(tablet) {
+      height: 455px;
     }
-
-    @include respondTo (desktop){
-        @include flexBasis (3, 16px);
-        margin-left: 16px;
-
+    @include respondTo(desktop) {
+      height: 449px;
     }
+  }
 
-    &__link {
-        text-decoration: none;
-        color: inherit;
-        font-family: $fontPrimary;
-        font-style: normal;
+  &__title {
+    text-transform: uppercase;
+    line-height: 1.33;
+    margin-top: 8px;
+    margin-bottom: 5px;
+  }
 
-        &:focus {
-            outline: auto;
-        }
-    }
-    
+  &__info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    line-height: 16px;
+  }
 
-    &__img{
-        width: 100%;
-        height: 402px;
-        border-radius: 5px;
-        object-fit: cover;
-        
-        @include respondTo (tablet) {
-       
-            height: 455px;
-        }
-        @include respondTo (desktop){
-            height: 449px;
-        }
-    }
+  &__genres {
+    color: getColor('accent');
+    line-height: 16px;
+    margin-right: 3px;
+  }
+  &__date {
+    margin-left: 3px;
+    margin-right: 3px;
 
-     &__title {
-            text-transform: uppercase;
-            line-height: 1.33;
-            margin-top: 8px;
-            margin-bottom: 5px;
-        
-        }
+    color: getColor('accent');
+  }
+  &__avarage {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: getColor('accent');
+    border-radius: 5px;
+    width: 36px;
+    height: 16px;
 
-        &__info{
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            line-height: 16px;
-            
-        
-        }
-
-        &__genres{
-            color: getColor('accent');
-            line-height: 16px;
-            margin-right: 3px;           
-       }
-        &__date {
-            margin-left: 3px;
-            margin-right: 3px;
-            
-            color: getColor('accent');
-        }
-        &__avarage{
-            padding-left: 10px;
-            padding-right: 10px;
-            background-color: getColor('accent');
-            border-radius: 5px;
-            width: 36px;
-            height: 16px;
-
-            color: getColor('text-secondary');
-            text-align: center;
-        }
-        &_list {
-            display: flex;
-        }
-   }
+    color: getColor('text-secondary');
+    text-align: center;
+  }
+  &_list {
+    display: flex;
+  }
+}
 
 //    =====animation=====
 
 @keyframes show {
-    0% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 0;
+  }
 
-    100% {
-        opacity: 1;
-    }
+  100% {
+    opacity: 1;
+  }
 }
-

@@ -29,7 +29,6 @@ export function modalCardMarkUp({
       width: 'retina',
     })}`;
   }
-  
 
   const vote = captions.movieDetails.vote;
   const votes = captions.movieDetails.votes;

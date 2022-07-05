@@ -1,258 +1,310 @@
-import Pagination from "tui-pagination";
-import { REFS, USER_COLLECTIONS } from "../site-constants";
-import { paginatorTemplate } from "../templates/paginator-tmpl";
+import Pagination from 'tui-pagination';
+import { REFS, USER_COLLECTIONS } from '../site-constants';
+import { paginatorTemplate } from '../templates/paginator-tmpl';
 
 const debounce = require('lodash.debounce');
 
 export default class SiteEngine {
-    #currentSitePage;
-/* Обробники сторінок сайту */
-    #trendingHandler;
-    #collectionHandler;
-    #modalHandler;
-    #searchHandler;
-    #paginator;
-    #notifyer;
-    #languageSet;
-    #isUserNew;
-    #apiService;
-/* Колбеки для eventListeners */
-    #queueCallback;
-    #watchedCallback;
-    #paginatorAfterCallback;
+  #currentSitePage;
+  /* Обробники сторінок сайту */
+  #trendingHandler;
+  #collectionHandler;
+  #modalHandler;
+  #searchHandler;
+  #paginator;
+  #notifyer;
+  #languageSet;
+  #isUserNew;
+  #apiService;
+  /* Колбеки для eventListeners */
+  #queueCallback;
+  #watchedCallback;
+  #paginatorAfterCallback;
 
-    constructor ({ trendingHandler, collectionHandler, modalHandler, searchHandler, notifyer, languageSet, apiService }) {
-        this.#trendingHandler = trendingHandler;
-        this.#collectionHandler = collectionHandler;
-        this.#modalHandler = modalHandler;
-        this.#searchHandler = searchHandler;
-        this.#languageSet = languageSet;
-        this.#notifyer = notifyer;
-        this.#apiService = apiService;
-        this.#isUserNew = this.#languageSet.getIsUserNew();
-        this.hiderClass = 'js-hidden';
-        this.myLibraryClass = 'my-library';
-        this.#init().then(this.#handleHome()).catch(console.log);        
+  constructor({
+    trendingHandler,
+    collectionHandler,
+    modalHandler,
+    searchHandler,
+    notifyer,
+    languageSet,
+    apiService,
+  }) {
+    this.#trendingHandler = trendingHandler;
+    this.#collectionHandler = collectionHandler;
+    this.#modalHandler = modalHandler;
+    this.#searchHandler = searchHandler;
+    this.#languageSet = languageSet;
+    this.#notifyer = notifyer;
+    this.#apiService = apiService;
+    this.#isUserNew = this.#languageSet.getIsUserNew();
+    this.hiderClass = 'js-hidden';
+    this.myLibraryClass = 'my-library';
+    this.#init().then(this.#handleHome()).catch(console.log);
+  }
+
+  /* Ініціалізація головної сторінки сайта */
+  async #init() {
+    REFS.headerLogo.addEventListener('click', this.#handleHome.bind(this));
+    REFS.headerHomeBtn.addEventListener('click', this.#handleHome.bind(this));
+    REFS.headerMyLibBtn.addEventListener(
+      'click',
+      this.#handleWatched.bind(this, { isFromHome: true })
+    );
+    REFS.searchForm.addEventListener(
+      'input',
+      debounce(this.#handleSearch.bind(this), 300)
+    );
+    REFS.teamLink.addEventListener('click', this.#handleTeam.bind(this));
+    if (this.#isUserNew) {
+      this.#notifyNewUser();
     }
 
-/* Ініціалізація головної сторінки сайта */ 
-    async #init () {
-        REFS.headerLogo.addEventListener('click', this.#handleHome.bind(this));
-        REFS.headerHomeBtn.addEventListener('click', this.#handleHome.bind(this));
-        REFS.headerMyLibBtn.addEventListener('click', this.#handleWatched.bind(this, {isFromHome: true}) );
-        REFS.searchForm.addEventListener('input', debounce(this.#handleSearch.bind(this), 300));
-        REFS.teamLink.addEventListener('click', this.#handleTeam.bind(this));
-        if (this.#isUserNew) {   
-            this.#notifyNewUser();
-        }
-        
-            await this.#apiService.getGenres();
+    await this.#apiService.getGenres();
+  }
+
+  /* Формування та логіка головної сторінки сайта */
+  async #handleHome() {
+    this.#currentSitePage = 'home';
+    this.#setSitePage();
+
+    if (this.#queueCallback || this.#watchedCallback) {
+      this.#removeCollectionsListeners();
     }
 
-/* Формування та логіка головної сторінки сайта */ 
-    async #handleHome () { 
-        this.#currentSitePage = 'home';
-        this.#setSitePage();
+    try {
+      const source = await this.#trendingHandler.getTrendingMoviesPage({
+        page: 1,
+      });
 
-        if (this.#queueCallback || this.#watchedCallback) {
-            this.#removeCollectionsListeners();
-        }
-        
-        try {
-            const source = await this.#trendingHandler.getTrendingMoviesPage({ page: 1 });
-            
-            this.#createPaginator({ source: source, itemsPerPage: 20 });
-            this.#paginatorAfterCallback = this.#trendingHandler.getTrendingMoviesPage.bind(this.#trendingHandler);
-            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ page: page }));
-        }
-        catch (error) {
-            this.#notifyer.renderNotification ({ message: 'technicalFault' });
-        }  
+      this.#createPaginator({ source: source, itemsPerPage: 20 });
+      this.#paginatorAfterCallback =
+        this.#trendingHandler.getTrendingMoviesPage.bind(this.#trendingHandler);
+      this.#paginator.on('afterMove', ({ page }) =>
+        this.#paginatorAfterCallback({ page: page })
+      );
+    } catch (error) {
+      this.#notifyer.renderNotification({ message: 'technicalFault' });
+    }
+  }
+
+  /* Формування відображення результату пошуку фільмів за пошуковим запитом */
+  async #handleSearch() {
+    this.#currentSitePage = 'search';
+    this.#setSitePage();
+    const searchQuery = REFS.searchForm.value.trim();
+
+    if (!searchQuery.length) {
+      const message = this.#languageSet.captions.notifications.searchMinLength;
+      this.#notifyer.showNotification({ message: message });
+      this.#handleHome();
+      return false;
     }
 
-/* Формування відображення результату пошуку фільмів за пошуковим запитом */ 
-    async #handleSearch () {
-        this.#currentSitePage = 'search';
-        this.#setSitePage();
-        const searchQuery = REFS.searchForm.value.trim();
-       
-        if(!searchQuery.length) {
-            const message = this.#languageSet.captions.notifications.searchMinLength;
-            this.#notifyer.showNotification({ message: message });
-            this.#handleHome();
-        return false;
-        } 
-
-        if (this.#isUserNew && this.#languageSet.getCurrentLanguage() === 'default' && (/^([а-яА-ЯёЁ]*)$/i.test(searchQuery))) {
-            this.#notifyNewUser();
-            this.#isUserNew = false;
-         }
-        
-        try {
-            const source = await this.#searchHandler.getMoviesBySearch({query: searchQuery, page: 1});
-            if(!source || !source.totalResults) {
-                const message =  this.#languageSet.captions.notifications.searchFault;
-                this.#notifyer.showNotification({ message: message });
-                this.#handleHome();
-            }
-            this.#createPaginator({ source: source, itemsPerPage: 20 });
-            this.#paginatorAfterCallback = this.#searchHandler.getMoviesBySearch.bind(this.#searchHandler);
-            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ query: searchQuery, page: page }));
-        }
-        catch (error) {
-            console.log(error.message);
-        }     
+    if (
+      this.#isUserNew &&
+      this.#languageSet.getCurrentLanguage() === 'default' &&
+      /^([а-яА-ЯёЁ]*)$/i.test(searchQuery)
+    ) {
+      this.#notifyNewUser();
+      this.#isUserNew = false;
     }
 
-/* Формування відображення та логіка колекції watched */ 
-    async #handleWatched ({ isFromHome }) {
-        this.#currentSitePage = 'watched';
-        this.#setSitePage();
+    try {
+      const source = await this.#searchHandler.getMoviesBySearch({
+        query: searchQuery,
+        page: 1,
+      });
+      if (!source || !source.totalResults) {
+        const message = this.#languageSet.captions.notifications.searchFault;
+        this.#notifyer.showNotification({ message: message });
+        this.#handleHome();
+      }
+      this.#createPaginator({ source: source, itemsPerPage: 20 });
+      this.#paginatorAfterCallback = this.#searchHandler.getMoviesBySearch.bind(
+        this.#searchHandler
+      );
+      this.#paginator.on('afterMove', ({ page }) =>
+        this.#paginatorAfterCallback({ query: searchQuery, page: page })
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
-        if (isFromHome) {
-         this.#addCollectionsBtnsListeners();
-         REFS.collectionWatchedBtn.disabled = false;
-        } 
-        
-        this.#collectionsBtnsToggle ();
+  /* Формування відображення та логіка колекції watched */
+  async #handleWatched({ isFromHome }) {
+    this.#currentSitePage = 'watched';
+    this.#setSitePage();
 
-        try {
-            const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.watched, page: 1 });
-            
-            this.#createPaginator({ source: source, itemsPerPage: 9 });
-            this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
-            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.watched, page: page }));   
-            
-        }
-        catch (error) {
-            console.log(error.message);
-        }
+    if (isFromHome) {
+      this.#addCollectionsBtnsListeners();
+      REFS.collectionWatchedBtn.disabled = false;
     }
 
-/* Формування відображення та логіка колекції queue */ 
-    async #handleQueue () {
+    this.#collectionsBtnsToggle();
 
-        this.#collectionsBtnsToggle ();
-        this.#currentSitePage = 'queue';
-        this.#setSitePage();
-        try {
-            const source = await this.#collectionHandler.getCollectionMoviesPage({collectionName: USER_COLLECTIONS.queue, page: 1 });
+    try {
+      const source = await this.#collectionHandler.getCollectionMoviesPage({
+        collectionName: USER_COLLECTIONS.watched,
+        page: 1,
+      });
 
-            this.#createPaginator({ source: source, itemsPerPage: 9 });
-            this.#paginatorAfterCallback = this.#collectionHandler.getCollectionMoviesPage.bind(this.#collectionHandler);
-            this.#paginator.on('afterMove', ({ page }) => this.#paginatorAfterCallback({ collectionName: USER_COLLECTIONS.queue, page: page }));   
-            
-        }
-        catch (error) {
-            console.log(error.message);
-        }
+      this.#createPaginator({ source: source, itemsPerPage: 9 });
+      this.#paginatorAfterCallback =
+        this.#collectionHandler.getCollectionMoviesPage.bind(
+          this.#collectionHandler
+        );
+      this.#paginator.on('afterMove', ({ page }) =>
+        this.#paginatorAfterCallback({
+          collectionName: USER_COLLECTIONS.watched,
+          page: page,
+        })
+      );
+    } catch (error) {
+      console.log(error.message);
     }
+  }
 
-/* Відображення сторінки команди */
-    #handleTeam(evt) {
+  /* Формування відображення та логіка колекції queue */
+  async #handleQueue() {
+    this.#collectionsBtnsToggle();
+    this.#currentSitePage = 'queue';
+    this.#setSitePage();
+    try {
+      const source = await this.#collectionHandler.getCollectionMoviesPage({
+        collectionName: USER_COLLECTIONS.queue,
+        page: 1,
+      });
+
+      this.#createPaginator({ source: source, itemsPerPage: 9 });
+      this.#paginatorAfterCallback =
+        this.#collectionHandler.getCollectionMoviesPage.bind(
+          this.#collectionHandler
+        );
+      this.#paginator.on('afterMove', ({ page }) =>
+        this.#paginatorAfterCallback({
+          collectionName: USER_COLLECTIONS.queue,
+          page: page,
+        })
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  /* Відображення сторінки команди */
+  #handleTeam(evt) {
     evt.preventDefault();
     this.#modalHandler.openModalShell();
     REFS.backdropTeam.classList.remove(this.hiderClass);
-    REFS.backdropTeam.addEventListener('click', this.#modalHandler.onClickBackdrop.bind(this.#modalHandler));        
-}
+    REFS.backdropTeam.addEventListener(
+      'click',
+      this.#modalHandler.onClickBackdrop.bind(this.#modalHandler)
+    );
+  }
 
-/* Встановлення стану поточної сторінки сайту */ 
-    #setSitePage () {
-        this.#modalHandler.setCurrentSitePage ({ page: this.#currentSitePage });
-        this.#languageSet.setCurrentSitePage ({ page: this.#currentSitePage });
-        switch (this.#currentSitePage) {
-        case 'home':
-            REFS.headerHomeBtn.disabled = true;
-            REFS.headerMyLibBtn.disabled = false;
-            REFS.searchFormContainer.classList.remove(this.hiderClass);
-            REFS.collectionsBtnsContainer.classList.add(this.hiderClass);
-            REFS.headerContainer.classList.remove(this.myLibraryClass);
-            REFS.searchForm.value = '';
+  /* Встановлення стану поточної сторінки сайту */
+  #setSitePage() {
+    this.#modalHandler.setCurrentSitePage({ page: this.#currentSitePage });
+    this.#languageSet.setCurrentSitePage({ page: this.#currentSitePage });
+    switch (this.#currentSitePage) {
+      case 'home':
+        REFS.headerHomeBtn.disabled = true;
+        REFS.headerMyLibBtn.disabled = false;
+        REFS.searchFormContainer.classList.remove(this.hiderClass);
+        REFS.collectionsBtnsContainer.classList.add(this.hiderClass);
+        REFS.headerContainer.classList.remove(this.myLibraryClass);
+        REFS.searchForm.value = '';
         break;
 
-        case 'watched':
-        case 'queue':
-            REFS.headerHomeBtn.disabled = false;
-            REFS.headerMyLibBtn.disabled = true;
-            REFS.searchFormContainer.classList.add(this.hiderClass);
-            REFS.collectionsBtnsContainer.classList.remove(this.hiderClass);
-            REFS.headerContainer.classList.add(this.myLibraryClass);
+      case 'watched':
+      case 'queue':
+        REFS.headerHomeBtn.disabled = false;
+        REFS.headerMyLibBtn.disabled = true;
+        REFS.searchFormContainer.classList.add(this.hiderClass);
+        REFS.collectionsBtnsContainer.classList.remove(this.hiderClass);
+        REFS.headerContainer.classList.add(this.myLibraryClass);
         break;
 
-        case 'search':
-            REFS.headerHomeBtn.disabled = false;
-            REFS.headerMyLibBtn.disabled = false;
-            REFS.searchFormContainer.classList.remove(this.hiderClass);
-            REFS.collectionsBtnsContainer.classList.add(this.hiderClass);
-            REFS.headerContainer.classList.remove(this.myLibraryClass);
+      case 'search':
+        REFS.headerHomeBtn.disabled = false;
+        REFS.headerMyLibBtn.disabled = false;
+        REFS.searchFormContainer.classList.remove(this.hiderClass);
+        REFS.collectionsBtnsContainer.classList.add(this.hiderClass);
+        REFS.headerContainer.classList.remove(this.myLibraryClass);
         break;
-        }
+    }
+  }
+
+  /* Логіка перемикання між колекцією watched, та колекцією queue */
+  #collectionsBtnsToggle() {
+    const disable = REFS.collectionWatchedBtn.disabled;
+
+    REFS.collectionWatchedBtn.disabled = !disable;
+    REFS.collectionQueueBtn.disabled = disable;
+  }
+
+  /* Логіка додавання та прибирання eventListener на кнопках коллекцій */
+  #addCollectionsBtnsListeners() {
+    this.#queueCallback = this.#handleQueue.bind(this);
+    this.#watchedCallback = this.#handleWatched.bind(this, {
+      isFromHome: false,
+    });
+
+    REFS.collectionQueueBtn.addEventListener('click', this.#queueCallback);
+    REFS.collectionWatchedBtn.addEventListener('click', this.#watchedCallback);
+  }
+
+  /* Логіка прибирання eventListener на пагінаторі */
+  #removeCollectionsListeners() {
+    REFS.collectionQueueBtn.removeEventListener('click', this.#queueCallback);
+    REFS.collectionWatchedBtn.removeEventListener(
+      'click',
+      this.#watchedCallback
+    );
+  }
+
+  /* Створення нового пагінатора */
+  #createPaginator({ source, itemsPerPage }) {
+    if (this.#paginator && this.#paginatorAfterCallback) {
+      this.#paginator.off('afterMove', this.#paginatorAfterCallback);
+    }
+    let totalItems;
+    if (!source) {
+      totalItems = 0;
+    } else {
+      totalItems = source.totalResults;
     }
 
-/* Логіка перемикання між колекцією watched, та колекцією queue */ 
-    #collectionsBtnsToggle () {
-        const disable = REFS.collectionWatchedBtn.disabled;
-
-        REFS.collectionWatchedBtn.disabled = !disable;
-        REFS.collectionQueueBtn.disabled = disable;
+    if (totalItems <= itemsPerPage) {
+      REFS.paginator.classList.add('js-hidden');
+    } else if (REFS.paginator.classList.contains('js-hidden')) {
+      REFS.paginator.classList.remove('js-hidden');
     }
 
-/* Логіка додавання та прибирання eventListener на кнопках коллекцій */ 
-    #addCollectionsBtnsListeners () {
-        this.#queueCallback = this.#handleQueue.bind(this);
-        this.#watchedCallback = this.#handleWatched.bind(this, {isFromHome: false});
-         
-         REFS.collectionQueueBtn.addEventListener('click', this.#queueCallback);
-         REFS.collectionWatchedBtn.addEventListener('click', this.#watchedCallback);
-    }
+    const paginatorOptions = {
+      totalItems: totalItems,
+      itemsPerPage: itemsPerPage,
+      visiblePages: 5,
+      page: 1,
+      centerAlign: true,
+      firstItemClassName: 'btn__pagination',
+      lastItemClassName: 'btn__pagination',
+      template: paginatorTemplate,
+    };
 
-/* Логіка прибирання eventListener на пагінаторі */ 
-    #removeCollectionsListeners () {
-        REFS.collectionQueueBtn.removeEventListener('click', this.#queueCallback);
-        REFS.collectionWatchedBtn.removeEventListener('click', this.#watchedCallback);
-    }
+    this.#paginator = new Pagination('pagination', paginatorOptions);
+    this.#languageSet.setPaginator({ paginator: this.#paginator });
+    this.#modalHandler.setPaginator({ paginator: this.#paginator });
+  }
 
-/* Створення нового пагінатора */ 
-    #createPaginator ({ source, itemsPerPage }) {
-        if (this.#paginator && this.#paginatorAfterCallback) {
-            this.#paginator.off('afterMove', this.#paginatorAfterCallback);
-        }
-        let totalItems;
-        if(!source) {
-            totalItems = 0;
-        } else {
-            totalItems = source.totalResults;
-        }
+  /* Перевірка, та нотифікування щодо мови, якщо користувач новий */
 
-        if( totalItems <= itemsPerPage) {
-            REFS.paginator.classList.add('js-hidden');
-        } else if ( REFS.paginator.classList.contains('js-hidden')) {
-            REFS.paginator.classList.remove('js-hidden');
-        }
-
-        const paginatorOptions = {
-            totalItems: totalItems,
-            itemsPerPage: itemsPerPage,
-            visiblePages: 5,
-            page: 1,
-            centerAlign: true,
-            firstItemClassName: 'btn__pagination',
-            lastItemClassName: 'btn__pagination',
-            template: paginatorTemplate,
-          };
-
-            this.#paginator = new Pagination ('pagination', paginatorOptions);
-            this.#languageSet.setPaginator({ paginator: this.#paginator});
-            this.#modalHandler.setPaginator({ paginator: this.#paginator});
-    }
-
-    /* Перевірка, та нотифікування щодо мови, якщо користувач новий */
-
-    #notifyNewUser () {
-            const message = this.#languageSet.captions.notifications.languageNotify;
-            setTimeout(() => {     
-                this.#notifyer.showNotification({ message: message, type: 'language' });
-              }, 2000);  
-            
-    }
+  #notifyNewUser() {
+    const message = this.#languageSet.captions.notifications.languageNotify;
+    setTimeout(() => {
+      this.#notifyer.showNotification({ message: message, type: 'language' });
+    }, 2000);
+  }
 }

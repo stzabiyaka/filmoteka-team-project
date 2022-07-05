@@ -1,25 +1,48 @@
 <div class="backdrop js-hidden" id="backdrop-modal-card">
-    <div class="modal-card container" >
+  <div class="modal-card container">
+    <button
+      type="button"
+      class="modal-card__close-btn"
+      id="modal-close"
+      title="close window"
+      aria-label="close window"
+      data-modal-close
+    >
+      <svg class="modal-card__close-btn-icon" width="30" height="30">
+        <use href="./images/icons/icons.svg#icon-close"></use>
+      </svg>
+    </button>
 
-        <button type="button" class="modal-card__close-btn" id="modal-close" title="close window" aria-label="close window" data-modal-close>
-            <svg class="modal-card__close-btn-icon" width="30" height="30">
-                <use href="./images/icons/icons.svg#icon-close"></use>
-            </svg>
-        </button> 
+    <div class="modal-card__data container" id="modal"></div>
 
-        <div class="modal-card__data container" id="modal"></div>
-
-        <div class="modal-card-thumb__btn js-hidden">
-            <button type="button" id="watched-add" title="add to Watched" aria-label="add to Watched"
-                class="modal-card-btn__watched ">Add to Watched</button>
-            <button type="button" id="queue-add" title="add to Queue" aria-label="add to Queue"
-                class="modal-card-btn__queue ">Add to Queue</button>
-        </div>
-
-        <button id="modal-open-movie" title="Open video" aria-label="open video" class="modal-card__open-movie js-hidden">
-            <span class="modal-card__open-movie--icon"></span>
-        </button>
-
+    <div class="modal-card-thumb__btn js-hidden">
+      <button
+        type="button"
+        id="watched-add"
+        title="add to Watched"
+        aria-label="add to Watched"
+        class="modal-card-btn__watched"
+      >
+        Add to Watched
+      </button>
+      <button
+        type="button"
+        id="queue-add"
+        title="add to Queue"
+        aria-label="add to Queue"
+        class="modal-card-btn__queue"
+      >
+        Add to Queue
+      </button>
     </div>
-    
+
+    <button
+      id="modal-open-movie"
+      title="Open video"
+      aria-label="open video"
+      class="modal-card__open-movie js-hidden"
+    >
+      <span class="modal-card__open-movie--icon"></span>
+    </button>
+  </div>
 </div>

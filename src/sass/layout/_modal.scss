@@ -1,524 +1,514 @@
 //загальне для всіх модалок
 
 .backdrop {
-    width: 100vw;
-    height: 100vh;
-    background-color: getColor('backdrop');
-    position: fixed;
-    top: 0;
-    left: 0;
-    opacity: 1;
-    z-index: 100;
-    visibility: visible;
-    pointer-events: auto;
+  width: 100vw;
+  height: 100vh;
+  background-color: getColor('backdrop');
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  z-index: 100;
+  visibility: visible;
+  pointer-events: auto;
 
-    &.js-hidden {
-        visibility: hidden;
-        pointer-events: none;
-        opacity: 0;
-    }
+  &.js-hidden {
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+  }
 }
 
 //______________________________________________________
 //модалка фільму
 
 .modal-card {
-    background-color: getColor('background-primary');
-    z-index: 101;
-    position: absolute;
-    max-width: 100%;
-    height: 90%;
-    top: 50%;
-    left: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 40px;
-    padding-top: 48px;
-    transform: translate(-50%, -50%);
-    color: getColor('text-primary');    
-    overflow-y: auto;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    
-        &::-webkit-scrollbar {
-            width: 0;
-            height: 0;
-        }
+  background-color: getColor('background-primary');
+  z-index: 101;
+  position: absolute;
+  max-width: 100%;
+  height: 90%;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 40px;
+  padding-top: 48px;
+  transform: translate(-50%, -50%);
+  color: getColor('text-primary');
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
-    @include respondTo(tablet) {
-        height: 552px;
-        padding-left: 36px;
-        padding-right: 72px;
-        padding-top: 40px;
-        flex-direction: row;  
-    }
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 
-    @include respondTo(desktop) {
-        width: 814px;
-        height: 558px;
-        padding-left: 16px;
-        padding-right: 16px;
-    }
+  @include respondTo(tablet) {
+    height: 552px;
+    padding-left: 36px;
+    padding-right: 72px;
+    padding-top: 40px;
+    flex-direction: row;
+  }
 
-    .body.theme-dark & {
-        background-color: getColor('text-primary');
+  @include respondTo(desktop) {
+    width: 814px;
+    height: 558px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
-        color: getColor('text-secondary');
+  .body.theme-dark & {
+    background-color: getColor('text-primary');
 
-        box-shadow: 0 0 50px getColor('text-secondary');
-    }
+    color: getColor('text-secondary');
 
+    box-shadow: 0 0 50px getColor('text-secondary');
+  }
 }
 
 // кнопка закриття модального вікна
 //------------------------------------------------
 .modal-card__close-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background-color: transparent;
-    border: transparent;
-    padding: 0;    
-    cursor: pointer; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: transparent;
+  border: transparent;
+  padding: 0;
+  cursor: pointer;
 
-    &:hover,
-    &:focus{
+  &:hover,
+  &:focus {
     border: 1px solid getColor('accent');
     border-radius: 5px;
-}
+  }
 }
 
 .modal-card__close-btn-icon {
-    stroke: getColor('text-primary');
-    
-    .body.theme-dark & {
-        stroke: getColor('text-secondary');
-    }
+  stroke: getColor('text-primary');
+
+  .body.theme-dark & {
+    stroke: getColor('text-secondary');
+  }
 }
 
 .modal-card__close-btn:hover .modal-card__close-btn-icon,
-.modal-card__close-btn:focus .modal-card__close-btn-icon{
-    stroke: getColor('accent');
+.modal-card__close-btn:focus .modal-card__close-btn-icon {
+  stroke: getColor('accent');
 }
-
 
 //карточка фільму
 //---------------------------------
 
-.modal-card__data{
-    display: flex;
-    max-width: 240px;
-    flex-direction: column;
-    
+.modal-card__data {
+  display: flex;
+  max-width: 240px;
+  flex-direction: column;
 
-    @include respondTo(tablet){
-        flex-direction: row;
-        max-width: 596px;
-        height: 472px;    
-    }
+  @include respondTo(tablet) {
+    flex-direction: row;
+    max-width: 596px;
+    height: 472px;
+  }
 
-    @include respondTo(desktop){
-        max-width: 782px;
-        height: 478px;
-        margin: 0;
-    }
+  @include respondTo(desktop) {
+    max-width: 782px;
+    height: 478px;
+    margin: 0;
+  }
 }
 
 //контейнер для картинки в середині карточки
 //----------------------------------------------------
 
 .modal-card-thumb__img {
-    display: flex;
-    border-radius: 5px;    
-    height: 357px;
-    width: 240px;
-    @include respondTo(tablet){
-        width: 264px;
-        height: 374px;
-    }
-    @include respondTo(desktop){
-        width: 375px;
-        height: 478px;
-    }
+  display: flex;
+  border-radius: 5px;
+  height: 357px;
+  width: 240px;
+  @include respondTo(tablet) {
+    width: 264px;
+    height: 374px;
+  }
+  @include respondTo(desktop) {
+    width: 375px;
+    height: 478px;
+  }
 }
 
-//стилі для обгортки img 
+//стилі для обгортки img
 
-.modal-card__picture{
-    width: 100%;
-    height: 100%;
-    background-color: url(./../images/poster.svg);
-    background-size: cover;    
+.modal-card__picture {
+  width: 100%;
+  height: 100%;
+  background-color: url(./../images/poster.svg);
+  background-size: cover;
 }
 
 //стилі для тегу img
 //---------------------------------
 
-.modal-card__img{
-    display: block;
-    object-fit: cover;
-    width: inherit;
-    height: inherit;     
-    border-radius: 5px;
+.modal-card__img {
+  display: block;
+  object-fit: cover;
+  width: inherit;
+  height: inherit;
+  border-radius: 5px;
 }
 
 //стилі для кнопки відкриття фільму
 //---------------------------------
-.modal-card__open-movie{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 34px;
-    height: 34px;
-    position: fixed;
-    left: 123px;
-    top: 208px;
-    padding: 0;
-    background-color: transparent;
-    border: 1px solid getColor('accent');
-    border-radius: 5px;    
-    cursor: pointer;
-    @include respondTo(tablet){
-        left: 151px;        
-        top: 210px;
-    }
-    @include respondTo(desktop){
-        left: 186px;
-        top: 262px;
-    }
+.modal-card__open-movie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 34px;
+  height: 34px;
+  position: fixed;
+  left: 123px;
+  top: 208px;
+  padding: 0;
+  background-color: transparent;
+  border: 1px solid getColor('accent');
+  border-radius: 5px;
+  cursor: pointer;
+  @include respondTo(tablet) {
+    left: 151px;
+    top: 210px;
+  }
+  @include respondTo(desktop) {
+    left: 186px;
+    top: 262px;
+  }
 
-    &:hover,
-    &:focus {
+  &:hover,
+  &:focus {
     background-color: getColor('accent');
     transform: scale(1.5);
-}
+  }
 
-    &.js-hidden{
-        visibility: hidden;
-        pointer-events: none;
-        opacity: 0;
-    }
+  &.js-hidden {
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+  }
 }
 
 //стилі для іконки відкриття фільму
 //-----------------------------------
 
-.modal-card__open-movie--icon{    
-width: 20px;
-height: 20px;
-border-top: 10px solid transparent;
-border-left: 20px solid getColor('accent');
-border-bottom: 10px solid transparent;
+.modal-card__open-movie--icon {
+  width: 20px;
+  height: 20px;
+  border-top: 10px solid transparent;
+  border-left: 20px solid getColor('accent');
+  border-bottom: 10px solid transparent;
 }
 
 .modal-card__open-movie:hover .modal-card__open-movie--icon,
-.modal-card__open-movie:focus .modal-card__open-movie--icon{
-border-left: 18px solid getColor('text-secondary');
-    
+.modal-card__open-movie:focus .modal-card__open-movie--icon {
+  border-left: 18px solid getColor('text-secondary');
 }
 
 //стилі акрикла
 
-.modal-card__article{
-    display: flex;
-    flex-direction: column;
-    @include respondTo(tablet){
-        flex-direction: row;
-    }
-         overflow-y: auto;
-         -ms-overflow-style: none;
-         scrollbar-width: none;
-    
-         &::-webkit-scrollbar {
-             width: 0;
-             height: 0;
-         }
+.modal-card__article {
+  display: flex;
+  flex-direction: column;
+  @include respondTo(tablet) {
+    flex-direction: row;
+  }
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 }
 
 //контейнер для відображення всієї інформації про фільм
 //-------------------------------------------------------
 
 .modal-card-thumb__content {
-margin-top: 20px;
-display: flex;
-flex-direction: column;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 
-    @include respondTo(tablet) {
-        height: 472px;
-        width: 264px;
-        margin-top: 0;
-        margin-left: 68px;
-    }
+  @include respondTo(tablet) {
+    height: 472px;
+    width: 264px;
+    margin-top: 0;
+    margin-left: 68px;
+  }
 
-    @include respondTo(desktop) {
-        margin-left: 16px;
-        width: 391px;
-        height: 478px;
-    }
+  @include respondTo(desktop) {
+    margin-left: 16px;
+    width: 391px;
+    height: 478px;
+  }
 }
 
 // обгортка для відображення характеристик і опису фільму
 .modal-card-info {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 //заголовок картки
 //------------------------------------
 
 .modal-card-info__title {
-    margin-bottom: 20px;
-    font-size: 20px;
-    line-height: 1.172em;
-    text-align: left;
-    vertical-align: top;
-    text-transform: uppercase;
+  margin-bottom: 20px;
+  font-size: 20px;
+  line-height: 1.172em;
+  text-align: left;
+  vertical-align: top;
+  text-transform: uppercase;
 
-    @include respondTo(desktop) {
-        font-size: 30px;
-        line-height: 1.167;
-    }
+  @include respondTo(desktop) {
+    font-size: 30px;
+    line-height: 1.167;
+  }
 }
 
 // обгортка для блоку характеристик фільму
 //--------------------------------
 
 .modal-card__thumb--characteristics {
-    display: flex;
-    margin-bottom: 20px;
-    align-items: flex-start;
+  display: flex;
+  margin-bottom: 20px;
+  align-items: flex-start;
 }
 
 //блок назв характеристик фільму
 //--------------------------------------
 
-
 .modal-card-info__characteristics {
-    width: 108px;
+  width: 108px;
 
-    &--name {
-        color: getColor('modal-text-secondary');
-        width: 116px;
-    }
+  &--name {
+    color: getColor('modal-text-secondary');
+    width: 116px;
+  }
 }
-
-
-
 
 //блок значень характеристик фільму
 //-----------------------------------------------
-.modal-card-info__data{
-    width: 100%;
+.modal-card-info__data {
+  width: 100%;
 
-    &--vote, &--votes {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 16px;
+  &--vote,
+  &--votes {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 16px;
 
-        line-height: 1.167;
-        text-align: center;
-        border-radius: 5px;
-    }
+    line-height: 1.167;
+    text-align: center;
+    border-radius: 5px;
+  }
 
-    &--vote {
-        color: getColor('text-secondary');
-        background-color: getColor('accent');
-        margin-right: 3px;
-    }
+  &--vote {
+    color: getColor('text-secondary');
+    background-color: getColor('accent');
+    margin-right: 3px;
+  }
 
-    &--votes {
-        background-color: getColor('background-secondary');
-        color: getColor('text-primary');
-        margin-left: 3px;
-    }
+  &--votes {
+    background-color: getColor('background-secondary');
+    color: getColor('text-primary');
+    margin-left: 3px;
+  }
 
-    &--slesh {
-        color: getColor('modal-text-secondary');    
-    }
+  &--slesh {
+    color: getColor('modal-text-secondary');
+  }
 
-    &--popularity {
-        line-height: 1.167em;
-    }
+  &--popularity {
+    line-height: 1.167em;
+  }
 }
 
 //спільні стилі для блоку назв характеристик і для блоку значень
 //------------------------------------------------
 
-.modal-card-info__characteristics--item{
-    display: flex;
-    align-items: center;
+.modal-card-info__characteristics--item {
+  display: flex;
+  align-items: center;
 
-    &:not(:last-child){
-        margin-bottom: 8px;
-    }
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
 }
 
-.modal-card-info__characteristics{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.modal-card-info__characteristics {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 //заголовок опису тексту
 //------------------------------
 
 .modal-card-info-about__title {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    text-align: left;
-    align-self: center;
-    margin-bottom: 8px;
-    text-transform: uppercase;
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+  align-self: center;
+  margin-bottom: 8px;
+  text-transform: uppercase;
 }
 
 //опис тексту
 //-----------------------
 
 .modal-card-info-about__description {
-    display: inline-block;    
-    line-height: 1.667em;
-    text-align: left;
-    vertical-align: middle; 
-    overflow: visible;
+  display: inline-block;
+  line-height: 1.667em;
+  text-align: left;
+  vertical-align: middle;
+  overflow: visible;
 
-    @include respondTo(tablet) {
-        max-height: 168px;  // не по макету, але так, щоб було як намальовано в макеті
-        width: 264px;    
-        overflow-y: auto;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        
-            &::-webkit-scrollbar {
-                width: 0;
-                height: 0;
-            }
-    }
+  @include respondTo(tablet) {
+    max-height: 168px; // не по макету, але так, щоб було як намальовано в макеті
+    width: 264px;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
-    @include respondTo(desktop){
-        width: 391px;
-        max-height: 184px;        
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
     }
+  }
+
+  @include respondTo(desktop) {
+    width: 391px;
+    max-height: 184px;
+  }
 }
 
 // блок кнопок
 //--------------------
 
 .modal-card-thumb__btn {
-    display: flex;
-    justify-content: space-between;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    @include respondTo(tablet) {
-        position: absolute;
-        justify-content: start;
-        bottom: 40px;
-        left: 368px;
-    }
-    @include respondTo(desktop){
-        left: 407px;
-    }
+  display: flex;
+  justify-content: space-between;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  @include respondTo(tablet) {
+    position: absolute;
+    justify-content: start;
+    bottom: 40px;
+    left: 368px;
+  }
+  @include respondTo(desktop) {
+    left: 407px;
+  }
 
-    &.js-hidden {
-        visibility: hidden;
-        pointer-events: none;
-        opacity: 0;
-    }
+  &.js-hidden {
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+  }
 }
 
 //кнопка add to Watched
 //--------------------------
 
-.modal-card-btn__watched{
-    @extend .button;
-    font-family: $fontPrimary;
-    cursor: pointer;
-    width: 110px;
+.modal-card-btn__watched {
+  @extend .button;
+  font-family: $fontPrimary;
+  cursor: pointer;
+  width: 110px;
 
-    .body.theme-dark & {
-        @extend .button--inverse
-    }
+  .body.theme-dark & {
+    @extend .button--inverse;
+  }
 
-    &:hover,
-    &:focus{
-        @extend .button--accent;
-        @extend .button--shadow;
+  &:hover,
+  &:focus {
+    @extend .button--accent;
+    @extend .button--shadow;
 
-        color: getColor('text-secondary');
-        border: none;
-    }
+    color: getColor('text-secondary');
+    border: none;
+  }
 
-    @include respondTo(tablet){
-        width: 125px;
-    }
+  @include respondTo(tablet) {
+    width: 125px;
+  }
 
-    @include respondTo(desktop){
-        width: 136px;
-        margin-left: 8px;
-    }
-
-    
+  @include respondTo(desktop) {
+    width: 136px;
+    margin-left: 8px;
+  }
 }
 
 // кнопка add to queue
 //------------------------
 
-.modal-card-btn__queue{
-    @extend .modal-card-btn__watched;
+.modal-card-btn__queue {
+  @extend .modal-card-btn__watched;
 
-    @include respondTo(tablet){
-        margin-left: 15px;
-    }    
+  @include respondTo(tablet) {
+    margin-left: 15px;
+  }
 }
 
 // сповіщення про помилку
 //------------------------------
-.modal__notification{
-    
-    display: flex;   
-    width: 240px;
-    height: 80px;
-    border-radius: 5px;
-    background-color: getColor('background-secondary');
-    font-size: 20px;
-    margin-top: 150px;
-    justify-content: center;
-    align-items: center;
-    @include respondTo(tablet) {            
-            width: 596px;
-            font-size: 25px;            
-        }
-    @include respondTo(desktop) {
-        width: 782px;
-        font-size: 30px;                        
-    }
+.modal__notification {
+  display: flex;
+  width: 240px;
+  height: 80px;
+  border-radius: 5px;
+  background-color: getColor('background-secondary');
+  font-size: 20px;
+  margin-top: 150px;
+  justify-content: center;
+  align-items: center;
+  @include respondTo(tablet) {
+    width: 596px;
+    font-size: 25px;
+  }
+  @include respondTo(desktop) {
+    width: 782px;
+    font-size: 30px;
+  }
 }
 
 // оформлення фрейму для відео
 //---------------------------------
 
-.iframe{
-    object-fit: cover;
-    height: 357px;
-    width: 240px;
+.iframe {
+  object-fit: cover;
+  height: 357px;
+  width: 240px;
 
-    border-radius: 5px;
-    
-    @include respondTo(tablet) {
-        width: 264px;
-        height: 374px;
-    }
-    
-    @include respondTo(desktop) {
-        width: 375px;
-        height: 478px;
-    }
+  border-radius: 5px;
+
+  @include respondTo(tablet) {
+    width: 264px;
+    height: 374px;
+  }
+
+  @include respondTo(desktop) {
+    width: 375px;
+    height: 478px;
+  }
 }

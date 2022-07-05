@@ -19,9 +19,9 @@ export default function cardParser({
   if (poster_path) {
     image = ImagesPathConstructor.getImagePath({ path: poster_path });
     ImageMiddle = ImagesPathConstructor.getImagePath({
-      path:poster_path,
+      path: poster_path,
       width: 'middle',
-    })
+    });
     imageRetina = ImagesPathConstructor.getImagePath({
       path: poster_path,
       width: 'retina',
@@ -41,8 +41,12 @@ export default function cardParser({
     <div class="movie-card__info">
     <p class = "movie-card__genres" title = "${captions.movieDetails.genres}">
         ${genres.join(', ')}
-        |<span class="movie-card__date" title = "${captions.movieDetails.release}">${release_date}</span>
-        <span class="movie-card__avarage" title ="${captions.movieDetails.rating}">${vote_average.toFixed(1)}</span>
+        |<span class="movie-card__date" title = "${
+          captions.movieDetails.release
+        }">${release_date}</span>
+        <span class="movie-card__avarage" title ="${
+          captions.movieDetails.rating
+        }">${vote_average.toFixed(1)}</span>
     </p>
     </div>
 </article></a></li>`;

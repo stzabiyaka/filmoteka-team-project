@@ -1,17 +1,16 @@
-import { REFS } from "../../site-constants";
+import { REFS } from '../../site-constants';
 
 export default class Spinner {
-    #spinner;
-    constructor () {
-        this.#spinner = REFS.spinner;
-    }
+  #spinner;
+  constructor() {
+    this.#spinner = REFS.spinner;
+  }
 
-    showSpinner () {
-        this.#spinner.classList.remove('js-hidden');
-    }
+  showSpinner() {
+    this.#spinner.classList.remove('js-hidden');
+  }
 
-    hideSpinner () {
-            this.#spinner.classList.add('js-hidden');
-    }
+  hideSpinner() {
+    this.#spinner.classList.add('js-hidden');
+  }
 }
-   

@@ -1,43 +1,40 @@
 .button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-    height: 44px;
-    width: 124px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  height: 44px;
+  width: 124px;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    color: getColor('text-primary');
-    text-align: center;
-    text-transform: uppercase;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: getColor('text-primary');
+  text-align: center;
+  text-transform: uppercase;
 
-    background-color: transparent;
-    border-radius: 5px;
-    border: 1px solid getColor('text-primary');
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid getColor('text-primary');
 
-    &--accent {
-        color: getColor('text-secondary');
-        background-color: getColor('accent');
-        border-color: transparent;
-        
-    }
+  &--accent {
+    color: getColor('text-secondary');
+    background-color: getColor('accent');
+    border-color: transparent;
+  }
 
-    &--shadow {
-        box-shadow: 0 8px 43px rgba(255, 107, 1, 0.6);
-        color: getColor('accent');
-        border-color: getColor('accent');
-    }
+  &--shadow {
+    box-shadow: 0 8px 43px rgba(255, 107, 1, 0.6);
+    color: getColor('accent');
+    border-color: getColor('accent');
+  }
 
-
-
-    &--inverse {
-        color: getColor('text-secondary');
-        border-color: getColor('text-secondary');
-    }
+  &--inverse {
+    color: getColor('text-secondary');
+    border-color: getColor('text-secondary');
+  }
 }

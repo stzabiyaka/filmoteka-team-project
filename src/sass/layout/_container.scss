@@ -1,12 +1,12 @@
 .container {
-    margin: 0 auto;
-    max-width: 280px;
+  margin: 0 auto;
+  max-width: 280px;
 
-    @include respondTo(tablet) {
-        max-width: 704px;
-    }
-    
-    @include respondTo(desktop) {
-        max-width: 960px;
-    }
+  @include respondTo(tablet) {
+    max-width: 704px;
+  }
+
+  @include respondTo(desktop) {
+    max-width: 960px;
+  }
 }
