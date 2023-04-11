@@ -47,7 +47,7 @@ export default class ModalHandler {
     REFS.backdrop.addEventListener('click', this.#closeBtnCallback);
 
     this.#captions = this.#languageSet.captions;
-    const selectedElements = evt.path;
+    const selectedElements = evt.composedPath();
 
     selectedElements.forEach(el => {
       if (el.className === 'movie-card') {
