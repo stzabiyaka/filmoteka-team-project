@@ -67,7 +67,7 @@ export default class CollectionService extends LocalStorageService {
     if (!id || this.isInCollection({ collection: collection, id: id })) {
       return 'this id is already in the collection, or you didn`t spicified an id';
     }
-    this.#collections[collection].push(id);
+    this.#collections[collection].unshift(id);
     this.#saveCollections();
     this.#totalPagesCount();
   }

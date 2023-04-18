@@ -96,9 +96,9 @@ export default class MoviesApiService {
   /* Отримання об'екту з масивом фільмів за масивом id */
   async getMoviesBundle({ bundle, page = 1, total_pages = 1, total_results }) {
     const requests = bundle.map(id => this.getMovie({ movieId: id }));
-    const results = await Promise.all(requests);
+    const results = await Promise.allSettled(requests);
     return {
-      results: results,
+      results: results.map(result => result.value),
       page: page,
       total_pages: total_pages,
       total_results: total_results,
